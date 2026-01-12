@@ -44,7 +44,7 @@ logger.info("OPENAI_API_KEY present: %s", bool(os.getenv("OPENAI_API_KEY")))
 # 환경변수로 허용할 origin을 설정할 수 있도록 함 (쉼표로 구분)
 _allowed = os.getenv(
     "BACKEND_ALLOWED_ORIGINS",
-    "http://localhost:8080,http://localhost:3000,https://watchcrewscreenhai.vercel.app/,https://watchcrewscreenhai.vercel.app",
+    "http://localhost:8080,http://localhost:3000,https://watchcrew-screen-hai.vercel.app",
 )
 origins = [o.strip() for o in _allowed.split(",") if o.strip()]
 
