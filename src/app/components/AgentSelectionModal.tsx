@@ -180,7 +180,7 @@ export function AgentSelectionModal({
 
         <div className="py-4">
           {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4"> */}
-          <div className="grid grid-cols-1 gap-4"></div>
+          <div className="grid grid-cols-1 gap-4">
             {loading ? (
               Array.from({ length: 6 }).map((_, i) => (
                 <Card key={`skel-${i}`} className="animate-pulse border-2 border-slate-200 h-40">
