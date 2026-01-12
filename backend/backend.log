@@ -1,0 +1,532 @@
+2026-01-08 13:07:29,949 INFO watchcrew.backend: OPENAI_API_KEY present: False
+2026-01-08 13:07:35,021 INFO watchcrew.backend: OPENAI_API_KEY present: False
+2026-01-08 13:08:21,446 INFO watchcrew.backend: OPENAI_API_KEY present: False
+2026-01-08 13:08:42,133 INFO watchcrew.backend: OPENAI_API_KEY present: False
+2026-01-08 13:10:35,181 INFO watchcrew.backend: OPENAI_API_KEY present: False
+2026-01-08 13:13:37,600 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 13:13:53,096 ERROR watchcrew.backend: OpenAI call failed
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 177, in generate_candidates
+    resp = openai.ChatCompletion.create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\site-packages\openai\lib\_old_api.py", line 39, in __call__
+    raise APIRemovedInV1(symbol=self._symbol)
+openai.lib._old_api.APIRemovedInV1: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2026-01-08 13:15:00,547 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 13:15:10,962 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 13:15:26,141 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 13:15:43,719 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 13:15:52,081 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 13:16:46,959 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 13:17:00,469 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 13:17:16,812 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 13:17:51,363 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 13:18:02,109 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 13:18:05,655 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 13:20:02,276 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 13:20:38,403 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 13:22:45,510 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 13:23:09,533 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 13:23:53,398 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 13:40:57,672 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 14:23:01,178 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 14:23:05,871 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 14:24:09,933 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 14:24:33,208 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 14:30:29,170 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:00:01,620 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:00:04,237 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:00:23,453 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:00:33,566 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:00:41,555 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:00:46,589 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:01:08,474 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:01:08,497 ERROR watchcrew.backend: OpenAI call failed
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 325, in generate_candidates
+    parsed = json.loads(text)
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 87 column 7 (char 2062)
+2026-01-08 15:01:09,892 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:01:38,531 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:01:38,548 ERROR watchcrew.backend: OpenAI call failed
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 325, in generate_candidates
+    parsed = json.loads(text)
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 87 column 19 (char 2050)
+2026-01-08 15:01:39,816 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:01:39,816 ERROR watchcrew.backend: OpenAI call failed
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 325, in generate_candidates
+    parsed = json.loads(text)
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 85 column 6 (char 2043)
+2026-01-08 15:01:54,700 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:01:54,701 ERROR watchcrew.backend: OpenAI call failed
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 325, in generate_candidates
+    parsed = json.loads(text)
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 83 column 13 (char 2047)
+2026-01-08 15:02:33,480 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:02:33,486 ERROR watchcrew.backend: OpenAI call failed
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 325, in generate_candidates
+    parsed = json.loads(text)
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 88 column 13 (char 2162)
+2026-01-08 15:03:08,816 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:03:08,816 ERROR watchcrew.backend: OpenAI call failed
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 325, in generate_candidates
+    parsed = json.loads(text)
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 88 column 13 (char 2159)
+2026-01-08 15:03:41,311 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:04:00,461 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:04:00,480 ERROR watchcrew.backend: OpenAI call failed
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 325, in generate_candidates
+    parsed = json.loads(text)
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 87 column 13 (char 2176)
+2026-01-08 15:04:43,172 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:04:47,461 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:04:50,677 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:04:55,564 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:04:58,216 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:05:00,502 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:05:05,025 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:05:29,025 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:05:29,057 ERROR watchcrew.backend: OpenAI call failed, using static fallback
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 365, in generate_candidates
+    parsed = json.loads(text)
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 91 column 19 (char 2202)
+2026-01-08 15:05:29,059 INFO watchcrew.backend: Returning 10 fallback candidates
+2026-01-08 15:06:13,640 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:06:38,083 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:06:46,811 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:06:54,976 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:07:16,048 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:07:16,065 ERROR watchcrew.backend: Could not find JSON array in response. Text preview: [
+  {
+    "id": "home-1",
+    "name": "분석왕 민수",
+    "dimensions": {
+      "말투": "논리적이고 조리 있음",
+      "성격": "신중하고 꼼꼼함",
+      "분석의 초점": "데이터 중심 해석"
+    },
+    "fullPrompt": "경기 상황을 데이터에 기반하여 세밀하게 분석하는 논리적인 분석가입니다.",
+    "team": "home"
+  },
+  {
+    "id": "home-2",
+    "name": "전략가 지현",
+    "dimensions": {
+      "말투": "차분하고 명확함",
+      "성격": "이성적이고 침착함",
+      "분석의 초점": "전술적 움직임 분석"
+    },
+    "fullPrompt": "경기 내 전략과 전술의 변화를 논리적으로 해석하는 분석가입니다.",
+    "team": "home"
+  },
+  {
+    "id": "home-3",
+    "
+2026-01-08 15:07:16,065 ERROR watchcrew.backend: OpenAI call failed, using static fallback
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 366, in generate_candidates
+    parsed = json.loads(text)
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 105 column 7 (char 2179)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 414, in generate_candidates
+    raise Exception("No JSON array found in OpenAI response")
+Exception: No JSON array found in OpenAI response
+2026-01-08 15:07:16,067 INFO watchcrew.backend: Fallback reason: No JSON array found in OpenAI response
+2026-01-08 15:07:16,067 INFO watchcrew.backend: Returning 10 fallback candidates
+2026-01-08 15:07:44,544 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:07:50,910 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:07:53,648 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:08:09,531 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:08:09,563 ERROR watchcrew.backend: Could not find JSON array in response. Full response length=2180, preview: [
+  {
+    "id": "home-1",
+    "name": "분석왕 민수",
+    "dimensions": {
+      "말투": "논리적이고 객관적",
+      "성격": "침착하고 신중함",
+      "분석의 초점": "데이터 기반 경기 흐름"
+    },
+    "fullPrompt": "민수는 경기 상황을 데이터와 논리로 분석해 명확한 인사이트를 제공하는 분석 전문가입니다.",
+    "team": "home"
+  },
+  {
+    "id": "home-2",
+    "name": "전략가 수진",
+    "dimensions": {
+      "말투": "차분하고 조리있음",
+      "성격": "계획적이며 꼼꼼함",
+      "분석의 초점": "전술 변화와 흐름"
+    },
+    "fullPrompt": "수진은 경기 내 전략과 전술 변화를 세세하게 분석하여 설명합니다.",
+    "team": "home"
+  },
+  {
+    "id": "home-3",
+    "name": "상황분석가 태현",
+    "dimensions": {
+      "말투": "명확하고 간결함",
+      "성격": "논리적이고 분석적",
+      "분석의 초점": "상황별 선수 움직임"
+    },
+    "fullPrompt": "태현은 각 상황에서 선수들의 움직임과 선택을 분석적으로 설명합니다.",
+    "team": "home"
+  },
+  {
+    "id": "home-4",
+    "name": "데이터박사 예린",
+    "dimensions": {
+      "말투": "지적이고 친절함",
+      "성격": "호기심 많고 꼼꼼함",
+      "분석의 초점": "통계적 수치 해석"
+    },
+    "fullPrompt": "예린은 경기의 통계 자료를 바탕으로 세밀하게 상황을 해석합니다.",
+    "team": "home"
+  },
+  {
+    "id": "home-5",
+    "name": "포지션분석 해진",
+2026-01-08 15:08:09,563 ERROR watchcrew.backend: OpenAI call failed, using static fallback
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 366, in generate_candidates
+    parsed = json.loads(text)
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 105 column 12 (char 2180)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 441, in generate_candidates
+    raise Exception("No JSON array found in OpenAI response")
+Exception: No JSON array found in OpenAI response
+2026-01-08 15:08:09,565 INFO watchcrew.backend: Fallback reason: No JSON array found in OpenAI response
+2026-01-08 15:08:09,565 INFO watchcrew.backend: Returning 10 fallback candidates
+2026-01-08 15:08:45,390 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:08:48,463 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:08:56,917 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:09:11,061 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:09:14,482 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:09:34,931 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:09:34,960 ERROR watchcrew.backend: Could not find JSON array in response. Full response length=2163
+2026-01-08 15:09:34,961 ERROR watchcrew.backend: OpenAI call failed, using static fallback
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 382, in generate_candidates
+    parsed = json.loads(text)
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 106 column 13 (char 2162)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 471, in generate_candidates
+    raise Exception("No JSON array found in OpenAI response")
+Exception: No JSON array found in OpenAI response
+2026-01-08 15:09:34,963 INFO watchcrew.backend: Fallback reason: No JSON array found in OpenAI response
+2026-01-08 15:09:34,963 INFO watchcrew.backend: Returning 10 fallback candidates
+2026-01-08 15:10:53,771 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:10:55,678 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:10:57,739 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:11:11,428 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:11:11,445 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 15:11:12,814 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:53:14,864 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:53:14,887 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 15:56:57,375 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:56:57,392 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 15:57:14,239 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:57:14,245 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 15:57:36,933 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-08 15:58:13,656 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 15:58:13,676 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:01:19,503 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:01:19,505 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:02:00,364 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:02:00,369 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:07:08,269 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:07:08,269 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:09:11,138 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:09:11,151 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:09:24,041 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:09:24,041 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:09:43,592 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:09:43,606 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:10:06,103 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:10:06,104 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:12:57,669 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:12:57,678 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:21:10,583 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:21:10,590 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:24:26,874 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:24:26,956 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:26:01,989 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:26:02,002 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:28:52,897 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:28:52,899 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:30:18,482 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:30:18,482 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:33:55,955 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:33:55,965 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:36:28,353 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:36:28,353 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:40:36,522 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:40:36,529 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:43:26,358 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:43:26,374 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:43:32,687 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:43:32,698 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:44:38,869 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:44:38,869 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:45:34,649 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:45:34,649 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:46:31,840 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:46:31,842 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:47:35,133 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:47:35,133 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:48:02,463 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:48:02,467 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:49:21,672 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:49:21,689 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 16:50:30,871 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 16:50:30,875 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 17:55:05,977 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 17:55:05,982 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 18:01:56,104 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 18:01:56,120 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 18:04:41,794 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 18:04:41,801 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-08 18:05:34,652 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-08 18:05:34,669 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 11:50:10,657 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 14:13:38,636 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 14:17:17,202 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 14:17:17,220 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 14:18:49,605 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 14:18:49,605 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 14:19:24,417 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 14:19:24,417 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 14:24:43,308 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 14:24:43,312 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 14:38:53,495 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 14:43:50,053 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 14:43:52,603 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 14:44:02,141 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 14:44:24,588 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 14:44:33,312 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 14:44:50,145 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 14:44:52,213 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 14:44:54,614 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 14:45:51,485 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 14:47:03,440 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 14:47:03,461 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 14:48:54,217 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 14:48:54,217 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 14:48:57,218 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 14:48:57,219 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 14:49:20,926 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 14:49:20,927 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 15:00:31,913 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 15:00:59,803 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 15:00:59,827 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 15:01:01,172 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 15:01:04,864 INFO watchcrew.backend: Agent created: 감성팬 지민
+2026-01-09 15:01:04,864 INFO watchcrew.backend:   Team: home
+2026-01-09 15:01:04,864 INFO watchcrew.backend: Agent created: 눈빛팬 현우
+2026-01-09 15:01:04,864 INFO watchcrew.backend:   Prompt: 아티스트의 감정과 분위기에 깊이 공감하며 감동을 잘 전달하는 감성 팬 역할을 해주세요.
+2026-01-09 15:01:04,864 INFO watchcrew.backend: Agent created: 설렘가득 민호
+2026-01-09 15:01:04,864 INFO watchcrew.backend:   Team: home
+2026-01-09 15:01:04,865 INFO watchcrew.backend:   Created at: 2026-01-09T06:01:04.544Z
+2026-01-09 15:01:04,865 INFO watchcrew.backend:   Team: home
+2026-01-09 15:01:04,865 INFO watchcrew.backend:   Prompt: 아티스트의 눈빛에서 감정을 읽고 깊이 공감하는 팬처럼 답변해 주세요.
+2026-01-09 15:01:04,865 INFO watchcrew.backend:   Prompt: 아티스트를 생각할 때마다 설레고 기뻐하는 순수한 팬처럼 답변해 주세요.
+2026-01-09 15:01:04,865 INFO watchcrew.backend:   Created at: 2026-01-09T06:01:04.546Z
+2026-01-09 15:01:04,866 INFO watchcrew.backend:   Created at: 2026-01-09T06:01:04.545Z
+2026-01-09 15:01:04,866 INFO watchcrew.backend: Agent saved to C:\Users\장동건\Desktop\WatchCrew_screen\backend\agents.jsonl
+2026-01-09 15:01:04,866 INFO watchcrew.backend: Agent saved to C:\Users\장동건\Desktop\WatchCrew_screen\backend\agents.jsonl
+2026-01-09 15:01:04,867 INFO watchcrew.backend: Agent saved to C:\Users\장동건\Desktop\WatchCrew_screen\backend\agents.jsonl
+2026-01-09 15:04:40,354 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 15:04:40,379 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 15:04:45,196 INFO watchcrew.backend: Agent created: 눈물의팬
+2026-01-09 15:04:45,197 INFO watchcrew.backend:   Team: nc
+2026-01-09 15:04:45,197 INFO watchcrew.backend:   Prompt: 작은 일에도 감동하고 기뻐하는 눈물이 많은 팬처럼 말하세요.
+2026-01-09 15:04:45,197 INFO watchcrew.backend:   Created at: 2026-01-09T06:04:45.195Z
+2026-01-09 15:04:45,197 INFO watchcrew.backend: Agent created: 함성응원가
+2026-01-09 15:04:45,197 INFO watchcrew.backend:   Team: nc
+2026-01-09 15:04:45,198 INFO watchcrew.backend:   Prompt: 항상 힘차게 응원하는 열성적인 팬처럼 생동감 있게 대화하세요.
+2026-01-09 15:04:45,198 INFO watchcrew.backend:   Created at: 2026-01-09T06:04:45.196Z
+2026-01-09 15:04:45,198 INFO watchcrew.backend: Agent saved to C:\Users\장동건\Desktop\WatchCrew_screen\backend\agents.jsonl
+2026-01-09 15:04:45,199 INFO watchcrew.backend: Agent saved to C:\Users\장동건\Desktop\WatchCrew_screen\backend\agents.jsonl
+2026-01-09 15:07:17,323 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 15:08:05,447 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 15:13:42,875 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 15:13:42,912 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 15:16:56,485 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 15:16:56,506 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 15:17:36,994 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 15:17:37,003 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 15:19:32,869 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 15:19:32,872 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 15:20:07,862 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 15:20:07,862 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 15:23:00,490 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 15:23:00,490 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 15:23:40,492 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 15:23:40,492 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 15:26:04,093 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 15:26:04,187 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 15:26:45,166 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 15:26:45,166 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 17:28:00,177 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 17:28:45,874 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 17:28:45,894 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 17:56:41,187 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-09 17:57:13,249 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 17:57:13,264 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 17:58:02,510 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 17:58:02,511 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 18:00:34,372 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 18:00:34,372 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 18:01:55,068 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 18:01:55,093 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 18:09:05,892 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 18:09:05,892 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 18:14:29,865 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 18:14:29,865 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 18:14:51,332 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 18:14:51,355 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 18:16:38,771 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 18:16:38,771 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 18:16:40,646 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 18:16:40,646 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 18:39:50,184 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 18:39:50,184 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 18:56:47,446 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 18:56:47,453 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 18:59:04,392 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 18:59:04,398 INFO watchcrew.backend: Returning 10 candidates from OpenAI
+2026-01-09 18:59:59,217 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-09 18:59:59,226 INFO watchcrew.backend: Returning 10 candidates from OpenAI
