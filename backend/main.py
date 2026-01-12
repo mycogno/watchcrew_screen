@@ -71,7 +71,7 @@ class AgentCandidate(BaseModel):
 
 
 def normalize_candidates(
-    parsed: List[dict], team: str = "samsung", want_count: int = 10
+    parsed: List[dict], team: str = "samsung", want_count: int = 5
 ) -> List[dict]:
     """Normalize and validate parsed candidates from OpenAI.
 
@@ -456,7 +456,7 @@ def generate_candidates(payload: GenerateRequest):
                     logger.exception("invalid item from openai, skipping")
 
             # Normalize candidates to ensure proper id format, uniqueness, team assignment
-            normalized = normalize_candidates(output, team=userTeam, want_count=10)
+            normalized = normalize_candidates(output, team=userTeam, want_count=5)
             if len(normalized) >= 1:
                 logger.info("Returning %d candidates from OpenAI", len(normalized))
                 return normalized
@@ -469,7 +469,7 @@ def generate_candidates(payload: GenerateRequest):
             logger.info(f"Fallback reason: {str(e)}")
             # Use static fallback instead of raising 500 error
             normalized = normalize_candidates(
-                static_candidates, team=userTeam, want_count=10
+                static_candidates, team=userTeam, want_count=5
             )
             if len(normalized) >= 1:
                 logger.info("Returning %d fallback candidates", len(normalized))
@@ -485,7 +485,7 @@ def generate_candidates(payload: GenerateRequest):
             "OpenAI SDK or OPENAI_API_KEY not available; using static fallback"
         )
         normalized = normalize_candidates(
-            static_candidates, team=userTeam, want_count=10
+            static_candidates, team=userTeam, want_count=5
         )
         if len(normalized) >= 1:
             logger.info("Returning %d static fallback candidates", len(normalized))
