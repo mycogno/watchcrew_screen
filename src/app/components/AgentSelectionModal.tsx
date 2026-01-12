@@ -156,7 +156,7 @@ export function AgentSelectionModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className={contentClassName ?? "max-w-[2000px] w-[98vw] max-h-[95vh] overflow-y-auto"}>
+      <DialogContent className={contentClassName ?? "max-w-[90vw] w-full sm:max-w-[90vw] max-h-[95vh] overflow-y-auto"}>
         <DialogHeader>
           <DialogTitle className="text-xl">에이전트 페르소나 선택</DialogTitle>
           {/* 팀 태그 표시 */}
@@ -200,7 +200,7 @@ export function AgentSelectionModal({
                 return (
                   <Card
                     key={candidate.id}
-                    className={`cursor-pointer transition-all hover:shadow-lg border-2 h-60 min-w-[320px] flex-shrink-0 ${
+                    className={`cursor-pointer transition-all hover:shadow-lg border-2 h-60 w-[320px] flex-shrink-0 ${
                       isSelected
                         ? 'border-primary ring-2 ring-primary ring-offset-2'
                         : 'border-slate-200 hover:border-primary/50'
