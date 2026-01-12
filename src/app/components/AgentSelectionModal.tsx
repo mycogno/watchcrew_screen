@@ -156,7 +156,7 @@ export function AgentSelectionModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className={contentClassName ?? "max-w-[90vw] w-full sm:max-w-[90vw] max-h-[95vh] overflow-y-auto"}>
+      <DialogContent className={contentClassName ?? "max-w-[90vw] w-full sm:max-w-[90vw] max-h-[95vh] overflow-y-auto !max-w-[90vw]"}>
         <DialogHeader>
           <DialogTitle className="text-xl">에이전트 페르소나 선택</DialogTitle>
           {/* 팀 태그 표시 */}
