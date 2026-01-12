@@ -497,6 +497,60 @@ def generate_candidates(payload: GenerateRequest):
             )
 
 
+# 요청 데이터 모델 정의
+class ChatMessage(BaseModel):
+    role: str
+    content: str
+
+
+class AgentInfo(BaseModel):
+    name: str
+    team: str
+    teamName: str  # "삼성 라이온즈" 등 실제 팀 이름
+    prompt: str  # 에이전트 성격
+
+
+class ChatRequest(BaseModel):
+    agent: AgentInfo
+    history: List[ChatMessage]  # 이전 대화 기록
+
+
+@app.post("/chat")
+async def generate_chat(request: ChatRequest):
+    try:
+        openai_key = os.getenv("OPENAI_API_KEY")
+        openai_model = os.getenv("OPENAI_MODEL", "gpt-4.1")
+        client = openai.OpenAI(api_key=openai_key)
+        # 시스템 프롬프트 구성
+        system_content = (
+            f"당신은 {request.agent.teamName}의 팬입니다. "
+            f"당신은 프로야구 경기를 시청하는 중입니다. "
+            f"당신의 성격: {request.agent.prompt}. "
+            "이전 메시지를 고려하여 채팅 메시지를 생성하시오. "
+            "응답은 한국어로 하며, 짧고 자연스러운 채팅 형식으로 작성하세요 (1-2문장)."
+        )
+
+        messages = [{"role": "system", "content": system_content}]
+
+        # 대화 기록 추가
+        messages.extend([msg.model_dump() for msg in request.history])
+
+        # OpenAI API 호출
+        response = client.chat.completions.create(
+            model=openai_model,
+            messages=messages,
+            max_tokens=100,
+            temperature=0.9,
+        )
+
+        content = response.choices[0].message.content
+        return {"message": content}
+
+    except Exception as e:
+        print(f"Error generating chat: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 if __name__ == "__main__":
     import uvicorn
 

@@ -18,7 +18,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { TEAMS } from "./TeamSelection";
-import OpenAI from "openai";
 import {
   Tabs,
   TabsContent,
@@ -262,13 +261,8 @@ export function WatchGame({
 
   // OpenAI 클라이언트 초기화
   // Vite 환경에서 OpenAI API 키를 가져옵니다 (브라우저)
-  const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-
-  const openai = new OpenAI({
-    apiKey: OPENAI_API_KEY,
-    dangerouslyAllowBrowser: true, // 클라이언트 사이드에서 사용 (프로덕션에서는 백엔드 권장)
-  });
-
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+  // const API_URL="http://localhost:8000";
   const getTeamInfo = (team: "home" | "away") => {
     const teamData = team === "home" ? homeTeam : awayTeam;
     return {
@@ -295,49 +289,48 @@ export function WatchGame({
         team?.name ||
         (agent.team === "home" ? "홈팀" : "어웨이팀");
 
-      // 대화 히스토리를 OpenAI API 포맷으로 변환
+      // 대화 히스토리를 백엔드가 이해할 수 있는 포맷으로 변환
       const historyMessages = conversationHistory.map(
         (msg) => ({
-          role: "user" as const,
+          role: "user", // 백엔드 Pydantic 모델에 맞춤
           content: `[${msg.agentName}]: ${msg.message}`,
         }),
       );
 
-      const messages = [
-        {
-          role: "system" as const,
-          content: `당신은 ${teamName}의 팬입니다. 당신은 프로야구 경기를 시청하는 중입니다. 당신의 성격: ${agent.prompt}. 이전 메시지를 고려하여 채팅 메시지를 생성하시오. 응답은 한국어로 하며, 짧고 자연스러운 채팅 형식으로 작성하세요 (1-2문장).`,
+      // 백엔드로 요청 전송
+      const response = await fetch(`${API_URL}/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        ...historyMessages,
-      ];
-
-      // 디버깅: OpenAI에 전달되는 메시지 출력
-      console.log(`[${agent.name}] OpenAI API 요청:`, {
-        agent: agent.name,
-        team: teamName,
-        messages: messages,
+        body: JSON.stringify({
+          agent: {
+            name: agent.name,
+            team: agent.team,
+            teamName: teamName,
+            prompt: agent.prompt,
+          },
+          history: historyMessages,
+        }),
       });
 
-      const response = await openai.chat.completions.create({
-        model: "gpt-4.1",
-        messages: messages,
-        max_tokens: 100,
-        temperature: 0.9,
-      });
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
 
-      const generatedMessage =
-        response.choices[0]?.message?.content || "...";
+      const data = await response.json();
+      const generatedMessage = data.message || "...";
 
       // 디버깅: 생성된 응답 출력
       console.log(
-        `[${agent.name}] 생성된 응답:`,
+        `[${agent.name}] 백엔드 응답:`,
         generatedMessage,
       );
 
       return generatedMessage;
     } catch (error) {
-      console.error("OpenAI API 오류:", error);
-      return "메시지를 생성할 수 없습니다.";
+      console.error("API 요청 오류:", error);
+      return "메시지를 생성할 수 없습니다."; // 에러 시 기본 메시지
     }
   };
 
