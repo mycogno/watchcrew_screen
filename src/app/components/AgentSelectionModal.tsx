@@ -231,7 +231,7 @@ export function AgentSelectionModal({
 
                         <div className="pl-11 space-y-1">
                           {Object.entries(candidate.dimensions).map(([key, value]) => (
-                            <div key={key} className="text-xs">
+                            <div key={key} className="text-sm">
                               <span className="font-semibold text-slate-700">{key}:</span>
                               <span className="text-slate-600 ml-1">{value}</span>
                             </div>
@@ -239,7 +239,7 @@ export function AgentSelectionModal({
                         </div>
 
                         <div className="pl-11">
-                          <p className="text-xs text-muted-foreground">{candidate.fullPrompt}</p>
+                          <p className="text-sm text-muted-foreground">{candidate.fullPrompt}</p>
                         </div>
                       </div>
                     </CardContent>
