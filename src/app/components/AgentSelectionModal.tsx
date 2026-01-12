@@ -180,10 +180,11 @@ export function AgentSelectionModal({
 
         <div className="py-4">
           {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4"> */}
-          <div className="grid grid-cols-1 gap-4">
+          {/* <div className="grid grid-cols-1 gap-4"> */}
+          <div className="flex gap-4 overflow-x-auto pb-4">
             {loading ? (
-              Array.from({ length: 6 }).map((_, i) => (
-                <Card key={`skel-${i}`} className="animate-pulse border-2 border-slate-200 h-50">
+              Array.from({ length: 5 }).map((_, i) => (
+                <Card key={`skel-${i}`} className="animate-pulse border-2 border-slate-200 h-60 min-w-[320px] flex-shrink-0">
                   <CardContent className="p-3 h-full">
                     <div className="space-y-2">
                       <div className="h-4 bg-slate-200 rounded w-1/3 mb-2" />
@@ -199,7 +200,7 @@ export function AgentSelectionModal({
                 return (
                   <Card
                     key={candidate.id}
-                    className={`cursor-pointer transition-all hover:shadow-lg border-2 h-50 ${
+                    className={`cursor-pointer transition-all hover:shadow-lg border-2 h-60 min-w-[320px] flex-shrink-0 ${
                       isSelected
                         ? 'border-primary ring-2 ring-primary ring-offset-2'
                         : 'border-slate-200 hover:border-primary/50'
