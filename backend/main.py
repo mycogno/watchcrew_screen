@@ -264,7 +264,7 @@ def generate_candidates(payload: GenerateRequest):
             )
 
             user_msg = (
-                f"Create 10 agent candidates based on the following user prompt: {json.dumps(userPrompt, ensure_ascii=False)}\n"
+                f"Create 5 agent candidates based on the following user prompt: {json.dumps(userPrompt, ensure_ascii=False)}\n"
                 "Do NOT include 'id' or 'team' fields - they will be auto-generated and set to the team ID."
             )
 
