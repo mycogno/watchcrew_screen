@@ -156,7 +156,13 @@ export function AgentSelectionModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className={contentClassName ?? "max-w-[90vw] w-full sm:max-w-[90vw] max-h-[95vh] overflow-y-auto !max-w-[90vw]"}>
+      <DialogContent 
+      className={contentClassName ?? "max-w-[90vw] w-full sm:max-w-[90vw] max-h-[95vh] overflow-y-auto !max-w-[90vw]"}
+      style={{ 
+      maxWidth: '95vw', // 화면 너비의 95% (강제 적용)
+      width: '100%'     // 가능한 꽉 채우기
+    }}
+      >
         <DialogHeader>
           <DialogTitle className="text-xl">에이전트 페르소나 선택</DialogTitle>
           {/* 팀 태그 표시 */}
