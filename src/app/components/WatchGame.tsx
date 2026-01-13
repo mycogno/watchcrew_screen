@@ -25,6 +25,7 @@ import {
   TabsTrigger,
 } from "./ui/tabs";
 import { playHistoryData } from "../data/playHistory";
+import { API_URL } from "../../config/api";
 
 interface WatchGameProps {
   selectedAgents: Agent[];
@@ -261,8 +262,6 @@ export function WatchGame({
 
   // OpenAI 클라이언트 초기화
   // Vite 환경에서 OpenAI API 키를 가져옵니다 (브라우저)
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
-  // const API_URL="http://localhost:8000";
   const getTeamInfo = (team: "home" | "away") => {
     const teamData = team === "home" ? homeTeam : awayTeam;
     return {

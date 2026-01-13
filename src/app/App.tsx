@@ -98,7 +98,16 @@ function App() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(agents));
   }, [agents]);
 
-  const handleCreateAgent = (name: string, prompt: string, team: string, avatarSeed?: string, teamName?: string) => {
+  const handleCreateAgent = (
+    name: string, 
+    prompt: string, 
+    team: string, 
+    avatarSeed?: string, 
+    teamName?: string,
+    id?: string,
+    createdAt?: string,
+    dimensions?: Record<string, string>
+  ) => {
     // team: 'home' | 'away' or team id
     let realTeamName = teamName;
     let teamId = team;
@@ -110,13 +119,14 @@ function App() {
       realTeamName = TEAMS.find(t => t.id === team)?.name || '';
     }
     const newAgent: Agent = {
-      id: `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+      id: id || `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
       name,
       prompt,
       team,
-      createdAt: new Date().toISOString(),
+      createdAt: createdAt || new Date().toISOString(),
       avatarSeed: avatarSeed ? avatarSeed : Math.random().toString(36).substring(7),
       teamName: realTeamName || '',
+      dimensions: dimensions,
     };
     setAgents((prev) => [newAgent, ...prev]);
   };

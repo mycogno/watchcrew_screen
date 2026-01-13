@@ -11,6 +11,7 @@ import { Card, CardContent } from "./ui/card";
 import { Check } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { TEAMS } from "./TeamSelection";
+import { API_URL } from "../../config/api";
 
 interface AgentCandidate {
   id: string;
@@ -24,7 +25,7 @@ interface AgentSelectionModalProps {
   isOpen: boolean;
   onClose: () => void;
   // now includes avatarSeed to apply selected candidate's avatar to created agent
-  onSelectAgent: (name: string, prompt: string, team: string, avatarSeed: string, teamName: string) => void;
+  onSelectAgent: (name: string, prompt: string, team: string, avatarSeed: string, teamName: string, id?: string, createdAt?: string, dimensions?: Record<string, string>) => void;
   team: string;
   prompt: string;
   homeTeamId: string | null;
@@ -47,8 +48,6 @@ export function AgentSelectionModal({
   const [candidates, setCandidates] = useState<AgentCandidate[]>([]);
   const [loading, setLoading] = useState(false);
   const abortControllerRef = useState<AbortController | null>(null)[0];
-
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
   const fetchCandidates = async (signal?: AbortSignal) => {
   setLoading(true);
@@ -127,7 +126,8 @@ export function AgentSelectionModal({
         team: candidate.team,
         createdAt: new Date().toISOString(),
         avatarSeed: candidate.id,
-        teamName: realTeamName
+        teamName: realTeamName,
+        dimensions: candidate.dimensions
       };
       console.log('Registering Agent:', agentData);
       // Pass all fields to onSelectAgent if possible, otherwise update downstream to accept agentData
@@ -141,7 +141,8 @@ export function AgentSelectionModal({
           agentData.avatarSeed,
           agentData.teamName,
           agentData.id,
-          agentData.createdAt
+          agentData.createdAt,
+          agentData.dimensions
         );
       }
     });

@@ -534,3 +534,4 @@ Exception: No JSON array found in OpenAI response
 2026-01-12 16:53:14,788 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2026-01-12 16:53:15,893 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2026-01-12 16:53:17,758 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-13 13:19:38,383 INFO watchcrew.backend: OPENAI_API_KEY present: True

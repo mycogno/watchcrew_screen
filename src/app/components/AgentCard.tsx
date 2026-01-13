@@ -15,6 +15,7 @@ export interface Agent {
   createdAt: string;
   avatarSeed: string;
   teamName: string; // 실제 팀 이름
+  dimensions?: Record<string, string>; // 말투, 성격, 분석의 초점 등
 }
 
 interface AgentCardProps {
@@ -156,7 +157,20 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: A
             </div>
           </>
         ) : (
-          <p className="text-muted-foreground">{agent.prompt}</p>
+          <>
+            {/* 말투, 성격, 분석의 초점 등 표시 */}
+            {agent.dimensions && Object.keys(agent.dimensions).length > 0 && (
+              <div className="space-y-2 pb-3 border-b">
+                {Object.entries(agent.dimensions).map(([key, value]) => (
+                  <div key={key} className="flex items-start gap-2">
+                    <span className="font-semibold text-slate-700 min-w-fit">{key}:</span>
+                    <span className="text-slate-600">{value}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            <p className="text-muted-foreground">{agent.prompt}</p>
+          </>
         )}
       </CardContent>
     </Card>

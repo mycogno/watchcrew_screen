@@ -16,6 +16,8 @@ interface AgentCreatorProps {
     team: 'home' | 'away', 
     avatarSeed?: string, 
     teamName?: string,
+    id?: string,
+    createdAt?: string,
     dimensions?: Record<string, string> 
   ) => void;
   homeTeamId: string | null;
@@ -41,13 +43,15 @@ export function AgentCreator({ onCreateAgent, homeTeamId, awayTeamId }: AgentCre
     selectedTeam: string, // 모달에서 string으로 옴
     avatarSeed: string, 
     teamName: string,
+    id?: string,
+    createdAt?: string,
     dimensions?: Record<string, string> // ✅ 추가됨
   ) => {
     // team 타입 변환 (string -> 'home' | 'away')
     const finalTeam = selectedTeam === 'home' || selectedTeam === 'away' ? selectedTeam : 'home';
     
     // 상위 컴포넌트로 dimensions까지 포함해서 전달
-    onCreateAgent(name, fullPrompt, finalTeam, avatarSeed, teamName, dimensions);
+    onCreateAgent(name, fullPrompt, finalTeam, avatarSeed, teamName, id, createdAt, dimensions);
     
     setPrompt("");
     setTeam('home');
