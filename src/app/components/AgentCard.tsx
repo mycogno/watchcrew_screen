@@ -11,16 +11,16 @@ export interface Agent {
   id: string;
   name: string;
   prompt: string;
-  team: string;
+  team: string; // 이제 팀 이름 (예: "samsung lions", "kia tigers")
+  isHome: boolean; // home인지 away인지 구분
   createdAt: string;
   avatarSeed: string;
-  teamName: string; // 실제 팀 이름
   dimensions?: Record<string, string>; // 말투, 성격, 분석의 초점 등
 }
 
 interface AgentCardProps {
   agent: Agent;
-  onEdit: (id: string, name: string, prompt: string, team: string) => void;
+  onEdit: (id: string, name: string, prompt: string, team: string, isHome: boolean) => void;
   onDelete: (id: string) => void;
   homeTeamId?: string | null;
   awayTeamId?: string | null;
@@ -30,11 +30,12 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: A
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(agent.name);
   const [editPrompt, setEditPrompt] = useState(agent.prompt);
-  const [editTeam, setEditTeam] = useState<'home' | 'away'>(agent.team);
+  const [editTeam, setEditTeam] = useState<string>(agent.team);
+  const [editIsHome, setEditIsHome] = useState<boolean>(agent.isHome);
 
   const handleSave = () => {
     if (editName.trim() && editPrompt.trim()) {
-      onEdit(agent.id, editName, editPrompt, editTeam);
+      onEdit(agent.id, editName, editPrompt, editTeam, editIsHome);
       setIsEditing(false);
     }
   };
@@ -43,6 +44,7 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: A
     setEditName(agent.name);
     setEditPrompt(agent.prompt);
     setEditTeam(agent.team);
+    setEditIsHome(agent.isHome);
     setIsEditing(false);
   };
 
@@ -51,7 +53,11 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: A
 
   const homeTeam = TEAMS.find(t => t.id === homeTeamId);
   const awayTeam = TEAMS.find(t => t.id === awayTeamId);
-  const currentTeam = agent.team === 'home' ? homeTeam : awayTeam;
+  
+  // 에이전트의 팀 이름으로 팀 데이터 찾기
+  const agentTeamData = TEAMS.find(t => t.name.toLowerCase() === agent.team.toLowerCase() || t.shortName.toLowerCase() === agent.team.toLowerCase());
+  const agentTeamColor = agentTeamData?.color || '#999';
+  const agentTeamShortName = agentTeamData?.shortName || agent.team;
 
   return (
     <Card className="hover:shadow-lg transition-all">
@@ -65,23 +71,30 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: A
                 placeholder="에이전트 이름"
               />
               <div className="flex gap-2">
+                {/* 팀 이름 선택 */}
                 <Button
                   type="button"
-                  variant={editTeam === 'away' ? 'default' : 'outline'}
+                  variant={editTeam === awayTeam?.name ? 'default' : 'outline'}
                   size="sm"
-                  onClick={() => setEditTeam('away')}
+                  onClick={() => {
+                    setEditTeam(awayTeam?.name || 'away');
+                    setEditIsHome(false);
+                  }}
                   className="flex-1"
-                  style={editTeam === 'away' ? { backgroundColor: awayTeam?.color, borderColor: awayTeam?.color } : {}}
+                  style={editTeam === awayTeam?.name ? { backgroundColor: awayTeam?.color, borderColor: awayTeam?.color } : {}}
                 >
                   {awayTeam?.name || '어웨이팀'}
                 </Button>
                 <Button
                   type="button"
-                  variant={editTeam === 'home' ? 'default' : 'outline'}
+                  variant={editTeam === homeTeam?.name ? 'default' : 'outline'}
                   size="sm"
-                  onClick={() => setEditTeam('home')}
+                  onClick={() => {
+                    setEditTeam(homeTeam?.name || 'home');
+                    setEditIsHome(true);
+                  }}
                   className="flex-1"
-                  style={editTeam === 'home' ? { backgroundColor: homeTeam?.color, borderColor: homeTeam?.color } : {}}
+                  style={editTeam === homeTeam?.name ? { backgroundColor: homeTeam?.color, borderColor: homeTeam?.color } : {}}
                 >
                   {homeTeam?.name || '홈팀'}
                 </Button>
@@ -97,14 +110,14 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: A
               <div className="flex items-center gap-2 flex-1 flex-wrap">
                 <CardTitle>{agent.name}</CardTitle>
                 <Badge 
-                  variant={agent.team === 'home' ? 'default' : 'secondary'}
+                  variant={agent.isHome ? 'default' : 'secondary'}
                   style={{ 
-                    backgroundColor: currentTeam?.color || (agent.team === 'home' ? '#074CA1' : '#EA0029'),
-                    borderColor: currentTeam?.color || (agent.team === 'home' ? '#074CA1' : '#EA0029'),
+                    backgroundColor: agentTeamColor,
+                    borderColor: agentTeamColor,
                     color: 'white'
                   }}
                 >
-                  {agent.teamName || currentTeam?.shortName || (agent.team === 'home' ? '홈팀' : '어웨이팀')}
+                  {agentTeamShortName}
                 </Badge>
               </div>
             </>

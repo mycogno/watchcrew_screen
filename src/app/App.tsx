@@ -101,40 +101,30 @@ function App() {
   const handleCreateAgent = (
     name: string, 
     prompt: string, 
-    team: string, 
+    team: string,  // 팀 이름 (예: "samsung lions", "kia tigers")
+    isHome: boolean,  // home인지 away인지
     avatarSeed?: string, 
-    teamName?: string,
     id?: string,
     createdAt?: string,
     dimensions?: Record<string, string>
   ) => {
-    // team: 'home' | 'away' or team id
-    let realTeamName = teamName;
-    let teamId = team;
-    if (!teamName && (team === 'home' || team === 'away')) {
-      // If home/away, get id from homeTeamId/awayTeamId
-      teamId = team === 'home' ? homeTeamId : awayTeamId;
-      realTeamName = TEAMS.find(t => t.id === teamId)?.name || '';
-    } else if (!teamName) {
-      realTeamName = TEAMS.find(t => t.id === team)?.name || '';
-    }
     const newAgent: Agent = {
       id: id || `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
       name,
       prompt,
-      team,
+      team,  // 팀 이름
+      isHome,  // home 여부
       createdAt: createdAt || new Date().toISOString(),
       avatarSeed: avatarSeed ? avatarSeed : Math.random().toString(36).substring(7),
-      teamName: realTeamName || '',
       dimensions: dimensions,
     };
     setAgents((prev) => [newAgent, ...prev]);
   };
 
-  const handleEditAgent = (id: string, name: string, prompt: string, team: string) => {
+  const handleEditAgent = (id: string, name: string, prompt: string, team: string, isHome: boolean) => {
     setAgents((prev) =>
       prev.map((agent) =>
-        agent.id === id ? { ...agent, name, prompt, team } : agent
+        agent.id === id ? { ...agent, name, prompt, team, isHome } : agent
       )
     );
   };

@@ -2,3 +2,6 @@ fastapi
 uvicorn[standard]
 openai
 python-dotenv
+langchain-openai
+pandas
+tqdm

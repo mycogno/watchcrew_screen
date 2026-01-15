@@ -1,12 +1,19 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from typing import List, Literal, Dict
+from typing import List, Literal, Dict, Optional
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import json
 import logging
 from dotenv import load_dotenv
 from pathlib import Path
+import re
+import math
+from collections import Counter
+import asyncio
+import pandas as pd
+import time
 
 # load .env (prefer backend/.env located next to this file)
 env_path = Path(__file__).resolve().parent / ".env"
@@ -28,6 +35,8 @@ app = FastAPI()
 
 # basic logging: file + console
 LOG_PATH = os.path.join(os.path.dirname(__file__), "backend.log")
+ORCHESTRATE_LOG_PATH = os.path.join(os.path.dirname(__file__), "orchestrate.log")
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s %(name)s: %(message)s",
@@ -38,8 +47,19 @@ logging.basicConfig(
 )
 logger = logging.getLogger("watchcrew.backend")
 
+# Orchestrator 전용 로거 (orchestrate.log에만 기록)
+orchestrate_logger = logging.getLogger("watchcrew.orchestrate")
+orchestrate_logger.setLevel(logging.INFO)
+orchestrate_handler = logging.FileHandler(ORCHESTRATE_LOG_PATH, encoding="utf-8")
+orchestrate_handler.setFormatter(logging.Formatter("%(asctime)s: %(message)s"))
+orchestrate_logger.addHandler(orchestrate_handler)
+orchestrate_logger.propagate = False  # 부모 로거로 전파 방지
+
 # log whether OPENAI_API_KEY is present (do not log the key itself)
 logger.info("OPENAI_API_KEY present: %s", bool(os.getenv("OPENAI_API_KEY")))
+
+# 게임 데이터 row_index 상태 관리 (요청마다 증가)
+current_row_index = 328
 
 # 환경변수로 허용할 origin을 설정할 수 있도록 함 (쉼표로 구분)
 _allowed = os.getenv(
@@ -68,6 +88,298 @@ class AgentCandidate(BaseModel):
     dimensions: Dict[str, str]
     fullPrompt: str
     team: str
+
+
+# ============================================
+# JSON Parsing Utilities (from orchestration_v2.ipynb)
+# ============================================
+
+
+def extract_codeblock(s: str) -> str:
+    """```json ... ``` 구간 추출 (없으면 원문 반환)"""
+    m = re.search(r"```json\s*(.*?)\s*```", s, flags=re.DOTALL | re.IGNORECASE)
+    return m.group(1) if m else s
+
+
+def strip_wrapper_quotes(s: str) -> str:
+    """양끝의 단일 따옴표 한 쌍 제거 (있을 때만)"""
+    return s[1:-1] if len(s) >= 2 and s[0] == s[-1] == "'" else s
+
+
+def remove_js_comments(s: str) -> str:
+    """// 주석 및 /* ... */ 주석 제거"""
+    s = re.sub(r"//.*?$", "", s, flags=re.MULTILINE)  # // line comments
+    s = re.sub(r"/\*.*?\*/", "", s, flags=re.DOTALL)  # /* block comments */
+    return s
+
+
+def sanitize_trailing_commas_outside_strings(s: str) -> str:
+    """문자열(\"...\")은 그대로 두고, 문자열 밖에서만 }, ] 앞의 불필요한 콤마 제거."""
+    pattern = r"(\"(?:\\.|[^\"\\])*\")|,\s*([}\]])"
+    return re.sub(pattern, lambda m: m.group(1) if m.group(1) else m.group(2), s)
+
+
+def prepare_json_text(raw: str) -> str:
+    """OpenAI 응답에서 JSON 텍스트 추출 및 정리"""
+    s = extract_codeblock(raw)
+    s = strip_wrapper_quotes(s)
+    s = remove_js_comments(s)
+    s = sanitize_trailing_commas_outside_strings(s)
+    # BOM 제거 등 사소한 정리
+    s = s.lstrip("\ufeff").strip()
+    return s
+
+
+# ============================================
+# News Summarizer (from orchestration_v2.ipynb)
+# ============================================
+
+
+def news_summarizer(news_dict: dict) -> dict:
+    """전날 뉴스 기사 제목을 요약하는 함수"""
+    try:
+        openai_key = os.getenv("OPENAI_API_KEY")
+        openai_model = os.getenv("OPENAI_MODEL", "gpt-4.1")
+
+        if not openai or not openai_key:
+            logger.warning("OpenAI not available for news summarization")
+            return {}
+
+        client = openai.OpenAI(api_key=openai_key)
+
+        prompt = f"""
+당신은 최근 뉴스를 요약하는 직업입니다. 당신의 역할은 두 팀의 전날 업데이트된 뉴스 기사의 제목을 보고 두 팀의 최근 경기 상황 및 소식을 요약하여 제공해야합니다.
+
+[주어진 데이터]
+# News title data from yesterday
+: 전날 올라온 두 팀의 뉴스 기사 제목 100개 (팀별 50개)
+
+----------------
+
+[RESPONSE RULES]
+- 각 팀별로 전날 올라온 기사 제목(50개)에서 드러나는 최근 경기 흐름/결과/부상·복귀/선발·라인업/트레이드·엔트리/논란·이슈를 요약한다.
+- 요약은 제목에서 확인 가능한 내용만 사용하며, 추측·과장·새 사실 생성을 하지 않는다.
+- 각 팀 요약은 2~5문장으로 작성하고, 문장마다 다른 핵심 포인트를 담는다.
+- 각 팀 요약 내부에서 중복 문장/동일 의미 반복을 피한다.
+- 각 팀 요약 내부에 서로 모순되는 내용이 없도록 한다.
+- 출력은 반드시 [OUTPUT FORMAT]의 JSON 객체를 따르며, 키는 팀 이름 2개만 포함한다.
+- JSON 값(value)은 문자열(string) 로 작성한다.
+
+----------------
+
+[INPUT FORMAT]
+# News title data from yesterday
+: {news_dict}
+
+[OUTPUT FORMAT]
+{{
+    name of team1: A summary of the team1's recent performance and key updates,
+    name of team2: A summary of the team2's recent performance and key updates
+}}
+
+"""
+        response = client.chat.completions.create(
+            model=openai_model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0,
+        )
+
+        chatResult = response.choices[0].message.content
+        clean = prepare_json_text(chatResult)
+        recNews = json.loads(clean)
+
+        return recNews
+    except Exception as e:
+        logger.exception(f"Error in news_summarizer: {e}")
+        return {}
+
+
+# ============================================
+# Hardcoded Agent Personas (from orchestration_v2.ipynb)
+# TODO: 추후 AgentCreator에서 생성된 데이터를 전달받도록 수정
+# ============================================
+
+HARDCODED_AGENTS = [
+    {
+        "userName": "야구는못참지",
+        "team": "samsung lions",
+        "language": "ko",
+        "성격": "분석적이고 차분한 성향으로 경기 흐름과 선수 기용, 투수 관리 같은 실질적 요소를 중시합니다. 감정적 흥분보다는 기록과 상황을 바탕으로 판단하고, 과잉반응을 경계하면서도 필요한 경우 단호하게 보완점을 지적합니다. 팀 분위기에는 낙관적이되 현실적인 기대치를 유지하려는 편입니다.",
+        "말투": "직설적이고 실용적인 말투를 사용합니다. 짧고 명료한 문장으로 핵심을 짚고, 선수 이름이나 포지션을 친근한 호칭으로 부르며 조언형·평가형 발언을 자주 합니다. 비난보다는 '관리'나 '휴식' 같은 해결책을 제시하는 어조를 즐겨 씁니다.",
+        "어휘": [
+            "무조건",
+            "연패",
+            "연승",
+            "관리 잘해줘라",
+            "무리했다",
+            "믿고 던져라",
+            "선발",
+            "마무리",
+            "콜업 필요",
+            "에러남발",
+            "오늘 잘했음",
+            "아쉽",
+            "30구",
+            "이닝",
+            "방어율",
+            "빨리 내릴 필요 없었는데",
+            "믿을 선수가 없다",
+            "등판",
+            "휴식",
+            "투수 관리",
+        ],
+    },
+    {
+        "userName": "수고했소님",
+        "team": "samsung lions",
+        "language": "ko",
+        "성격": "룰은 잘 모르지만 경기를 보며 선수·스태프들에게 고생했다는 마음이 먼저 드는 잔잔한 응원형 팬입니다. 결과에 일희일비하지 않고 격려를 우선해요.",
+        "말투": "차분하고 따뜻한 말투로 '고생했다', '후....' 같은 표현을 자주 씁니다. 경기 과정을 보며 '어렵게 이겼네' 같은 소감을 느리게 전해요.",
+        "어휘": [
+            "고생했다..",
+            "후....",
+            "이기긴했네..ㅋ",
+            "어렵게",
+            "낸은 좀 과감해지자~~~",
+            "감독대행님 무쟈게 좋아하네~",
+            "두산",
+        ],
+    },
+    {
+        "userName": "찬승바라기",
+        "team": "samsung lions",
+        "language": "ko",
+        "성격": "분석적이면서도 응원심이 강한 타입이다. 차분하게 이유를 대면서도 좋아하는 선수에게는 애칭을 붙여 응원하고, 작은 성과에도 칭찬을 아끼지 않는다.",
+        "말투": "짧고 직설적인 응원형 말투를 쓴다. '믿습니다', '화이팅입니다', '잘했다' 같은 표현을 자주 쓰며 한두 마디로 감정과 분석을 섞어 전달한다.",
+        "어휘": [
+            "믿습니다",
+            "화이팅입니다",
+            "사랑해",
+            "잘했다",
+            "응?",
+            "한점",
+            "홈런",
+            "살아난다",
+        ],
+    },
+    {
+        "userName": "우성편",
+        "team": "kia tigers",
+        "language": "ko",
+        "성격": "야구 룰에는 아직 약하지만 특히 특정 선수가 불공정하게 비판받으면 바로 옹호하는 성향입니다. 선수 잘못 아닌 부분은 감싸주려 해요.",
+        "말투": "직설적이고 방어적인 어투를 쓰되, 과격하진 않습니다. '이걸 왜 이우성 욕함?', '해영탓 하지마라' 같은 표현으로 방어 의사를 분명히 합니다.",
+        "어휘": [
+            "이걸 왜 이우성 욕함?",
+            "이게 우성이 잘못이냐",
+            "맞은놈 잘못이지",
+            "해영탓 하지마라",
+            "억까",
+            "박찬호",
+            "땅볼아웃",
+        ],
+    },
+    {
+        "userName": "시즌루키",
+        "team": "kia tigers",
+        "language": "ko",
+        "성격": "야구는 막 배운 초보 팬이지만 숫자나 기록에 호기심이 많은 편이에요. 룰은 잘 몰라도 선수들의 성과나 흐름을 보고 응원하는 걸 즐기고, 긍정적으로 팀을 밀어줍니다.",
+        "말투": "질문을 자주 던지고 간단한 스탯을 인용하면서 응원해요. “이 기록이면 괜찮은 편인가요?”, “오늘 투구수 괜찮았네, 굿굿!”처럼 궁금증과 칭찬을 섞어 말합니다.",
+        "어휘": [
+            "데이터",
+            "타율",
+            "승률",
+            "OPS",
+            "WAR",
+            "스탯",
+            "분석",
+            "추세",
+            "확률",
+            "투구수",
+            "수비율",
+            "타석",
+            "세이버",
+            "기록",
+            "궁금",
+        ],
+    },
+]
+
+
+# ============================================
+# Game Data Loader (from orchestration_v2.ipynb Pre data & Stimulus data)
+# ============================================
+
+
+def load_game_data(
+    game_file: str = "250523_HTSS_HT_game.csv", row_index: int = 328
+) -> tuple:
+    """
+    backend/game 폴더에서 CSV 파일을 로드하고 특정 행에서
+    currGameStat과 gameFlow를 추출합니다.
+
+    orchestration_v2.ipynb의 로직:
+    i = 361
+    curr_game_stat = df.loc[i, 'currGameStat']
+    game_flow = df.loc[i, 'gameFlow']
+
+    Args:
+        game_file: CSV 파일명 (기본값: 250523_HTSS_HT_game.csv)
+        row_index: 추출할 행 번호 (기본값: 361)
+
+    Returns:
+        tuple: (currGameStat, gameFlow, df)
+    """
+    try:
+        game_path = Path(__file__).resolve().parent / "game" / game_file
+
+        if not game_path.exists():
+            logger.warning(f"Game file not found: {game_path}, using default data")
+            return "경기 진행 중", "경기 흐름 데이터 없음", None
+
+        # CSV 파일 로드
+        df = pd.read_csv(game_path, encoding="utf-8-sig")
+
+        if df.empty:
+            logger.warning(f"Game data is empty: {game_path}")
+            return "경기 진행 중", "경기 흐름 데이터 없음", df
+
+        # 중복 제거 (orchestration_v2.ipynb 참고)
+        df = df.drop_duplicates("messageTime").reset_index(drop=True)
+
+        # 지정된 행 번호가 유효한지 확인
+        if row_index < 0 or row_index >= len(df):
+            logger.warning(
+                f"Row index {row_index} out of bounds (total rows: {len(df)}), using last row"
+            )
+            row_index = len(df) - 1
+
+        # 특정 행에서 데이터 추출 (orchestration_v2.ipynb 로직)
+        selected_row = df.loc[row_index]
+
+        # currGameStat: 현재 경기 상태
+        curr_game_stat = str(selected_row.get("currGameStat", "경기 진행 중"))
+
+        # gameFlow: 경기 흐름
+        game_flow = str(
+            selected_row.get(
+                "gameFlow", selected_row.get("seqDescription", "경기 흐름 데이터 없음")
+            )
+        )
+
+        logger.info(f"Loaded game data from {game_file} at row {row_index}")
+        logger.debug(f"Current game stat: {curr_game_stat}")
+        logger.debug(f"Game flow: {game_flow[:100]}...")  # 첫 100자만 로그
+
+        return curr_game_stat, game_flow, df
+
+    except Exception as e:
+        logger.exception(f"Error loading game data: {e}")
+        return "경기 진행 중", "경기 흐름 데이터 없음", None
+
+
+# ============================================
+# Agent Candidate normalization
+# ============================================
 
 
 def normalize_candidates(
@@ -278,8 +590,8 @@ def generate_candidates(payload: GenerateRequest):
                         {"role": "system", "content": system_msg},
                         {"role": "user", "content": user_msg},
                     ],
-                    temperature=0.7,
                     max_tokens=2000,
+                    temperature=0,
                 )
             else:
                 # old interface
@@ -289,8 +601,8 @@ def generate_candidates(payload: GenerateRequest):
                         {"role": "system", "content": system_msg},
                         {"role": "user", "content": user_msg},
                     ],
-                    temperature=0.7,
                     max_tokens=2000,
+                    temperature=0,
                 )
 
             # Try multiple ways to extract text from response (dict-like or object-like)
@@ -497,57 +809,335 @@ def generate_candidates(payload: GenerateRequest):
             )
 
 
-# 요청 데이터 모델 정의
-class ChatMessage(BaseModel):
-    role: str
-    content: str
+# ============================================
+# Orchestrator Endpoint (from orchestration_v2.ipynb)
+# ============================================
 
 
-class AgentInfo(BaseModel):
-    name: str
-    team: str
-    teamName: str  # "삼성 라이온즈" 등 실제 팀 이름
-    prompt: str  # 에이전트 성격
+class OrchestratorRequest(BaseModel):
+    """Orchestrator 요청 모델
+
+    30초마다 자동으로 채팅 셋을 생성하며, 사용자 입력이 있으면 이를 반영합니다.
+    """
+
+    userMessages: List[Dict[str, str]] = (
+        []
+    )  # [{"speaker": "사용자1", "text": "메시지"}, ...]
+    currGameStat: Optional[str] = "경기 진행 중"  # 현재 경기 상태 (추후 자동 업데이트)
+    gameFlow: Optional[str] = ""  # 경기 흐름 요약 (추후 자동 업데이트)
 
 
-class ChatRequest(BaseModel):
-    agent: AgentInfo
-    history: List[ChatMessage]  # 이전 대화 기록
+@app.post("/orchestrate")
+async def orchestrate_chat(request: OrchestratorRequest):
+    """에이전트들 간의 대화 스크립트를 생성하고 스트리밍으로 응답
 
+    orchestration_v2.ipynb의 로직을 FastAPI 스트리밍으로 구현
+    backend/game 폴더의 실제 게임 데이터를 사용합니다.
+    """
+    global current_row_index
 
-@app.post("/chat")
-async def generate_chat(request: ChatRequest):
     try:
         openai_key = os.getenv("OPENAI_API_KEY")
         openai_model = os.getenv("OPENAI_MODEL", "gpt-4.1")
+
+        if not openai or not openai_key:
+            raise HTTPException(status_code=500, detail="OpenAI API not configured")
+
         client = openai.OpenAI(api_key=openai_key)
-        # 시스템 프롬프트 구성
-        system_content = (
-            f"당신은 {request.agent.teamName}의 팬입니다. "
-            f"당신은 프로야구 경기를 시청하는 중입니다. "
-            f"당신의 성격: {request.agent.prompt}. "
-            "이전 메시지를 고려하여 채팅 메시지를 생성하시오. "
-            "응답은 한국어로 하며, 짧고 자연스러운 채팅 형식으로 작성하세요 (1-2문장)."
+
+        # 하드코딩된 에이전트 리스트 사용 (추후 AgentCreator에서 받도록 수정 예정)
+        ap_list = HARDCODED_AGENTS
+
+        # turn_num 계산 (ipynb 로직 그대로)
+        turn_num = [
+            math.floor(len(ap_list) * 1 + 0.5),
+            math.floor(len(ap_list) * 1.5 + 0.5),
+        ]
+
+        # context_memory 구성: 사용자 메시지를 포함
+        context_memory = request.userMessages if request.userMessages else []
+
+        # =====================================================
+        # 게임 데이터 로드 (orchestration_v2.ipynb의 Pre data, Stimulus data)
+        # =====================================================
+        # 현재 row_index로 게임 데이터 로드
+        curr_game_stat, game_flow, df = load_game_data(row_index=current_row_index)
+
+        # 다음 요청을 위해 row_index 증가
+        if df is not None and current_row_index < len(df) - 1:
+            current_row_index += 1
+
+        logger.info(
+            f"Loaded game data at row {current_row_index - 1} - currGameStat: {curr_game_stat}, gameFlow length: {len(game_flow)}"
         )
 
-        messages = [{"role": "system", "content": system_content}]
+        # Five Chatting Motivations
+        five_motivations = """
+[Five Chatting Motivations]
+- Sharing Feelings and Thoughts
+: 사람들은 무언가가 일어날 때 다른 사람들의 반응을 보고, 실시간으로 생각과 감정을 나누기 위해 채팅한다.
+- Membership
+: 사람들은 다른 팬들과 함께 응원하며 하나됨을 느끼고, 충성심을 보여주기 위해 우리 팀을 옹호하려고 채팅한다.
+- Information Sharing
+: 사람들은 질문하고 답을 얻으며, 경기 규칙이나 선수 별명 같은 유용한 정보를 배우기 위해 채팅한다.
+- Fun and Entertainment
+: 사람들은 경기가 지루할 때 시간을 보내고, 다른 사람들의 댓글을 읽는 게 재미있어서 채팅한다.
+- Emotional Release
+: 사람들은 떠오르는 생각을 쓰고 감정을 표현하며, 강한 순간에는 채팅으로 소리치듯 반응하기 위해 채팅한다.
+"""
 
-        # 대화 기록 추가
-        messages.extend([msg.model_dump() for msg in request.history])
+        # 프롬프트 생성 (ipynb 로직 그대로)
+        prompt = f"""
+당신은 야구 중계 채팅 시스템 매니저입니다. 당신의 역할은 현재 야구 경기를 시청 중인 시청자들에게, 지금 경기 상황에 맞춰 사람들이 더 재미있거나 더 유용하다고 느낄 만한 대화를 생성해 제공하는 것입니다.
 
-        # OpenAI API 호출
+주어진 데이터와 에이전트 및 페르소나 리스트 그리고 5가지 채팅 동기들을 활용하여 다음의 작업을 Chain-of-thought 방식으로 단계적으로 수행하세요.
+
+[주어진 데이터]
+# Current Game Data
+- Current Game Status: The current state of the game at this moment.
+- Game Flow: Summary of game events leading up to this point.
+
+# Context Memory
+: 에이전트들의 이전 대화 내용들
+
+[Agent & Personas list]
+: 선택된 에이전트들과 해당 페르소나들
+
+{five_motivations}
+ 
+[작업]
+1. Five Chatting Motivation를 참고하여 주어진 현재 경기 데이터 상황에서 사람들이 더 재미있거나 더 유용하다고 느낄 만한 주제와 대화의 전략을 선정합니다.
+
+2. 1에서 정해진 주제 혹은 전략에 맞춰서, 각각 다른 페르소나를 가진 에이전트들이 대화 내에서 어떤 역할을 해야하는지를 결정합니다.
+
+3. 2.에서 결정된 역할에 맞춰 에이전트끼리 대화를 나누는 발화 텍스트를 생성합니다.
+
+----------------
+
+[RESPONSE RULES]
+1. Output format
+- 출력은 반드시 [OUTPUT FORMAT]의 JSON 구조를 따릅니다.
+- agent_role과 script는 에이전트/발화의 리스트(배열)로 작성합니다.
+- script는 총 {turn_num[0]} 턴 이상 {turn_num[1]} 턴 이하로 구성하세요.
+- script의 각 utterance는 한 번에 한 문장을 넘지 않습니다.
+
+2. Rule of strategy
+- strategy에는 현재 경기 데이터 상황에서 사람들이 더 재미있거나 더 유용하다고 느낄 만한 주제와 대화의 전략을 출력합니다.
+- Five Chatting Motivation 중 1개만 참고하여 대화 전략을 고르고, 어떤 대화를 해야할지를 결정합니다.
+- 대화의 유형에는 질의 응답, 동조(긍정/부정), 갈등(같은 팀 간의/다른 팀 간의), 침묵, 환호 등이 있습니다.
+
+3. Rule of agent_role
+- agent_role에는 각 에이전트의 페르소나를 고려하여, 선택된 대화 주제 및 전략에 맞게 대화에서 수행해야 할 역할을 명시합니다.
+- agent_role에 역할 설명은 반드시 해당 에이전트의 응원 team을 고려하여 작성되어야 합니다.
+- agent_role을 작성할 때, 각 에이전트가 다른 에이전트의 발화에 반응하거나 질문·동의·반박·보완을 수행하는 등, 상호작용 방식(예: "앞선 에이전트의 의견에 반응한다", "상대의 질문에 답한다", "상대의 주장에 근거를 덧붙인다")이 드러나도록 역할을 부여합니다.
+- agent_role의 개수는 선택된 에이전트의 개수에 따라 달라질 수 있습니다.
+
+4. Rule of script
+- script에는 strategy와 agent_role을 고려하여 각 에이전트가 실제 말해야하는 발화 텍스트(utterance of the speaker)을 생성합니다.
+- script는 에이전트 간 상호 대화처럼 보이도록 작성합니다. 즉, 에이전트 간 대화를 서로 주고받는 흐름이 드러나야 합니다.
+- 발화 순서는 정해진 역할과 에이전트의 페르소나를 고려해 결정합니다.
+- 에이전트의 각 발화는 말투/톤 등은 해당 페르소나에 맞게 반영되어야 합니다.
+- script의 대화의 문맥과 흐름은 자연스럽게 이어져야합니다.
+- 에이전트의 각 발화는 문맥을 유지하면서도 해당 에이전트의 응원 team 관점이 반영되어야 합니다.
+- 각 에이전트의 발화 텍스트가 서로 너무 비슷하지 않게 합니다.
+
+----------------
+
+[INPUT FORMAT]
+# Current Game Data
+- Current Game Status: {curr_game_stat}
+- Game Flow: {game_flow} 
+
+# Context Memory
+: {context_memory}
+
+[Agent & Personas list]
+: {ap_list}
+
+
+[OUTPUT FORMAT]
+{{
+    "strategy": Conversation strategy for the current situation,
+    "agent_role": [
+        {{"name": name of agent1, "text": The role of Agent 1 in this conversation}},
+        {{"name": name of agent2, "text": The role of Agent 2 in this conversation}},      
+        ... ],
+    "script": [
+        {{"name": name of the speaker1, "text": utterance of the speaker1}},
+        {{"name": name of the speaker2, "text": utterance of the speaker2}},
+        ... ],
+}}
+
+"""
+
+        # OpenAI API 호출 - 스트리밍 모드
+        logger.info(f"Calling OpenAI with model: {openai_model}")
+        request_start_time = time.time()
         response = client.chat.completions.create(
             model=openai_model,
-            messages=messages,
-            max_tokens=100,
-            temperature=0.9,
+            messages=[{"role": "user", "content": prompt}],
+            stream=True,
+            temperature=0,
         )
 
-        content = response.choices[0].message.content
-        return {"message": content}
+        # 에이전트 team 정보 매핑 (이름으로 team 찾기)
+        agent_team_map = {
+            agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+        }
 
+        # 스트리밍 응답을 즉시 파싱하여 전송 (동기 generator로 변경하여 즉시 스트리밍)
+        def generate():
+            buffer = ""
+            full_response = ""  # 전체 응답 저장용
+            chunk_count = 0
+            sent_count = 0
+            script_array_found = False
+            script_start_pos = -1
+            sent_messages = set()  # 중복 전송 방지
+            first_chunk_time = None
+            script_start_time = None
+            first_message_time = None
+            last_message_time = None
+
+            logger.info("Starting incremental parsing and streaming")
+            orchestrate_logger.info("=" * 80)
+            orchestrate_logger.info("NEW ORCHESTRATE REQUEST")
+            orchestrate_logger.info("=" * 80)
+
+            for chunk in response:
+                if chunk.choices[0].delta.content:
+                    content = chunk.choices[0].delta.content
+                    buffer += content
+                    full_response += content  # 전체 응답에도 추가
+                    chunk_count += 1
+
+                    # 첫 chunk 도착 시간 기록
+                    if first_chunk_time is None:
+                        first_chunk_time = time.time()
+                        elapsed = first_chunk_time - request_start_time
+                        logger.info(f"⏱️ First chunk received after {elapsed:.3f}s")
+
+                    # "script": [ 배열 위치 찾기 (한 번만 실행)
+                    if not script_array_found and '"script"' in buffer:
+                        script_idx = buffer.find('"script"')
+                        # "script" 다음의 : 와 [ 찾기
+                        search_start = script_idx + len('"script"')
+                        bracket_idx = buffer.find("[", search_start)
+                        if bracket_idx > script_idx:
+                            script_array_found = True
+                            script_start_pos = bracket_idx + 1  # [ 다음 위치 저장
+                            script_start_time = time.time()
+                            elapsed_from_start = script_start_time - request_start_time
+                            elapsed_from_first = script_start_time - first_chunk_time
+                            logger.info(
+                                f"⏱️ Found 'script' array at {elapsed_from_start:.3f}s (first chunk +{elapsed_from_first:.3f}s)"
+                            )
+
+                    # script 배열이 시작된 후에만 메시지 추출
+                    if script_array_found and script_start_pos >= 0:
+                        # script 배열 내용만 추출 (버퍼 전체가 아닌 script 시작 위치 이후만)
+                        script_content = buffer[script_start_pos:]
+
+                        # {"name": "...", "text": "..."} 패턴 찾기 (쉼표 선택적 포함)
+                        import re
+
+                        pattern = r'\{\s*"name"\s*:\s*"([^"]+)"\s*,\s*"text"\s*:\s*"([^"]*(?:\\.[^"]*)*)"\s*\}\s*,?'
+
+                        matches = list(re.finditer(pattern, script_content))
+
+                        if matches:
+                            current_time = time.time()
+                            for match in matches:
+                                speaker = match.group(1)
+                                text = match.group(2).replace(
+                                    '\\"', '"'
+                                )  # unescape quotes
+
+                                # 중복 전송 방지 (같은 speaker + text 조합)
+                                msg_key = f"{speaker}:{text}"
+                                if msg_key in sent_messages:
+                                    continue
+                                sent_messages.add(msg_key)
+
+                                team = agent_team_map.get(speaker, "samsung")
+
+                                message = json.dumps(
+                                    {"speaker": speaker, "text": text, "team": team},
+                                    ensure_ascii=False,
+                                )
+                                sent_count += 1
+
+                                # 타이밍 정보 계산
+                                elapsed_from_start = current_time - request_start_time
+                                elapsed_from_script = current_time - script_start_time
+
+                                if first_message_time is None:
+                                    first_message_time = current_time
+                                    logger.info(
+                                        f"⏱️ First message sent at {elapsed_from_start:.3f}s (script start +{elapsed_from_script:.3f}s)"
+                                    )
+
+                                if last_message_time is not None:
+                                    time_since_last = current_time - last_message_time
+                                    logger.info(
+                                        f"⏱️ Message {sent_count}: speaker={speaker}, text_length={len(text)}, time_since_last={time_since_last:.3f}s"
+                                    )
+                                else:
+                                    logger.info(
+                                        f"⏱️ Message {sent_count}: speaker={speaker}, text_length={len(text)}"
+                                    )
+
+                                last_message_time = current_time
+                                yield f"{message}\n"
+
+                            # 전송한 마지막 메시지 위치까지 script_start_pos 업데이트
+                            last_match = matches[-1]
+                            script_start_pos += last_match.end()
+
+            end_time = time.time()
+            total_elapsed = end_time - request_start_time
+            logger.info(
+                f"⏱️ Streaming completed in {total_elapsed:.3f}s. Total chunks: {chunk_count}, messages sent: {sent_count}"
+            )
+
+            # 전체 응답을 orchestrate.log에 기록
+            orchestrate_logger.info(f"Total elapsed time: {total_elapsed:.3f}s")
+            orchestrate_logger.info(
+                f"Total chunks: {chunk_count}, messages sent: {sent_count}"
+            )
+            orchestrate_logger.info("-" * 80)
+            orchestrate_logger.info("FULL OPENAI RESPONSE:")
+            orchestrate_logger.info("-" * 80)
+            orchestrate_logger.info(full_response)
+            orchestrate_logger.info("-" * 80)
+            orchestrate_logger.info("")
+
+            if first_chunk_time:
+                logger.info(
+                    f"⏱️ Timing summary: Request→FirstChunk: {(first_chunk_time - request_start_time):.3f}s"
+                )
+            if script_start_time:
+                logger.info(
+                    f"⏱️ Timing summary: Request→ScriptStart: {(script_start_time - request_start_time):.3f}s"
+                )
+            if first_message_time:
+                logger.info(
+                    f"⏱️ Timing summary: Request→FirstMessage: {(first_message_time - request_start_time):.3f}s"
+                )
+            if last_message_time:
+                logger.info(
+                    f"⏱️ Timing summary: Request→LastMessage: {(last_message_time - request_start_time):.3f}s"
+                )
+
+        return StreamingResponse(generate(), media_type="application/x-ndjson")
+
+    except json.JSONDecodeError as e:
+        logger.exception(f"JSON parsing error in orchestrate: {e}")
+        raise HTTPException(
+            status_code=500, detail=f"Failed to parse response: {str(e)}"
+        )
     except Exception as e:
-        print(f"Error generating chat: {e}")
+        logger.exception(f"Error in orchestrate: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 

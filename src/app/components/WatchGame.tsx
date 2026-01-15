@@ -39,7 +39,8 @@ interface ChatMessage {
   id: string;
   agentId: string;
   agentName: string;
-  team: string;
+  team: string; // canonical team id (예: "samsung", "kia")
+  isHome: boolean; // home인지 away인지
   message: string;
   timestamp: string;
   avatarSeed?: string;
@@ -100,6 +101,7 @@ export function WatchGame({
   const [inputMessage, setInputMessage] = useState("");
   const [showAgentInfo, setShowAgentInfo] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false); // 메시지 생성 중 상태
+  const [contextMemory, setContextMemory] = useState<Array<{speaker: string, text: string}>>([]); // context_memory for orchestrator
   const [expandedBatters, setExpandedBatters] = useState<
     Set<number>
   >(new Set()); // 확장된 타자 목록 (batterAppearanceOrder 기준) - 초기값 비움
@@ -260,56 +262,75 @@ export function WatchGame({
     return { pitchNumber, eventType, eventColor, eventLabel };
   };
 
-  // OpenAI 클라이언트 초기화
-  // Vite 환경에서 OpenAI API 키를 가져옵니다 (브라우저)
-  const getTeamInfo = (team: "home" | "away") => {
-    const teamData = team === "home" ? homeTeam : awayTeam;
+  // 팀 문자열을 너그럽게 매칭하기 위한 정규화 도우미
+  const normalizeTeamKey = (value?: string | null) =>
+    (value ? value.toLowerCase().replace(/[^a-z0-9가-힣]/g, "") : "").trim();
+
+  // team id/한국어 이름/영문 별칭 등을 모두 수용해 Team 객체를 찾는다
+  const findTeamByAnyName = (teamName?: string | null) => {
+    const normalized = normalizeTeamKey(teamName);
+    if (!normalized) return undefined;
+
+    return TEAMS.find((team) => {
+      const candidates = [
+        team.id,
+        team.name,
+        team.shortName,
+        team.name.replace(/\s+/g, ""),
+        team.shortName.replace(/\s+/g, ""),
+      ]
+        .map(normalizeTeamKey)
+        .filter(Boolean);
+
+      // "samsunglions", "kia tigers" 같은 케이스도 포괄하기 위해 contains 매칭을 허용
+      return candidates.some(
+        (candidate) =>
+          candidate === normalized ||
+          normalized === `${candidate}s` ||
+          normalized.startsWith(candidate) ||
+          normalized.endsWith(candidate),
+      );
+    });
+  };
+
+  const resolveTeamId = (teamName?: string | null) =>
+    findTeamByAnyName(teamName)?.id || null;
+
+  // 팀 이름으로 팀 정보 조회 (id/별칭 모두 허용)
+  const getTeamInfo = (teamName?: string | null) => {
+    const teamData = findTeamByAnyName(teamName);
+    if (teamData) {
+      return {
+        color: teamData.color,
+        shortName: teamData.shortName,
+        id: teamData.id,
+        name: teamData.name,
+      };
+    }
+    // 기본값
     return {
-      color:
-        teamData?.color ||
-        (team === "home" ? "#074CA1" : "#EA0029"),
-      shortName:
-        teamData?.shortName ||
-        (team === "home" ? "홈팀" : "어웨이팀"),
+      color: "#999",
+      shortName: teamName || "팀",
+      id: teamName || "unknown",
+      name: teamName || "팀",
     };
   };
 
-  // 에이전트 메시지 생성 함수
-  const generateAgentMessage = async (
-    agent: Agent,
-    conversationHistory: ChatMessage[],
-  ) => {
+  // Orchestrator를 사용한 에이전트 대화 생성 (스트리밍) - 30초 인터벌에서만 호출
+  const callOrchestrator = async (memoryToUse: Array<{speaker: string, text: string}>) => {
+    setIsGenerating(true);
+
     try {
-      // 에이전트가 응원하는 팀 정보 가져오기
-      const teamId =
-        agent.team === "home" ? homeTeamId : awayTeamId;
-      const team = TEAMS.find((t) => t.id === teamId);
-      const teamName =
-        team?.name ||
-        (agent.team === "home" ? "홈팀" : "어웨이팀");
-
-      // 대화 히스토리를 백엔드가 이해할 수 있는 포맷으로 변환
-      const historyMessages = conversationHistory.map(
-        (msg) => ({
-          role: "user", // 백엔드 Pydantic 모델에 맞춤
-          content: `[${msg.agentName}]: ${msg.message}`,
-        }),
-      );
-
-      // 백엔드로 요청 전송
-      const response = await fetch(`${API_URL}/chat`, {
+      // orchestrator 엔드포인트 호출
+      const response = await fetch(`${API_URL}/orchestrate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          agent: {
-            name: agent.name,
-            team: agent.team,
-            teamName: teamName,
-            prompt: agent.prompt,
-          },
-          history: historyMessages,
+          userMessages: memoryToUse,
+          currGameStat: "경기 진행 중",
+          gameFlow: "",
         }),
       });
 
@@ -317,81 +338,154 @@ export function WatchGame({
         throw new Error(`Server error: ${response.status}`);
       }
 
-      const data = await response.json();
-      const generatedMessage = data.message || "...";
+      // 스트리밍 응답 처리
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
 
-      // 디버깅: 생성된 응답 출력
-      console.log(
-        `[${agent.name}] 백엔드 응답:`,
-        generatedMessage,
-      );
+      if (!reader) {
+        throw new Error("No response body");
+      }
 
-      return generatedMessage;
-    } catch (error) {
-      console.error("API 요청 오류:", error);
-      return "메시지를 생성할 수 없습니다."; // 에러 시 기본 메시지
-    }
-  };
+      let buffer = "";
+      let lineCount = 0;
+      let parseErrorCount = 0;
+      let requestStartTime = Date.now();
+      let lastMessageDisplayTime = 0;
 
-  // 모든 에이전트가 순차적으로 응답하도록 처리
-  const generateAllAgentResponses = async (
-    userMessage: string,
-  ) => {
-    setIsGenerating(true);
+      console.log("[Orchestrator] Starting to read stream response");
 
-    // 사용자 메시지를 먼저 추가
-    const newUserMessage: ChatMessage = {
-      id: Date.now().toString(),
-      agentId: "user",
-      agentName: "나",
-      team: userTeam || selectedAgents[0].team,
-      message: userMessage,
-      timestamp: new Date().toLocaleTimeString(),
-    };
+      // 메시지 표시 함수
+      const displayMessage = async (item: {speaker: string, text: string, team?: string}, arrivalTime: number) => {
+        if (lastMessageDisplayTime === 0) {
+          // 첫 메시지는 바로 표시
+          console.log(`[Display] First message from "${item.speaker}" - displaying immediately`);
+        } else {
+          // 메시지 길이에 따라 목표 간격 계산 (1.5초 ~ 2.5초)
+          const minInterval = 1500;
+          const maxInterval = 2500;
+          const avgTextLength = 100;
+          
+          const textLengthRatio = Math.min(item.text.length / avgTextLength, 2);
+          const targetInterval = minInterval + (maxInterval - minInterval) * (textLengthRatio / 2);
+          
+          // 직전 메시지 표시로부터 경과 시간 계산
+          const elapsedSinceLastDisplay = Date.now() - lastMessageDisplayTime;
+          
+          // 목표 간격에 미달하면 추가 딜레이
+          const additionalDelay = Math.max(0, targetInterval - elapsedSinceLastDisplay);
+          
+          if (additionalDelay > 0) {
+            console.log(`[Display] Message from "${item.speaker}" (${item.text.length} chars, target: ${targetInterval.toFixed(0)}ms) - ${elapsedSinceLastDisplay.toFixed(0)}ms elapsed, adding ${additionalDelay.toFixed(0)}ms delay`);
+            await new Promise((resolve) => setTimeout(resolve, additionalDelay));
+          } else {
+            console.log(`[Display] Message from "${item.speaker}" (${item.text.length} chars, target: ${targetInterval.toFixed(0)}ms) - ${elapsedSinceLastDisplay.toFixed(0)}ms elapsed, displaying immediately`);
+          }
+        }
 
-    setMessages((prev) => [...prev, newUserMessage]);
+        // 메시지 표시
+        const resolvedTeamId = resolveTeamId(item.team) || homeTeamId || awayTeamId || "samsung";
+        const isHome = resolvedTeamId === homeTeamId;
 
-    // 현재까지의 대화 히스토리
-    let currentHistory = [...messages, newUserMessage];
+        const agentMessage: ChatMessage = {
+          id: Date.now().toString() + Math.random(),
+          agentId: item.speaker,
+          agentName: item.speaker,
+          team: resolvedTeamId,
+          isHome: isHome,
+          message: item.text,
+          timestamp: new Date().toLocaleTimeString(),
+          avatarSeed: item.speaker,
+        };
 
-    // 에이전트 순서를 랜덤으로 섞기
-    const shuffledAgents = [...selectedAgents].sort(
-      () => Math.random() - 0.5,
-    );
-
-    // 각 에이전트가 순차적으로 응답 생성
-    for (const agent of shuffledAgents) {
-      // AI 응답 생성
-      const generatedMessage = await generateAgentMessage(
-        agent,
-        currentHistory,
-      );
-
-      // 실제 메시지 추가
-      const agentMessage: ChatMessage = {
-        id: Date.now().toString() + agent.id,
-        agentId: agent.id,
-        agentName: agent.name,
-        team: agent.team,
-        message: generatedMessage,
-        timestamp: new Date().toLocaleTimeString(),
-        avatarSeed: agent.avatarSeed,
+        setMessages((prev) => [...prev, agentMessage]);
+        lastMessageDisplayTime = Date.now();
       };
 
-      setMessages((prev) => [...prev, agentMessage]);
+      while (true) {
+        const { done, value } = await reader.read();
+        
+        if (done) {
+          console.log(`[Orchestrator] Stream ended. Total lines processed: ${lineCount}, Parse errors: ${parseErrorCount}`);
+          break;
+        }
 
-      // 현재 히스토리에 추가
-      currentHistory = [...currentHistory, agentMessage];
+        // 디코드하고 버퍼에 추가
+        buffer += decoder.decode(value, { stream: true });
+
+        // 줄 단위로 분리
+        const lines = buffer.split("\n");
+        buffer = lines.pop() || ""; // 마지막 불완전한 줄은 버퍼에 남김
+
+        for (const line of lines) {
+          if (line.trim()) {
+            lineCount++;
+            try {
+              const messageData = JSON.parse(line);
+              const speaker = messageData.speaker || "Unknown";
+              const text = messageData.text || "";
+              const team = messageData.team || "samsung lions";
+
+              console.log(`[Orchestrator] Message ${lineCount}: speaker="${speaker}", textLength=${text.length}, team="${team}"`);
+
+              // 메시지 도착 시간 기록하고 표시 (딜레이 포함)
+              const arrivalTime = Date.now();
+              await displayMessage({ speaker, text, team }, arrivalTime);
+
+            } catch (e) {
+              parseErrorCount++;
+              console.error(`[Orchestrator] Parse error on line ${lineCount}:`, e);
+              console.error(`[Orchestrator] Line content (first 200 chars):`, line.substring(0, 200));
+            }
+          }
+        }
+      }
+
+    } catch (error) {
+      console.error("Orchestrator API 오류:", error);
+      
+      // 에러 메시지 표시
+      const errorMessage: ChatMessage = {
+        id: Date.now().toString(),
+        agentId: "system",
+        agentName: "시스템",
+        team: "samsung lions",
+        isHome: true,
+        message: "메시지를 생성할 수 없습니다. 다시 시도해주세요.",
+        timestamp: new Date().toLocaleTimeString(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsGenerating(false);
     }
-
-    setIsGenerating(false);
   };
 
   const handleSendMessage = async () => {
-    if (inputMessage.trim() && !isGenerating) {
+    if (inputMessage.trim()) {
       const userMessage = inputMessage;
       setInputMessage("");
-      await generateAllAgentResponses(userMessage);
+      
+      // 사용자 팀 정보 결정
+      const userTeamName = userTeam || selectedAgents[0]?.team || "samsung";
+      const resolvedUserTeamId = resolveTeamId(userTeamName) || homeTeamId || awayTeamId || "samsung";
+      const userIsHome = resolvedUserTeamId === homeTeamId;
+      
+      // 사용자 메시지를 UI에 표시
+      const newUserMessage: ChatMessage = {
+        id: Date.now().toString(),
+        agentId: "user",
+        agentName: "나",
+        team: resolvedUserTeamId,
+        isHome: userIsHome,
+        message: userMessage,
+        timestamp: new Date().toLocaleTimeString(),
+      };
+      setMessages((prev) => [...prev, newUserMessage]);
+      
+      // context_memory에만 추가 (다음 30초 주기에서 반영됨)
+      setContextMemory(prev => [...prev, {
+        speaker: "사용자",
+        text: userMessage
+      }]);
     }
   };
 
@@ -401,6 +495,47 @@ export function WatchGame({
       handleSendMessage();
     }
   };
+
+  // 15초마다 새로운 orchestrator 요청을 병렬로 시작
+  useEffect(() => {
+    let isActive = true;
+    let requestCount = 0;
+
+    const startOrchestratorRequest = () => {
+      if (!isActive) return;
+      
+      requestCount++;
+      const currentRequestId = requestCount;
+      
+      console.log(`[Orchestrator] Starting request #${currentRequestId}`);
+      
+      // 병렬로 요청 시작 (await 없이)
+      callOrchestrator(contextMemory).then(() => {
+        console.log(`[Orchestrator] Request #${currentRequestId} completed`);
+      }).catch((error) => {
+        console.error(`[Orchestrator] Request #${currentRequestId} failed:`, error);
+      });
+    };
+
+    // 즉시 첫 요청 시작
+    startOrchestratorRequest();
+
+    // 15초마다 새로운 요청 시작 (이전 요청 완료 여부와 무관)
+    const interval = setInterval(() => {
+      if (isActive) {
+        startOrchestratorRequest();
+      }
+    }, 15000); // 15초마다
+
+    // 클린업
+    return () => {
+      isActive = false;
+      clearInterval(interval);
+    };
+  }, []); // 빈 의존성 배열 - 마운트 시에만 설정
+
+  // contextMemory 변경 시에도 inGenerating 상태 업데이트는 필요하지만,
+  // 인터벌 재설정은 불필요 (이미 설정된 인터벌이 contextMemory를 캡처)
 
   useEffect(() => {
     if (chatRef.current) {
@@ -424,7 +559,7 @@ export function WatchGame({
                 <Badge
                   key={agent.id}
                   variant={
-                    agent.team === "home"
+                    agent.isHome
                       ? "default"
                       : "secondary"
                   }
@@ -520,7 +655,7 @@ export function WatchGame({
                               </span>
                               <Badge
                                 variant={
-                                  agent.team === "home"
+                                  agent.isHome
                                     ? "default"
                                     : "secondary"
                                 }
@@ -575,7 +710,7 @@ export function WatchGame({
                             </span>
                             <Badge
                               variant={
-                                msg.team === "home"
+                                msg.isHome
                                   ? "default"
                                   : "secondary"
                               }

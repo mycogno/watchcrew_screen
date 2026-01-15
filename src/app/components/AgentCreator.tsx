@@ -8,14 +8,12 @@ import { TEAMS } from "./TeamSelection";
 import { AgentSelectionModal } from "./AgentSelectionModal";
 
 interface AgentCreatorProps {
-  // [수정됨] dimensions?: Record<string, string> 추가
-  // 상위 컴포넌트(WatchGame)로 데이터를 넘겨주는 함수 정의
   onCreateAgent: (
     name: string, 
     prompt: string, 
-    team: 'home' | 'away', 
+    team: string,  // 팀 이름 (예: "samsung lions", "kia tigers")
+    isHome: boolean,  // home인지 away인지
     avatarSeed?: string, 
-    teamName?: string,
     id?: string,
     createdAt?: string,
     dimensions?: Record<string, string> 
@@ -26,35 +24,33 @@ interface AgentCreatorProps {
 
 export function AgentCreator({ onCreateAgent, homeTeamId, awayTeamId }: AgentCreatorProps) {
   const [prompt, setPrompt] = useState("");
-  const [team, setTeam] = useState<'home' | 'away'>('home');
-  // [수정됨] 에러가 발생했던 줄입니다. 깨끗하게 다시 작성했습니다.
+  const [selectedTeamName, setSelectedTeamName] = useState<string>("");
+  const [selectedIsHome, setSelectedIsHome] = useState<boolean>(true);
   const [showModal, setShowModal] = useState(false);
 
   const handleCreate = () => {
-    if (prompt.trim()) {
+    if (prompt.trim() && selectedTeamName) {
       setShowModal(true);
     }
   };
 
-  // [수정됨] 모달에서 선택한 에이전트 정보(dimensions 포함)를 받아서 상위로 전달
+  // 모달에서 선택한 에이전트 정보를 받아서 상위로 전달
   const handleSelectAgent = (
     name: string, 
     fullPrompt: string, 
-    selectedTeam: string, // 모달에서 string으로 옴
+    selectedTeam: string, 
+    isHome: boolean,
     avatarSeed: string, 
-    teamName: string,
     id?: string,
     createdAt?: string,
-    dimensions?: Record<string, string> // ✅ 추가됨
+    dimensions?: Record<string, string>
   ) => {
-    // team 타입 변환 (string -> 'home' | 'away')
-    const finalTeam = selectedTeam === 'home' || selectedTeam === 'away' ? selectedTeam : 'home';
-    
-    // 상위 컴포넌트로 dimensions까지 포함해서 전달
-    onCreateAgent(name, fullPrompt, finalTeam, avatarSeed, teamName, id, createdAt, dimensions);
+    // 상위 컴포넌트로 팀 이름과 isHome 전달
+    onCreateAgent(name, fullPrompt, selectedTeam, isHome, avatarSeed, id, createdAt, dimensions);
     
     setPrompt("");
-    setTeam('home');
+    setSelectedTeamName("");
+    setSelectedIsHome(true);
     setShowModal(false);
   };
 
@@ -75,19 +71,25 @@ export function AgentCreator({ onCreateAgent, homeTeamId, awayTeamId }: AgentCre
           <div className="flex gap-2">
             <Button
               type="button"
-              variant={team === 'away' ? 'default' : 'outline'}
-              onClick={() => setTeam('away')}
+              variant={selectedIsHome === false && selectedTeamName === awayTeam?.name ? 'default' : 'outline'}
+              onClick={() => {
+                setSelectedTeamName(awayTeam?.name || '');
+                setSelectedIsHome(false);
+              }}
               className="flex-1"
-              style={team === 'away' ? { backgroundColor: awayTeam?.color, borderColor: awayTeam?.color } : {}}
+              style={selectedIsHome === false && selectedTeamName === awayTeam?.name ? { backgroundColor: awayTeam?.color, borderColor: awayTeam?.color } : {}}
             >
               {awayTeam?.name || '어웨이팀'}
             </Button>
             <Button
               type="button"
-              variant={team === 'home' ? 'default' : 'outline'}
-              onClick={() => setTeam('home')}
+              variant={selectedIsHome === true && selectedTeamName === homeTeam?.name ? 'default' : 'outline'}
+              onClick={() => {
+                setSelectedTeamName(homeTeam?.name || '');
+                setSelectedIsHome(true);
+              }}
               className="flex-1"
-              style={team === 'home' ? { backgroundColor: homeTeam?.color, borderColor: homeTeam?.color } : {}}
+              style={selectedIsHome === true && selectedTeamName === homeTeam?.name ? { backgroundColor: homeTeam?.color, borderColor: homeTeam?.color } : {}}
             >
               {homeTeam?.name || '홈팀'}
             </Button>
@@ -107,7 +109,7 @@ export function AgentCreator({ onCreateAgent, homeTeamId, awayTeamId }: AgentCre
         <Button
           onClick={handleCreate}
           className="w-full"
-          disabled={!prompt.trim()}
+          disabled={!prompt.trim() || !selectedTeamName}
         >
           <Sparkles className="size-4 mr-2" />
           에이전트 생성
@@ -118,12 +120,12 @@ export function AgentCreator({ onCreateAgent, homeTeamId, awayTeamId }: AgentCre
       <AgentSelectionModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-        onSelectAgent={handleSelectAgent} // 위에서 수정한 핸들러 연결
-        team={team}
+        onSelectAgent={handleSelectAgent}
+        team={selectedTeamName}
+        isHome={selectedIsHome}
         prompt={prompt}
         homeTeamId={homeTeamId}
         awayTeamId={awayTeamId}
-        // 이전에 모달 크기 문제 해결할 때 썼던 className 유지 또는 제거 (Modal 내부에서 style로 처리했으므로 여기선 제거해도 무방)
         contentClassName="max-w-5xl w-full max-h-[90vh] overflow-y-auto"
       />
     </Card>

@@ -24,13 +24,12 @@ interface AgentCandidate {
 interface AgentSelectionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  // now includes avatarSeed to apply selected candidate's avatar to created agent
-  onSelectAgent: (name: string, prompt: string, team: string, avatarSeed: string, teamName: string, id?: string, createdAt?: string, dimensions?: Record<string, string>) => void;
-  team: string;
+  onSelectAgent: (name: string, prompt: string, team: string, isHome: boolean, avatarSeed: string, id?: string, createdAt?: string, dimensions?: Record<string, string>) => void;
+  team: string; // 팀 이름
+  isHome: boolean; // home인지 away인지
   prompt: string;
   homeTeamId: string | null;
   awayTeamId: string | null;
-  // optional className applied to DialogContent to control modal size
   contentClassName?: string;
 }
 
@@ -39,6 +38,7 @@ export function AgentSelectionModal({
   onClose,
   onSelectAgent,
   team,
+  isHome,
   prompt,
   homeTeamId,
   awayTeamId,
@@ -102,10 +102,8 @@ export function AgentSelectionModal({
 
   const homeTeam = TEAMS.find(t => t.id === homeTeamId);
   const awayTeam = TEAMS.find(t => t.id === awayTeamId);
-  const currentTeamObj = team === 'home' 
-    ? homeTeam 
-    : (team === 'away' ? awayTeam : TEAMS.find(t => t.id === team));
-  const realTeamName = currentTeamObj?.name || (team === 'home' ? '홈팀' : '어웨이팀');
+  const currentTeamObj = TEAMS.find(t => t.name === team);
+  const realTeamName = currentTeamObj?.name || team;
 
   const handleToggleSelect = (id: string) => {
     setSelectedIds(prev => 
@@ -123,23 +121,21 @@ export function AgentSelectionModal({
         id: `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
         name: candidate.name,
         prompt: candidate.fullPrompt,
-        team: candidate.team,
+        team: candidate.team, // 팀 이름
+        isHome: isHome, // home 여부
         createdAt: new Date().toISOString(),
         avatarSeed: candidate.id,
-        teamName: realTeamName,
         dimensions: candidate.dimensions
       };
       console.log('Registering Agent:', agentData);
-      // Pass all fields to onSelectAgent if possible, otherwise update downstream to accept agentData
+      // Pass all fields to onSelectAgent
       if (typeof onSelectAgent === 'function') {
-        // If onSelectAgent expects full agent object, pass agentData
-        // Otherwise, pass individual fields
         onSelectAgent(
           agentData.name,
           agentData.prompt,
           agentData.team,
+          agentData.isHome,
           agentData.avatarSeed,
-          agentData.teamName,
           agentData.id,
           agentData.createdAt,
           agentData.dimensions
