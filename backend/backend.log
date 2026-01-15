@@ -3573,3 +3573,159 @@ KeyError: Index(['messageTime'], dtype='object')
 2026-01-15 18:09:33,471 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 27.915s
 2026-01-15 18:09:33,471 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 28.378s
 2026-01-15 18:09:33,471 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 32.844s
+2026-01-15 18:35:09,861 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-15 18:35:21,163 ERROR watchcrew.backend: Error loading game data: Index(['messageTime'], dtype='object')
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 347, in load_game_data
+    df = df.drop_duplicates("messageTime").reset_index(drop=True)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\site-packages\pandas\core\frame.py", line 6818, in drop_duplicates
+    result = self[-self.duplicated(subset, keep=keep)]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\site-packages\pandas\core\frame.py", line 6950, in duplicated
+    raise KeyError(Index(diff))
+KeyError: Index(['messageTime'], dtype='object')
+2026-01-15 18:35:21,163 INFO watchcrew.backend: Loaded game data at row 327 - currGameStat: 경기 진행 중, gameFlow length: 12
+2026-01-15 18:35:21,163 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:35:22,886 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:35:22,893 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:35:22,905 INFO watchcrew.backend: ⏱️ First chunk received after 1.742s
+2026-01-15 18:35:30,470 INFO watchcrew.backend: ⏱️ Found 'script' array at 9.307s (first chunk +7.565s)
+2026-01-15 18:35:31,225 INFO watchcrew.backend: ⏱️ First message sent at 10.063s (script start +0.755s)
+2026-01-15 18:35:31,225 INFO watchcrew.backend: ⏱️ Message 1: speaker=시즌루키, text_length=38
+2026-01-15 18:35:32,190 INFO watchcrew.backend: ⏱️ Message 2: speaker=야구는못참지, text_length=49, time_since_last=0.965s
+2026-01-15 18:35:33,038 INFO watchcrew.backend: ⏱️ Message 3: speaker=찬승바라기, text_length=33, time_since_last=0.848s
+2026-01-15 18:35:33,776 INFO watchcrew.backend: ⏱️ Message 4: speaker=우성편, text_length=42, time_since_last=0.737s
+2026-01-15 18:35:34,524 INFO watchcrew.backend: ⏱️ Message 5: speaker=야구는못참지, text_length=36, time_since_last=0.748s
+2026-01-15 18:35:35,447 INFO watchcrew.backend: ⏱️ Message 6: speaker=시즌루키, text_length=42, time_since_last=0.923s
+2026-01-15 18:35:35,862 ERROR watchcrew.backend: Error loading game data: Index(['messageTime'], dtype='object')
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 347, in load_game_data
+    df = df.drop_duplicates("messageTime").reset_index(drop=True)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\site-packages\pandas\core\frame.py", line 6818, in drop_duplicates
+    result = self[-self.duplicated(subset, keep=keep)]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\site-packages\pandas\core\frame.py", line 6950, in duplicated
+    raise KeyError(Index(diff))
+KeyError: Index(['messageTime'], dtype='object')
+2026-01-15 18:35:35,862 INFO watchcrew.backend: Loaded game data at row 327 - currGameStat: 경기 진행 중, gameFlow length: 12
+2026-01-15 18:35:35,862 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:35:36,126 INFO watchcrew.backend: ⏱️ Message 7: speaker=찬승바라기, text_length=37, time_since_last=0.679s
+2026-01-15 18:35:36,374 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:35:36,377 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:35:36,379 INFO watchcrew.backend: ⏱️ Streaming completed in 15.216s. Total chunks: 691, messages sent: 7
+2026-01-15 18:35:36,379 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.742s
+2026-01-15 18:35:36,379 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 9.307s
+2026-01-15 18:35:36,379 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 10.063s
+2026-01-15 18:35:36,380 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 14.964s
+2026-01-15 18:35:36,402 INFO watchcrew.backend: ⏱️ First chunk received after 0.540s
+2026-01-15 18:35:43,623 INFO watchcrew.backend: ⏱️ Found 'script' array at 7.761s (first chunk +7.221s)
+2026-01-15 18:35:44,291 INFO watchcrew.backend: ⏱️ First message sent at 8.429s (script start +0.668s)
+2026-01-15 18:35:44,291 INFO watchcrew.backend: ⏱️ Message 1: speaker=시즌루키, text_length=36
+2026-01-15 18:35:44,976 INFO watchcrew.backend: ⏱️ Message 2: speaker=야구는못참지, text_length=37, time_since_last=0.686s
+2026-01-15 18:35:45,864 INFO watchcrew.backend: ⏱️ Message 3: speaker=찬승바라기, text_length=40, time_since_last=0.888s
+2026-01-15 18:35:46,616 INFO watchcrew.backend: ⏱️ Message 4: speaker=우성편, text_length=45, time_since_last=0.752s
+2026-01-15 18:35:47,202 INFO watchcrew.backend: ⏱️ Message 5: speaker=시즌루키, text_length=37, time_since_last=0.585s
+2026-01-15 18:35:47,969 INFO watchcrew.backend: ⏱️ Message 6: speaker=야구는못참지, text_length=34, time_since_last=0.767s
+2026-01-15 18:35:48,936 INFO watchcrew.backend: ⏱️ Message 7: speaker=찬승바라기, text_length=39, time_since_last=0.968s
+2026-01-15 18:35:48,973 INFO watchcrew.backend: ⏱️ Streaming completed in 13.112s. Total chunks: 670, messages sent: 7
+2026-01-15 18:35:48,973 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.540s
+2026-01-15 18:35:48,973 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 7.761s
+2026-01-15 18:35:48,973 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 8.429s
+2026-01-15 18:35:48,973 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 13.075s
+2026-01-15 18:35:50,840 ERROR watchcrew.backend: Error loading game data: Index(['messageTime'], dtype='object')
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 347, in load_game_data
+    df = df.drop_duplicates("messageTime").reset_index(drop=True)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\site-packages\pandas\core\frame.py", line 6818, in drop_duplicates
+    result = self[-self.duplicated(subset, keep=keep)]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\site-packages\pandas\core\frame.py", line 6950, in duplicated
+    raise KeyError(Index(diff))
+KeyError: Index(['messageTime'], dtype='object')
+2026-01-15 18:35:50,840 INFO watchcrew.backend: Loaded game data at row 327 - currGameStat: 경기 진행 중, gameFlow length: 12
+2026-01-15 18:35:50,841 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:35:51,505 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:35:51,505 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:35:51,558 INFO watchcrew.backend: ⏱️ First chunk received after 0.717s
+2026-01-15 18:35:59,914 INFO watchcrew.backend: ⏱️ Found 'script' array at 9.073s (first chunk +8.356s)
+2026-01-15 18:36:00,549 INFO watchcrew.backend: ⏱️ First message sent at 9.708s (script start +0.635s)
+2026-01-15 18:36:00,549 INFO watchcrew.backend: ⏱️ Message 1: speaker=시즌루키, text_length=34
+2026-01-15 18:36:01,163 INFO watchcrew.backend: ⏱️ Message 2: speaker=야구는못참지, text_length=38, time_since_last=0.614s
+2026-01-15 18:36:02,189 INFO watchcrew.backend: ⏱️ Message 3: speaker=찬승바라기, text_length=31, time_since_last=1.026s
+2026-01-15 18:36:02,982 INFO watchcrew.backend: ⏱️ Message 4: speaker=우성편, text_length=40, time_since_last=0.793s
+2026-01-15 18:36:03,765 INFO watchcrew.backend: ⏱️ Message 5: speaker=시즌루키, text_length=36, time_since_last=0.784s
+2026-01-15 18:36:04,876 INFO watchcrew.backend: ⏱️ Message 6: speaker=야구는못참지, text_length=39, time_since_last=1.110s
+2026-01-15 18:36:06,318 INFO watchcrew.backend: ⏱️ Message 7: speaker=찬승바라기, text_length=36, time_since_last=1.443s
+2026-01-15 18:36:06,351 INFO watchcrew.backend: ⏱️ Streaming completed in 15.510s. Total chunks: 669, messages sent: 7
+2026-01-15 18:36:06,351 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.717s
+2026-01-15 18:36:06,351 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 9.073s
+2026-01-15 18:36:06,351 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 9.708s
+2026-01-15 18:36:06,351 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 15.477s
+2026-01-15 18:36:31,324 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-15 18:36:37,738 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 328
+2026-01-15 18:36:37,738 INFO watchcrew.backend: Loaded game data at row 328 - currGameStat: In the top of the 8th inning, Kia Tigers’ third batter, Kim Do-young, stepped up to the plate against Samsung Lions’ pitcher Kim Jae-yoon with runners on first base and one out. Kia Tigers’ batter 김도영 faced a 145 km/h fastball from Samsung Lions’ pitcher 김재윤 and made contact on the first pitch with a hit. Kia Tigers batter 김도영 hit a home run to deep left-center field, measuring 125 meters, against Samsung Lions pitcher 김재윤 in the bottom of the 8th inning. Kia Tigers’ baserunner 김규성 scored a run, increasing the away team’s lead to 6-4 against the Samsung Lions in the bottom of the 8th inning., gameFlow length: 549
+2026-01-15 18:36:37,739 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:36:38,828 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:36:38,832 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:36:38,877 INFO watchcrew.backend: ⏱️ First chunk received after 1.137s
+2026-01-15 18:36:49,515 INFO watchcrew.backend: ⏱️ Found 'script' array at 11.776s (first chunk +10.639s)
+2026-01-15 18:36:50,671 INFO watchcrew.backend: ⏱️ First message sent at 12.932s (script start +1.156s)
+2026-01-15 18:36:50,671 INFO watchcrew.backend: ⏱️ Message 1: speaker=시즌루키, text_length=39
+2026-01-15 18:36:51,689 INFO watchcrew.backend: ⏱️ Message 2: speaker=찬승바라기, text_length=47, time_since_last=1.018s
+2026-01-15 18:36:52,389 INFO watchcrew.backend: ⏱️ Message 3: speaker=야구는못참지, text_length=35, time_since_last=0.700s
+2026-01-15 18:36:52,452 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 329
+2026-01-15 18:36:52,452 INFO watchcrew.backend: Loaded game data at row 329 - currGameStat: In the top of the 8th inning, Kia Tigers’ fourth batter, Choi Hyung-woo, stepped up to bat against Samsung Lions’ pitcher Kim Jae-yoon with no balls or strikes and one out in the inning., gameFlow length: 568
+2026-01-15 18:36:52,452 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:36:52,853 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:36:52,853 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:36:52,883 INFO watchcrew.backend: ⏱️ First chunk received after 0.430s
+2026-01-15 18:36:52,980 INFO watchcrew.backend: ⏱️ Message 4: speaker=우성편, text_length=28, time_since_last=0.591s
+2026-01-15 18:36:53,578 INFO watchcrew.backend: ⏱️ Message 5: speaker=수고했소님, text_length=38, time_since_last=0.598s
+2026-01-15 18:36:54,342 INFO watchcrew.backend: ⏱️ Message 6: speaker=시즌루키, text_length=37, time_since_last=0.764s
+2026-01-15 18:36:54,861 INFO watchcrew.backend: ⏱️ Message 7: speaker=찬승바라기, text_length=28, time_since_last=0.519s
+2026-01-15 18:36:54,893 INFO watchcrew.backend: ⏱️ Streaming completed in 17.153s. Total chunks: 778, messages sent: 7
+2026-01-15 18:36:54,894 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.137s
+2026-01-15 18:36:54,894 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 11.776s
+2026-01-15 18:36:54,894 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 12.932s
+2026-01-15 18:36:54,894 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 17.121s
+2026-01-15 18:37:01,379 INFO watchcrew.backend: ⏱️ Found 'script' array at 8.926s (first chunk +8.496s)
+2026-01-15 18:37:01,764 INFO watchcrew.backend: ⏱️ First message sent at 9.311s (script start +0.384s)
+2026-01-15 18:37:01,764 INFO watchcrew.backend: ⏱️ Message 1: speaker=야구는못참지, text_length=27
+2026-01-15 18:37:02,269 INFO watchcrew.backend: ⏱️ Message 2: speaker=수고했소님, text_length=31, time_since_last=0.505s
+2026-01-15 18:37:02,772 INFO watchcrew.backend: ⏱️ Message 3: speaker=찬승바라기, text_length=20, time_since_last=0.503s
+2026-01-15 18:37:03,225 INFO watchcrew.backend: ⏱️ Message 4: speaker=우성편, text_length=28, time_since_last=0.454s
+2026-01-15 18:37:04,033 INFO watchcrew.backend: ⏱️ Message 5: speaker=시즌루키, text_length=43, time_since_last=0.807s
+2026-01-15 18:37:04,596 INFO watchcrew.backend: ⏱️ Message 6: speaker=야구는못참지, text_length=30, time_since_last=0.563s
+2026-01-15 18:37:05,088 INFO watchcrew.backend: ⏱️ Message 7: speaker=수고했소님, text_length=28, time_since_last=0.493s
+2026-01-15 18:37:05,115 INFO watchcrew.backend: ⏱️ Streaming completed in 12.662s. Total chunks: 795, messages sent: 7
+2026-01-15 18:37:05,116 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.430s
+2026-01-15 18:37:05,116 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 8.926s
+2026-01-15 18:37:05,117 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 9.311s
+2026-01-15 18:37:05,117 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 12.635s
+2026-01-15 18:37:07,437 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 330
+2026-01-15 18:37:07,437 INFO watchcrew.backend: Loaded game data at row 330 - currGameStat: In the top of the 8th inning, Kia Tigers’ batter Choi Hyung-woo faced Samsung Lions’ pitcher Kim Jae-yoon and fouled the first pitch, a 134 km/h forkball, with a 0-1 count and one out. Kia Tigers batter 최형우 faced a 136 km/h slider from Samsung Lions pitcher 김재윤, resulting in a foul ball and a strike count of 0-2 with one out in the bottom of the 8th inning., gameFlow length: 564
+2026-01-15 18:37:07,437 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:37:07,917 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:37:07,917 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:37:07,931 INFO watchcrew.backend: ⏱️ First chunk received after 0.494s
+2026-01-15 18:37:16,897 INFO watchcrew.backend: ⏱️ Found 'script' array at 9.460s (first chunk +8.966s)
+2026-01-15 18:37:17,383 INFO watchcrew.backend: ⏱️ First message sent at 9.947s (script start +0.486s)
+2026-01-15 18:37:17,383 INFO watchcrew.backend: ⏱️ Message 1: speaker=야구는못참지, text_length=30
+2026-01-15 18:37:17,733 INFO watchcrew.backend: ⏱️ Message 2: speaker=찬승바라기, text_length=21, time_since_last=0.349s
+2026-01-15 18:37:18,265 INFO watchcrew.backend: ⏱️ Message 3: speaker=우성편, text_length=34, time_since_last=0.532s
+2026-01-15 18:37:18,845 INFO watchcrew.backend: ⏱️ Message 4: speaker=시즌루키, text_length=34, time_since_last=0.581s
+2026-01-15 18:37:19,544 INFO watchcrew.backend: ⏱️ Message 5: speaker=야구는못참지, text_length=35, time_since_last=0.699s
+2026-01-15 18:37:19,973 INFO watchcrew.backend: ⏱️ Message 6: speaker=찬승바라기, text_length=30, time_since_last=0.429s
+2026-01-15 18:37:20,580 INFO watchcrew.backend: ⏱️ Message 7: speaker=우성편, text_length=28, time_since_last=0.607s
+2026-01-15 18:37:21,033 INFO watchcrew.backend: ⏱️ Message 8: speaker=시즌루키, text_length=28, time_since_last=0.453s
+2026-01-15 18:37:21,098 INFO watchcrew.backend: ⏱️ Streaming completed in 13.661s. Total chunks: 819, messages sent: 8
+2026-01-15 18:37:21,098 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.494s
+2026-01-15 18:37:21,098 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 9.460s
+2026-01-15 18:37:21,098 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 9.947s
+2026-01-15 18:37:21,098 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 13.597s
+2026-01-15 18:37:22,439 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 331
+2026-01-15 18:37:22,440 INFO watchcrew.backend: Loaded game data at row 331 - currGameStat: In the top of the 8th inning, Kia Tigers batter Choi Hyung-woo faced Samsung Lions pitcher Kim Jae-yoon and fouled off a 144 km/h fastball for strike two with one out and no runners on base., gameFlow length: 556
+2026-01-15 18:37:22,440 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
