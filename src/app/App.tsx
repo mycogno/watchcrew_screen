@@ -99,36 +99,42 @@ function App() {
   }, [agents]);
 
   const handleCreateAgent = (
-    name: string, 
-    prompt: string, 
-    team: string,  // 팀 이름 (예: "samsung lions", "kia tigers")
-    isHome: boolean,  // home인지 away인지
-    avatarSeed?: string, 
+    name: string,
+    userPrompt: string,
+    team: string,
+    isHome: boolean,
+    avatarSeed?: string,
     id?: string,
     createdAt?: string,
-    dimensions?: Record<string, string>,
+    팬의특성?: Record<string, string>,
+    애착?: Record<string, string>,
+    채팅특성?: Record<string, string>,
+    표현?: Record<string, string>,
     채팅특성요약?: string,
     표현요약?: string
   ) => {
     const newAgent: Agent = {
       id: id || `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
       name,
-      prompt,
-      team,  // 팀 이름
-      isHome,  // home 여부
+      userPrompt,
+      team,
+      isHome,
       createdAt: createdAt || new Date().toISOString(),
       avatarSeed: avatarSeed ? avatarSeed : Math.random().toString(36).substring(7),
-      dimensions: dimensions,
+      팬의특성,
+      애착,
+      채팅특성,
+      표현,
       채팅특성요약,
       표현요약,
     };
     setAgents((prev) => [newAgent, ...prev]);
   };
 
-  const handleEditAgent = (id: string, name: string, prompt: string, team: string, isHome: boolean) => {
+  const handleEditAgent = (id: string, name: string, userPrompt: string, team: string, isHome: boolean) => {
     setAgents((prev) =>
       prev.map((agent) =>
-        agent.id === id ? { ...agent, name, prompt, team, isHome } : agent
+        agent.id === id ? { ...agent, name, userPrompt, team, isHome } : agent
       )
     );
   };

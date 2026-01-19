@@ -16,9 +16,12 @@ import { API_URL } from "../../config/api";
 interface AgentCandidate {
   id: string;
   name: string;
-  dimensions: Record<string, Record<string, string> | string>;
-  fullPrompt: string;
   team: string;
+  userPrompt: string;
+  팬의특성: Record<string, string>;
+  애착: Record<string, string>;
+  채팅특성: Record<string, string>;
+  표현: Record<string, string>;
   채팅특성요약?: string;
   표현요약?: string;
 }
@@ -26,7 +29,21 @@ interface AgentCandidate {
 interface AgentSelectionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectAgent: (name: string, prompt: string, team: string, isHome: boolean, avatarSeed: string, id?: string, createdAt?: string, dimensions?: Record<string, string>, 채팅특성요약?: string, 표현요약?: string) => void;
+  onSelectAgent: (
+    name: string,
+    userPrompt: string,
+    team: string,
+    isHome: boolean,
+    avatarSeed: string,
+    id?: string,
+    createdAt?: string,
+    팬의특성?: Record<string, string>,
+    애착?: Record<string, string>,
+    채팅특성?: Record<string, string>,
+    표현?: Record<string, string>,
+    채팅특성요약?: string,
+    표현요약?: string
+  ) => void;
   team: string; // 팀 이름
   isHome: boolean; // home인지 away인지
   prompt: string;
@@ -118,31 +135,35 @@ export function AgentSelectionModal({
   const handleConfirm = () => {
     const selectedCandidates = candidates.filter(c => selectedIds.includes(c.id));
     selectedCandidates.forEach(candidate => {
-      // Create Agent object according to interface Agent
       const agentData = {
         id: `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
         name: candidate.name,
-        prompt: candidate.fullPrompt,
-        team: candidate.team, // 팀 이름
-        isHome: isHome, // home 여부
+        userPrompt: candidate.userPrompt,
+        team: candidate.team,
+        isHome: isHome,
         createdAt: new Date().toISOString(),
         avatarSeed: candidate.id,
-        dimensions: candidate.dimensions,
+        팬의특성: candidate.팬의특성,
+        애착: candidate.애착,
+        채팅특성: candidate.채팅특성,
+        표현: candidate.표현,
         채팅특성요약: candidate.채팅특성요약,
         표현요약: candidate.표현요약,
       };
       console.log('Registering Agent:', agentData);
-      // Pass all fields to onSelectAgent
       if (typeof onSelectAgent === 'function') {
         onSelectAgent(
           agentData.name,
-          agentData.prompt,
+          agentData.userPrompt,
           agentData.team,
           agentData.isHome,
           agentData.avatarSeed,
           agentData.id,
           agentData.createdAt,
-          agentData.dimensions,
+          agentData.팬의특성,
+          agentData.애착,
+          agentData.채팅특성,
+          agentData.표현,
           agentData.채팅특성요약,
           agentData.표현요약
         );
@@ -240,25 +261,32 @@ export function AgentSelectionModal({
                         </div>
 
                         <div className="pl-4 space-y-1">
-                          {Object.entries(candidate.dimensions)
-                            .filter(([key]) => key === '팬의특성' || key === '애착')
-                            .map(([categoryKey, categoryValue]) => (
-                            <div key={categoryKey} className="text-sm">
-                              <div className="font-semibold text-slate-700 mb-0.5">{categoryKey}</div>
-                              {typeof categoryValue === 'object' && categoryValue !== null ? (
-                                <div className="ml-2 space-y-0.5">
-                                  {Object.entries(categoryValue).map(([subKey, subValue]) => (
-                                    <div key={subKey} className="text-xs">
-                                      <span className="text-slate-600">{subKey}:</span>
-                                      <span className="text-slate-500 ml-1">{String(subValue)}</span>
-                                    </div>
-                                  ))}
-                                </div>
-                              ) : (
-                                <div className="ml-2 text-xs text-slate-600">{String(categoryValue)}</div>
-                              )}
+                          {candidate.팬의특성 && Object.keys(candidate.팬의특성).length > 0 && (
+                            <div className="text-sm">
+                              <div className="font-semibold text-slate-700 mb-0.5">팬의특성</div>
+                              <div className="ml-2 space-y-0.5">
+                                {Object.entries(candidate.팬의특성).map(([subKey, subValue]) => (
+                                  <div key={subKey} className="text-xs">
+                                    <span className="text-slate-600">{subKey}:</span>
+                                    <span className="text-slate-500 ml-1">{String(subValue)}</span>
+                                  </div>
+                                ))}
+                              </div>
                             </div>
-                          ))}
+                          )}
+                          {candidate.애착 && Object.keys(candidate.애착).length > 0 && (
+                            <div className="text-sm">
+                              <div className="font-semibold text-slate-700 mb-0.5">애착</div>
+                              <div className="ml-2 space-y-0.5">
+                                {Object.entries(candidate.애착).map(([subKey, subValue]) => (
+                                  <div key={subKey} className="text-xs">
+                                    <span className="text-slate-600">{subKey}:</span>
+                                    <span className="text-slate-500 ml-1">{String(subValue)}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                           {candidate.채팅특성요약 && (
                             <div className="text-sm">
                               <div className="font-semibold text-slate-700 mb-0.5">채팅 특성</div>

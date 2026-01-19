@@ -10,19 +10,22 @@ import { TEAMS } from "./TeamSelection";
 export interface Agent {
   id: string;
   name: string;
-  prompt: string;
+  userPrompt: string; // 사용자가 입력한 원본 프롬프트
   team: string; // 이제 팀 이름 (예: "samsung lions", "kia tigers")
   isHome: boolean; // home인지 away인지 구분
   createdAt: string;
   avatarSeed: string;
-  dimensions?: Record<string, string>; // 말투, 성격, 분석의 초점 등
+  팬의특성?: Record<string, string>; // 팬의 특성
+  애착?: Record<string, string>; // 애착
+  채팅특성?: Record<string, string>; // 채팅 특성
+  표현?: Record<string, string>; // 표현
   채팅특성요약?: string;
   표현요약?: string;
 }
 
 interface AgentCardProps {
   agent: Agent;
-  onEdit: (id: string, name: string, prompt: string, team: string, isHome: boolean) => void;
+  onEdit: (id: string, name: string, userPrompt: string, team: string, isHome: boolean) => void;
   onDelete: (id: string) => void;
   homeTeamId?: string | null;
   awayTeamId?: string | null;
@@ -31,7 +34,7 @@ interface AgentCardProps {
 export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: AgentCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(agent.name);
-  const [editPrompt, setEditPrompt] = useState(agent.prompt);
+  const [editPrompt, setEditPrompt] = useState(agent.userPrompt);
   const [editTeam, setEditTeam] = useState<string>(agent.team);
   const [editIsHome, setEditIsHome] = useState<boolean>(agent.isHome);
 
@@ -44,7 +47,7 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: A
 
   const handleCancel = () => {
     setEditName(agent.name);
-    setEditPrompt(agent.prompt);
+    setEditPrompt(agent.userPrompt);
     setEditTeam(agent.team);
     setEditIsHome(agent.isHome);
     setIsEditing(false);
@@ -173,27 +176,47 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: A
           </>
         ) : (
           <>
-            {/* 팬의특성, 애착, 채팅특성, 표현 모두 동일한 스타일로 표시 */}
-            {agent.dimensions && Object.keys(agent.dimensions).length > 0 && (
+            {/* 팬의특성, 애착, 채팅특성요약, 표현요약 표시 */}
+            {(agent.팬의특성 || agent.애착 || agent.채팅특성요약 || agent.표현요약) && (
               <div className="space-y-2">
-                {Object.entries(agent.dimensions)
-                  .map(([key, value]) => (
-                  <div key={key}>
-                    <div className="font-semibold text-slate-700 mb-1">{key}</div>
-                    {typeof value === 'object' && value !== null ? (
-                      <div className="ml-2 space-y-0.5">
-                        {Object.entries(value).map(([subKey, subValue]) => (
-                          <div key={subKey} className="text-sm">
-                            <span className="text-slate-600">{subKey}:</span>
-                            <span className="text-slate-500 ml-1">{String(subValue)}</span>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="ml-2 text-sm text-slate-600">{String(value)}</div>
-                    )}
+                {agent.팬의특성 && Object.keys(agent.팬의특성).length > 0 && (
+                  <div>
+                    <div className="font-semibold text-slate-700 mb-1">팬의 특성</div>
+                    <div className="ml-2 space-y-0.5">
+                      {Object.entries(agent.팬의특성).map(([key, value]) => (
+                        <div key={key} className="text-sm">
+                          <span className="text-slate-600">{key}:</span>
+                          <span className="text-slate-500 ml-1">{String(value)}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                ))}
+                )}
+                {agent.애착 && Object.keys(agent.애착).length > 0 && (
+                  <div>
+                    <div className="font-semibold text-slate-700 mb-1">애착</div>
+                    <div className="ml-2 space-y-0.5">
+                      {Object.entries(agent.애착).map(([key, value]) => (
+                        <div key={key} className="text-sm">
+                          <span className="text-slate-600">{key}:</span>
+                          <span className="text-slate-500 ml-1">{String(value)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {agent.채팅특성요약 && (
+                  <div>
+                    <div className="font-semibold text-slate-700 mb-1">채팅 특성</div>
+                    <div className="ml-2 text-sm text-slate-600">{agent.채팅특성요약}</div>
+                  </div>
+                )}
+                {agent.표현요약 && (
+                  <div>
+                    <div className="font-semibold text-slate-700 mb-1">표현</div>
+                    <div className="ml-2 text-sm text-slate-600">{agent.표현요약}</div>
+                  </div>
+                )}
               </div>
             )}
           </>

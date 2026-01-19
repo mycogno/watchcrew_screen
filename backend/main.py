@@ -86,16 +86,13 @@ class AgentCandidate(BaseModel):
     id: str
     name: str
     team: str
+    userPrompt: str = ""  # 사용자 입력 프롬프트
     팬의특성: Dict[str, str] = {}
     애착: Dict[str, str] = {}
     채팅특성: Dict[str, str] = {}
     표현: Dict[str, str] = {}
     채팅특성요약: str = ""  # 채팅 특성 요약
     표현요약: str = ""  # 표현 요약
-    dimensions: Dict[str, Dict[str, str] | str] = (
-        {}
-    )  # Nested structure: {"팬의특성": {...}, "애착": {...}, "채팅특성": "요약", "표현": "요약"}
-    fullPrompt: str = ""  # OpenAI 생성 시 사용되는 필드
 
 
 # ============================================
@@ -485,43 +482,18 @@ def normalize_candidates(
             or ""
         )
 
-        # Create dimensions dict with nested structure (all four categories same level)
-        dimensions = {
-            "팬의특성": fan_traits,
-            "애착": attachment,
-            "채팅특성": chat_content,
-            "표현": expression,
-        }
-
-        # Generate fullPrompt from all attributes
-        full_prompt_parts = []
-        for cat_name, cat_data in [
-            ("팬의특성", fan_traits),
-            ("애착", attachment),
-            ("채팅특성", chat_content),
-            ("표현", expression),
-        ]:
-            if cat_data:
-                full_prompt_parts.append(
-                    f"{cat_name}: {', '.join(f'{k}={v}' for k, v in cat_data.items())}"
-                )
-        full_prompt = (
-            " | ".join(full_prompt_parts) if full_prompt_parts else f"{team} 팬"
-        )
-
         out.append(
             {
                 "id": new_id,
                 "name": user_name,
                 "team": team,
+                "userPrompt": "",  # Will be set by the caller
                 "팬의특성": fan_traits,
                 "애착": attachment,
                 "채팅특성": chat_content,
                 "표현": expression,
                 "채팅특성요약": chat_summary,
                 "표현요약": expression_summary,
-                "dimensions": dimensions,
-                "fullPrompt": full_prompt,
             }
         )
 
@@ -541,19 +513,13 @@ def normalize_candidates(
                     "id": new_id,
                     "name": auto_name,
                     "team": team,
+                    "userPrompt": "",
                     "팬의특성": {},
                     "애착": {},
                     "채팅특성": {},
                     "표현": {},
                     "채팅특성요약": "",
                     "표현요약": "",
-                    "dimensions": {
-                        "팬의특성": {},
-                        "애착": {},
-                        "채팅특성": "",
-                        "표현": "",
-                    },
-                    "fullPrompt": f"{team} 팬",
                 }
             )
 
@@ -884,6 +850,11 @@ def generate_candidates(payload: GenerateRequest):
 
         # Normalize candidates to ensure proper id format, uniqueness, team assignment
         normalized = normalize_candidates(output, team=userTeam, want_count=5)
+
+        # Add userPrompt to all candidates
+        for candidate in normalized:
+            candidate["userPrompt"] = userPrompt
+
         if len(normalized) >= 1:
             logger.info("Returning %d candidates from OpenAI", len(normalized))
             # Dump full normalized payload to console/log for inspection

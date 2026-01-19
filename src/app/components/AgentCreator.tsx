@@ -9,14 +9,17 @@ import { AgentSelectionModal } from "./AgentSelectionModal";
 
 interface AgentCreatorProps {
   onCreateAgent: (
-    name: string, 
-    prompt: string,
-    team: string,  // 팀 이름 (예: "samsung lions", "kia tigers")
-    isHome: boolean,  // home인지 away인지
-    avatarSeed?: string, 
+    name: string,
+    userPrompt: string,
+    team: string,
+    isHome: boolean,
+    avatarSeed?: string,
     id?: string,
     createdAt?: string,
-    dimensions?: Record<string, string>,
+    팬의특성?: Record<string, string>,
+    애착?: Record<string, string>,
+    채팅특성?: Record<string, string>,
+    표현?: Record<string, string>,
     채팅특성요약?: string,
     표현요약?: string
   ) => void;
@@ -38,19 +41,36 @@ export function AgentCreator({ onCreateAgent, homeTeamId, awayTeamId }: AgentCre
 
   // 모달에서 선택한 에이전트 정보를 받아서 상위로 전달
   const handleSelectAgent = (
-    name: string, 
-    fullPrompt: string, 
-    selectedTeam: string, 
+    name: string,
+    userPrompt: string,
+    selectedTeam: string,
     isHome: boolean,
-    avatarSeed: string, 
+    avatarSeed: string,
     id?: string,
     createdAt?: string,
-    dimensions?: Record<string, string>,
+    팬의특성?: Record<string, string>,
+    애착?: Record<string, string>,
+    채팅특성?: Record<string, string>,
+    표현?: Record<string, string>,
     채팅특성요약?: string,
     표현요약?: string
   ) => {
     // 상위 컴포넌트로 팀 이름과 isHome 전달
-    onCreateAgent(name, fullPrompt, selectedTeam, isHome, avatarSeed, id, createdAt, dimensions, 채팅특성요약, 표현요약);
+    onCreateAgent(
+      name,
+      userPrompt,
+      selectedTeam,
+      isHome,
+      avatarSeed,
+      id,
+      createdAt,
+      팬의특성,
+      애착,
+      채팅특성,
+      표현,
+      채팅특성요약,
+      표현요약
+    );
     
     setPrompt("");
     setSelectedTeamName("");
