@@ -10,13 +10,15 @@ import { AgentSelectionModal } from "./AgentSelectionModal";
 interface AgentCreatorProps {
   onCreateAgent: (
     name: string, 
-    prompt: string, 
+    prompt: string,
     team: string,  // 팀 이름 (예: "samsung lions", "kia tigers")
     isHome: boolean,  // home인지 away인지
     avatarSeed?: string, 
     id?: string,
     createdAt?: string,
-    dimensions?: Record<string, string> 
+    dimensions?: Record<string, string>,
+    채팅특성요약?: string,
+    표현요약?: string
   ) => void;
   homeTeamId: string | null;
   awayTeamId: string | null;
@@ -43,10 +45,12 @@ export function AgentCreator({ onCreateAgent, homeTeamId, awayTeamId }: AgentCre
     avatarSeed: string, 
     id?: string,
     createdAt?: string,
-    dimensions?: Record<string, string>
+    dimensions?: Record<string, string>,
+    채팅특성요약?: string,
+    표현요약?: string
   ) => {
     // 상위 컴포넌트로 팀 이름과 isHome 전달
-    onCreateAgent(name, fullPrompt, selectedTeam, isHome, avatarSeed, id, createdAt, dimensions);
+    onCreateAgent(name, fullPrompt, selectedTeam, isHome, avatarSeed, id, createdAt, dimensions, 채팅특성요약, 표현요약);
     
     setPrompt("");
     setSelectedTeamName("");

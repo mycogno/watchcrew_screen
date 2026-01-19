@@ -411,7 +411,7 @@ export function WatchGame({
 
         // 디코드하고 버퍼에 추가
         buffer += decoder.decode(value, { stream: true });
-
+        console.log(buffer);
         // 줄 단위로 분리
         const lines = buffer.split("\n");
         buffer = lines.pop() || ""; // 마지막 불완전한 줄은 버퍼에 남김
@@ -459,34 +459,34 @@ export function WatchGame({
     }
   };
 
-  const handleSendMessage = async () => {
-    if (inputMessage.trim()) {
-      const userMessage = inputMessage;
-      setInputMessage("");
-      
-      // 사용자 팀 정보 결정
-      const userTeamName = userTeam || selectedAgents[0]?.team || "samsung";
-      const resolvedUserTeamId = resolveTeamId(userTeamName) || homeTeamId || awayTeamId || "samsung";
-      const userIsHome = resolvedUserTeamId === homeTeamId;
-      
-      // 사용자 메시지를 UI에 표시
-      const newUserMessage: ChatMessage = {
-        id: Date.now().toString(),
-        agentId: "user",
-        agentName: "나",
-        team: resolvedUserTeamId,
-        isHome: userIsHome,
-        message: userMessage,
-        timestamp: new Date().toLocaleTimeString(),
-      };
-      setMessages((prev) => [...prev, newUserMessage]);
-      
-      // context_memory에만 추가 (다음 30초 주기에서 반영됨)
-      setContextMemory(prev => [...prev, {
-        speaker: "사용자",
-        text: userMessage
-      }]);
-    }
+  const handleSendMessage = () => {
+    if (!inputMessage.trim()) return;
+    
+    const userMessage = inputMessage;
+    setInputMessage("");
+    
+    // 사용자 팀 정보 결정
+    const userTeamName = userTeam || selectedAgents[0]?.team || "samsung";
+    const resolvedUserTeamId = resolveTeamId(userTeamName) || homeTeamId || awayTeamId || "samsung";
+    const userIsHome = resolvedUserTeamId === homeTeamId;
+    
+    // 사용자 메시지를 UI에 표시
+    const newUserMessage: ChatMessage = {
+      id: Date.now().toString(),
+      agentId: "user",
+      agentName: "나",
+      team: resolvedUserTeamId,
+      isHome: userIsHome,
+      message: userMessage,
+      timestamp: new Date().toLocaleTimeString(),
+    };
+    setMessages((prev) => [...prev, newUserMessage]);
+    
+    // context_memory에만 추가 (다음 30초 주기에서 반영됨)
+    setContextMemory(prev => [...prev, {
+      speaker: "사용자",
+      text: userMessage
+    }]);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -757,9 +757,7 @@ export function WatchGame({
                   <Button
                     size="icon"
                     onClick={handleSendMessage}
-                    disabled={
-                      !inputMessage.trim() || isGenerating
-                    }
+                    disabled={!inputMessage.trim()}
                   >
                     <Send className="size-4" />
                   </Button>

@@ -16,15 +16,17 @@ import { API_URL } from "../../config/api";
 interface AgentCandidate {
   id: string;
   name: string;
-  dimensions: Record<string, string>;
+  dimensions: Record<string, Record<string, string> | string>;
   fullPrompt: string;
   team: string;
+  채팅특성요약?: string;
+  표현요약?: string;
 }
 
 interface AgentSelectionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectAgent: (name: string, prompt: string, team: string, isHome: boolean, avatarSeed: string, id?: string, createdAt?: string, dimensions?: Record<string, string>) => void;
+  onSelectAgent: (name: string, prompt: string, team: string, isHome: boolean, avatarSeed: string, id?: string, createdAt?: string, dimensions?: Record<string, string>, 채팅특성요약?: string, 표현요약?: string) => void;
   team: string; // 팀 이름
   isHome: boolean; // home인지 away인지
   prompt: string;
@@ -125,7 +127,9 @@ export function AgentSelectionModal({
         isHome: isHome, // home 여부
         createdAt: new Date().toISOString(),
         avatarSeed: candidate.id,
-        dimensions: candidate.dimensions
+        dimensions: candidate.dimensions,
+        채팅특성요약: candidate.채팅특성요약,
+        표현요약: candidate.표현요약,
       };
       console.log('Registering Agent:', agentData);
       // Pass all fields to onSelectAgent
@@ -138,7 +142,9 @@ export function AgentSelectionModal({
           agentData.avatarSeed,
           agentData.id,
           agentData.createdAt,
-          agentData.dimensions
+          agentData.dimensions,
+          agentData.채팅특성요약,
+          agentData.표현요약
         );
       }
     });
@@ -203,7 +209,7 @@ export function AgentSelectionModal({
                 return (
                   <Card
                     key={candidate.id}
-                    className={`cursor-pointer transition-all hover:shadow-lg border-2 h-60 w-[320px] flex-shrink-0 ${
+                    className={`cursor-pointer transition-all hover:shadow-lg border-2 h-80 w-[320px] flex-shrink-0 ${
                       isSelected
                         ? 'border-primary ring-2 ring-primary ring-offset-2'
                         : 'border-slate-200 hover:border-primary/50'
@@ -233,17 +239,38 @@ export function AgentSelectionModal({
                           </div>
                         </div>
 
-                        <div className="pl-11 space-y-1">
-                          {Object.entries(candidate.dimensions).map(([key, value]) => (
-                            <div key={key} className="text-sm">
-                              <span className="font-semibold text-slate-700">{key}:</span>
-                              <span className="text-slate-600 ml-1">{value}</span>
+                        <div className="pl-4 space-y-1">
+                          {Object.entries(candidate.dimensions)
+                            .filter(([key]) => key === '팬의특성' || key === '애착')
+                            .map(([categoryKey, categoryValue]) => (
+                            <div key={categoryKey} className="text-sm">
+                              <div className="font-semibold text-slate-700 mb-0.5">{categoryKey}</div>
+                              {typeof categoryValue === 'object' && categoryValue !== null ? (
+                                <div className="ml-2 space-y-0.5">
+                                  {Object.entries(categoryValue).map(([subKey, subValue]) => (
+                                    <div key={subKey} className="text-xs">
+                                      <span className="text-slate-600">{subKey}:</span>
+                                      <span className="text-slate-500 ml-1">{String(subValue)}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              ) : (
+                                <div className="ml-2 text-xs text-slate-600">{String(categoryValue)}</div>
+                              )}
                             </div>
                           ))}
-                        </div>
-
-                        <div className="pl-11">
-                          <p className="text-sm text-muted-foreground">{candidate.fullPrompt}</p>
+                          {candidate.채팅특성요약 && (
+                            <div className="text-sm">
+                              <div className="font-semibold text-slate-700 mb-0.5">채팅 특성</div>
+                              <div className="ml-2 text-xs text-slate-600">{candidate.채팅특성요약}</div>
+                            </div>
+                          )}
+                          {candidate.표현요약 && (
+                            <div className="text-sm">
+                              <div className="font-semibold text-slate-700 mb-0.5">표현</div>
+                              <div className="ml-2 text-xs text-slate-600">{candidate.표현요약}</div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </CardContent>

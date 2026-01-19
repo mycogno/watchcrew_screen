@@ -3729,3 +3729,1869 @@ KeyError: Index(['messageTime'], dtype='object')
 2026-01-15 18:37:22,439 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 331
 2026-01-15 18:37:22,440 INFO watchcrew.backend: Loaded game data at row 331 - currGameStat: In the top of the 8th inning, Kia Tigers batter Choi Hyung-woo faced Samsung Lions pitcher Kim Jae-yoon and fouled off a 144 km/h fastball for strike two with one out and no runners on base., gameFlow length: 556
 2026-01-15 18:37:22,440 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:37:23,057 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:37:23,058 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:37:23,068 INFO watchcrew.backend: ⏱️ First chunk received after 0.627s
+2026-01-15 18:37:31,786 INFO watchcrew.backend: ⏱️ Found 'script' array at 9.345s (first chunk +8.718s)
+2026-01-15 18:37:32,590 INFO watchcrew.backend: ⏱️ First message sent at 10.149s (script start +0.804s)
+2026-01-15 18:37:32,590 INFO watchcrew.backend: ⏱️ Message 1: speaker=시즌루키, text_length=43
+2026-01-15 18:37:34,078 INFO watchcrew.backend: ⏱️ Message 2: speaker=야구는못참지, text_length=55, time_since_last=1.488s
+2026-01-15 18:37:35,008 INFO watchcrew.backend: ⏱️ Message 3: speaker=찬승바라기, text_length=31, time_since_last=0.931s
+2026-01-15 18:37:36,106 INFO watchcrew.backend: ⏱️ Message 4: speaker=우성편, text_length=37, time_since_last=1.098s
+2026-01-15 18:37:37,406 INFO watchcrew.backend: ⏱️ Message 5: speaker=시즌루키, text_length=34, time_since_last=1.300s
+2026-01-15 18:37:37,763 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 332
+2026-01-15 18:37:37,763 INFO watchcrew.backend: Loaded game data at row 332 - currGameStat: In the top of the 8th inning, Kia Tigers batter Choi Hyung-woo faced Samsung Lions pitcher Kim Jae-yoon and took a fourth pitch ball on a forkball at 137 km/h, bringing the count to one ball and two strikes with one out and no runners on base. Kia Tigers batter 최형우 faced a 135 km/h forkball from Samsung Lions pitcher 김재윤 and hit a foul ball, maintaining a 1-2 count with one out in the top of the 8th inning., gameFlow length: 556
+2026-01-15 18:37:37,763 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:37:38,265 INFO watchcrew.backend: ⏱️ Message 6: speaker=야구는못참지, text_length=38, time_since_last=0.859s
+2026-01-15 18:37:38,487 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:37:38,487 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:37:38,498 INFO watchcrew.backend: ⏱️ First chunk received after 0.733s
+2026-01-15 18:37:39,359 INFO watchcrew.backend: ⏱️ Message 7: speaker=찬승바라기, text_length=31, time_since_last=1.094s
+2026-01-15 18:37:39,386 INFO watchcrew.backend: ⏱️ Streaming completed in 16.946s. Total chunks: 716, messages sent: 7
+2026-01-15 18:37:39,387 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.627s
+2026-01-15 18:37:39,387 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 9.345s
+2026-01-15 18:37:39,387 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 10.149s
+2026-01-15 18:37:39,387 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 16.918s
+2026-01-15 18:37:45,233 INFO watchcrew.backend: ⏱️ Found 'script' array at 7.469s (first chunk +6.735s)
+2026-01-15 18:37:46,033 INFO watchcrew.backend: ⏱️ First message sent at 8.253s (script start +0.784s)
+2026-01-15 18:37:46,033 INFO watchcrew.backend: ⏱️ Message 1: speaker=시즌루키, text_length=36
+2026-01-15 18:37:46,889 INFO watchcrew.backend: ⏱️ Message 2: speaker=야구는못참지, text_length=57, time_since_last=0.871s
+2026-01-15 18:37:47,806 INFO watchcrew.backend: ⏱️ Message 3: speaker=찬승바라기, text_length=40, time_since_last=0.918s
+2026-01-15 18:37:48,547 INFO watchcrew.backend: ⏱️ Message 4: speaker=우성편, text_length=41, time_since_last=0.741s
+2026-01-15 18:37:49,020 INFO watchcrew.backend: ⏱️ Message 5: speaker=시즌루키, text_length=36, time_since_last=0.473s
+2026-01-15 18:37:49,602 INFO watchcrew.backend: ⏱️ Message 6: speaker=야구는못참지, text_length=43, time_since_last=0.581s
+2026-01-15 18:37:50,139 INFO watchcrew.backend: ⏱️ Message 7: speaker=찬승바라기, text_length=35, time_since_last=0.538s
+2026-01-15 18:37:50,188 INFO watchcrew.backend: ⏱️ Streaming completed in 12.423s. Total chunks: 739, messages sent: 7
+2026-01-15 18:37:50,188 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.733s
+2026-01-15 18:37:50,188 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 7.469s
+2026-01-15 18:37:50,188 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 8.253s
+2026-01-15 18:37:50,188 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 12.375s
+2026-01-15 18:37:52,435 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 333
+2026-01-15 18:37:52,435 INFO watchcrew.backend: Loaded game data at row 333 - currGameStat: In the top of the 8th inning, Kia Tigers batter Choi Hyung-woo faced a 1-2 count against Samsung Lions pitcher Kim Jae-yoon and swung at the sixth pitch, a 146 km/h fastball. Kia Tigers’ batter 최형우 hit a double to left-center field, advancing to second base with one out in the bottom of the 8th inning against Samsung Lions’ pitcher 김재윤., gameFlow length: 546
+2026-01-15 18:37:52,435 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:37:53,052 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:37:53,053 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:37:53,072 INFO watchcrew.backend: ⏱️ First chunk received after 0.636s
+2026-01-15 18:38:01,739 INFO watchcrew.backend: ⏱️ Found 'script' array at 9.303s (first chunk +8.667s)
+2026-01-15 18:38:02,532 INFO watchcrew.backend: ⏱️ First message sent at 10.096s (script start +0.793s)
+2026-01-15 18:38:02,532 INFO watchcrew.backend: ⏱️ Message 1: speaker=우성편, text_length=29
+2026-01-15 18:38:03,282 INFO watchcrew.backend: ⏱️ Message 2: speaker=야구는못참지, text_length=36, time_since_last=0.751s
+2026-01-15 18:38:04,650 INFO watchcrew.backend: ⏱️ Message 3: speaker=수고했소님, text_length=28, time_since_last=1.367s
+2026-01-15 18:38:06,431 INFO watchcrew.backend: ⏱️ Message 4: speaker=찬승바라기, text_length=16, time_since_last=1.782s
+2026-01-15 18:38:07,267 INFO watchcrew.backend: ⏱️ Message 5: speaker=시즌루키, text_length=34, time_since_last=0.836s
+2026-01-15 18:38:07,886 INFO watchcrew.backend: ⏱️ Message 6: speaker=야구는못참지, text_length=34, time_since_last=0.619s
+2026-01-15 18:38:08,123 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 334
+2026-01-15 18:38:08,123 INFO watchcrew.backend: Loaded game data at row 334 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-15 18:38:08,123 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:38:08,687 INFO watchcrew.backend: ⏱️ Message 7: speaker=우성편, text_length=21, time_since_last=0.801s
+2026-01-15 18:38:08,734 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:38:08,735 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:38:08,787 INFO watchcrew.backend: ⏱️ Streaming completed in 16.351s. Total chunks: 727, messages sent: 7
+2026-01-15 18:38:08,788 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.636s
+2026-01-15 18:38:08,788 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 9.303s
+2026-01-15 18:38:08,788 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 10.096s
+2026-01-15 18:38:08,788 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 16.252s
+2026-01-15 18:38:08,878 INFO watchcrew.backend: ⏱️ First chunk received after 0.755s
+2026-01-15 18:38:19,279 INFO watchcrew.backend: ⏱️ Found 'script' array at 11.155s (first chunk +10.400s)
+2026-01-15 18:38:20,563 INFO watchcrew.backend: ⏱️ First message sent at 12.440s (script start +1.285s)
+2026-01-15 18:38:20,563 INFO watchcrew.backend: ⏱️ Message 1: speaker=야구는못참지, text_length=46
+2026-01-15 18:38:21,046 INFO watchcrew.backend: ⏱️ Message 2: speaker=수고했소님, text_length=32, time_since_last=0.483s
+2026-01-15 18:38:21,796 INFO watchcrew.backend: ⏱️ Message 3: speaker=찬승바라기, text_length=32, time_since_last=0.750s
+2026-01-15 18:38:22,707 INFO watchcrew.backend: ⏱️ Message 4: speaker=우성편, text_length=41, time_since_last=0.911s
+2026-01-15 18:38:22,754 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 335
+2026-01-15 18:38:22,754 INFO watchcrew.backend: Loaded game data at row 335 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-15 18:38:22,754 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:38:23,344 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:38:23,344 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:38:23,406 INFO watchcrew.backend: ⏱️ First chunk received after 0.651s
+2026-01-15 18:38:23,727 INFO watchcrew.backend: ⏱️ Message 5: speaker=시즌루키, text_length=39, time_since_last=1.020s
+2026-01-15 18:38:24,498 INFO watchcrew.backend: ⏱️ Message 6: speaker=야구는못참지, text_length=41, time_since_last=0.771s
+2026-01-15 18:38:25,358 INFO watchcrew.backend: ⏱️ Message 7: speaker=우성편, text_length=36, time_since_last=0.860s
+2026-01-15 18:38:25,413 INFO watchcrew.backend: ⏱️ Streaming completed in 17.290s. Total chunks: 821, messages sent: 7
+2026-01-15 18:38:25,413 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.755s
+2026-01-15 18:38:25,414 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 11.155s
+2026-01-15 18:38:25,414 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 12.440s
+2026-01-15 18:38:25,414 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 17.235s
+2026-01-15 18:38:32,509 INFO watchcrew.backend: ⏱️ Found 'script' array at 9.754s (first chunk +9.103s)
+2026-01-15 18:38:33,985 INFO watchcrew.backend: ⏱️ First message sent at 11.231s (script start +1.476s)
+2026-01-15 18:38:33,985 INFO watchcrew.backend: ⏱️ Message 1: speaker=야구는못참지, text_length=33
+2026-01-15 18:38:34,796 INFO watchcrew.backend: ⏱️ Message 2: speaker=수고했소님, text_length=32, time_since_last=0.811s
+2026-01-15 18:38:35,236 INFO watchcrew.backend: ⏱️ Message 3: speaker=찬승바라기, text_length=25, time_since_last=0.439s
+2026-01-15 18:38:36,345 INFO watchcrew.backend: ⏱️ Message 4: speaker=시즌루키, text_length=36, time_since_last=1.110s
+2026-01-15 18:38:37,051 INFO watchcrew.backend: ⏱️ Message 5: speaker=우성편, text_length=44, time_since_last=0.706s
+2026-01-15 18:38:37,734 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 336
+2026-01-15 18:38:37,734 INFO watchcrew.backend: Loaded game data at row 336 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-15 18:38:37,734 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:38:37,795 INFO watchcrew.backend: ⏱️ Message 6: speaker=야구는못참지, text_length=40, time_since_last=0.744s
+2026-01-15 18:38:38,281 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:38:38,297 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:38:38,378 INFO watchcrew.backend: ⏱️ First chunk received after 0.644s
+2026-01-15 18:38:38,735 INFO watchcrew.backend: ⏱️ Message 7: speaker=수고했소님, text_length=27, time_since_last=0.939s
+2026-01-15 18:38:38,770 INFO watchcrew.backend: ⏱️ Streaming completed in 16.015s. Total chunks: 778, messages sent: 7
+2026-01-15 18:38:38,770 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.651s
+2026-01-15 18:38:38,771 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 9.754s
+2026-01-15 18:38:38,771 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 11.231s
+2026-01-15 18:38:38,771 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 15.980s
+2026-01-15 18:38:47,723 INFO watchcrew.backend: ⏱️ Found 'script' array at 9.989s (first chunk +9.345s)
+2026-01-15 18:38:48,205 INFO watchcrew.backend: ⏱️ First message sent at 10.471s (script start +0.482s)
+2026-01-15 18:38:48,205 INFO watchcrew.backend: ⏱️ Message 1: speaker=야구는못참지, text_length=33
+2026-01-15 18:38:49,077 INFO watchcrew.backend: ⏱️ Message 2: speaker=수고했소님, text_length=28, time_since_last=0.873s
+2026-01-15 18:38:49,534 INFO watchcrew.backend: ⏱️ Message 3: speaker=찬승바라기, text_length=16, time_since_last=0.456s
+2026-01-15 18:38:50,298 INFO watchcrew.backend: ⏱️ Message 4: speaker=우성편, text_length=26, time_since_last=0.764s
+2026-01-15 18:38:51,128 INFO watchcrew.backend: ⏱️ Message 5: speaker=시즌루키, text_length=35, time_since_last=0.830s
+2026-01-15 18:38:51,905 INFO watchcrew.backend: ⏱️ Message 6: speaker=야구는못참지, text_length=32, time_since_last=0.777s
+2026-01-15 18:38:52,495 INFO watchcrew.backend: ⏱️ Message 7: speaker=우성편, text_length=40, time_since_last=0.590s
+2026-01-15 18:38:52,529 INFO watchcrew.backend: ⏱️ Streaming completed in 14.795s. Total chunks: 765, messages sent: 7
+2026-01-15 18:38:52,529 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.644s
+2026-01-15 18:38:52,529 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 9.989s
+2026-01-15 18:38:52,529 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 10.471s
+2026-01-15 18:38:52,529 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 14.761s
+2026-01-15 18:38:52,757 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 337
+2026-01-15 18:38:52,758 INFO watchcrew.backend: Loaded game data at row 337 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-15 18:38:52,758 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:38:53,271 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:38:53,272 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:38:53,421 INFO watchcrew.backend: ⏱️ First chunk received after 0.663s
+2026-01-15 18:39:03,003 INFO watchcrew.backend: ⏱️ Found 'script' array at 10.246s (first chunk +9.583s)
+2026-01-15 18:39:03,786 INFO watchcrew.backend: ⏱️ First message sent at 11.028s (script start +0.782s)
+2026-01-15 18:39:03,786 INFO watchcrew.backend: ⏱️ Message 1: speaker=야구는못참지, text_length=33
+2026-01-15 18:39:04,420 INFO watchcrew.backend: ⏱️ Message 2: speaker=찬승바라기, text_length=38, time_since_last=0.634s
+2026-01-15 18:39:05,202 INFO watchcrew.backend: ⏱️ Message 3: speaker=우성편, text_length=35, time_since_last=0.782s
+2026-01-15 18:39:05,934 INFO watchcrew.backend: ⏱️ Message 4: speaker=시즌루키, text_length=39, time_since_last=0.732s
+2026-01-15 18:39:06,827 INFO watchcrew.backend: ⏱️ Message 5: speaker=야구는못참지, text_length=38, time_since_last=0.893s
+2026-01-15 18:39:07,331 INFO watchcrew.backend: ⏱️ Message 6: speaker=찬승바라기, text_length=25, time_since_last=0.504s
+2026-01-15 18:39:07,745 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 338
+2026-01-15 18:39:07,745 INFO watchcrew.backend: Loaded game data at row 338 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-15 18:39:07,745 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:39:07,857 INFO watchcrew.backend: ⏱️ Message 7: speaker=우성편, text_length=37, time_since_last=0.527s
+2026-01-15 18:39:08,137 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:39:08,137 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:39:08,161 INFO watchcrew.backend: ⏱️ First chunk received after 0.416s
+2026-01-15 18:39:08,675 INFO watchcrew.backend: ⏱️ Message 8: speaker=시즌루키, text_length=45, time_since_last=0.818s
+2026-01-15 18:39:08,755 INFO watchcrew.backend: ⏱️ Streaming completed in 15.997s. Total chunks: 786, messages sent: 8
+2026-01-15 18:39:08,755 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.663s
+2026-01-15 18:39:08,755 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 10.246s
+2026-01-15 18:39:08,755 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 11.028s
+2026-01-15 18:39:08,755 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 15.917s
+2026-01-15 18:39:19,351 INFO watchcrew.backend: ⏱️ Found 'script' array at 11.605s (first chunk +11.190s)
+2026-01-15 18:39:19,897 INFO watchcrew.backend: ⏱️ First message sent at 12.151s (script start +0.546s)
+2026-01-15 18:39:19,897 INFO watchcrew.backend: ⏱️ Message 1: speaker=야구는못참지, text_length=38
+2026-01-15 18:39:20,506 INFO watchcrew.backend: ⏱️ Message 2: speaker=수고했소님, text_length=37, time_since_last=0.610s
+2026-01-15 18:39:21,014 INFO watchcrew.backend: ⏱️ Message 3: speaker=찬승바라기, text_length=30, time_since_last=0.507s
+2026-01-15 18:39:21,638 INFO watchcrew.backend: ⏱️ Message 4: speaker=우성편, text_length=38, time_since_last=0.625s
+2026-01-15 18:39:22,390 INFO watchcrew.backend: ⏱️ Message 5: speaker=시즌루키, text_length=36, time_since_last=0.751s
+2026-01-15 18:39:23,115 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 339
+2026-01-15 18:39:23,115 INFO watchcrew.backend: Loaded game data at row 339 - currGameStat: In the top of the 8th inning, Kia Tigers’ fifth batter, Oh Sun-woo, stepped up to the plate against Samsung Lions’ pitcher Kim Jae-yoon with one out and a runner on second base. In the top of the 8th inning, the Samsung Lions, who are fielding, replaced their pitcher with Bae Chan-seung while the Kia Tigers continue batting with Oh Sun-woo at the plate. In the top of the 8th inning, the Kia Tigers, who are batting, replaced their 5th batter, Oh Sun-woo, with pinch hitter Kim Ho-ryeong against Samsung Lions pitcher Bae Chan-seung. In the top of the 8th inning, the Kia Tigers, currently batting, have sent in pinch hitter Kim Ho-ryeong to bat in place of Oh Sun-woo against Samsung Lions pitcher Bae Chan-seung. Kia Tigers’ batter Oh Sun-woo faced a 152 km/h fastball from Samsung Lions’ pitcher Bae Chan-seung, resulting in a strike on the first pitch of the at-bat., gameFlow length: 648
+2026-01-15 18:39:23,115 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:39:23,115 INFO watchcrew.backend: ⏱️ Message 6: speaker=야구는못참지, text_length=33, time_since_last=0.726s
+2026-01-15 18:39:23,551 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:39:23,551 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:39:23,565 INFO watchcrew.backend: ⏱️ First chunk received after 0.450s
+2026-01-15 18:39:24,400 INFO watchcrew.backend: ⏱️ Message 7: speaker=우성편, text_length=34, time_since_last=1.284s
+2026-01-15 18:39:24,432 INFO watchcrew.backend: ⏱️ Streaming completed in 16.687s. Total chunks: 788, messages sent: 7
+2026-01-15 18:39:24,433 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.416s
+2026-01-15 18:39:24,433 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 11.605s
+2026-01-15 18:39:24,433 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 12.151s
+2026-01-15 18:39:24,433 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 16.655s
+2026-01-15 18:39:30,739 INFO watchcrew.backend: ⏱️ Found 'script' array at 7.623s (first chunk +7.173s)
+2026-01-15 18:39:31,389 INFO watchcrew.backend: ⏱️ First message sent at 8.274s (script start +0.651s)
+2026-01-15 18:39:31,389 INFO watchcrew.backend: ⏱️ Message 1: speaker=시즌루키, text_length=48
+2026-01-15 18:39:34,426 INFO watchcrew.backend: ⏱️ Message 2: speaker=야구는못참지, text_length=70, time_since_last=3.037s
+2026-01-15 18:39:35,327 INFO watchcrew.backend: ⏱️ Message 3: speaker=찬승바라기, text_length=41, time_since_last=0.901s
+2026-01-15 18:39:36,311 INFO watchcrew.backend: ⏱️ Message 4: speaker=우성편, text_length=48, time_since_last=0.984s
+2026-01-15 18:39:37,167 INFO watchcrew.backend: ⏱️ Message 5: speaker=시즌루키, text_length=40, time_since_last=0.856s
+2026-01-15 18:39:38,095 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 340
+2026-01-15 18:39:38,095 INFO watchcrew.backend: Loaded game data at row 340 - currGameStat: In the top of the 8th inning, Kia Tigers batter Oh Sun-woo, batting fifth, hit a fastball pitched at 152 km/h by Samsung Lions pitcher Bae Chan-seung on the second pitch, with a count of no balls and one strike, while there was a runner on second base and one out. Kia Tigers batter Kim Ho-ryeong grounded out to third base, with the Samsung Lions’ third baseman throwing to first base for the out, marking the second out of the inning. Kia Tigers’ baserunner 최형우 advanced from second base to third base during the at-bat of 오선우 against Samsung Lions’ pitcher 배찬승 in the bottom of the 8th inning., gameFlow length: 726
+2026-01-15 18:39:38,095 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:39:38,471 INFO watchcrew.backend: ⏱️ Message 6: speaker=야구는못참지, text_length=65, time_since_last=1.303s
+2026-01-15 18:39:38,560 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:39:38,560 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:39:38,560 INFO watchcrew.backend: ⏱️ First chunk received after 0.465s
+2026-01-15 18:39:39,524 INFO watchcrew.backend: ⏱️ Message 7: speaker=찬승바라기, text_length=30, time_since_last=1.054s
+2026-01-15 18:39:39,661 INFO watchcrew.backend: ⏱️ Streaming completed in 16.546s. Total chunks: 767, messages sent: 7
+2026-01-15 18:39:39,661 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.450s
+2026-01-15 18:39:39,661 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 7.623s
+2026-01-15 18:39:39,661 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 8.274s
+2026-01-15 18:39:39,661 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 16.409s
+2026-01-15 18:39:46,423 INFO watchcrew.backend: ⏱️ Found 'script' array at 8.328s (first chunk +7.864s)
+2026-01-15 18:39:47,216 INFO watchcrew.backend: ⏱️ First message sent at 9.121s (script start +0.793s)
+2026-01-15 18:39:47,216 INFO watchcrew.backend: ⏱️ Message 1: speaker=시즌루키, text_length=37
+2026-01-15 18:39:47,692 INFO watchcrew.backend: ⏱️ Message 2: speaker=찬승바라기, text_length=32, time_since_last=0.476s
+2026-01-15 18:39:48,265 INFO watchcrew.backend: ⏱️ Message 3: speaker=야구는못참지, text_length=37, time_since_last=0.573s
+2026-01-15 18:39:49,218 INFO watchcrew.backend: ⏱️ Message 4: speaker=우성편, text_length=34, time_since_last=0.953s
+2026-01-15 18:39:50,045 INFO watchcrew.backend: ⏱️ Message 5: speaker=시즌루키, text_length=33, time_since_last=0.827s
+2026-01-15 18:39:50,483 INFO watchcrew.backend: ⏱️ Message 6: speaker=찬승바라기, text_length=24, time_since_last=0.438s
+2026-01-15 18:39:50,938 INFO watchcrew.backend: ⏱️ Message 7: speaker=야구는못참지, text_length=33, time_since_last=0.455s
+2026-01-15 18:39:51,484 INFO watchcrew.backend: ⏱️ Message 8: speaker=우성편, text_length=32, time_since_last=0.545s
+2026-01-15 18:39:51,520 INFO watchcrew.backend: ⏱️ Streaming completed in 13.425s. Total chunks: 718, messages sent: 8
+2026-01-15 18:39:51,520 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.465s
+2026-01-15 18:39:51,521 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 8.328s
+2026-01-15 18:39:51,521 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 9.121s
+2026-01-15 18:39:51,521 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 13.388s
+2026-01-15 18:39:52,796 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 341
+2026-01-15 18:39:52,796 INFO watchcrew.backend: Loaded game data at row 341 - currGameStat: In the top of the 8th inning, Kia Tigers’ sixth batter, Byun Woo-hyuk, stepped up to the plate against Samsung Lions’ pitcher Bae Chan-seung with two outs and a runner on third base, starting his at-bat with no balls and no strikes. Kia Tigers’ batter 변우혁 faced a 135 km/h slider from Samsung Lions’ pitcher 배찬승, resulting in a ball and a 1-0 count with two outs and a runner on third base in the bottom of the 8th inning., gameFlow length: 632
+2026-01-15 18:39:52,796 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-15 18:39:53,224 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-15 18:39:53,224 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-15 18:39:53,255 INFO watchcrew.backend: ⏱️ First chunk received after 0.459s
+2026-01-15 18:40:01,402 INFO watchcrew.backend: ⏱️ Found 'script' array at 8.606s (first chunk +8.147s)
+2026-01-15 18:40:01,983 INFO watchcrew.backend: ⏱️ First message sent at 9.187s (script start +0.581s)
+2026-01-15 18:40:01,983 INFO watchcrew.backend: ⏱️ Message 1: speaker=시즌루키, text_length=42
+2026-01-16 12:18:44,304 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 12:19:14,107 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 328
+2026-01-16 12:19:14,107 INFO watchcrew.backend: Loaded game data at row 328 - currGameStat: In the top of the 8th inning, Kia Tigers’ third batter, Kim Do-young, stepped up to the plate against Samsung Lions’ pitcher Kim Jae-yoon with runners on first base and one out. Kia Tigers’ batter 김도영 faced a 145 km/h fastball from Samsung Lions’ pitcher 김재윤 and made contact on the first pitch with a hit. Kia Tigers batter 김도영 hit a home run to deep left-center field, measuring 125 meters, against Samsung Lions pitcher 김재윤 in the bottom of the 8th inning. Kia Tigers’ baserunner 김규성 scored a run, increasing the away team’s lead to 6-4 against the Samsung Lions in the bottom of the 8th inning., gameFlow length: 549
+2026-01-16 12:19:14,107 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:19:15,625 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:19:15,625 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:19:28,775 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 329
+2026-01-16 12:19:28,775 INFO watchcrew.backend: Loaded game data at row 329 - currGameStat: In the top of the 8th inning, Kia Tigers’ fourth batter, Choi Hyung-woo, stepped up to bat against Samsung Lions’ pitcher Kim Jae-yoon with no balls or strikes and one out in the inning., gameFlow length: 568
+2026-01-16 12:19:28,776 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:19:29,883 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:19:29,883 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:19:44,074 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 330
+2026-01-16 12:19:44,074 INFO watchcrew.backend: Loaded game data at row 330 - currGameStat: In the top of the 8th inning, Kia Tigers’ batter Choi Hyung-woo faced Samsung Lions’ pitcher Kim Jae-yoon and fouled the first pitch, a 134 km/h forkball, with a 0-1 count and one out. Kia Tigers batter 최형우 faced a 136 km/h slider from Samsung Lions pitcher 김재윤, resulting in a foul ball and a strike count of 0-2 with one out in the bottom of the 8th inning., gameFlow length: 564
+2026-01-16 12:19:44,074 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:19:45,710 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:19:45,710 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:19:58,761 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 331
+2026-01-16 12:19:58,761 INFO watchcrew.backend: Loaded game data at row 331 - currGameStat: In the top of the 8th inning, Kia Tigers batter Choi Hyung-woo faced Samsung Lions pitcher Kim Jae-yoon and fouled off a 144 km/h fastball for strike two with one out and no runners on base., gameFlow length: 556
+2026-01-16 12:19:58,761 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:19:59,266 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:19:59,267 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:20:14,078 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 332
+2026-01-16 12:20:14,078 INFO watchcrew.backend: Loaded game data at row 332 - currGameStat: In the top of the 8th inning, Kia Tigers batter Choi Hyung-woo faced Samsung Lions pitcher Kim Jae-yoon and took a fourth pitch ball on a forkball at 137 km/h, bringing the count to one ball and two strikes with one out and no runners on base. Kia Tigers batter 최형우 faced a 135 km/h forkball from Samsung Lions pitcher 김재윤 and hit a foul ball, maintaining a 1-2 count with one out in the top of the 8th inning., gameFlow length: 556
+2026-01-16 12:20:14,078 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:20:14,641 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:20:14,641 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:20:28,770 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 333
+2026-01-16 12:20:28,770 INFO watchcrew.backend: Loaded game data at row 333 - currGameStat: In the top of the 8th inning, Kia Tigers batter Choi Hyung-woo faced a 1-2 count against Samsung Lions pitcher Kim Jae-yoon and swung at the sixth pitch, a 146 km/h fastball. Kia Tigers’ batter 최형우 hit a double to left-center field, advancing to second base with one out in the bottom of the 8th inning against Samsung Lions’ pitcher 김재윤., gameFlow length: 546
+2026-01-16 12:20:28,770 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:20:29,943 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:20:29,943 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:20:44,065 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 334
+2026-01-16 12:20:44,065 INFO watchcrew.backend: Loaded game data at row 334 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-16 12:20:44,065 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:20:44,573 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:20:44,573 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:20:58,768 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 335
+2026-01-16 12:20:58,768 INFO watchcrew.backend: Loaded game data at row 335 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-16 12:20:58,768 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:21:00,095 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:21:00,095 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:21:14,075 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 336
+2026-01-16 12:21:14,075 INFO watchcrew.backend: Loaded game data at row 336 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-16 12:21:14,075 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:21:14,508 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:21:14,508 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:21:28,771 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 337
+2026-01-16 12:21:28,771 INFO watchcrew.backend: Loaded game data at row 337 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-16 12:21:28,771 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:21:30,420 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:21:30,420 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:21:36,060 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 12:21:42,741 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 328
+2026-01-16 12:21:42,741 INFO watchcrew.backend: Loaded game data at row 328 - currGameStat: In the top of the 8th inning, Kia Tigers’ third batter, Kim Do-young, stepped up to the plate against Samsung Lions’ pitcher Kim Jae-yoon with runners on first base and one out. Kia Tigers’ batter 김도영 faced a 145 km/h fastball from Samsung Lions’ pitcher 김재윤 and made contact on the first pitch with a hit. Kia Tigers batter 김도영 hit a home run to deep left-center field, measuring 125 meters, against Samsung Lions pitcher 김재윤 in the bottom of the 8th inning. Kia Tigers’ baserunner 김규성 scored a run, increasing the away team’s lead to 6-4 against the Samsung Lions in the bottom of the 8th inning., gameFlow length: 549
+2026-01-16 12:21:42,741 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:21:44,028 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:21:44,028 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:21:57,422 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 329
+2026-01-16 12:21:57,422 INFO watchcrew.backend: Loaded game data at row 329 - currGameStat: In the top of the 8th inning, Kia Tigers’ fourth batter, Choi Hyung-woo, stepped up to bat against Samsung Lions’ pitcher Kim Jae-yoon with no balls or strikes and one out in the inning., gameFlow length: 568
+2026-01-16 12:21:57,422 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:22:02,991 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:22:02,991 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:22:13,379 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 330
+2026-01-16 12:22:13,379 INFO watchcrew.backend: Loaded game data at row 330 - currGameStat: In the top of the 8th inning, Kia Tigers’ batter Choi Hyung-woo faced Samsung Lions’ pitcher Kim Jae-yoon and fouled the first pitch, a 134 km/h forkball, with a 0-1 count and one out. Kia Tigers batter 최형우 faced a 136 km/h slider from Samsung Lions pitcher 김재윤, resulting in a foul ball and a strike count of 0-2 with one out in the bottom of the 8th inning., gameFlow length: 564
+2026-01-16 12:22:13,379 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:22:13,864 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:22:13,865 ERROR watchcrew.backend: Error in orchestrate: 'userName'
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 998, in orchestrate_chat
+    agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+    ~~~~~^^^^^^^^^^^^
+KeyError: 'userName'
+2026-01-16 12:22:43,580 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 12:22:43,911 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 328
+2026-01-16 12:22:43,912 INFO watchcrew.backend: Loaded game data at row 328 - currGameStat: In the top of the 8th inning, Kia Tigers’ third batter, Kim Do-young, stepped up to the plate against Samsung Lions’ pitcher Kim Jae-yoon with runners on first base and one out. Kia Tigers’ batter 김도영 faced a 145 km/h fastball from Samsung Lions’ pitcher 김재윤 and made contact on the first pitch with a hit. Kia Tigers batter 김도영 hit a home run to deep left-center field, measuring 125 meters, against Samsung Lions pitcher 김재윤 in the bottom of the 8th inning. Kia Tigers’ baserunner 김규성 scored a run, increasing the away team’s lead to 6-4 against the Samsung Lions in the bottom of the 8th inning., gameFlow length: 549
+2026-01-16 12:22:43,912 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:22:44,624 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:22:44,630 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:22:44,664 INFO watchcrew.backend: ⏱️ First chunk received after 0.752s
+2026-01-16 12:22:55,926 INFO watchcrew.backend: ⏱️ Found 'script' array at 12.013s (first chunk +11.262s)
+2026-01-16 12:22:56,610 INFO watchcrew.backend: ⏱️ First message sent at 12.697s (script start +0.684s)
+2026-01-16 12:22:56,610 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=36
+2026-01-16 12:22:58,062 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 329
+2026-01-16 12:22:58,062 INFO watchcrew.backend: Loaded game data at row 329 - currGameStat: In the top of the 8th inning, Kia Tigers’ fourth batter, Choi Hyung-woo, stepped up to bat against Samsung Lions’ pitcher Kim Jae-yoon with no balls or strikes and one out in the inning., gameFlow length: 568
+2026-01-16 12:22:58,062 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:22:58,101 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=45, time_since_last=1.491s
+2026-01-16 12:22:58,515 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:22:58,515 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:22:58,551 INFO watchcrew.backend: ⏱️ First chunk received after 0.489s
+2026-01-16 12:22:58,936 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=28, time_since_last=0.835s
+2026-01-16 12:23:00,211 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=48, time_since_last=1.275s
+2026-01-16 12:23:01,113 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=44, time_since_last=0.902s
+2026-01-16 12:23:02,496 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=34, time_since_last=1.382s
+2026-01-16 12:23:03,612 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=31, time_since_last=1.116s
+2026-01-16 12:23:03,746 INFO watchcrew.backend: ⏱️ Streaming completed in 19.834s. Total chunks: 847, messages sent: 7
+2026-01-16 12:23:03,747 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.752s
+2026-01-16 12:23:03,747 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 12.013s
+2026-01-16 12:23:03,747 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 12.697s
+2026-01-16 12:23:03,747 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 19.700s
+2026-01-16 12:23:06,150 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 330
+2026-01-16 12:23:06,150 INFO watchcrew.backend: Loaded game data at row 330 - currGameStat: In the top of the 8th inning, Kia Tigers’ batter Choi Hyung-woo faced Samsung Lions’ pitcher Kim Jae-yoon and fouled the first pitch, a 134 km/h forkball, with a 0-1 count and one out. Kia Tigers batter 최형우 faced a 136 km/h slider from Samsung Lions pitcher 김재윤, resulting in a foul ball and a strike count of 0-2 with one out in the bottom of the 8th inning., gameFlow length: 564
+2026-01-16 12:23:06,150 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:23:06,621 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:23:06,623 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:23:06,624 INFO watchcrew.backend: ⏱️ First chunk received after 0.474s
+2026-01-16 12:23:11,421 INFO watchcrew.backend: ⏱️ Found 'script' array at 13.359s (first chunk +12.870s)
+2026-01-16 12:23:12,156 INFO watchcrew.backend: ⏱️ First message sent at 14.095s (script start +0.736s)
+2026-01-16 12:23:12,156 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=39
+2026-01-16 12:23:13,178 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=42, time_since_last=1.021s
+2026-01-16 12:23:13,895 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=34, time_since_last=0.717s
+2026-01-16 12:23:14,675 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=37, time_since_last=0.780s
+2026-01-16 12:23:15,771 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=45, time_since_last=1.096s
+2026-01-16 12:23:16,744 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=27, time_since_last=0.973s
+2026-01-16 12:23:17,818 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=31, time_since_last=1.074s
+2026-01-16 12:23:17,824 INFO watchcrew.backend: ⏱️ Found 'script' array at 11.674s (first chunk +11.200s)
+2026-01-16 12:23:17,864 INFO watchcrew.backend: ⏱️ Streaming completed in 19.802s. Total chunks: 814, messages sent: 7
+2026-01-16 12:23:17,865 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.489s
+2026-01-16 12:23:17,865 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 13.359s
+2026-01-16 12:23:17,865 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 14.095s
+2026-01-16 12:23:17,866 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 19.756s
+2026-01-16 12:23:18,595 INFO watchcrew.backend: ⏱️ First message sent at 12.445s (script start +0.771s)
+2026-01-16 12:23:18,595 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=35
+2026-01-16 12:23:19,446 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=33, time_since_last=0.851s
+2026-01-16 12:23:20,202 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=33, time_since_last=0.755s
+2026-01-16 12:23:21,414 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=45, time_since_last=1.212s
+2026-01-16 12:23:21,461 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 331
+2026-01-16 12:23:21,461 INFO watchcrew.backend: Loaded game data at row 331 - currGameStat: In the top of the 8th inning, Kia Tigers batter Choi Hyung-woo faced Samsung Lions pitcher Kim Jae-yoon and fouled off a 144 km/h fastball for strike two with one out and no runners on base., gameFlow length: 556
+2026-01-16 12:23:21,461 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:23:23,208 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:23:23,208 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:23:23,219 INFO watchcrew.backend: ⏱️ First chunk received after 1.756s
+2026-01-16 12:23:23,224 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=50, time_since_last=1.810s
+2026-01-16 12:23:23,795 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=38, time_since_last=0.571s
+2026-01-16 12:23:25,313 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=47, time_since_last=1.518s
+2026-01-16 12:23:25,370 INFO watchcrew.backend: ⏱️ Streaming completed in 19.220s. Total chunks: 833, messages sent: 7
+2026-01-16 12:23:25,370 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.474s
+2026-01-16 12:23:25,370 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 11.674s
+2026-01-16 12:23:25,370 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 12.445s
+2026-01-16 12:23:25,370 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 19.163s
+2026-01-16 12:23:36,002 INFO watchcrew.backend: ⏱️ Found 'script' array at 14.539s (first chunk +12.783s)
+2026-01-16 12:23:36,453 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 332
+2026-01-16 12:23:36,453 INFO watchcrew.backend: Loaded game data at row 332 - currGameStat: In the top of the 8th inning, Kia Tigers batter Choi Hyung-woo faced Samsung Lions pitcher Kim Jae-yoon and took a fourth pitch ball on a forkball at 137 km/h, bringing the count to one ball and two strikes with one out and no runners on base. Kia Tigers batter 최형우 faced a 135 km/h forkball from Samsung Lions pitcher 김재윤 and hit a foul ball, maintaining a 1-2 count with one out in the top of the 8th inning., gameFlow length: 556
+2026-01-16 12:23:36,453 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:23:37,068 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:23:37,068 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:23:37,073 INFO watchcrew.backend: ⏱️ First chunk received after 0.620s
+2026-01-16 12:23:37,161 INFO watchcrew.backend: ⏱️ First message sent at 15.699s (script start +1.160s)
+2026-01-16 12:23:37,161 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=39
+2026-01-16 12:23:37,995 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=44, time_since_last=0.834s
+2026-01-16 12:23:38,597 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=26, time_since_last=0.602s
+2026-01-16 12:23:39,705 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=47, time_since_last=1.108s
+2026-01-16 12:23:40,450 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=34, time_since_last=0.745s
+2026-01-16 12:23:41,097 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=30, time_since_last=0.647s
+2026-01-16 12:23:42,058 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=38, time_since_last=0.961s
+2026-01-16 12:23:42,099 INFO watchcrew.backend: ⏱️ Streaming completed in 20.636s. Total chunks: 847, messages sent: 7
+2026-01-16 12:23:42,099 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.756s
+2026-01-16 12:23:42,099 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 14.539s
+2026-01-16 12:23:42,099 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 15.699s
+2026-01-16 12:23:42,099 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 20.596s
+2026-01-16 12:23:51,089 INFO watchcrew.backend: ⏱️ Found 'script' array at 14.636s (first chunk +14.016s)
+2026-01-16 12:23:51,474 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 333
+2026-01-16 12:23:51,475 INFO watchcrew.backend: Loaded game data at row 333 - currGameStat: In the top of the 8th inning, Kia Tigers batter Choi Hyung-woo faced a 1-2 count against Samsung Lions pitcher Kim Jae-yoon and swung at the sixth pitch, a 146 km/h fastball. Kia Tigers’ batter 최형우 hit a double to left-center field, advancing to second base with one out in the bottom of the 8th inning against Samsung Lions’ pitcher 김재윤., gameFlow length: 546
+2026-01-16 12:23:51,475 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:23:52,107 INFO watchcrew.backend: ⏱️ First message sent at 15.654s (script start +1.018s)
+2026-01-16 12:23:52,107 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=31
+2026-01-16 12:23:52,678 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:23:52,680 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:23:52,698 INFO watchcrew.backend: ⏱️ First chunk received after 1.221s
+2026-01-16 12:23:53,230 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=29, time_since_last=1.124s
+2026-01-16 12:23:54,109 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=32, time_since_last=0.878s
+2026-01-16 12:23:54,992 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=48, time_since_last=0.884s
+2026-01-16 12:23:56,214 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=42, time_since_last=1.222s
+2026-01-16 12:23:57,215 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=29, time_since_last=1.001s
+2026-01-16 12:23:58,360 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=31, time_since_last=1.144s
+2026-01-16 12:23:58,385 INFO watchcrew.backend: ⏱️ Streaming completed in 21.932s. Total chunks: 909, messages sent: 7
+2026-01-16 12:23:58,387 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.620s
+2026-01-16 12:23:58,387 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 14.636s
+2026-01-16 12:23:58,387 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 15.654s
+2026-01-16 12:23:58,387 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 21.907s
+2026-01-16 12:24:03,170 INFO watchcrew.backend: ⏱️ Found 'script' array at 11.695s (first chunk +10.474s)
+2026-01-16 12:24:04,304 INFO watchcrew.backend: ⏱️ First message sent at 12.828s (script start +1.133s)
+2026-01-16 12:24:04,304 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=43
+2026-01-16 12:24:05,250 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=36, time_since_last=0.946s
+2026-01-16 12:24:05,922 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=38, time_since_last=0.672s
+2026-01-16 12:24:06,454 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 334
+2026-01-16 12:24:06,455 INFO watchcrew.backend: Loaded game data at row 334 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-16 12:24:06,455 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:24:06,671 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=38, time_since_last=0.749s
+2026-01-16 12:24:07,071 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:24:07,072 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:24:07,104 INFO watchcrew.backend: ⏱️ First chunk received after 0.648s
+2026-01-16 12:24:07,839 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=52, time_since_last=1.168s
+2026-01-16 12:24:08,854 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=37, time_since_last=1.015s
+2026-01-16 12:24:09,621 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=32, time_since_last=0.767s
+2026-01-16 12:24:09,688 INFO watchcrew.backend: ⏱️ Streaming completed in 18.213s. Total chunks: 843, messages sent: 7
+2026-01-16 12:24:09,689 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.221s
+2026-01-16 12:24:09,689 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 11.695s
+2026-01-16 12:24:09,689 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 12.828s
+2026-01-16 12:24:09,689 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 18.146s
+2026-01-16 12:24:18,991 INFO watchcrew.backend: ⏱️ Found 'script' array at 12.535s (first chunk +11.887s)
+2026-01-16 12:24:20,179 INFO watchcrew.backend: ⏱️ First message sent at 13.724s (script start +1.189s)
+2026-01-16 12:24:20,179 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=34
+2026-01-16 12:24:21,401 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=43, time_since_last=1.222s
+2026-01-16 12:24:21,472 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 335
+2026-01-16 12:24:21,473 INFO watchcrew.backend: Loaded game data at row 335 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-16 12:24:21,473 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:24:21,922 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:24:21,922 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:24:21,949 INFO watchcrew.backend: ⏱️ First chunk received after 0.476s
+2026-01-16 12:24:22,096 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=49, time_since_last=0.695s
+2026-01-16 12:24:22,964 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=40, time_since_last=0.868s
+2026-01-16 12:24:24,718 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=45, time_since_last=1.754s
+2026-01-16 12:24:25,712 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=35, time_since_last=0.994s
+2026-01-16 12:24:26,643 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=42, time_since_last=0.931s
+2026-01-16 12:24:26,726 INFO watchcrew.backend: ⏱️ Streaming completed in 20.271s. Total chunks: 865, messages sent: 7
+2026-01-16 12:24:26,726 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.648s
+2026-01-16 12:24:26,727 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 12.535s
+2026-01-16 12:24:26,727 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 13.724s
+2026-01-16 12:24:26,727 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 20.188s
+2026-01-16 12:24:36,470 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 336
+2026-01-16 12:24:36,471 INFO watchcrew.backend: Loaded game data at row 336 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-16 12:24:36,471 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:24:36,984 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:24:36,984 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:24:36,984 INFO watchcrew.backend: ⏱️ First chunk received after 0.512s
+2026-01-16 12:24:37,628 INFO watchcrew.backend: ⏱️ Found 'script' array at 16.155s (first chunk +15.679s)
+2026-01-16 12:24:38,712 INFO watchcrew.backend: ⏱️ First message sent at 17.239s (script start +1.084s)
+2026-01-16 12:24:38,712 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=43
+2026-01-16 12:24:39,914 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=41, time_since_last=1.201s
+2026-01-16 12:24:41,215 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=36, time_since_last=1.301s
+2026-01-16 12:24:42,032 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=46, time_since_last=0.817s
+2026-01-16 12:24:43,640 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=55, time_since_last=1.608s
+2026-01-16 12:24:44,484 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=32, time_since_last=0.844s
+2026-01-16 12:24:45,373 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=41, time_since_last=0.889s
+2026-01-16 12:24:45,418 INFO watchcrew.backend: ⏱️ Streaming completed in 23.945s. Total chunks: 877, messages sent: 7
+2026-01-16 12:24:45,418 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.476s
+2026-01-16 12:24:45,418 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 16.155s
+2026-01-16 12:24:45,418 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 17.239s
+2026-01-16 12:24:45,418 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 23.900s
+2026-01-16 12:24:48,383 INFO watchcrew.backend: ⏱️ Found 'script' array at 11.911s (first chunk +11.399s)
+2026-01-16 12:24:49,770 INFO watchcrew.backend: ⏱️ First message sent at 13.298s (script start +1.387s)
+2026-01-16 12:24:49,770 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=46
+2026-01-16 12:24:50,707 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=37, time_since_last=0.937s
+2026-01-16 12:24:51,469 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 337
+2026-01-16 12:24:51,469 INFO watchcrew.backend: Loaded game data at row 337 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-16 12:24:51,469 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:24:52,034 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=32, time_since_last=1.327s
+2026-01-16 12:24:52,166 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:24:52,166 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:24:52,375 INFO watchcrew.backend: ⏱️ First chunk received after 0.906s
+2026-01-16 12:24:52,981 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=38, time_since_last=0.947s
+2026-01-16 12:24:53,641 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=34, time_since_last=0.660s
+2026-01-16 12:24:54,582 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=39, time_since_last=0.941s
+2026-01-16 12:24:55,526 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=33, time_since_last=0.944s
+2026-01-16 12:24:55,559 INFO watchcrew.backend: ⏱️ Streaming completed in 19.088s. Total chunks: 855, messages sent: 7
+2026-01-16 12:24:55,560 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.512s
+2026-01-16 12:24:55,560 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 11.911s
+2026-01-16 12:24:55,560 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 13.298s
+2026-01-16 12:24:55,560 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 19.055s
+2026-01-16 12:25:02,503 INFO watchcrew.backend: ⏱️ Found 'script' array at 11.034s (first chunk +10.127s)
+2026-01-16 12:25:03,633 INFO watchcrew.backend: ⏱️ First message sent at 12.164s (script start +1.130s)
+2026-01-16 12:25:03,633 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=36
+2026-01-16 12:25:05,823 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=33, time_since_last=2.190s
+2026-01-16 12:25:06,422 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=32, time_since_last=0.599s
+2026-01-16 12:25:06,455 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 338
+2026-01-16 12:25:06,455 INFO watchcrew.backend: Loaded game data at row 338 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 546
+2026-01-16 12:25:06,456 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:25:06,834 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:25:06,834 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:25:06,881 INFO watchcrew.backend: ⏱️ First chunk received after 0.425s
+2026-01-16 12:25:07,147 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=41, time_since_last=0.725s
+2026-01-16 12:25:07,970 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=34, time_since_last=0.824s
+2026-01-16 12:25:08,727 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=32, time_since_last=0.757s
+2026-01-16 12:25:09,436 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=37, time_since_last=0.710s
+2026-01-16 12:25:09,522 INFO watchcrew.backend: ⏱️ Streaming completed in 18.053s. Total chunks: 830, messages sent: 7
+2026-01-16 12:25:09,523 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.906s
+2026-01-16 12:25:09,523 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 11.034s
+2026-01-16 12:25:09,523 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 12.164s
+2026-01-16 12:25:09,523 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 17.967s
+2026-01-16 12:25:21,468 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 339
+2026-01-16 12:25:21,468 INFO watchcrew.backend: Loaded game data at row 339 - currGameStat: In the top of the 8th inning, Kia Tigers’ fifth batter, Oh Sun-woo, stepped up to the plate against Samsung Lions’ pitcher Kim Jae-yoon with one out and a runner on second base. In the top of the 8th inning, the Samsung Lions, who are fielding, replaced their pitcher with Bae Chan-seung while the Kia Tigers continue batting with Oh Sun-woo at the plate. In the top of the 8th inning, the Kia Tigers, who are batting, replaced their 5th batter, Oh Sun-woo, with pinch hitter Kim Ho-ryeong against Samsung Lions pitcher Bae Chan-seung. In the top of the 8th inning, the Kia Tigers, currently batting, have sent in pinch hitter Kim Ho-ryeong to bat in place of Oh Sun-woo against Samsung Lions pitcher Bae Chan-seung. Kia Tigers’ batter Oh Sun-woo faced a 152 km/h fastball from Samsung Lions’ pitcher Bae Chan-seung, resulting in a strike on the first pitch of the at-bat., gameFlow length: 648
+2026-01-16 12:25:21,468 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:25:21,906 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:25:21,906 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:25:22,099 INFO watchcrew.backend: ⏱️ First chunk received after 0.631s
+2026-01-16 12:25:36,445 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 340
+2026-01-16 12:25:36,445 INFO watchcrew.backend: Loaded game data at row 340 - currGameStat: In the top of the 8th inning, Kia Tigers batter Oh Sun-woo, batting fifth, hit a fastball pitched at 152 km/h by Samsung Lions pitcher Bae Chan-seung on the second pitch, with a count of no balls and one strike, while there was a runner on second base and one out. Kia Tigers batter Kim Ho-ryeong grounded out to third base, with the Samsung Lions’ third baseman throwing to first base for the out, marking the second out of the inning. Kia Tigers’ baserunner 최형우 advanced from second base to third base during the at-bat of 오선우 against Samsung Lions’ pitcher 배찬승 in the bottom of the 8th inning., gameFlow length: 726
+2026-01-16 12:25:36,445 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:25:37,052 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:25:37,053 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:25:37,054 INFO watchcrew.backend: ⏱️ First chunk received after 0.610s
+2026-01-16 12:25:44,465 INFO watchcrew.backend: ⏱️ Found 'script' array at 38.009s (first chunk +37.584s)
+2026-01-16 12:25:46,662 INFO watchcrew.backend: ⏱️ Found 'script' array at 25.194s (first chunk +24.563s)
+2026-01-16 12:25:47,486 INFO watchcrew.backend: ⏱️ First message sent at 26.018s (script start +0.824s)
+2026-01-16 12:25:47,486 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=32
+2026-01-16 12:25:47,845 INFO watchcrew.backend: ⏱️ Found 'script' array at 11.401s (first chunk +10.791s)
+2026-01-16 12:25:48,249 INFO watchcrew.backend: ⏱️ First message sent at 41.793s (script start +3.784s)
+2026-01-16 12:25:48,249 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=38
+2026-01-16 12:25:48,523 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=42, time_since_last=1.036s
+2026-01-16 12:25:49,182 INFO watchcrew.backend: ⏱️ First message sent at 12.737s (script start +1.337s)
+2026-01-16 12:25:49,182 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=44
+2026-01-16 12:25:49,338 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=36, time_since_last=0.815s
+2026-01-16 12:25:50,088 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=48, time_since_last=0.907s
+2026-01-16 12:25:50,266 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=54, time_since_last=0.928s
+2026-01-16 12:25:50,703 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=44, time_since_last=0.614s
+2026-01-16 12:25:51,290 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=38, time_since_last=1.025s
+2026-01-16 12:25:51,469 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 341
+2026-01-16 12:25:51,469 INFO watchcrew.backend: Loaded game data at row 341 - currGameStat: In the top of the 8th inning, Kia Tigers’ sixth batter, Byun Woo-hyuk, stepped up to the plate against Samsung Lions’ pitcher Bae Chan-seung with two outs and a runner on third base, starting his at-bat with no balls and no strikes. Kia Tigers’ batter 변우혁 faced a 135 km/h slider from Samsung Lions’ pitcher 배찬승, resulting in a ball and a 1-0 count with two outs and a runner on third base in the bottom of the 8th inning., gameFlow length: 632
+2026-01-16 12:25:51,469 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:25:51,497 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=34, time_since_last=3.248s
+2026-01-16 12:25:51,557 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=57, time_since_last=0.854s
+2026-01-16 12:25:51,953 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:25:51,953 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:25:51,969 INFO watchcrew.backend: ⏱️ First chunk received after 0.501s
+2026-01-16 12:25:52,197 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=30, time_since_last=0.907s
+2026-01-16 12:25:52,708 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=51, time_since_last=1.151s
+2026-01-16 12:25:53,016 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=45, time_since_last=0.819s
+2026-01-16 12:25:53,075 INFO watchcrew.backend: ⏱️ Streaming completed in 31.607s. Total chunks: 928, messages sent: 7
+2026-01-16 12:25:53,076 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.631s
+2026-01-16 12:25:53,076 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 25.194s
+2026-01-16 12:25:53,076 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 26.018s
+2026-01-16 12:25:53,076 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 31.548s
+2026-01-16 12:25:53,460 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=42, time_since_last=0.752s
+2026-01-16 12:25:54,267 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=42, time_since_last=0.807s
+2026-01-16 12:25:54,318 INFO watchcrew.backend: ⏱️ Streaming completed in 17.873s. Total chunks: 943, messages sent: 7
+2026-01-16 12:25:54,318 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.610s
+2026-01-16 12:25:54,318 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 11.401s
+2026-01-16 12:25:54,318 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 12.737s
+2026-01-16 12:25:54,318 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 17.823s
+2026-01-16 12:25:55,834 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=45, time_since_last=4.337s
+2026-01-16 12:25:59,278 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=40, time_since_last=3.444s
+2026-01-16 12:26:04,146 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=37, time_since_last=4.867s
+2026-01-16 12:26:06,469 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 342
+2026-01-16 12:26:06,469 INFO watchcrew.backend: Loaded game data at row 342 - currGameStat: In the top of the 8th inning, Kia Tigers batter Byun Woo-hyuk swung and missed on a 152 km/h fastball from Samsung Lions pitcher Bae Chan-seung, bringing the count to one ball and one strike with two outs and a runner on third base., gameFlow length: 656
+2026-01-16 12:26:06,469 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 12:26:06,968 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 12:26:06,968 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 12:26:06,970 INFO watchcrew.backend: ⏱️ First chunk received after 0.502s
+2026-01-16 12:26:07,485 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=44, time_since_last=3.340s
+2026-01-16 12:26:10,449 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=34, time_since_last=2.963s
+2026-01-16 12:26:10,702 INFO watchcrew.backend: ⏱️ Streaming completed in 64.245s. Total chunks: 883, messages sent: 7
+2026-01-16 12:26:10,702 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.425s
+2026-01-16 12:26:10,704 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 38.009s
+2026-01-16 12:26:10,704 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 41.793s
+2026-01-16 12:26:10,704 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 63.992s
+2026-01-16 12:26:16,433 INFO watchcrew.backend: ⏱️ Found 'script' array at 9.965s (first chunk +9.463s)
+2026-01-16 12:26:17,421 INFO watchcrew.backend: ⏱️ First message sent at 10.952s (script start +0.987s)
+2026-01-16 12:26:17,421 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=34
+2026-01-16 12:26:18,427 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=31, time_since_last=1.007s
+2026-01-16 12:26:19,063 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=26, time_since_last=0.635s
+2026-01-16 12:26:19,630 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=37, time_since_last=0.567s
+2026-01-16 12:26:20,434 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=35, time_since_last=0.805s
+2026-01-16 12:26:20,658 INFO watchcrew.backend: ⏱️ Found 'script' array at 29.189s (first chunk +28.689s)
+2026-01-16 12:26:21,164 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=29, time_since_last=0.729s
+2026-01-16 12:26:21,466 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=25, time_since_last=0.302s
+2026-01-16 12:26:21,486 INFO watchcrew.backend: ⏱️ Streaming completed in 15.018s. Total chunks: 804, messages sent: 7
+2026-01-16 12:26:21,486 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.502s
+2026-01-16 12:26:21,486 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 9.965s
+2026-01-16 12:26:21,486 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 10.952s
+2026-01-16 12:26:21,486 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 14.997s
+2026-01-16 12:26:25,032 INFO watchcrew.backend: ⏱️ First message sent at 33.564s (script start +4.374s)
+2026-01-16 12:26:25,032 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=35
+2026-01-16 12:26:25,869 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=37, time_since_last=0.836s
+2026-01-16 12:26:26,419 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=32, time_since_last=0.551s
+2026-01-16 12:26:27,188 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=43, time_since_last=0.769s
+2026-01-16 12:26:28,290 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=41, time_since_last=1.102s
+2026-01-16 12:26:29,497 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=30, time_since_last=1.207s
+2026-01-16 12:26:30,291 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=34, time_since_last=0.793s
+2026-01-16 12:26:30,322 INFO watchcrew.backend: ⏱️ Streaming completed in 38.843s. Total chunks: 887, messages sent: 7
+2026-01-16 12:26:30,322 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.501s
+2026-01-16 12:26:30,322 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 29.189s
+2026-01-16 12:26:30,323 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 33.564s
+2026-01-16 12:26:30,323 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 38.822s
+2026-01-16 17:16:22,158 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:16:44,164 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:16:44,181 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 17:17:46,446 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 328
+2026-01-16 17:17:46,446 INFO watchcrew.backend: Loaded game data at row 328 - currGameStat: In the top of the 8th inning, Kia Tigers’ third batter, Kim Do-young, stepped up to the plate against Samsung Lions’ pitcher Kim Jae-yoon with runners on first base and one out. Kia Tigers’ batter 김도영 faced a 145 km/h fastball from Samsung Lions’ pitcher 김재윤 and made contact on the first pitch with a hit. Kia Tigers batter 김도영 hit a home run to deep left-center field, measuring 125 meters, against Samsung Lions pitcher 김재윤 in the bottom of the 8th inning. Kia Tigers’ baserunner 김규성 scored a run, increasing the away team’s lead to 6-4 against the Samsung Lions in the bottom of the 8th inning., gameFlow length: 549
+2026-01-16 17:17:46,446 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 17:17:47,751 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:17:47,768 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 17:17:47,797 INFO watchcrew.backend: ⏱️ First chunk received after 1.351s
+2026-01-16 17:18:00,217 INFO watchcrew.backend: ⏱️ Found 'script' array at 13.771s (first chunk +12.421s)
+2026-01-16 17:18:00,703 INFO watchcrew.backend: ⏱️ First message sent at 14.257s (script start +0.485s)
+2026-01-16 17:18:00,703 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=38
+2026-01-16 17:18:01,075 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 329
+2026-01-16 17:18:01,075 INFO watchcrew.backend: Loaded game data at row 329 - currGameStat: In the top of the 8th inning, Kia Tigers’ fourth batter, Choi Hyung-woo, stepped up to bat against Samsung Lions’ pitcher Kim Jae-yoon with no balls or strikes and one out in the inning., gameFlow length: 568
+2026-01-16 17:18:01,075 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 17:18:01,454 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=41, time_since_last=0.751s
+2026-01-16 17:18:02,697 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:18:02,699 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 17:18:02,708 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=29, time_since_last=1.254s
+2026-01-16 17:18:02,736 INFO watchcrew.backend: ⏱️ First chunk received after 1.662s
+2026-01-16 17:18:02,906 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=51, time_since_last=0.198s
+2026-01-16 17:18:03,655 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=49, time_since_last=0.749s
+2026-01-16 17:18:04,401 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=47, time_since_last=0.746s
+2026-01-16 17:18:05,073 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=42, time_since_last=0.672s
+2026-01-16 17:18:05,102 INFO watchcrew.backend: ⏱️ Streaming completed in 18.656s. Total chunks: 915, messages sent: 7
+2026-01-16 17:18:05,102 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.351s
+2026-01-16 17:18:05,102 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 13.771s
+2026-01-16 17:18:05,102 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 14.257s
+2026-01-16 17:18:05,102 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 18.627s
+2026-01-16 17:18:12,755 INFO watchcrew.backend: ⏱️ Found 'script' array at 11.680s (first chunk +10.019s)
+2026-01-16 17:18:13,254 INFO watchcrew.backend: ⏱️ First message sent at 12.180s (script start +0.499s)
+2026-01-16 17:18:13,254 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=29
+2026-01-16 17:18:13,948 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=51, time_since_last=0.694s
+2026-01-16 17:18:14,522 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=32, time_since_last=0.575s
+2026-01-16 17:18:15,258 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=48, time_since_last=0.735s
+2026-01-16 17:18:16,258 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=54, time_since_last=1.000s
+2026-01-16 17:18:16,415 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 330
+2026-01-16 17:18:16,415 INFO watchcrew.backend: Loaded game data at row 330 - currGameStat: In the top of the 8th inning, Kia Tigers’ batter Choi Hyung-woo faced Samsung Lions’ pitcher Kim Jae-yoon and fouled the first pitch, a 134 km/h forkball, with a 0-1 count and one out. Kia Tigers batter 최형우 faced a 136 km/h slider from Samsung Lions pitcher 김재윤, resulting in a foul ball and a strike count of 0-2 with one out in the bottom of the 8th inning., gameFlow length: 564
+2026-01-16 17:18:16,416 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 17:18:17,809 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:18:17,809 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 17:18:17,820 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=30, time_since_last=1.562s
+2026-01-16 17:18:17,830 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=30, time_since_last=0.011s
+2026-01-16 17:18:17,832 INFO watchcrew.backend: ⏱️ Streaming completed in 16.757s. Total chunks: 796, messages sent: 7
+2026-01-16 17:18:17,832 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.662s
+2026-01-16 17:18:17,833 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 11.680s
+2026-01-16 17:18:17,833 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 12.180s
+2026-01-16 17:18:17,833 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 16.755s
+2026-01-16 17:18:18,028 INFO watchcrew.backend: ⏱️ First chunk received after 1.613s
+2026-01-16 17:18:28,673 INFO watchcrew.backend: ⏱️ Found 'script' array at 12.257s (first chunk +10.644s)
+2026-01-16 17:18:29,589 INFO watchcrew.backend: ⏱️ First message sent at 13.172s (script start +0.915s)
+2026-01-16 17:18:29,589 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=44
+2026-01-16 17:18:30,691 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=47, time_since_last=1.103s
+2026-01-16 17:18:31,334 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=38, time_since_last=0.643s
+2026-01-16 17:18:31,405 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 331
+2026-01-16 17:18:31,405 INFO watchcrew.backend: Loaded game data at row 331 - currGameStat: In the top of the 8th inning, Kia Tigers batter Choi Hyung-woo faced Samsung Lions pitcher Kim Jae-yoon and fouled off a 144 km/h fastball for strike two with one out and no runners on base., gameFlow length: 556
+2026-01-16 17:18:31,405 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-16 17:18:32,956 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:18:32,965 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-16 17:18:32,976 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=47, time_since_last=1.643s
+2026-01-16 17:18:32,987 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=47, time_since_last=0.011s
+2026-01-16 17:18:32,993 INFO watchcrew.backend: ⏱️ First chunk received after 1.588s
+2026-01-16 17:18:33,584 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=32, time_since_last=0.596s
+2026-01-16 17:18:34,173 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=51, time_since_last=0.590s
+2026-01-16 17:18:34,195 INFO watchcrew.backend: ⏱️ Streaming completed in 17.779s. Total chunks: 887, messages sent: 7
+2026-01-16 17:18:34,195 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.613s
+2026-01-16 17:18:34,195 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 12.257s
+2026-01-16 17:18:34,195 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 13.172s
+2026-01-16 17:18:34,195 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 17.757s
+2026-01-16 17:18:41,976 INFO watchcrew.backend: ⏱️ Found 'script' array at 10.571s (first chunk +8.983s)
+2026-01-16 17:18:43,014 INFO watchcrew.backend: ⏱️ First message sent at 11.608s (script start +1.038s)
+2026-01-16 17:18:43,014 INFO watchcrew.backend: ⏱️ Message 1: speaker=라이온스밈헌터, text_length=41
+2026-01-16 17:18:43,617 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성풍자단, text_length=39, time_since_last=0.603s
+2026-01-16 17:18:44,368 INFO watchcrew.backend: ⏱️ Message 3: speaker=라이온스조크박스, text_length=31, time_since_last=0.752s
+2026-01-16 17:18:45,116 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성유머중계, text_length=46, time_since_last=0.747s
+2026-01-16 17:18:45,819 INFO watchcrew.backend: ⏱️ Message 5: speaker=블랙코미디라이온, text_length=39, time_since_last=0.703s
+2026-01-16 17:18:46,332 INFO watchcrew.backend: ⏱️ Message 6: speaker=라이온스밈헌터, text_length=27, time_since_last=0.514s
+2026-01-16 17:18:46,821 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성풍자단, text_length=33, time_since_last=0.489s
+2026-01-16 17:18:46,901 INFO watchcrew.backend: ⏱️ Streaming completed in 15.496s. Total chunks: 883, messages sent: 7
+2026-01-16 17:18:46,901 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.588s
+2026-01-16 17:18:46,901 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 10.571s
+2026-01-16 17:18:46,901 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 11.608s
+2026-01-16 17:18:46,901 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 15.416s
+2026-01-16 17:30:14,904 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:30:38,613 ERROR watchcrew.backend: OpenAI call failed
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 587, in generate_candidates
+    with open("persona_pool.json", "r", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'persona_pool.json'
+2026-01-16 17:31:57,046 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:32:00,422 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:32:03,750 ERROR watchcrew.backend: OpenAI call failed
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 599, in generate_candidates
+    resp = client.chat.completions.create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Donggeon\anaconda3\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    raise TypeError(msg)
+TypeError: Missing required arguments; Expected either ('messages' and 'model') or ('messages', 'model' and 'stream') arguments to be given
+2026-01-16 17:33:02,800 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:33:20,077 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:33:45,754 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:33:45,770 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 17:35:32,757 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:36:45,579 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:36:45,599 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 17:37:43,819 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:40:00,760 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:41:16,852 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:41:16,871 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 17:43:15,598 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:43:48,485 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:43:48,502 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 17:45:44,312 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:46:06,664 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:48:39,101 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:49:23,873 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:49:23,895 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 17:53:10,624 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:54:33,961 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 17:55:05,896 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:55:05,926 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 17:55:26,176 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:55:26,176 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 17:58:19,423 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 17:58:19,423 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:00:16,471 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:00:16,487 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:01:37,254 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:02:09,097 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:02:09,133 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:04:25,696 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:04:25,696 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:05:07,282 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:05:07,302 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:05:09,309 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:07:31,818 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:07:31,850 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:07:35,994 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:07:35,998 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:07:36,283 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:07:36,283 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:10:14,367 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:10:57,607 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:10:57,704 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:12:16,029 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:12:52,920 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:12:52,952 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:13:46,216 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:14:09,576 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:14:38,809 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:14:38,831 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:16:17,560 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:16:17,564 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:21:57,292 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:21:57,300 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:25:25,344 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:25:38,730 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:26:25,280 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:26:25,293 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:32:53,321 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:34:14,527 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:34:52,893 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:34:52,926 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:35:22,899 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:35:28,812 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:35:58,306 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:35:58,335 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:36:43,122 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:37:14,907 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:37:14,928 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:38:11,202 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:38:47,999 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:38:48,012 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:38:50,025 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:39:14,645 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:39:14,675 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:40:08,412 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:40:41,144 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:40:41,167 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:41:23,438 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:41:23,454 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:41:54,914 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:41:54,914 INFO watchcrew.backend: CORS origins configured: ['http://localhost:8080', 'http://localhost:3000', 'https://watchcrew-screen-hai.vercel.app']
+2026-01-16 18:43:04,297 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:43:04,297 INFO watchcrew.backend: CORS origins configured: ['http://localhost:8080', 'http://localhost:3000', 'https://watchcrew-screen-hai.vercel.app']
+2026-01-16 18:43:31,281 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:43:31,295 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:43:33,676 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:43:33,677 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:44:38,312 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:44:38,312 INFO watchcrew.backend: CORS origins configured: ['http://localhost:8080', 'http://localhost:3000', 'https://watchcrew-screen-hai.vercel.app']
+2026-01-16 18:45:07,160 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:45:07,188 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:45:32,625 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:45:32,626 INFO watchcrew.backend: CORS origins configured: ['http://localhost:8080', 'http://localhost:3000', 'https://watchcrew-screen-hai.vercel.app']
+2026-01-16 18:45:43,620 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:45:43,620 INFO watchcrew.backend: CORS origins configured: ['http://localhost:8080', 'http://localhost:3000', 'https://watchcrew-screen-hai.vercel.app']
+2026-01-16 18:45:48,038 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:46:27,108 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:46:27,130 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:48:09,377 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:48:09,380 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:48:31,697 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:48:31,700 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:48:37,923 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:49:06,388 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:49:42,353 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:49:42,373 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:52:00,213 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:52:27,810 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:52:27,845 INFO watchcrew.backend: Returning 5 candidates from OpenAI (no normalization)
+2026-01-16 18:52:34,636 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:53:19,265 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:53:27,919 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:53:42,759 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:54:09,969 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:54:09,997 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:54:09,998 INFO watchcrew.backend: Normalized candidates:
+[
+  {
+    "id": "삼성 라이온즈-1",
+    "name": "라이온즈분석가",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅특성": {
+      "내용": {
+        "Attribution of Responsibility": "Blame on management/ownership",
+        "Target of Evaluation": "Managerial tactics and lineup choices",
+        "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+        "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+      },
+      "채팅 내용 요약": "경기 전술과 라인업에 대한 구체적이고 긍정적인 분석과 제안",
+      "표현": {
+        "Tone and Linguistic Style": "Analytical/technical phrasing",
+        "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+        "Collective Action Calls": "Structural/long-term reorganization demands",
+        "Polarity toward Same Target": "Consistent heroization"
+      },
+      "채팅 표현 요약": "분석적이고 긍정적인 어조로 팀 발전을 위한 지속적 대화"
+    },
+    "표현": {},
+    "채팅특성요약": "",
+    "표현요약": "",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Performance (경기력)",
+        "채팅 참여 동기": "Information Offering"
+      },
+      "애착": {
+        "애착의 대상": "Team (팀)",
+        "애착의 강도/단계": "Allegiance"
+      },
+      "채팅특성": "",
+      "표현": ""
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Performance (경기력), 채팅 참여 동기=Information Offering | 애착: 애착의 대상=Team (팀), 애착의 강도/단계=Allegiance | 채팅특성: 내용={'Attribution of Responsibility': 'Blame on management/ownership', 'Target of Evaluation': 'Managerial tactics and lineup choices', 'Evaluative Focus (Outcome vs Process)': 'Process-focused tactical critique', 'Use of Numerical/Technical Signals': 'Explicit statistics and counts'}, 채팅 내용 요약=경기 전술과 라인업에 대한 구체적이고 긍정적인 분석과 제안, 표현={'Tone and Linguistic Style': 'Analytical/technical phrasing', 'Temporal Reactivity': 'Sustained narrative across game (replaying themes)', 'Collective Action Calls': 'Structural/long-term reorganization demands', 'Polarity toward Same Target': 'Consistent heroization'}, 채팅 표현 요약=분석적이고 긍정적인 어조로 팀 발전을 위한 지속적 대화"
+  },
+  {
+    "id": "삼성 라이온즈-2",
+    "name": "라이온즈열정러",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅특성": {
+      "내용": {
+        "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+        "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+        "Evaluative Focus (Outcome vs Process)": "Outcome-focused verdicts",
+        "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+      },
+      "채팅 내용 요약": "선수들의 투구력에 대한 열정적이고 긍정적인 평가와 응원",
+      "표현": {
+        "Tone and Linguistic Style": "Energetic and encouraging",
+        "Temporal Reactivity": "Spike reaction to dramatic moments",
+        "Collective Action Calls": "Calls for player support and motivation",
+        "Polarity toward Same Target": "Consistent praise"
+      },
+      "채팅 표현 요약": "열정적이고 긍정적인 응원과 선수 격려 중심의 표현"
+    },
+    "표현": {},
+    "채팅특성요약": "",
+    "표현요약": "",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Excitement (흥분/스릴)",
+        "채팅 참여 동기": "Sharing Feelings and Thoughts"
+      },
+      "애착": {
+        "애착의 대상": "Player (선수)",
+        "애착의 강도/단계": "Attachment"
+      },
+      "채팅특성": "",
+      "표현": ""
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Excitement (흥분/스릴), 채팅 참여 동기=Sharing Feelings and Thoughts | 애착: 애착의 대상=Player (선수), 애착의 강도/단계=Attachment | 채팅특성: 내용={'Attribution of Responsibility': 'Blame on individual players (performance/effort)', 'Target of Evaluation': 'Pitching performance (starter/unable bullpen)', 'Evaluative Focus (Outcome vs Process)': 'Outcome-focused verdicts', 'Use of Numerical/Technical Signals': 'Technical shorthand/labels'}, 채팅 내용 요약=선수들의 투구력에 대한 열정적이고 긍정적인 평가와 응원, 표현={'Tone and Linguistic Style': 'Energetic and encouraging', 'Temporal Reactivity': 'Spike reaction to dramatic moments', 'Collective Action Calls': 'Calls for player support and motivation', 'Polarity toward Same Target': 'Consistent praise'}, 채팅 표현 요약=열정적이고 긍정적인 응원과 선수 격려 중심의 표현"
+  },
+  {
+    "id": "삼성 라이온즈-3",
+    "name": "라이온즈커뮤니티러",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅특성": {
+      "내용": {
+        "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+        "Target of Evaluation": "Player transaction/value (trading, salary)",
+        "Evaluative Focus (Outcome vs Process)": "Narrative emotionalization of outcomes",
+        "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+      },
+      "채팅 내용 요약": "지역사회와 팀의 선수 거래에 대해 감정적이면서도 재미있게 소통",
+      "표현": {
+        "Tone and Linguistic Style": "Humorous/meme-based mockery",
+        "Temporal Reactivity": "Short-form reactions to micro-actions",
+        "Collective Action Calls": "Calls for community engagement and support",
+        "Polarity toward Same Target": "Simultaneous praise and lighthearted criticism"
+      },
+      "채팅 표현 요약": "유머와 감정을 섞어 지역사회 중심의 활발한 소통"
+    },
+    "표현": {},
+    "채팅특성요약": "",
+    "표현요약": "",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Socialization (사회적 교류)",
+        "채팅 참여 동기": "Fun and Entertainment"
+      },
+      "애착": {
+        "애착의 대상": "Community/City (지역)",
+        "애착의 강도/단계": "Attachment"
+      },
+      "채팅특성": "",
+      "표현": ""
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Socialization (사회적 교류), 채팅 참여 동기=Fun and Entertainment | 애착: 애착의 대상=Community/City (지역), 애착의 강도/단계=Attachment | 채팅특성: 내용={'Attribution of Responsibility': 'Operational prescriptions as direct remedies', 'Target of Evaluation': 'Player transaction/value (trading, salary)', 'Evaluative Focus (Outcome vs Process)': 'Narrative emotionalization of outcomes', 'Use of Numerical/Technical Signals': 'Mixed numeric + emotive'}, 채팅 내용 요약=지역사회와 팀의 선수 거래에 대해 감정적이면서도 재미있게 소통, 표현={'Tone and Linguistic Style': 'Humorous/meme-based mockery', 'Temporal Reactivity': 'Short-form reactions to micro-actions', 'Collective Action Calls': 'Calls for community engagement and support', 'Polarity toward Same Target': 'Simultaneous praise and lighthearted criticism'}, 채팅 표현 요약=유머와 감정을 섞어 지역사회 중심의 활발한 소통"
+  },
+  {
+    "id": "삼성 라이온즈-4",
+    "name": "라이온즈긍정분석가",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅특성": {
+      "내용": {
+        "Attribution of Responsibility": "Blame on manager/coaching decisions",
+        "Target of Evaluation": "Fielding and base-running errors",
+        "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+        "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+      },
+      "채팅 내용 요약": "수비와 주루 실수에 대해 건설적이고 긍정적인 분석과 개선 제안",
+      "표현": {
+        "Tone and Linguistic Style": "Concise imperative/demand",
+        "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+        "Collective Action Calls": "Calls for tactical improvements",
+        "Polarity toward Same Target": "Balanced praise와 비판"
+      },
+      "채팅 표현 요약": "간결하면서도 긍정적인 어조로 개선을 촉구하는 표현"
+    },
+    "표현": {},
+    "채팅특성요약": "",
+    "표현요약": "",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+        "채팅 참여 동기": "Information Seeking"
+      },
+      "애착": {
+        "애착의 대상": "Team (팀)",
+        "애착의 강도/단계": "Attachment"
+      },
+      "채팅특성": "",
+      "표현": ""
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Esteem (자긍심/자존감), 채팅 참여 동기=Information Seeking | 애착: 애착의 대상=Team (팀), 애착의 강도/단계=Attachment | 채팅특성: 내용={'Attribution of Responsibility': 'Blame on manager/coaching decisions', 'Target of Evaluation': 'Fielding and base-running errors', 'Evaluative Focus (Outcome vs Process)': 'Process-focused tactical critique', 'Use of Numerical/Technical Signals': 'Technical shorthand/labels'}, 채팅 내용 요약=수비와 주루 실수에 대해 건설적이고 긍정적인 분석과 개선 제안, 표현={'Tone and Linguistic Style': 'Concise imperative/demand', 'Temporal Reactivity': 'Sustained narrative across game (replaying themes)', 'Collective Action Calls': 'Calls for tactical improvements', 'Polarity toward Same Target': 'Balanced praise와 비판'}, 채팅 표현 요약=간결하면서도 긍정적인 어조로 개선을 촉구하는 표현"
+  },
+  {
+    "id": "삼성 라이온즈-5",
+    "name": "라이온즈응원단장",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅특성": {
+      "내용": {
+        "Attribution of Responsibility": "Blame on management/ownership",
+        "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+        "Evaluative Focus (Outcome vs Process)": "Outcome-focused verdicts",
+        "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+      },
+      "채팅 내용 요약": "팀 투수진에 대한 감정적이면서도 긍정적인 응원과 격려",
+      "표현": {
+        "Tone and Linguistic Style": "Humorous/meme-based mockery",
+        "Temporal Reactivity": "Spike reaction to dramatic moments",
+        "Collective Action Calls": "Calls for team unity and support",
+        "Polarity toward Same Target": "Simultaneous praise and constructive criticism"
+      },
+      "채팅 표현 요약": "유머와 감정을 섞어 팀 응원과 단합을 강조하는 표현"
+    },
+    "표현": {},
+    "채팅특성요약": "",
+    "표현요약": "",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Socialization (사회적 교류)",
+        "채팅 참여 동기": "Emotional Release"
+      },
+      "애착": {
+        "애착의 대상": "Team (팀)",
+        "애착의 강도/단계": "Allegiance"
+      },
+      "채팅특성": "",
+      "표현": ""
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Socialization (사회적 교류), 채팅 참여 동기=Emotional Release | 애착: 애착의 대상=Team (팀), 애착의 강도/단계=Allegiance | 채팅특성: 내용={'Attribution of Responsibility': 'Blame on management/ownership', 'Target of Evaluation': 'Pitching performance (starter/unable bullpen)', 'Evaluative Focus (Outcome vs Process)': 'Outcome-focused verdicts', 'Use of Numerical/Technical Signals': 'Mixed numeric + emotive'}, 채팅 내용 요약=팀 투수진에 대한 감정적이면서도 긍정적인 응원과 격려, 표현={'Tone and Linguistic Style': 'Humorous/meme-based mockery', 'Temporal Reactivity': 'Spike reaction to dramatic moments', 'Collective Action Calls': 'Calls for team unity and support', 'Polarity toward Same Target': 'Simultaneous praise and constructive criticism'}, 채팅 표현 요약=유머와 감정을 섞어 팀 응원과 단합을 강조하는 표현"
+  }
+]
+2026-01-16 18:55:53,963 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:56:38,054 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:56:38,076 ERROR watchcrew.backend: OpenAI call failed
+Traceback (most recent call last):
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 878, in generate_candidates
+    normalized = normalize_candidates(output, team=userTeam, want_count=5)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\장동건\Desktop\WatchCrew_screen\backend\main.py", line 493, in normalize_candidates
+    ("채팅특성", chat_traits),
+                 ^^^^^^^^^^^
+NameError: name 'chat_traits' is not defined. Did you mean: 'fan_traits'?
+2026-01-16 18:57:20,986 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-16 18:57:55,681 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:57:55,703 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:57:55,703 INFO watchcrew.backend: Normalized candidates:
+[
+  {
+    "id": "삼성 라이온즈-1",
+    "name": "라이온즈분석가",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Consistent heroization"
+    },
+    "채팅특성요약": "경기 전술과 라인업에 대한 세밀한 분석과 건설적인 피드백 제공",
+    "표현요약": "분석적이고 긍정적인 어조로 팀 발전을 위한 장기적 개선 요구",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Performance (경기력)",
+        "채팅 참여 동기": "Information Offering"
+      },
+      "애착": {
+        "애착의 대상": "Team (팀)",
+        "애착의 강도/단계": "Allegiance"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Blame on manager/coaching decisions",
+        "Target of Evaluation": "Managerial tactics and lineup choices",
+        "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+        "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Analytical/technical phrasing",
+        "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+        "Collective Action Calls": "Structural/long-term reorganization demands",
+        "Polarity toward Same Target": "Consistent heroization"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Performance (경기력), 채팅 참여 동기=Information Offering | 애착: 애착의 대상=Team (팀), 애착의 강도/단계=Allegiance | 채팅특성: Attribution of Responsibility=Blame on manager/coaching decisions, Target of Evaluation=Managerial tactics and lineup choices, Evaluative Focus (Outcome vs Process)=Process-focused tactical critique, Use of Numerical/Technical Signals=Explicit statistics and counts | 표현: Tone and Linguistic Style=Analytical/technical phrasing, Temporal Reactivity=Sustained narrative across game (replaying themes), Collective Action Calls=Structural/long-term reorganization demands, Polarity toward Same Target=Consistent heroization"
+  },
+  {
+    "id": "삼성 라이온즈-2",
+    "name": "삼성열정러",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus (Outcome vs Process)": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Encouraging and supportive",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for player motivation and effort",
+      "Polarity toward Same Target": "Simultaneous praise and constructive criticism"
+    },
+    "채팅특성요약": "선수들의 투구력에 대한 직관적이고 열정적인 평가와 응원",
+    "표현요약": "감정이 풍부하고 긍정적인 응원과 함께 선수 격려",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Excitement (흥분/스릴)",
+        "채팅 참여 동기": "Sharing Feelings and Thoughts"
+      },
+      "애착": {
+        "애착의 대상": "Player (선수)",
+        "애착의 강도/단계": "Attachment"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+        "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+        "Evaluative Focus (Outcome vs Process)": "Outcome-focused verdicts",
+        "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Encouraging and supportive",
+        "Temporal Reactivity": "Spike reaction to dramatic moments",
+        "Collective Action Calls": "Calls for player motivation and effort",
+        "Polarity toward Same Target": "Simultaneous praise and constructive criticism"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Excitement (흥분/스릴), 채팅 참여 동기=Sharing Feelings and Thoughts | 애착: 애착의 대상=Player (선수), 애착의 강도/단계=Attachment | 채팅특성: Attribution of Responsibility=Blame on individual players (performance/effort), Target of Evaluation=Pitching performance (starter/unable bullpen), Evaluative Focus (Outcome vs Process)=Outcome-focused verdicts, Use of Numerical/Technical Signals=Technical shorthand/labels | 표현: Tone and Linguistic Style=Encouraging and supportive, Temporal Reactivity=Spike reaction to dramatic moments, Collective Action Calls=Calls for player motivation and effort, Polarity toward Same Target=Simultaneous praise and constructive criticism"
+  },
+  {
+    "id": "삼성 라이온즈-3",
+    "name": "라이온즈커뮤니티러",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus (Outcome vs Process)": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Calls for structural/long-term reorganization",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    },
+    "채팅특성요약": "지역사회와 팀의 거래 및 가치에 대해 감정과 수치를 섞어 재미있게 토론",
+    "표현요약": "유머러스하고 긍정적인 분위기 속에서 건설적 비판과 응원",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Socialization (사회적 교류)",
+        "채팅 참여 동기": "Fun and Entertainment"
+      },
+      "애착": {
+        "애착의 대상": "Community/City (지역)",
+        "애착의 강도/단계": "Attachment"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+        "Target of Evaluation": "Player transaction/value (trading, salary)",
+        "Evaluative Focus (Outcome vs Process)": "Narrative emotionalization of outcomes",
+        "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Humorous/meme-based mockery",
+        "Temporal Reactivity": "Immediate praise followed by quick reversal",
+        "Collective Action Calls": "Calls for structural/long-term reorganization",
+        "Polarity toward Same Target": "Policing of excessive abuse"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Socialization (사회적 교류), 채팅 참여 동기=Fun and Entertainment | 애착: 애착의 대상=Community/City (지역), 애착의 강도/단계=Attachment | 채팅특성: Attribution of Responsibility=Operational prescriptions as direct remedies, Target of Evaluation=Player transaction/value (trading, salary), Evaluative Focus (Outcome vs Process)=Narrative emotionalization of outcomes, Use of Numerical/Technical Signals=Mixed numeric + emotive | 표현: Tone and Linguistic Style=Humorous/meme-based mockery, Temporal Reactivity=Immediate praise followed by quick reversal, Collective Action Calls=Calls for structural/long-term reorganization, Polarity toward Same Target=Policing of excessive abuse"
+  },
+  {
+    "id": "삼성 라이온즈-4",
+    "name": "삼성직관러",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for tactical action demands (in-game)",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    },
+    "채팅특성요약": "직관적이고 재미있게 경기 중 실책과 전술을 평가하며 응원",
+    "표현요약": "경기 직관하며 유쾌하고 긍정적인 반응과 응원",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Excitement (흥분/스릴)",
+        "채팅 참여 동기": "Fun and Entertainment"
+      },
+      "애착": {
+        "애착의 대상": "Team (팀)",
+        "애착의 강도/단계": "Attachment"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Blame on manager/coaching decisions",
+        "Target of Evaluation": "Fielding and base-running errors",
+        "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+        "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Humorous/meme-based mockery",
+        "Temporal Reactivity": "Short-form reactions to micro-actions",
+        "Collective Action Calls": "Calls for tactical action demands (in-game)",
+        "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Excitement (흥분/스릴), 채팅 참여 동기=Fun and Entertainment | 애착: 애착의 대상=Team (팀), 애착의 강도/단계=Attachment | 채팅특성: Attribution of Responsibility=Blame on manager/coaching decisions, Target of Evaluation=Fielding and base-running errors, Evaluative Focus (Outcome vs Process)=Process-focused tactical critique, Use of Numerical/Technical Signals=Technical shorthand/labels | 표현: Tone and Linguistic Style=Humorous/meme-based mockery, Temporal Reactivity=Short-form reactions to micro-actions, Collective Action Calls=Calls for tactical action demands (in-game), Polarity toward Same Target=Simultaneous praise and criticism for same individual"
+  },
+  {
+    "id": "삼성 라이온즈-5",
+    "name": "라이온즈기록러",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus (Outcome vs Process)": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Calls for player improvement and training",
+      "Polarity toward Same Target": "Consistent heroization"
+    },
+    "채팅특성요약": "선수들의 수비 및 주루 실책에 대해 통계와 전술적 근거를 바탕으로 분석",
+    "표현요약": "분석적이고 긍정적인 어조로 선수 발전을 촉구",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Performance (경기력)",
+        "채팅 참여 동기": "Information Seeking"
+      },
+      "애착": {
+        "애착의 대상": "Player (선수)",
+        "애착의 강도/단계": "Allegiance"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+        "Target of Evaluation": "Fielding and base-running errors",
+        "Evaluative Focus (Outcome vs Process)": "Hybrid (outcome stated with tactical justification)",
+        "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Concise imperative/demand",
+        "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+        "Collective Action Calls": "Calls for player improvement and training",
+        "Polarity toward Same Target": "Consistent heroization"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Performance (경기력), 채팅 참여 동기=Information Seeking | 애착: 애착의 대상=Player (선수), 애착의 강도/단계=Allegiance | 채팅특성: Attribution of Responsibility=Blame on individual players (performance/effort), Target of Evaluation=Fielding and base-running errors, Evaluative Focus (Outcome vs Process)=Hybrid (outcome stated with tactical justification), Use of Numerical/Technical Signals=Explicit statistics and counts | 표현: Tone and Linguistic Style=Concise imperative/demand, Temporal Reactivity=Sustained narrative across game (replaying themes), Collective Action Calls=Calls for player improvement and training, Polarity toward Same Target=Consistent heroization"
+  }
+]
+2026-01-16 18:58:44,459 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:58:44,474 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:58:44,474 INFO watchcrew.backend: Normalized candidates:
+[
+  {
+    "id": "삼성 라이온즈-1",
+    "name": "라이온즈분석가",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Consistent heroization"
+    },
+    "채팅특성요약": "팀 전술과 라인업에 대한 구체적이고 긍정적인 분석과 개선 제안",
+    "표현요약": "분석적이고 긍정적인 어조로 팀 발전을 위한 지속적 대화",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Performance (경기력)",
+        "채팅 참여 동기": "Information Offering"
+      },
+      "애착": {
+        "애착의 대상": "Team (팀)",
+        "애착의 강도/단계": "Allegiance"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+        "Target of Evaluation": "Managerial tactics and lineup choices",
+        "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+        "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Analytical/technical phrasing",
+        "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+        "Collective Action Calls": "Structural/long-term reorganization demands",
+        "Polarity toward Same Target": "Consistent heroization"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Performance (경기력), 채팅 참여 동기=Information Offering | 애착: 애착의 대상=Team (팀), 애착의 강도/단계=Allegiance | 채팅특성: Attribution of Responsibility=Operational prescriptions as direct remedies, Target of Evaluation=Managerial tactics and lineup choices, Evaluative Focus (Outcome vs Process)=Process-focused tactical critique, Use of Numerical/Technical Signals=Explicit statistics and counts | 표현: Tone and Linguistic Style=Analytical/technical phrasing, Temporal Reactivity=Sustained narrative across game (replaying themes), Collective Action Calls=Structural/long-term reorganization demands, Polarity toward Same Target=Consistent heroization"
+  },
+  {
+    "id": "삼성 라이온즈-2",
+    "name": "긍정응원단장",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus (Outcome vs Process)": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    },
+    "채팅특성요약": "경기 중 실수에 대한 유머러스한 지적과 긍정적 응원",
+    "표현요약": "유머와 긍정적 비판을 섞어 즐거운 응원 분위기 조성",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Socialization (사회적 교류)",
+        "채팅 참여 동기": "Fun and Entertainment"
+      },
+      "애착": {
+        "애착의 대상": "Team (팀)",
+        "애착의 강도/단계": "Attachment"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Blame on manager/coaching decisions",
+        "Target of Evaluation": "Fielding and base-running errors",
+        "Evaluative Focus (Outcome vs Process)": "Outcome-focused verdicts",
+        "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Humorous/meme-based mockery",
+        "Temporal Reactivity": "Short-form reactions to micro-actions",
+        "Collective Action Calls": "Tactical action demands (in-game)",
+        "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Socialization (사회적 교류), 채팅 참여 동기=Fun and Entertainment | 애착: 애착의 대상=Team (팀), 애착의 강도/단계=Attachment | 채팅특성: Attribution of Responsibility=Blame on manager/coaching decisions, Target of Evaluation=Fielding and base-running errors, Evaluative Focus (Outcome vs Process)=Outcome-focused verdicts, Use of Numerical/Technical Signals=Non-numeric intuitive claims | 표현: Tone and Linguistic Style=Humorous/meme-based mockery, Temporal Reactivity=Short-form reactions to micro-actions, Collective Action Calls=Tactical action demands (in-game), Polarity toward Same Target=Simultaneous praise and criticism for same individual"
+  },
+  {
+    "id": "삼성 라이온즈-3",
+    "name": "스릴러라이온즈",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus (Outcome vs Process)": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent vilification"
+    },
+    "채팅특성요약": "감독 전술에 대한 직관적 평가와 감정 공유",
+    "표현요약": "직설적이지만 열정적인 응원과 전술 요구",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Excitement (흥분/스릴)",
+        "채팅 참여 동기": "Sharing Feelings and Thoughts"
+      },
+      "애착": {
+        "애착의 대상": "Coach (감독/코치)",
+        "애착의 강도/단계": "Attachment"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+        "Target of Evaluation": "Managerial tactics and lineup choices",
+        "Evaluative Focus (Outcome vs Process)": "Hybrid (outcome stated with tactical justification)",
+        "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Concise imperative/demand",
+        "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+        "Collective Action Calls": "Tactical action demands (in-game)",
+        "Polarity toward Same Target": "Consistent vilification"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Excitement (흥분/스릴), 채팅 참여 동기=Sharing Feelings and Thoughts | 애착: 애착의 대상=Coach (감독/코치), 애착의 강도/단계=Attachment | 채팅특성: Attribution of Responsibility=Blame on individual players (performance/effort), Target of Evaluation=Managerial tactics and lineup choices, Evaluative Focus (Outcome vs Process)=Hybrid (outcome stated with tactical justification), Use of Numerical/Technical Signals=Non-numeric intuitive claims | 표현: Tone and Linguistic Style=Concise imperative/demand, Temporal Reactivity=Sustained narrative across game (replaying themes), Collective Action Calls=Tactical action demands (in-game), Polarity toward Same Target=Consistent vilification"
+  },
+  {
+    "id": "삼성 라이온즈-4",
+    "name": "지역사랑라이온즈",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus (Outcome vs Process)": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    },
+    "채팅특성요약": "지역과 선수 이적에 대한 감정적이면서도 분석적인 정보 제공",
+    "표현요약": "감정과 분석을 조화시킨 균형 잡힌 소통",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+        "채팅 참여 동기": "Information Offering"
+      },
+      "애착": {
+        "애착의 대상": "Community/City (지역)",
+        "애착의 강도/단계": "Allegiance"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+        "Target of Evaluation": "Player transaction/value (trading, salary)",
+        "Evaluative Focus (Outcome vs Process)": "Narrative emotionalization of outcomes",
+        "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Analytical/technical phrasing",
+        "Temporal Reactivity": "Immediate praise followed by quick reversal",
+        "Collective Action Calls": "Structural/long-term reorganization demands",
+        "Polarity toward Same Target": "Policing of excessive abuse"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Esteem (자긍심/자존감), 채팅 참여 동기=Information Offering | 애착: 애착의 대상=Community/City (지역), 애착의 강도/단계=Allegiance | 채팅특성: Attribution of Responsibility=Operational prescriptions as direct remedies, Target of Evaluation=Player transaction/value (trading, salary), Evaluative Focus (Outcome vs Process)=Narrative emotionalization of outcomes, Use of Numerical/Technical Signals=Mixed numeric + emotive | 표현: Tone and Linguistic Style=Analytical/technical phrasing, Temporal Reactivity=Immediate praise followed by quick reversal, Collective Action Calls=Structural/long-term reorganization demands, Polarity toward Same Target=Policing of excessive abuse"
+  },
+  {
+    "id": "삼성 라이온즈-5",
+    "name": "굿즈열정라이온",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    },
+    "채팅특성요약": "투수진에 대한 전문적 분석과 재미있는 응원",
+    "표현요약": "전문성과 유머를 겸비한 활발한 팬 활동",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Diversion (기분전환/도피)",
+        "채팅 참여 동기": "Fun and Entertainment"
+      },
+      "애착": {
+        "애착의 대상": "Sport (종목 자체)",
+        "애착의 강도/단계": "Attraction"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Blame on management/ownership",
+        "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+        "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+        "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Humorous/meme-based mockery",
+        "Temporal Reactivity": "Short-form reactions to micro-actions",
+        "Collective Action Calls": "Calls for player demotion/release",
+        "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Diversion (기분전환/도피), 채팅 참여 동기=Fun and Entertainment | 애착: 애착의 대상=Sport (종목 자체), 애착의 강도/단계=Attraction | 채팅특성: Attribution of Responsibility=Blame on management/ownership, Target of Evaluation=Pitching performance (starter/unable bullpen), Evaluative Focus (Outcome vs Process)=Process-focused tactical critique, Use of Numerical/Technical Signals=Technical shorthand/labels | 표현: Tone and Linguistic Style=Humorous/meme-based mockery, Temporal Reactivity=Short-form reactions to micro-actions, Collective Action Calls=Calls for player demotion/release, Polarity toward Same Target=Simultaneous praise and criticism for same individual"
+  }
+]
+2026-01-16 18:58:48,844 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-16 18:58:48,844 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-16 18:58:48,844 INFO watchcrew.backend: Normalized candidates:
+[
+  {
+    "id": "삼성 라이온즈-1",
+    "name": "라이온즈분석가",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Consistent heroization"
+    },
+    "채팅특성요약": "경기 전술과 라인업에 대한 세밀한 분석과 건설적인 비판",
+    "표현요약": "분석적이고 기술적인 표현으로 팀 발전을 위한 장기적 개선 요구",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Performance (경기력)",
+        "채팅 참여 동기": "Information Offering"
+      },
+      "애착": {
+        "애착의 대상": "Team (팀)",
+        "애착의 강도/단계": "Allegiance"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Blame on manager/coaching decisions",
+        "Target of Evaluation": "Managerial tactics and lineup choices",
+        "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+        "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Analytical/technical phrasing",
+        "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+        "Collective Action Calls": "Structural/long-term reorganization demands",
+        "Polarity toward Same Target": "Consistent heroization"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Performance (경기력), 채팅 참여 동기=Information Offering | 애착: 애착의 대상=Team (팀), 애착의 강도/단계=Allegiance | 채팅특성: Attribution of Responsibility=Blame on manager/coaching decisions, Target of Evaluation=Managerial tactics and lineup choices, Evaluative Focus (Outcome vs Process)=Process-focused tactical critique, Use of Numerical/Technical Signals=Explicit statistics and counts | 표현: Tone and Linguistic Style=Analytical/technical phrasing, Temporal Reactivity=Sustained narrative across game (replaying themes), Collective Action Calls=Structural/long-term reorganization demands, Polarity toward Same Target=Consistent heroization"
+  },
+  {
+    "id": "삼성 라이온즈-2",
+    "name": "열정라이온즈팬",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus (Outcome vs Process)": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    },
+    "채팅특성요약": "선수들의 투구력에 대한 직관적이고 열정적인 평가",
+    "표현요약": "감정이 풍부하고 순간적인 반응으로 선수에 대한 긍정과 비판을 병행",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Excitement (흥분/스릴)",
+        "채팅 참여 동기": "Sharing Feelings and Thoughts"
+      },
+      "애착": {
+        "애착의 대상": "Player (선수)",
+        "애착의 강도/단계": "Attachment"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+        "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+        "Evaluative Focus (Outcome vs Process)": "Outcome-focused verdicts",
+        "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Concise imperative/demand",
+        "Temporal Reactivity": "Spike reaction to dramatic moments",
+        "Collective Action Calls": "Calls for player demotion/release",
+        "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Excitement (흥분/스릴), 채팅 참여 동기=Sharing Feelings and Thoughts | 애착: 애착의 대상=Player (선수), 애착의 강도/단계=Attachment | 채팅특성: Attribution of Responsibility=Blame on individual players (performance/effort), Target of Evaluation=Pitching performance (starter/unable bullpen), Evaluative Focus (Outcome vs Process)=Outcome-focused verdicts, Use of Numerical/Technical Signals=Technical shorthand/labels | 표현: Tone and Linguistic Style=Concise imperative/demand, Temporal Reactivity=Spike reaction to dramatic moments, Collective Action Calls=Calls for player demotion/release, Polarity toward Same Target=Simultaneous praise and criticism for same individual"
+  },
+  {
+    "id": "삼성 라이온즈-3",
+    "name": "커뮤니티라이온즈",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus (Outcome vs Process)": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    },
+    "채팅특성요약": "선수 이적과 가치에 대한 감정적이면서도 실용적인 논의",
+    "표현요약": "유머와 감정을 섞어 지역사회 중심의 긍정적 팬 활동 전개",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Socialization (사회적 교류)",
+        "채팅 참여 동기": "Fun and Entertainment"
+      },
+      "애착": {
+        "애착의 대상": "Community/City (지역)",
+        "애착의 강도/단계": "Attachment"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+        "Target of Evaluation": "Player transaction/value (trading, salary)",
+        "Evaluative Focus (Outcome vs Process)": "Narrative emotionalization of outcomes",
+        "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Humorous/meme-based mockery",
+        "Temporal Reactivity": "Immediate praise followed by quick reversal",
+        "Collective Action Calls": "Structural/long-term reorganization demands",
+        "Polarity toward Same Target": "Policing of excessive abuse"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Socialization (사회적 교류), 채팅 참여 동기=Fun and Entertainment | 애착: 애착의 대상=Community/City (지역), 애착의 강도/단계=Attachment | 채팅특성: Attribution of Responsibility=Operational prescriptions as direct remedies, Target of Evaluation=Player transaction/value (trading, salary), Evaluative Focus (Outcome vs Process)=Narrative emotionalization of outcomes, Use of Numerical/Technical Signals=Mixed numeric + emotive | 표현: Tone and Linguistic Style=Humorous/meme-based mockery, Temporal Reactivity=Immediate praise followed by quick reversal, Collective Action Calls=Structural/long-term reorganization demands, Polarity toward Same Target=Policing of excessive abuse"
+  },
+  {
+    "id": "삼성 라이온즈-4",
+    "name": "긍정직관라이온즈",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Consistent vilification"
+    },
+    "채팅특성요약": "경기 운영과 투수진에 대한 직관적이고 감정적인 평가",
+    "표현요약": "유머러스하면서도 감정을 담아 투수진 문제를 지적",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Diversion (기분전환/도피)",
+        "채팅 참여 동기": "Emotional Release"
+      },
+      "애착": {
+        "애착의 대상": "Sport (종목 자체)",
+        "애착의 강도/단계": "Attachment"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Blame on management/ownership",
+        "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+        "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
+        "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Humorous/meme-based mockery",
+        "Temporal Reactivity": "Spike reaction to dramatic moments",
+        "Collective Action Calls": "Calls for player demotion/release",
+        "Polarity toward Same Target": "Consistent vilification"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Diversion (기분전환/도피), 채팅 참여 동기=Emotional Release | 애착: 애착의 대상=Sport (종목 자체), 애착의 강도/단계=Attachment | 채팅특성: Attribution of Responsibility=Blame on management/ownership, Target of Evaluation=Pitching performance (starter/unable bullpen), Evaluative Focus (Outcome vs Process)=Process-focused tactical critique, Use of Numerical/Technical Signals=Non-numeric intuitive claims | 표현: Tone and Linguistic Style=Humorous/meme-based mockery, Temporal Reactivity=Spike reaction to dramatic moments, Collective Action Calls=Calls for player demotion/release, Polarity toward Same Target=Consistent vilification"
+  },
+  {
+    "id": "삼성 라이온즈-5",
+    "name": "분석열정라이온즈",
+    "team": "삼성 라이온즈",
+    "팬의특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus (Outcome vs Process)": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Consistent heroization"
+    },
+    "채팅특성요약": "수비와 주루 실수에 대한 감정과 분석이 결합된 평가",
+    "표현요약": "분석적이면서도 열정적인 표현으로 선수에 대한 충성심과 비판 공존",
+    "dimensions": {
+      "팬의특성": {
+        "스포츠 시청 동기": "Performance (경기력)",
+        "채팅 참여 동기": "Sharing Feelings and Thoughts"
+      },
+      "애착": {
+        "애착의 대상": "Player (선수)",
+        "애착의 강도/단계": "Allegiance"
+      },
+      "채팅특성": {
+        "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+        "Target of Evaluation": "Fielding and base-running errors",
+        "Evaluative Focus (Outcome vs Process)": "Hybrid (outcome stated with tactical justification)",
+        "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+      },
+      "표현": {
+        "Tone and Linguistic Style": "Analytical/technical phrasing",
+        "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+        "Collective Action Calls": "Calls for firing/resignation",
+        "Polarity toward Same Target": "Consistent heroization"
+      }
+    },
+    "fullPrompt": "팬의특성: 스포츠 시청 동기=Performance (경기력), 채팅 참여 동기=Sharing Feelings and Thoughts | 애착: 애착의 대상=Player (선수), 애착의 강도/단계=Allegiance | 채팅특성: Attribution of Responsibility=Blame on individual players (performance/effort), Target of Evaluation=Fielding and base-running errors, Evaluative Focus (Outcome vs Process)=Hybrid (outcome stated with tactical justification), Use of Numerical/Technical Signals=Mixed numeric + emotive | 표현: Tone and Linguistic Style=Analytical/technical phrasing, Temporal Reactivity=Sustained narrative across game (replaying themes), Collective Action Calls=Calls for firing/resignation, Polarity toward Same Target=Consistent heroization"
+  }
+]
+2026-01-16 18:58:50,796 INFO watchcrew.backend: OPENAI_API_KEY present: True

@@ -16,6 +16,8 @@ export interface Agent {
   createdAt: string;
   avatarSeed: string;
   dimensions?: Record<string, string>; // 말투, 성격, 분석의 초점 등
+  채팅특성요약?: string;
+  표현요약?: string;
 }
 
 interface AgentCardProps {
@@ -171,18 +173,29 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: A
           </>
         ) : (
           <>
-            {/* 말투, 성격, 분석의 초점 등 표시 */}
+            {/* 팬의특성, 애착, 채팅특성, 표현 모두 동일한 스타일로 표시 */}
             {agent.dimensions && Object.keys(agent.dimensions).length > 0 && (
-              <div className="space-y-2 pb-3 border-b">
-                {Object.entries(agent.dimensions).map(([key, value]) => (
-                  <div key={key} className="flex items-start gap-2">
-                    <span className="font-semibold text-slate-700 min-w-fit">{key}:</span>
-                    <span className="text-slate-600">{value}</span>
+              <div className="space-y-2">
+                {Object.entries(agent.dimensions)
+                  .map(([key, value]) => (
+                  <div key={key}>
+                    <div className="font-semibold text-slate-700 mb-1">{key}</div>
+                    {typeof value === 'object' && value !== null ? (
+                      <div className="ml-2 space-y-0.5">
+                        {Object.entries(value).map(([subKey, subValue]) => (
+                          <div key={subKey} className="text-sm">
+                            <span className="text-slate-600">{subKey}:</span>
+                            <span className="text-slate-500 ml-1">{String(subValue)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="ml-2 text-sm text-slate-600">{String(value)}</div>
+                    )}
                   </div>
                 ))}
               </div>
             )}
-            <p className="text-muted-foreground">{agent.prompt}</p>
           </>
         )}
       </CardContent>

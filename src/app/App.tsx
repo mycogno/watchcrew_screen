@@ -106,7 +106,9 @@ function App() {
     avatarSeed?: string, 
     id?: string,
     createdAt?: string,
-    dimensions?: Record<string, string>
+    dimensions?: Record<string, string>,
+    채팅특성요약?: string,
+    표현요약?: string
   ) => {
     const newAgent: Agent = {
       id: id || `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
@@ -117,6 +119,8 @@ function App() {
       createdAt: createdAt || new Date().toISOString(),
       avatarSeed: avatarSeed ? avatarSeed : Math.random().toString(36).substring(7),
       dimensions: dimensions,
+      채팅특성요약,
+      표현요약,
     };
     setAgents((prev) => [newAgent, ...prev]);
   };

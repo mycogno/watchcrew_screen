@@ -1,0 +1,1655 @@
+[
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Intra-membership"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Inter-membership"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채착": {
+      "스포츠 시청 동기_error_fix": "N/A"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Intra-membership"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Inter-membership"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Intra-membership"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Inter-membership"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Intra-membership"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Inter-membership"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Intra-membership"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Inter-membership"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Intra-membership"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Inter-membership"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Intra-membership"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Inter-membership"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Intra-membership"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Inter-membership"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Intra-membership"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Inter-membership"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Intra-membership"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Inter-membership"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Socialization (사회적 교류)",
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
+    },
+    "애착": {
+      "애착의 대상": "Team (팀)",
+      "애착의 강도/단계": "Attachment"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Hybrid (outcome stated with tactical justification)",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Performance (경기력)",
+      "채팅 참여 동기": "Fun and Entertainment"
+    },
+    "애착": {
+      "애착의 대상": "Player (선수)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on management/ownership",
+      "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Explicit statistics and counts"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Aggressive/insulting",
+      "Temporal Reactivity": "Spike reaction to dramatic moments",
+      "Collective Action Calls": "Calls for player demotion/release",
+      "Polarity toward Same Target": "Consistent vilification"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Excitement (흥분/스릴)",
+      "채팅 참여 동기": "Information Seeking"
+    },
+    "애착": {
+      "애착의 대상": "Coach (감독/코치)",
+      "애착의 강도/단계": "Attraction"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on manager/coaching decisions",
+      "Target of Evaluation": "Fielding and base-running errors",
+      "Evaluative Focus": "Process-focused tactical critique",
+      "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Humorous/meme-based mockery",
+      "Temporal Reactivity": "Short-form reactions to micro-actions",
+      "Collective Action Calls": "Calls for firing/resignation",
+      "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Esteem (자긍심/자존감)",
+      "채팅 참여 동기": "Information Offering"
+    },
+    "애착": {
+      "애착의 대상": "Community/City (지역)",
+      "애착의 강도/단계": "Allegiance"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+      "Target of Evaluation": "Managerial tactics and lineup choices",
+      "Evaluative Focus": "Outcome-focused verdicts",
+      "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Concise imperative/demand",
+      "Temporal Reactivity": "Immediate praise followed by quick reversal",
+      "Collective Action Calls": "Tactical action demands (in-game)",
+      "Polarity toward Same Target": "Consistent heroization"
+    }
+  },
+  {
+    "팬의 특성": {
+      "스포츠 시청 동기": "Diversion (기분전환/도피)",
+      "채팅 참여 동기": "Emotional Release"
+    },
+    "애착": {
+      "애착의 대상": "Sport (종목 자체)",
+      "애착의 강도/단계": "Awareness"
+    },
+    "채팅 특성": {
+      "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+      "Target of Evaluation": "Player transaction/value (trading, salary)",
+      "Evaluative Focus": "Narrative emotionalization of outcomes",
+      "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
+    },
+    "표현": {
+      "Tone and Linguistic Style": "Analytical/technical phrasing",
+      "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+      "Collective Action Calls": "Structural/long-term reorganization demands",
+      "Polarity toward Same Target": "Policing of excessive abuse"
+    }
+  }
+]
