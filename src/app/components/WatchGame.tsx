@@ -321,6 +321,21 @@ export function WatchGame({
     setIsGenerating(true);
 
     try {
+      // localStorage에서 뉴스 데이터 읽기
+      const newsDataStr = localStorage.getItem('gameNewsData');
+      let newsData = {};
+      
+      if (newsDataStr) {
+        try {
+          newsData = JSON.parse(newsDataStr);
+          console.log('📰 News data loaded from localStorage:', newsData);
+        } catch (error) {
+          console.error('❌ Failed to parse news data from localStorage:', error);
+        }
+      } else {
+        console.warn('⚠️ No news data in localStorage');
+      }
+
       // orchestrator 엔드포인트 호출
       const response = await fetch(`${API_URL}/orchestrate`, {
         method: "POST",
@@ -331,6 +346,7 @@ export function WatchGame({
           userMessages: memoryToUse,
           currGameStat: "경기 진행 중",
           gameFlow: "",
+          newsData: newsData,
         }),
       });
 

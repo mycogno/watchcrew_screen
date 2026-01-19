@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
+from langchain_openai import ChatOpenAI
 from pydantic import BaseModel
 from typing import List, Literal, Dict, Optional
 from fastapi.middleware.cors import CORSMiddleware
@@ -76,10 +77,28 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# 팀 ID와 팀 이름 매핑
+TEAM_DICT = {
+    "HT": "Kia Tigers",
+    "SK": "SSG Landers",
+    "HH": "Hanhwa Eagles",
+    "LT": "Lotte Giants",
+    "SS": "Samsung Lions",
+    "NC": "NC Dinos",
+    "LG": "LG Twins",
+    "OB": "Doosan Bears",
+    "WO": "Kiwoom Heros",
+    "KT": "KT Wiz",
+}
+
 
 class GenerateRequest(BaseModel):
     prompt: str = ""
     team: str = ""
+
+
+class NewsSummaryRequest(BaseModel):
+    game: str  # 예: "250523_HTSS_HT_game"
 
 
 class AgentCandidate(BaseModel):
@@ -141,6 +160,7 @@ def prepare_json_text(raw: str) -> str:
 
 
 def news_summarizer(news_dict: dict) -> dict:
+    llm = ChatOpenAI(model="gpt-5-mini")
     """전날 뉴스 기사 제목을 요약하는 함수"""
     try:
         openai_key = os.getenv("OPENAI_API_KEY")
@@ -164,7 +184,7 @@ def news_summarizer(news_dict: dict) -> dict:
 [RESPONSE RULES]
 - 각 팀별로 전날 올라온 기사 제목(50개)에서 드러나는 최근 경기 흐름/결과/부상·복귀/선발·라인업/트레이드·엔트리/논란·이슈를 요약한다.
 - 요약은 제목에서 확인 가능한 내용만 사용하며, 추측·과장·새 사실 생성을 하지 않는다.
-- 각 팀 요약은 2~5문장으로 작성하고, 문장마다 다른 핵심 포인트를 담는다.
+- 각 팀 요약은 2 ~ 5문장으로 작성하고, 문장마다 다른 핵심 포인트를 담는다.
 - 각 팀 요약 내부에서 중복 문장/동일 의미 반복을 피한다.
 - 각 팀 요약 내부에 서로 모순되는 내용이 없도록 한다.
 - 출력은 반드시 [OUTPUT FORMAT]의 JSON 객체를 따르며, 키는 팀 이름 2개만 포함한다.
@@ -183,13 +203,8 @@ def news_summarizer(news_dict: dict) -> dict:
 }}
 
 """
-        response = client.chat.completions.create(
-            model=openai_model,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0,
-        )
+        chatResult = llm.invoke(prompt).content
 
-        chatResult = response.choices[0].message.content
         clean = prepare_json_text(chatResult)
         recNews = json.loads(clean)
 
@@ -884,6 +899,77 @@ def generate_candidates(payload: GenerateRequest):
 
 
 # ============================================
+# News Summary Endpoint
+# ============================================
+
+
+@app.post("/get_news_summary")
+async def get_news_summary(request: NewsSummaryRequest):
+    """뉴스 요약을 받아오는 엔드포인트 (비동기 처리)
+
+    게임 정보를 받아 뉴스 CSV를 로드하고 news_summarizer로 요약합니다.
+    게임 ID 포맷: 250523_HTSS_HT_game
+    - 위치 7-9: SS (어웨이팀)
+    - 위치 9-11: HT (홈팀)
+    """
+    try:
+        loop = asyncio.get_event_loop()
+        # 동기 작업을 스레드풀에서 비동기로 실행
+        news_data = await loop.run_in_executor(
+            None, _process_news_summary_sync, request.game
+        )
+        return news_data
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception(f"Error in get_news_summary: {e}")
+        raise HTTPException(
+            status_code=500, detail=f"Failed to get news summary: {str(e)}"
+        )
+
+
+def _process_news_summary_sync(game: str):
+    """동기적으로 뉴스 요약을 처리하는 내부 함수"""
+    logger.info(f"Parsing game ID: {game}")
+
+    date = game.split("_")[0]
+    news = f"{date}recentNews"
+
+    # 파일 경로 (backend/news/YYYYMMDD/YYYYMMDD recentNews.csv)
+    backend_dir = Path(__file__).resolve().parent
+    news_csv_path = backend_dir / "news" / date / f"{news}.csv"
+    logger.info(f"News CSV path: {news_csv_path}")
+
+    # df
+    ndf = pd.read_csv(news_csv_path, encoding="utf-8-sig")
+    logger.info(f"✅ News CSV loaded successfully")
+
+    # 데이터
+    news_dict = {}
+    away_team_id = game[7:9]  # "SS"
+    home_team_id = game[9:11]  # "HT"
+
+    news_dict[TEAM_DICT[away_team_id]] = ndf[ndf["teamId"] == away_team_id][
+        "title"
+    ].tolist()
+    news_dict[TEAM_DICT[home_team_id]] = ndf[ndf["teamId"] == home_team_id][
+        "title"
+    ].tolist()
+
+    logger.info(
+        f"Extracted news - {away_team_id}: {len(news_dict[TEAM_DICT[away_team_id]])} items, {home_team_id}: {len(news_dict[TEAM_DICT[home_team_id]])} items"
+    )
+
+    news_data = news_summarizer(news_dict)
+    logger.info(
+        f"✅ News summary generated: {json.dumps(news_data, ensure_ascii=False)}"
+    )
+
+    return news_data
+
+
+# ============================================
 # Orchestrator Endpoint (from orchestration_v2.ipynb)
 # ============================================
 
@@ -899,6 +985,7 @@ class OrchestratorRequest(BaseModel):
     )  # [{"speaker": "사용자1", "text": "메시지"}, ...]
     currGameStat: Optional[str] = "경기 진행 중"  # 현재 경기 상태 (추후 자동 업데이트)
     gameFlow: Optional[str] = ""  # 경기 흐름 요약 (추후 자동 업데이트)
+    newsData: Optional[Dict[str, str]] = {}  # 뉴스 요약 데이터
 
 
 @app.post("/orchestrate")
@@ -930,6 +1017,9 @@ async def orchestrate_chat(request: OrchestratorRequest):
 
         # context_memory 구성: 사용자 메시지를 포함
         context_memory = request.userMessages if request.userMessages else []
+
+        # news_data 구성
+        news_data = request.newsData if request.newsData else {}
 
         # =====================================================
         # 게임 데이터 로드 (orchestration_v2.ipynb의 Pre data, Stimulus data)
@@ -971,6 +1061,9 @@ async def orchestrate_chat(request: OrchestratorRequest):
 - Current Game Status: The current state of the game at this moment.
 - Game Flow: Summary of game events leading up to this point.
 
+# Recent News
+: 전날 업데이트된 각 팀별 최신 이슈들
+
 # Context Memory
 : 에이전트들의 이전 대화 내용들
 
@@ -994,6 +1087,7 @@ async def orchestrate_chat(request: OrchestratorRequest):
 - agent_role과 script는 에이전트/발화의 리스트(배열)로 작성합니다.
 - script는 총 {turn_num[0]} 턴 이상 {turn_num[1]} 턴 이하로 구성하세요.
 - script의 각 utterance는 한 번에 한 문장을 넘지 않습니다.
+- script를 항상 먼저 생성하도록 하세요.
 
 2. Rule of strategy
 - strategy에는 현재 경기 데이터 상황에서 사람들이 더 재미있거나 더 유용하다고 느낄 만한 주제와 대화의 전략을 출력합니다.
@@ -1022,6 +1116,9 @@ async def orchestrate_chat(request: OrchestratorRequest):
 - Current Game Status: {curr_game_stat}
 - Game Flow: {game_flow} 
 
+# Recent News
+: {news_data}
+
 # Context Memory
 : {context_memory}
 
@@ -1031,15 +1128,16 @@ async def orchestrate_chat(request: OrchestratorRequest):
 
 [OUTPUT FORMAT]
 {{
+    "script": [
+        {{"name": name of the speaker1, "text": utterance of the speaker1}},
+        {{"name": name of the speaker2, "text": utterance of the speaker2}},
+        ... ],
     "strategy": Conversation strategy for the current situation,
     "agent_role": [
         {{"name": name of agent1, "text": The role of Agent 1 in this conversation}},
         {{"name": name of agent2, "text": The role of Agent 2 in this conversation}},      
         ... ],
-    "script": [
-        {{"name": name of the speaker1, "text": utterance of the speaker1}},
-        {{"name": name of the speaker2, "text": utterance of the speaker2}},
-        ... ],
+    
 }}
 
 """

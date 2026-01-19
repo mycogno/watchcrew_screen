@@ -168,6 +168,9 @@ function App() {
     setAwayTeamId(null);
     setUserTeam(null);
     setShowResetDialog(false);
+    // 뉴스 데이터 제거
+    localStorage.removeItem('gameNewsData');
+    console.log('🗑️ Cleared news data from localStorage');
   };
 
   const handleLoadTestAgents = () => {
@@ -333,12 +336,46 @@ function App() {
   }
 
   // Show Team Selection Screen
-  return <TeamSelection onSelectTeams={(homeId, awayId, userTeam) => {
+  const handleSelectTeams = (homeId: string, awayId: string, userTeamId: string) => {
     setHomeTeamId(homeId);
     setAwayTeamId(awayId);
-    setUserTeam(userTeam);
+    setUserTeam(userTeamId);
     setCurrentScreen('setup');
-  }} />;
+    
+    // 뉴스 요약 요청을 비동기로 fire-and-forget 처리 (응답을 기다리지 않음)
+    // 사용자는 즉시 다음 화면으로 이동
+    const fetchNewsInBackground = async () => {
+      try {
+        const gameId = "250523_HTSS_HT_game";
+        
+        console.log(`📰 Fetching news for game: ${gameId}`);
+        const response = await fetch('http://localhost:8000/get_news_summary', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ game: gameId }),
+        });
+
+        if (!response.ok) {
+          console.error('❌ Failed to fetch news summary:', response.statusText);
+          return;
+        }
+        
+        const newsData = await response.json();
+        console.log('✅ News summary received:', newsData);
+        localStorage.setItem('gameNewsData', JSON.stringify(newsData));
+        console.log('✅ News data saved to localStorage');
+      } catch (error) {
+        console.error('❌ Error fetching news summary:', error);
+      }
+    };
+    
+    // 백그라운드에서 처리 (응답을 기다리지 않음)
+    fetchNewsInBackground();
+  };
+
+  return <TeamSelection onSelectTeams={handleSelectTeams} />;
 }
 
 export default App;

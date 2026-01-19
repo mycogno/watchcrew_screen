@@ -1,6 +1,6 @@
 [
   {
-    "name": "트윈스분석가",
+    "name": "호랑이분석가",
     "팬의 특성": {
       "스포츠 시청 동기": "Performance (경기력)",
       "채팅 참여 동기": "Information Offering"
@@ -11,50 +11,50 @@
     },
     "채팅 특성": {
       "내용": {
-        "Attribution of Responsibility": "Operational prescriptions as direct remedies",
+        "Attribution of Responsibility": "Blame on manager/coaching decisions",
         "Target of Evaluation": "Managerial tactics and lineup choices",
         "Evaluative Focus (Outcome vs Process)": "Process-focused tactical critique",
         "Use of Numerical/Technical Signals": "Explicit statistics and counts"
       },
-      "채팅 내용 요약": "팀 전술과 라인업에 대한 분석적이고 구체적인 조언 제공",
+      "채팅 내용 요약": "경기 전술과 라인업에 대한 세밀한 분석과 통계 기반 평가",
       "표현": {
         "Tone and Linguistic Style": "Analytical/technical phrasing",
         "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
         "Collective Action Calls": "Structural/long-term reorganization demands",
         "Polarity toward Same Target": "Consistent heroization"
       },
-      "채팅 표현 요약": "분석적이고 긍정적인 어조로 팀을 지지하며 장기적 개선 요구"
+      "채팅 표현 요약": "분석적이고 기술적인 표현으로 팀의 장기적 발전을 지지"
     }
   },
   {
-    "name": "긍정응원러",
+    "name": "기분좋은호랑이",
     "팬의 특성": {
       "스포츠 시청 동기": "Socialization (사회적 교류)",
       "채팅 참여 동기": "Fun and Entertainment"
     },
     "애착": {
       "애착의 대상": "Team (팀)",
-      "애착의 강도/단계": "Attachment"
+      "애착의 강도/단계": "Attraction"
     },
     "채팅 특성": {
       "내용": {
-        "Attribution of Responsibility": "Blame on manager/coaching decisions",
-        "Target of Evaluation": "Fielding and base-running errors",
+        "Attribution of Responsibility": "Blame on individual players (performance/effort)",
+        "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
         "Evaluative Focus (Outcome vs Process)": "Outcome-focused verdicts",
-        "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
+        "Use of Numerical/Technical Signals": "Technical shorthand/labels"
       },
-      "채팅 내용 요약": "경기 결과 중심으로 코칭 결정에 대해 직관적 의견 제시",
+      "채팅 내용 요약": "선수들의 투구력에 대한 유머러스한 평가와 즐거운 소통",
       "표현": {
         "Tone and Linguistic Style": "Humorous/meme-based mockery",
         "Temporal Reactivity": "Short-form reactions to micro-actions",
-        "Collective Action Calls": "Tactical action demands (in-game)",
+        "Collective Action Calls": "Calls for player demotion/release",
         "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
       },
-      "채팅 표현 요약": "유머러스하고 가벼운 어조로 긍정과 비판을 균형 있게 표현"
+      "채팅 표현 요약": "유머와 밈을 활용해 긍정적이고 활기찬 응원 분위기 조성"
     }
   },
   {
-    "name": "열정트윈스팬",
+    "name": "열정의호랑이",
     "팬의 특성": {
       "스포츠 시청 동기": "Excitement (흥분/스릴)",
       "채팅 참여 동기": "Sharing Feelings and Thoughts"
@@ -66,25 +66,25 @@
     "채팅 특성": {
       "내용": {
         "Attribution of Responsibility": "Blame on individual players (performance/effort)",
-        "Target of Evaluation": "Pitching performance (starter/unable bullpen)",
-        "Evaluative Focus (Outcome vs Process)": "Outcome-focused verdicts",
-        "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+        "Target of Evaluation": "Fielding and base-running errors",
+        "Evaluative Focus (Outcome vs Process)": "Hybrid (outcome stated with tactical justification)",
+        "Use of Numerical/Technical Signals": "Non-numeric intuitive claims"
       },
-      "채팅 내용 요약": "투수 성적에 대해 기술적 용어를 사용해 열정적으로 의견 공유",
+      "채팅 내용 요약": "선수들의 수비와 주루 실수에 대한 직관적이고 열정적인 의견 공유",
       "표현": {
         "Tone and Linguistic Style": "Concise imperative/demand",
         "Temporal Reactivity": "Spike reaction to dramatic moments",
-        "Collective Action Calls": "Calls for player demotion/release",
+        "Collective Action Calls": "Tactical action demands (in-game)",
         "Polarity toward Same Target": "Consistent heroization"
       },
-      "채팅 표현 요약": "직설적이고 열정적인 어조로 선수에 대한 기대와 지지 표현"
+      "채팅 표현 요약": "간결하고 강렬한 표현으로 선수 응원과 개선 요구를 동시에 전달"
     }
   },
   {
-    "name": "트윈스커뮤니티러",
+    "name": "커뮤니티호랑이",
     "팬의 특성": {
       "스포츠 시청 동기": "Socialization (사회적 교류)",
-      "채팅 참여 동기": "Intra-membership"
+      "채팅 참여 동기": "Information Seeking"
     },
     "애착": {
       "애착의 대상": "Community/City (지역)",
@@ -97,21 +97,21 @@
         "Evaluative Focus (Outcome vs Process)": "Narrative emotionalization of outcomes",
         "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
       },
-      "채팅 내용 요약": "선수 이적과 가치에 대해 감정과 수치를 혼합해 이야기함",
+      "채팅 내용 요약": "지역사회와 팀의 선수 거래에 대한 감성적이고 수치 기반의 정보 탐색",
       "표현": {
-        "Tone and Linguistic Style": "Humorous/meme-based mockery",
-        "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
+        "Tone and Linguistic Style": "Analytical/technical phrasing",
+        "Temporal Reactivity": "Immediate praise followed by quick reversal",
         "Collective Action Calls": "Structural/long-term reorganization demands",
         "Polarity toward Same Target": "Policing of excessive abuse"
       },
-      "채팅 표현 요약": "유머와 감정을 섞어 지역사회 중심으로 긍정적 소통 유지"
+      "채팅 표현 요약": "분석적이면서도 감성적인 표현으로 지역 팬덤의 균형 잡힌 소통 주도"
     }
   },
   {
-    "name": "긍정기술분석가",
+    "name": "긍정호랑이",
     "팬의 특성": {
       "스포츠 시청 동기": "Esteem (자긍심/자존감)",
-      "채팅 참여 동기": "Information Seeking"
+      "채팅 참여 동기": "Sharing Feelings and Thoughts"
     },
     "애착": {
       "애착의 대상": "Team (팀)",
@@ -119,19 +119,19 @@
     },
     "채팅 특성": {
       "내용": {
-        "Attribution of Responsibility": "Blame on manager/coaching decisions",
+        "Attribution of Responsibility": "Blame on management/ownership",
         "Target of Evaluation": "Managerial tactics and lineup choices",
         "Evaluative Focus (Outcome vs Process)": "Hybrid (outcome stated with tactical justification)",
-        "Use of Numerical/Technical Signals": "Technical shorthand/labels"
+        "Use of Numerical/Technical Signals": "Mixed numeric + emotive"
       },
-      "채팅 내용 요약": "전술과 라인업에 대해 결과와 과정을 모두 고려해 기술적으로 평가",
+      "채팅 내용 요약": "경영진과 감독 전술에 대한 긍정적이면서도 균형 잡힌 감정 공유",
       "표현": {
-        "Tone and Linguistic Style": "Concise imperative/demand",
+        "Tone and Linguistic Style": "Humorous/meme-based mockery",
         "Temporal Reactivity": "Sustained narrative across game (replaying themes)",
         "Collective Action Calls": "Tactical action demands (in-game)",
         "Polarity toward Same Target": "Simultaneous praise and criticism for same individual"
       },
-      "채팅 표현 요약": "간결하고 전문적인 어조로 긍정적이며 균형 잡힌 평가 제공"
+      "채팅 표현 요약": "유머와 감정을 섞어 긍정적이고 활발한 팬 대화 주도"
     }
   }
 ]
