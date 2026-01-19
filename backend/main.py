@@ -103,15 +103,25 @@ class NewsSummaryRequest(BaseModel):
 
 class AgentCandidate(BaseModel):
     id: str
-    name: str
+    name: str  # Nickname
     team: str
     userPrompt: str = ""  # 사용자 입력 프롬프트
-    팬의특성: Dict[str, str] = {}
-    애착: Dict[str, str] = {}
-    채팅특성: Dict[str, str] = {}
-    표현: Dict[str, str] = {}
-    채팅특성요약: str = ""  # 채팅 특성 요약
-    표현요약: str = ""  # 표현 요약
+    동기: Dict[str, Dict[str, str]] = (
+        {}
+    )  # 스포츠 시청 동기, 채팅 참여 동기 (각각 example_value, explanation)
+    동기요약: str = ""  # 동기 요약 설명
+    애착: Dict[str, Dict[str, str]] = (
+        {}
+    )  # 애착의 대상, 애착의 강도/단계 (각각 example_value, explanation)
+    애착요약: str = ""  # 애착 요약 설명
+    내용: Dict[str, Dict[str, str]] = (
+        {}
+    )  # Attribution of Responsibility, Target of Evaluation, etc.
+    채팅내용설명: str = ""  # 채팅 내용 요약 설명
+    표현: Dict[str, Dict[str, str]] = (
+        {}
+    )  # Tone and Linguistic Style, Temporal Reactivity, etc.
+    채팅표현설명: str = ""  # 채팅 표현 요약 설명
 
 
 # ============================================
@@ -420,6 +430,41 @@ def load_game_data(
 # ============================================
 
 
+def _clean_attr_dict(raw: dict, summary_keys: List[str]) -> tuple:
+    """Helper to extract a summary string and ensure all other values are Dict[str, str]."""
+    cleaned = {}
+    summary = ""
+    if not isinstance(raw, dict):
+        return {}, ""
+
+    # Copy to avoid mutating original
+    temp_raw = dict(raw)
+
+    # 1. Extract summary if present in this dict
+    for sk in summary_keys:
+        if sk in temp_raw:
+            val = temp_raw.pop(sk)
+            if not summary and isinstance(val, (str, bytes)):
+                summary = str(val)
+
+    # 2. Normalize remaining keys
+    for k, v in temp_raw.items():
+        if isinstance(v, dict):
+            # Ensure example_value and explanation exist
+            cleaned[k] = {
+                "example_value": str(v.get("example_value", v.get("label", ""))),
+                "explanation": str(v.get("explanation", "")),
+            }
+        elif isinstance(v, str):
+            # LLM flattened it
+            cleaned[k] = {"example_value": v, "explanation": ""}
+        else:
+            # Fallback for unexpected types
+            cleaned[k] = {"example_value": str(v), "explanation": ""}
+
+    return cleaned, summary
+
+
 def normalize_candidates(
     parsed: List[dict], team: str = "samsung", want_count: int = 5
 ) -> List[dict]:
@@ -448,52 +493,66 @@ def normalize_candidates(
             k += 1
         seen.add(new_id)
 
-        # Extract name (or Nickname or userName for backward compatibility)
+        # Extract name (Nickname)
         user_name = str(
-            item.get("name")
+            item.get("Nickname")
+            or item.get("name")
             or item.get("userName")
-            or item.get("Nickname")
             or f"{team.title()}Fan{counter}"
         )
 
-        # Extract nested attributes - ensure they are dicts
-        fan_traits = item.get("팬의 특성") or item.get("팬의특성") or {}
+        # Extract new structure: 팬의 특성 → {동기, 애착}
+        fan_traits = item.get("팬의 특성") or {}
         if not isinstance(fan_traits, dict):
             fan_traits = {}
 
-        attachment = item.get("애착") or {}
-        if not isinstance(attachment, dict):
-            attachment = {}
-
-        raw_chat_traits = item.get("채팅 특성") or item.get("채팅특성") or {}
-        if not isinstance(raw_chat_traits, dict):
-            raw_chat_traits = {}
-
-        # New nested schema: 채팅 특성 내부에 "내용", "채팅 내용 요약", "표현", "채팅 표현 요약" 포함
-        chat_content = (
-            raw_chat_traits.get("내용")
-            if isinstance(raw_chat_traits.get("내용"), dict)
-            else {}
+        # 동기: {스포츠 시청 동기: {example_value, explanation}, 채팅 참여 동기: {...}}
+        motivations_raw = fan_traits.get("동기") or {}
+        motivations, motiv_sum = _clean_attr_dict(
+            motivations_raw, ["동기 요약", "동기요약"]
         )
-        expression = (
-            raw_chat_traits.get("표현")
-            if isinstance(raw_chat_traits.get("표현"), dict)
-            else {}
+        motivation_summary = (
+            motiv_sum or fan_traits.get("동기 요약") or fan_traits.get("동기요약") or ""
         )
 
-        # Extract summaries (string)
-        chat_summary = (
-            raw_chat_traits.get("채팅 내용 요약")
-            or raw_chat_traits.get("채팅특성요약")
-            or item.get("채팅 특성 요약")
-            or item.get("채팅특성요약")
+        # 애착: {애착의 대상: {example_value, explanation}, 애착의 강도/단계: {...}}
+        attachment_raw = fan_traits.get("애착") or {}
+        attachment, attach_sum = _clean_attr_dict(
+            attachment_raw, ["애착 요약", "애착요약"]
+        )
+        attachment_summary = (
+            attach_sum
+            or fan_traits.get("애착 요약")
+            or fan_traits.get("애착요약")
             or ""
         )
-        expression_summary = (
-            raw_chat_traits.get("채팅 표현 요약")
-            or raw_chat_traits.get("채팅표현요약")
-            or item.get("표현 요약")
-            or item.get("표현요약")
+
+        # Extract new structure: 채팅 특성 → {내용, 채팅 내용 설명, 표현, 채팅 표현 설명}
+        chat_traits = item.get("채팅 특성") or {}
+        if not isinstance(chat_traits, dict):
+            chat_traits = {}
+
+        # 내용: {Attribution of Responsibility: {example_value, explanation}, ...}
+        content_raw = chat_traits.get("내용") or {}
+        content, content_sum = _clean_attr_dict(
+            content_raw, ["채팅 내용 설명", "채팅내용설명"]
+        )
+        content_description = (
+            content_sum
+            or chat_traits.get("채팅 내용 설명")
+            or chat_traits.get("채팅내용설명")
+            or ""
+        )
+
+        # 표현: {Tone and Linguistic Style: {example_value, explanation}, ...}
+        expression_raw = chat_traits.get("표현") or {}
+        expression, expr_sum = _clean_attr_dict(
+            expression_raw, ["채팅 표현 설명", "채팅표현설명"]
+        )
+        expression_description = (
+            expr_sum
+            or chat_traits.get("채팅 표현 설명")
+            or chat_traits.get("채팅표현설명")
             or ""
         )
 
@@ -503,12 +562,14 @@ def normalize_candidates(
                 "name": user_name,
                 "team": team,
                 "userPrompt": "",  # Will be set by the caller
-                "팬의특성": fan_traits,
+                "동기": motivations,
+                "동기요약": motivation_summary,
                 "애착": attachment,
-                "채팅특성": chat_content,
+                "애착요약": attachment_summary,
+                "내용": content,
+                "채팅내용설명": content_description,
                 "표현": expression,
-                "채팅특성요약": chat_summary,
-                "표현요약": expression_summary,
+                "채팅표현설명": expression_description,
             }
         )
 
@@ -529,12 +590,14 @@ def normalize_candidates(
                     "name": auto_name,
                     "team": team,
                     "userPrompt": "",
-                    "팬의특성": {},
+                    "동기": {},
+                    "동기요약": "",
                     "애착": {},
-                    "채팅특성": {},
+                    "애착요약": "",
+                    "내용": {},
+                    "채팅내용설명": "",
                     "표현": {},
-                    "채팅특성요약": "",
-                    "표현요약": "",
+                    "채팅표현설명": "",
                 }
             )
 
@@ -544,89 +607,134 @@ def normalize_candidates(
 def make_tuning_prompt(
     user_team: str, persona_db: List[dict], user_request: str
 ) -> str:
+    output_schema = {
+        "Nickname": "string",
+        "팬의 특성": {
+            "동기": {
+                "스포츠 시청 동기": {
+                    "example_value": "string",
+                    "explanation": "string",
+                },
+                "채팅 참여 동기": {"example_value": "string", "explanation": "string"},
+            },
+            "동기 요약": "string",
+            "애착": {
+                "애착의 대상": {"example_value": "string", "explanation": "string"},
+                "애착의 강도/단계": {
+                    "example_value": "string",
+                    "explanation": "string",
+                },
+            },
+            "애착 요약": "string",
+        },
+        "채팅 특성": {
+            "내용": {
+                "Attribution of Responsibility": {
+                    "example_value": "string",
+                    "explanation": "string",
+                },
+                "Target of Evaluation": {
+                    "example_value": "string",
+                    "explanation": "string",
+                },
+                "Evaluative Focus (Outcome vs Process)": {
+                    "example_value": "string",
+                    "explanation": "string",
+                },
+                "Use of Numerical/Technical Signals": {
+                    "example_value": "string",
+                    "explanation": "string",
+                },
+            },
+            "채팅 내용 설명": "string",
+            "표현": {
+                "Tone and Linguistic Style": {
+                    "example_value": "string",
+                    "explanation": "string",
+                },
+                "Temporal Reactivity": {
+                    "example_value": "string",
+                    "explanation": "string",
+                },
+                "Collective Action Calls": {
+                    "example_value": "string",
+                    "explanation": "string",
+                },
+                "Polarity toward Same Target": {
+                    "example_value": "string",
+                    "explanation": "string",
+                },
+            },
+            "채팅 표현 설명": "string",
+        },
+    }
+
+    # Format the schema as a clean JSON string for the prompt
+    output_format_str = json.dumps(output_schema, indent=2, ensure_ascii=False)
+
     return f"""
-당신은 사용자의 요구사항을 기반으로 야구 팬 페르소나를 커스터마이징하는 페르소나 제작자(Persona Generator)입니다. 
-당신의 역할은 페르소나 데이터베이스 내에서 사용자의 요구사항과 유사한 페르소나를 검색한 후, 해당 페르소나를 사용자의 요구사항에 맞게 커스터마이징하는 것 입니다.
+당신은 사용자의 요구사항을 기반으로 야구 팬 페르소나를 커스터마이징하는 페르소나 제작자(Persona Generator)입니다.
+사용자 요구사항이 주어지면, 주어진 Attribute–Example Values 세트를 커스터마이징하여 사용자에게 적합한 야구 팀 팬 페르소나 5개를 생성하세요.
 
-또한 당신은 온라인 커뮤니케이션 환경에서의 가명성(pseudonymity)을 고려하여, 각 페르소나의 정체성을 압축적으로 드러내는 닉네임(name)을 생성해야 합니다.
-이 닉네임은 완전한 익명성이 아닌, 팀 소속감·팬 성향·행동 스타일을 암시하는 ‘약한 정체성 단서(cue to identity)’로 기능해야 합니다.
+────────────────
 
-[작업]
-1. 페르소나 데이터베이스 내에서 사용자의 요구사항과 유사한 페르소나 최대 3개를 선택하세요.
-2. 선택한 페르소나를 바탕으로 사용자의 요구사항에 맞게 커스터마이징하여 새로운 사용자 맞춤형 야구 팬 페르소나 5개를 생성하세요.
-3. 각 페르소나마다 하나의 닉네임(name) Attribute를 생성하세요.
+[주어진 데이터]
+- 사용자 선호 야구 팀: {user_team}
+- 사용자 요구사항: {user_request}
+- Attribute–Example Values set:
+  · Attribute: 야구 팬의 특성을 설명하는 상위 카테고리
+  · Example Values: 각 Attribute에 대응하는 구체적 특성 값
+  · Explanation: 각 Example Value의 의미 설명
 
-[닉네임 생성 규칙]
-- 닉네임은 실명이 아닌 가명(pseudonym)이어야 합니다.
-- 닉네임은 다음 요소 중 2개 이상을 암시적으로 반영해야 합니다:
-  · 사용자의 선호 야구 팀
-  · 팬의 행동 성향(예: 열성, 분석형, 직관형, 커뮤니티 중심형 등)
-  · 응원 방식 또는 팬 문화(직관, 기록 분석, 굿즈, 온라인 활동 등)
-- 닉네임은 과도한 개인 식별 정보(연도, 실명 추정 정보 등)를 포함하지 마세요.
-- 5개의 페르소나 간 닉네임은 서로 중복되지 않아야 합니다.
-- 닉네임과 해당 페르소나의 다른 Attribute-Value들은 의미적으로 일관되어야 합니다.
-
-[주어진 데이터 설명]
-# 사용자 선호 야구 팀
-: 사용자가 응원하고 좋아하는 야구 팀 이름
-
-# 페르소나 데이터베이스
-: 100개의 다양한 야구 팬 페르소나로 이루어진 리스트이며,
-  각각의 페르소나는 Dictionary 형태의 Attribute-Example Value 구조를 가짐
-
-# 사용자 요구사항
-: 사용자가 원하는 페르소나 특성
-
-----------------
+────────────────
 
 [RESPONSE RULES]
-- 출력은 반드시 [OUTPUT FORMAT]에서 정의한 구조를 따릅니다.
-- 전체 출력은 하나의 리스트(list)이며, 그 안에 총 5개의 JSON 형태 페르소나가 포함되어야 합니다.
-- 각 페르소나는 기존 데이터베이스에서 선택된 페르소나의 Attribute를 key로 갖는 dictionary 형태여야 합니다.
-- 기존 데이터베이스에 존재하지 않는 디멘션은 임의로 추가·수정·생성하지 마세요.
-  (단, name Attribute는 예외적으로 반드시 포함해야 합니다.)
-- 각 Attribute에 대응하는 Value는 반드시 사용자의 요구사항을 반영해야 합니다.
-- 하나의 페르소나 내 모든 Attribute-Value 조합은 의미적으로 모순되지 않아야 합니다.
-- 5개의 페르소나는 모두 사용자의 요구사항을 반영하되,
-  Example Value의 중복을 최소화하세요.
-- 어떠한 경우에도 영문이 포함되어서는 안됩니다. 모든 내용을 한국어로 번역하세요.
+- 출력은 반드시 [OUTPUT FORMAT]을 따르며, 전체 출력은 JSON list 1개(정확히 5개 object)입니다.
+- dv_set에 없는 Attribute를 새로 만들지 마세요.
+- 각 속성은 dv_set의 Example Value 라벨 중 하나를 선택하고, explanation은 사용자 요구사항을 반영해 새로 작성하세요.
+- 하나의 페르소나 내에서 선택된 모든 Attribute-Example Values set 조합은 의미적으로 서로 모순되지 않아야 합니다.
+- 모든 출력은 한국어로 작성하세요.
+- JSON 문법을 엄격히 준수하세요. 특히 객체나 배열의 마지막 요소 뒤에 쉼표(trailing comma)를 절대 붙이지 마세요.
+- 아래 4개의 요약 필드는 각각 1문장으로 작성하세요:
+  1) "동기 요약": "스포츠 시청 동기" + "채팅 참여 동기"를 종합
+  2) "애착 요약": "애착의 대상" + "애착의 강도/단계"를 종합
+  3) "채팅 내용 설명": "내용"의 4개 속성을 종합
+  4) "채팅 표현 설명": "표현"의 4개 속성을 종합
+- 공격적·모욕적 표현 금지(밈/드립은 가능하나 누구를 지목해 조롱하지 않기).
 
-----------------
+[IMPORTANT: 값 출력 형식]
+- 각 속성 값은 반드시 아래 형태의 JSON object로 출력하세요.
+  {{ "example_value": "라벨", "explanation": "선택한 example_value가 사용자 요구사항에서 어떻게 드러나는지를 설명하는 1문장" }}
 
-[INPUT FORMAT]
-# 사용자 선호 야구 팀
-: {user_team}
+────────────────
 
-# 페르소나 데이터베이스
-: {persona_db}
+[NICKNAME DESIGN RULES]
+닉네임은 단순한 이름이 아니라, 팬의 성향을 암시하는 “압축된 신호”입니다.
 
-# 사용자 요구사항
-: {user_request}
+- 아래 단서 중 1~2개를 자연스럽게 반영하세요.
+  · 팀/야구가 맥락: {user_team} 또는 팀을 연상시키는 야구 관련 표현
+  · 성향 단서: 웃음, 풍자, 드립, 편파 없는 관찰자 시선
+  · 말투/리듬: 짧은 말장난이나 리듬감 있는 표현
+  · 취향 단서: 대표적인 야구 용어 1개 내외
+
+- 공격적·모욕적 표현은 금지하며, “상황을 웃기는 해설자/관찰자” 프레임을 유지하세요.
+- 특정 개인(선수·심판·팬)을 지목해 조롱하지 마세요.
+- Nickname은 해당 페르소나의 다른 Attribute들과 논리적으로 연결되어야 합니다.
+
+[닉네임 형식 제약]
+- 길이: 한글 2~8자 / 영문·숫자 4~10자
+- 특수문자·이모지·개인정보(이름·연도·지역) 사용 금지
+- 비속어·혐오 표현 금지
+
+[닉네임 다양성]
+- 5개 페르소나의 닉네임은 서로 다른 스타일이어야 합니다.
+
+────────────────
 
 [OUTPUT FORMAT]
 [
-  {{
-    "name": "string",
-    "팬의 특성": {{ ... }},
-    "애착": {{ ... }},
-    "채팅 특성": {{
-      "내용": {{
-        "Attribution of Responsibility": "string",
-        "Target of Evaluation": "string",
-        "Evaluative Focus (Outcome vs Process)": "string",
-        "Use of Numerical/Technical Signals": "string"
-      }},
-      "채팅 내용 요약": "string",
-      "표현": {{
-        "Tone and Linguistic Style": "string",
-        "Temporal Reactivity": "string",
-        "Collective Action Calls": "string",
-        "Polarity toward Same Target": "string"
-      }},
-      "채팅 표현 요약": "string"
-    }}
-  }},
-  ...
+  {output_format_str},
+  ... (총 5개)
 ]
 """.strip()
 
@@ -650,24 +758,6 @@ def generate_candidates(payload: GenerateRequest):
     try:
         openai.api_key = openai_key
 
-        # system_msg = (
-        #     "You are a JSON generator. Given a user's short prompt describing desired agent/persona characteristics, "
-        #     "produce a JSON array containing exactly 10 objects describing agent candidates.\n"
-        #     "CRITICAL: Return ONLY valid JSON, no explanatory text before or after.\n\n"
-        #     "Each object MUST have the following keys: name, dimensions, fullPrompt.\n"
-        #     "- name: concise Korean name for the persona.\n"
-        #     "- dimensions: a JSON object with dimension names as keys and descriptions as values.\n"
-        #     "  Suggested dimensions: '말투' (speech style), '성격' (personality), '분석의 초점' (analysis focus).\n"
-        #     "  Provide 3 dimension entries per candidate, each value being a short phrase (10-20 characters) in Korean.\n"
-        #     "- fullPrompt: a 1-sentence Korean prompt describing the persona (max ~30 words).\n"
-        #     "IMPORTANT: Escape all quotes in dimension values. Return ONLY a valid JSON array."
-        # )
-
-        # user_msg = (
-        #     f"Create 5 agent candidates based on the following user prompt: {json.dumps(userPrompt, ensure_ascii=False)}\n"
-        #     "Do NOT include 'id' or 'team' fields - they will be auto-generated and set to the team ID."
-        # )
-
         # Load persona pool from backend directory
         persona_pool_path = Path(__file__).resolve().parent / "persona_pool.json"
         with open(persona_pool_path, "r", encoding="utf-8") as f:
@@ -689,8 +779,6 @@ def generate_candidates(payload: GenerateRequest):
                     },
                     {"role": "user", "content": tuning_prompt},
                 ],
-                max_tokens=2000,
-                temperature=0,
             )
         else:
             # old interface
@@ -706,8 +794,6 @@ def generate_candidates(payload: GenerateRequest):
                     },
                     {"role": "user", "content": tuning_prompt},
                 ],
-                max_tokens=2000,
-                temperature=0,
             )
 
         # Try multiple ways to extract text from response (dict-like or object-like)
@@ -837,13 +923,47 @@ def generate_candidates(payload: GenerateRequest):
                         i += 1
                     json_str = "".join(fixed_chars)
 
+                    # 4. Handle trailing braces issues (e.g., }}} followed by , or ])
+                    # Replace triple closing braces with double if they look like candidate closers
+                    json_str = re.sub(r"\}\s*\}\s*\}\s*,", "}},", json_str)
+                    json_str = re.sub(r"\}\s*\}\s*\}\s*\]", "}}]", json_str)
+
+                    # 5. Remove trailing commas before closing braces/brackets
+                    json_str = re.sub(r",\s*([\]}])", r"\1", json_str)
+
                     try:
                         parsed = json.loads(json_str)
                         logger.info("Successfully parsed JSON after fixes")
                     except Exception as e3:
-                        logger.error(f"All JSON parse attempts failed: {e3}")
-                        logger.debug(f"Problematic JSON string: {json_str[:1000]}")
-                        raise e3
+                        logger.error(f"Post-fix JSON parse failed. Error: {e3}")
+                        # If still failing, try a more aggressive extraction of objects
+                        try:
+                            # Find all blocks starting with {"Nickname" and ending with }} before a , or ]
+                            candidate_matches = re.findall(
+                                r'\{"Nickname":[\s\S]*?\}\s*\}', json_str
+                            )
+                            if candidate_matches:
+                                candidates = []
+                                for cand_str in candidate_matches:
+                                    try:
+                                        # Clean up each candidate string for trailing commas as well
+                                        cand_str_fixed = re.sub(r",\s*([\]}])", r"\1", cand_str)
+                                        candidates.append(json.loads(cand_str_fixed))
+                                    except:
+                                        continue
+                                if len(candidates) >= 1:
+                                    parsed = candidates
+                                    logger.info(
+                                        f"Successfully extracted {len(candidates)} candidates via regex"
+                                    )
+                                else:
+                                    raise e3
+                            else:
+                                raise e3
+                        except Exception:
+                            logger.error(f"All JSON parse attempts failed: {e3}")
+                            logger.debug(f"Problematic JSON string: {json_str[:1000]}")
+                            raise e3
             else:
                 logger.error(
                     f"Could not find JSON array in response. Full response length={len(text)}"
@@ -1035,26 +1155,12 @@ async def orchestrate_chat(request: OrchestratorRequest):
             f"Loaded game data at row {current_row_index - 1} - currGameStat: {curr_game_stat}, gameFlow length: {len(game_flow)}"
         )
 
-        # Five Chatting Motivations
-        five_motivations = """
-[Five Chatting Motivations]
-- Sharing Feelings and Thoughts
-: 사람들은 무언가가 일어날 때 다른 사람들의 반응을 보고, 실시간으로 생각과 감정을 나누기 위해 채팅한다.
-- Membership
-: 사람들은 다른 팬들과 함께 응원하며 하나됨을 느끼고, 충성심을 보여주기 위해 우리 팀을 옹호하려고 채팅한다.
-- Information Sharing
-: 사람들은 질문하고 답을 얻으며, 경기 규칙이나 선수 별명 같은 유용한 정보를 배우기 위해 채팅한다.
-- Fun and Entertainment
-: 사람들은 경기가 지루할 때 시간을 보내고, 다른 사람들의 댓글을 읽는 게 재미있어서 채팅한다.
-- Emotional Release
-: 사람들은 떠오르는 생각을 쓰고 감정을 표현하며, 강한 순간에는 채팅으로 소리치듯 반응하기 위해 채팅한다.
-"""
-
         # 프롬프트 생성 (ipynb 로직 그대로)
         prompt = f"""
+
 당신은 야구 중계 채팅 시스템 매니저입니다. 당신의 역할은 현재 야구 경기를 시청 중인 시청자들에게, 지금 경기 상황에 맞춰 사람들이 더 재미있거나 더 유용하다고 느낄 만한 대화를 생성해 제공하는 것입니다.
 
-주어진 데이터와 에이전트 및 페르소나 리스트 그리고 5가지 채팅 동기들을 활용하여 다음의 작업을 Chain-of-thought 방식으로 단계적으로 수행하세요.
+주어진 데이터와 에이전트 및 페르소나 리스트 그리고 7가지 채팅 동기들을 활용하여 다음의 작업을 Chain-of-thought 방식으로 단계적으로 수행하세요.
 
 [주어진 데이터]
 # Current Game Data
@@ -1070,10 +1176,24 @@ async def orchestrate_chat(request: OrchestratorRequest):
 [Agent & Personas list]
 : 선택된 에이전트들과 해당 페르소나들
 
-{five_motivations}
- 
+[Seven Chatting Motivations]
+- Sharing Feelings and Thoughts
+: 사람들은 경기 해석·예측을 공유하고, 반응을 보며 감정을 확인해 공감·동의/반박을 주고받기 위해 채팅한다.
+- Fun and Entertainment
+: 사람들은 채팅 자체가 재미있어 참여하고, 재치 있는 댓글로 웃으며 지루한 시간을 보내고 즐거움을 더하기 위해 채팅한다.
+- Information Offering
+: 사람들은 질문에 답하고 유용한 정보를 제공하며, 잘못된 정보를 바로잡아 전달·정정하기 위해 채팅한다.
+- Information Seeking
+: 사람들은 모르는 점을 질문하고 Q&A로 답을 얻으며, 규칙·팀·선수 등 필요한 정보를 배우기 위해 채팅한다.
+- Emotional Release
+: 사람들은 흥분·기쁨·분노를 글로 쏟아 스트레스를 풀고, 긴장 순간 감정을 더 고조시키기 위해 채팅한다.
+- Intra-membership
+: 팬들은 같은 팀 팬끼리 함께 응원하며 하나됨과 소속감을 느끼고, 결속을 다지며 더 열심히 응원하기 위해 채팅한다.
+- Inter-membership
+: 팬들은 상대 팀·팬을 견제하거나 야유하고, 우리 팀을 비판하는 상대에게 맞서 옹호하며 라이벌 의식을 드러내기 위해 채팅한다.
+   
 [작업]
-1. Five Chatting Motivation를 참고하여 주어진 현재 경기 데이터 상황에서 사람들이 더 재미있거나 더 유용하다고 느낄 만한 주제와 대화의 전략을 선정합니다.
+1. Seven Chatting Motivation를 참고하여 주어진 현재 경기 데이터 상황에서 사람들이 더 재미있거나 더 유용하다고 느낄 만한 주제와 대화의 전략을 선정합니다.
 
 2. 1에서 정해진 주제 혹은 전략에 맞춰서, 각각 다른 페르소나를 가진 에이전트들이 대화 내에서 어떤 역할을 해야하는지를 결정합니다.
 
@@ -1087,27 +1207,30 @@ async def orchestrate_chat(request: OrchestratorRequest):
 - agent_role과 script는 에이전트/발화의 리스트(배열)로 작성합니다.
 - script는 총 {turn_num[0]} 턴 이상 {turn_num[1]} 턴 이하로 구성하세요.
 - script의 각 utterance는 한 번에 한 문장을 넘지 않습니다.
-- script를 항상 먼저 생성하도록 하세요.
+- 출력시, script를 반드시 첫번째로 반환해야 합니다.
 
 2. Rule of strategy
 - strategy에는 현재 경기 데이터 상황에서 사람들이 더 재미있거나 더 유용하다고 느낄 만한 주제와 대화의 전략을 출력합니다.
-- Five Chatting Motivation 중 1개만 참고하여 대화 전략을 고르고, 어떤 대화를 해야할지를 결정합니다.
+- Seven Chatting Motivation 중 1 ~ 2개만 참고하여 대화 전략을 고르고, 어떤 대화를 해야할지를 결정합니다.
 - 대화의 유형에는 질의 응답, 동조(긍정/부정), 갈등(같은 팀 간의/다른 팀 간의), 침묵, 환호 등이 있습니다.
+- 필요한 경우, (1) 현재 경기 상황과 직접 관련이 있거나, (2) 경기가 다소 잔잔해 대화 소재가 부족한 구간이라면, 최근 팀 이슈/뉴스를 보조 주제로 활용할 수 있습니다.
 
 3. Rule of agent_role
 - agent_role에는 각 에이전트의 페르소나를 고려하여, 선택된 대화 주제 및 전략에 맞게 대화에서 수행해야 할 역할을 명시합니다.
 - agent_role에 역할 설명은 반드시 해당 에이전트의 응원 team을 고려하여 작성되어야 합니다.
-- agent_role을 작성할 때, 각 에이전트가 다른 에이전트의 발화에 반응하거나 질문·동의·반박·보완을 수행하는 등, 상호작용 방식(예: "앞선 에이전트의 의견에 반응한다", "상대의 질문에 답한다", "상대의 주장에 근거를 덧붙인다")이 드러나도록 역할을 부여합니다.
+- 대화 주제가 최근 이슈/뉴스와 관련된 경우, agent_role은 해당 최근 이슈를 참고하여 역할을 구체화해 작성합니다.
+- agent_role을 작성할 때, 각 에이전트가 다른 에이전트의 발화에 반응하거나 질문·동의·반박·보완을 수행하는 등, 상호작용 방식(예: “앞선 에이전트의 의견에 반응한다”, “상대의 질문에 답한다”, “상대의 주장에 근거를 덧붙인다”)이 드러나도록 역할을 부여합니다.
 - agent_role의 개수는 선택된 에이전트의 개수에 따라 달라질 수 있습니다.
 
 4. Rule of script
 - script에는 strategy와 agent_role을 고려하여 각 에이전트가 실제 말해야하는 발화 텍스트(utterance of the speaker)을 생성합니다.
 - script는 에이전트 간 상호 대화처럼 보이도록 작성합니다. 즉, 에이전트 간 대화를 서로 주고받는 흐름이 드러나야 합니다.
 - 발화 순서는 정해진 역할과 에이전트의 페르소나를 고려해 결정합니다.
-- 에이전트의 각 발화는 말투/톤 등은 해당 페르소나에 맞게 반영되어야 합니다.
+- 에이전트의 각 발화는 말투/톤 등은 해당 페르소나의 채팅 특성-표현 부분에 맞게 반영되어야 합니다.
 - script의 대화의 문맥과 흐름은 자연스럽게 이어져야합니다.
 - 에이전트의 각 발화는 문맥을 유지하면서도 해당 에이전트의 응원 team 관점이 반영되어야 합니다.
 - 각 에이전트의 발화 텍스트가 서로 너무 비슷하지 않게 합니다.
+- strategy 또는 agent_role이 최근 이슈/뉴스 정보를 필요로 하는 경우, 해당 최근 이슈를 참고하여 발화를 작성합니다.
 
 ----------------
 
@@ -1137,7 +1260,6 @@ async def orchestrate_chat(request: OrchestratorRequest):
         {{"name": name of agent1, "text": The role of Agent 1 in this conversation}},
         {{"name": name of agent2, "text": The role of Agent 2 in this conversation}},      
         ... ],
-    
 }}
 
 """

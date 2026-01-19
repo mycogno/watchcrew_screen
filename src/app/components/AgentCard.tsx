@@ -15,12 +15,14 @@ export interface Agent {
   isHome: boolean; // home인지 away인지 구분
   createdAt: string;
   avatarSeed: string;
-  팬의특성?: Record<string, string>; // 팬의 특성
-  애착?: Record<string, string>; // 애착
-  채팅특성?: Record<string, string>; // 채팅 특성
-  표현?: Record<string, string>; // 표현
-  채팅특성요약?: string;
-  표현요약?: string;
+  동기?: Record<string, { example_value: string; explanation: string }>; // 스포츠 시청 동기, 채팅 참여 동기
+  동기요약?: string; // 동기 요약 설명
+  애착?: Record<string, { example_value: string; explanation: string }>; // 애착의 대상, 애착의 강도/단계
+  애착요약?: string; // 애착 요약 설명
+  내용?: Record<string, { example_value: string; explanation: string }>; // Attribution of Responsibility 등
+  채팅내용설명?: string; // 채팅 내용 요약 설명
+  표현?: Record<string, { example_value: string; explanation: string }>; // Tone and Linguistic Style 등
+  채팅표현설명?: string; // 채팅 표현 요약 설명
 }
 
 interface AgentCardProps {
@@ -176,45 +178,40 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: A
           </>
         ) : (
           <>
-            {/* 팬의특성, 애착, 채팅특성요약, 표현요약 표시 */}
-            {(agent.팬의특성 || agent.애착 || agent.채팅특성요약 || agent.표현요약) && (
+            {/* 동기, 애착, 내용(채팅내용설명), 표현(채팅표현설명) 표시 */}
+            {(agent.동기요약 || agent.애착요약 || agent.채팅내용설명 || agent.채팅표현설명) && (
               <div className="space-y-2">
-                {agent.팬의특성 && Object.keys(agent.팬의특성).length > 0 && (
+                {agent.동기요약 && (
                   <div>
-                    <div className="font-semibold text-slate-700 mb-1">팬의 특성</div>
-                    <div className="ml-2 space-y-0.5">
-                      {Object.entries(agent.팬의특성).map(([key, value]) => (
-                        <div key={key} className="text-sm">
-                          <span className="text-slate-600">{key}:</span>
-                          <span className="text-slate-500 ml-1">{String(value)}</span>
-                        </div>
-                      ))}
-                    </div>
+                    <div className="font-semibold text-slate-700 mb-1">동기</div>
+                    <div className="ml-2 text-sm text-slate-600">{agent.동기요약}</div>
                   </div>
                 )}
-                {agent.애착 && Object.keys(agent.애착).length > 0 && (
+                {agent.동기요약 && (agent.애착요약 || agent.채팅내용설명 || agent.채팅표현설명) && (
+                  <div className="border-t border-slate-200" />
+                )}
+                {agent.애착요약 && (
                   <div>
                     <div className="font-semibold text-slate-700 mb-1">애착</div>
-                    <div className="ml-2 space-y-0.5">
-                      {Object.entries(agent.애착).map(([key, value]) => (
-                        <div key={key} className="text-sm">
-                          <span className="text-slate-600">{key}:</span>
-                          <span className="text-slate-500 ml-1">{String(value)}</span>
-                        </div>
-                      ))}
-                    </div>
+                    <div className="ml-2 text-sm text-slate-600">{agent.애착요약}</div>
                   </div>
                 )}
-                {agent.채팅특성요약 && (
+                {agent.애착요약 && (agent.채팅내용설명 || agent.채팅표현설명) && (
+                  <div className="border-t border-slate-200" />
+                )}
+                {agent.채팅내용설명 && (
                   <div>
-                    <div className="font-semibold text-slate-700 mb-1">채팅 특성</div>
-                    <div className="ml-2 text-sm text-slate-600">{agent.채팅특성요약}</div>
+                    <div className="font-semibold text-slate-700 mb-1">내용</div>
+                    <div className="ml-2 text-sm text-slate-600">{agent.채팅내용설명}</div>
                   </div>
                 )}
-                {agent.표현요약 && (
+                {agent.채팅내용설명 && agent.채팅표현설명 && (
+                  <div className="border-t border-slate-200" />
+                )}
+                {agent.채팅표현설명 && (
                   <div>
                     <div className="font-semibold text-slate-700 mb-1">표현</div>
-                    <div className="ml-2 text-sm text-slate-600">{agent.표현요약}</div>
+                    <div className="ml-2 text-sm text-slate-600">{agent.채팅표현설명}</div>
                   </div>
                 )}
               </div>

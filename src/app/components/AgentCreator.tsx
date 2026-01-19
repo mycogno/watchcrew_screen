@@ -16,12 +16,14 @@ interface AgentCreatorProps {
     avatarSeed?: string,
     id?: string,
     createdAt?: string,
-    팬의특성?: Record<string, string>,
-    애착?: Record<string, string>,
-    채팅특성?: Record<string, string>,
-    표현?: Record<string, string>,
-    채팅특성요약?: string,
-    표현요약?: string
+    동기?: Record<string, { example_value: string; explanation: string }>,
+    동기요약?: string,
+    애착?: Record<string, { example_value: string; explanation: string }>,
+    애착요약?: string,
+    내용?: Record<string, { example_value: string; explanation: string }>,
+    채팅내용설명?: string,
+    표현?: Record<string, { example_value: string; explanation: string }>,
+    채팅표현설명?: string
   ) => void;
   homeTeamId: string | null;
   awayTeamId: string | null;
@@ -48,12 +50,14 @@ export function AgentCreator({ onCreateAgent, homeTeamId, awayTeamId }: AgentCre
     avatarSeed: string,
     id?: string,
     createdAt?: string,
-    팬의특성?: Record<string, string>,
-    애착?: Record<string, string>,
-    채팅특성?: Record<string, string>,
-    표현?: Record<string, string>,
-    채팅특성요약?: string,
-    표현요약?: string
+    동기?: Record<string, { example_value: string; explanation: string }>,
+    동기요약?: string,
+    애착?: Record<string, { example_value: string; explanation: string }>,
+    애착요약?: string,
+    내용?: Record<string, { example_value: string; explanation: string }>,
+    채팅내용설명?: string,
+    표현?: Record<string, { example_value: string; explanation: string }>,
+    채팅표현설명?: string
   ) => {
     // 상위 컴포넌트로 팀 이름과 isHome 전달
     onCreateAgent(
@@ -64,12 +68,14 @@ export function AgentCreator({ onCreateAgent, homeTeamId, awayTeamId }: AgentCre
       avatarSeed,
       id,
       createdAt,
-      팬의특성,
+      동기,
+      동기요약,
       애착,
-      채팅특성,
+      애착요약,
+      내용,
+      채팅내용설명,
       표현,
-      채팅특성요약,
-      표현요약
+      채팅표현설명
     );
     
     setPrompt("");
