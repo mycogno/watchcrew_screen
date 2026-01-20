@@ -604,8 +604,56 @@ def normalize_candidates(
     return out[:want_count]
 
 
+def transform_agent_for_orchestrate(agent: Dict) -> Dict:
+    """localStorage 에이전트를 orchestrate용으로 변환
+    
+    제외할 필드:
+    - id, avatarSeed, createdAt, isHome, userPrompt
+    - 동기요약, 애착요약, 채팅내용설명, 채팅표현설명
+    
+    유지할 필드:
+    - name → userName
+    - team
+    - 동기, 애착, 내용, 표현 (dict 형식)
+    """
+    result = {
+        "userName": agent.get("name", "DefaultAgent"),
+        "team": agent.get("team", "samsung"),
+    }
+    
+    # 팬의 특성 구성
+    fan_traits = {}
+    
+    # 동기 및 애착
+    motivation = agent.get("동기", {})
+    attachment = agent.get("애착", {})
+    
+    if motivation or attachment:
+        fan_traits["동기"] = motivation if motivation else {}
+        fan_traits["애착"] = attachment if attachment else {}
+    
+    if fan_traits:
+        result["팬의 특성"] = fan_traits
+    
+    # 채팅 특성 구성
+    chat_traits = {}
+    
+    # 내용 및 표현
+    content = agent.get("내용", {})
+    expression = agent.get("표현", {})
+    
+    if content or expression:
+        chat_traits["내용"] = content if content else {}
+        chat_traits["표현"] = expression if expression else {}
+    
+    if chat_traits:
+        result["채팅 특성"] = chat_traits
+    
+    return result
+
+
 def make_tuning_prompt(
-    user_team: str, persona_db: List[dict], user_request: str
+    user_team: str, user_request: str
 ) -> str:
     output_schema = {
         "Nickname": "string",
@@ -694,7 +742,6 @@ def make_tuning_prompt(
 - 각 속성은 dv_set의 Example Value 라벨 중 하나를 선택하고, explanation은 사용자 요구사항을 반영해 새로 작성하세요.
 - 하나의 페르소나 내에서 선택된 모든 Attribute-Example Values set 조합은 의미적으로 서로 모순되지 않아야 합니다.
 - 모든 출력은 한국어로 작성하세요.
-- JSON 문법을 엄격히 준수하세요. 특히 객체나 배열의 마지막 요소 뒤에 쉼표(trailing comma)를 절대 붙이지 마세요.
 - 아래 4개의 요약 필드는 각각 1문장으로 작성하세요:
   1) "동기 요약": "스포츠 시청 동기" + "채팅 참여 동기"를 종합
   2) "애착 요약": "애착의 대상" + "애착의 강도/단계"를 종합
@@ -758,17 +805,12 @@ def generate_candidates(payload: GenerateRequest):
     try:
         openai.api_key = openai_key
 
-        # Load persona pool from backend directory
-        persona_pool_path = Path(__file__).resolve().parent / "persona_pool.json"
-        with open(persona_pool_path, "r", encoding="utf-8") as f:
-            persona_pool = json.load(f)
-
         # Support both old openai (0.28) and new openai>=1.0 interfaces.
         if hasattr(openai, "OpenAI"):
             # new interface
             client = openai.OpenAI(api_key=openai_key)
             tuning_prompt = make_tuning_prompt(
-                user_team=userTeam, persona_db=persona_pool, user_request=userPrompt
+                user_team=userTeam, user_request=userPrompt
             )
             resp = client.chat.completions.create(
                 model=openai_model,
@@ -783,7 +825,7 @@ def generate_candidates(payload: GenerateRequest):
         else:
             # old interface
             tuning_prompt = make_tuning_prompt(
-                user_team=userTeam, persona_db=persona_pool, user_request=userPrompt
+                user_team=userTeam, user_request=userPrompt
             )
             resp = openai.ChatCompletion.create(
                 model=openai_model,
@@ -946,8 +988,9 @@ def generate_candidates(payload: GenerateRequest):
                                 candidates = []
                                 for cand_str in candidate_matches:
                                     try:
-                                        # Clean up each candidate string for trailing commas as well
-                                        cand_str_fixed = re.sub(r",\s*([\]}])", r"\1", cand_str)
+                                        cand_str_fixed = re.sub(
+                                            r",\s*([\]}])", r"\1", cand_str
+                                        )
                                         candidates.append(json.loads(cand_str_fixed))
                                     except:
                                         continue
@@ -1106,6 +1149,7 @@ class OrchestratorRequest(BaseModel):
     currGameStat: Optional[str] = "경기 진행 중"  # 현재 경기 상태 (추후 자동 업데이트)
     gameFlow: Optional[str] = ""  # 경기 흐름 요약 (추후 자동 업데이트)
     newsData: Optional[Dict[str, str]] = {}  # 뉴스 요약 데이터
+    agents: List[Dict] = []  # localStorage의 ai-fan-agents
 
 
 @app.post("/orchestrate")
@@ -1126,8 +1170,14 @@ async def orchestrate_chat(request: OrchestratorRequest):
 
         client = openai.OpenAI(api_key=openai_key)
 
-        # 하드코딩된 에이전트 리스트 사용 (추후 AgentCreator에서 받도록 수정 예정)
-        ap_list = HARDCODED_AGENTS
+        # localStorage에서 전달받은 에이전트 리스트 사용
+        if request.agents and len(request.agents) > 0:
+            ap_list = [transform_agent_for_orchestrate(agent) for agent in request.agents]
+            logger.info(f"Using {len(ap_list)} agents from localStorage")
+        else:
+            # 폴백: 하드코딩된 에이전트 사용
+            ap_list = HARDCODED_AGENTS
+            logger.info(f"No agents provided, using {len(ap_list)} HARDCODED_AGENTS")
 
         # turn_num 계산 (ipynb 로직 그대로)
         turn_num = [

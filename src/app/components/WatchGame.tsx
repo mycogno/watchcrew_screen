@@ -336,6 +336,18 @@ export function WatchGame({
         console.warn('⚠️ No news data in localStorage');
       }
 
+      // localStorage에서 에이전트 데이터 읽기
+      let agents: any[] = [];
+      try {
+        const agentsStr = localStorage.getItem("ai-fan-agents");
+        if (agentsStr) {
+          agents = JSON.parse(agentsStr);
+          console.log('👥 Agents loaded from localStorage:', agents);
+        }
+      } catch (error) {
+        console.error('❌ Failed to parse agents from localStorage:', error);
+      }
+
       // orchestrator 엔드포인트 호출
       const response = await fetch(`${API_URL}/orchestrate`, {
         method: "POST",
@@ -347,6 +359,7 @@ export function WatchGame({
           currGameStat: "경기 진행 중",
           gameFlow: "",
           newsData: newsData,
+          agents: agents,
         }),
       });
 

@@ -73,6 +73,9 @@ export function AgentSelectionModal({
   const abortControllerRef = useState<AbortController | null>(null)[0];
 
   const fetchCandidates = async (signal?: AbortSignal) => {
+  const startTime = performance.now();
+  console.log(`[API Request] generate_candidates 요청 시작 - 프롬프트: "${prompt.substring(0, 50)}${prompt.length > 50 ? '...' : ''}", 팀: ${team}`);
+  
   setLoading(true);
   try {
     const res = await fetch(`${API_URL}/generate_candidates`, {
@@ -86,13 +89,20 @@ export function AgentSelectionModal({
         throw new Error(`Request failed ${res.status}: ${text}`);
       }
       const data: AgentCandidate[] = await res.json();
+      const endTime = performance.now();
+      const duration = ((endTime - startTime) / 1000).toFixed(2);
+      console.log(`[API Response] generate_candidates 응답 완료 - 소요시간: ${duration}초, 후보자 수: ${data.length}`);
+      
       setCandidates(data);
     } catch (err: any) {
+      const endTime = performance.now();
+      const duration = ((endTime - startTime) / 1000).toFixed(2);
+      
       if (err.name === 'AbortError') {
-        // 요청이 취소됨
+        console.log(`[API Cancelled] generate_candidates 요청 취소됨 - 소요시간: ${duration}초`);
         return;
       }
-      console.error("generate_candidates fetch failed:", err);
+      console.error(`[API Error] generate_candidates 실패 - 소요시간: ${duration}초, 에러:`, err);
       setCandidates([]);
     } finally {
       setLoading(false);

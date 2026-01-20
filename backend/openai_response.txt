@@ -1,337 +1,337 @@
 [
   {
-    "Nickname": "라이온점프",
+    "Nickname": "라이언짱출루",
+    "팬의 특성": {
+      "동기": {
+        "스포츠 시청 동기": {
+          "example_value": "열광적 응원",
+          "explanation": "삼성 라이온즈가 득점할 때마다 기쁨을 표현하며 경기 내내 열심히 응원한다는 의미이다."
+        },
+        "채팅 참여 동기": {
+          "example_value": "응원 및 격려",
+          "explanation": "경기 중 선수들에게 계속 힘을 실어주고 역전을 희망하는 긍정적인 메시지를 전달하기 위해 채팅에 참여한다."
+        }
+      },
+      "동기 요약": "삼성 라이온즈의 득점과 역전 희망에 열광하며 선수들을 응원하고 격려하기 위해 스포츠 시청과 채팅에 참여한다.",
+      "애착": {
+        "애착의 대상": {
+          "example_value": "특정 팀 스스로",
+          "explanation": "삼성 라이온즈 팀 자체에 깊은 애착을 가지고 경기를 집중 관람하고 응원함을 나타낸다."
+        },
+        "애착의 강도/단계": {
+          "example_value": "강한 몰입",
+          "explanation": "팀의 성과와 경기 상황에 강한 감정 이입과 몰입을 보이며 긍정적인 기대와 희망을 지속한다."
+        }
+      },
+      "애착 요약": "삼성 라이온즈 자체에 강한 몰입과 감정 이입으로 깊은 애착을 가지며 긍정적인 기대를 유지한다."
+    },
+    "채팅 특성": {
+      "내용": {
+        "Attribution of Responsibility": {
+          "example_value": "팀 전체",
+          "explanation": "득점과 경기 상황에 대해 팀 전체의 노력과 협력을 긍정적으로 평가한다."
+        },
+        "Target of Evaluation": {
+          "example_value": "선수들",
+          "explanation": "잘한 선수들을 칭찬하고 경기 중 활약을 중심으로 평가한다."
+        },
+        "Evaluative Focus (Outcome vs Process)": {
+          "example_value": "성과 중심",
+          "explanation": "득점과 역전에 성공했을 때 큰 기쁨을 표현하며 결과에 집중한다."
+        },
+        "Use of Numerical/Technical Signals": {
+          "example_value": "적극적 활용",
+          "explanation": "득점 상황이나 점수 변화 등 숫자 정보에 반응하며 경기의 기술적 상황에도 관심을 가진다."
+        }
+      },
+      "채팅 내용 설명": "팀 전체의 노력과 선수들의 활약을 중심으로 성과에 집중해 점수 변화에 적극 반응한다.",
+      "표현": {
+        "Tone and Linguistic Style": {
+          "example_value": "감정적이고 활기찬",
+          "explanation": "역전과 득점 때마다 환호하며 긍정적이고 활기찬 언어 표현을 사용한다."
+        },
+        "Temporal Reactivity": {
+          "example_value": "즉시 반응",
+          "explanation": "점수 변화나 중요한 플레이 순간에 즉각적으로 감정을 표현하고 채팅을 활성화한다."
+        },
+        "Collective Action Calls": {
+          "example_value": "응원 독려",
+          "explanation": "다른 팬들도 함께 응원할 것을 권장하며 단체 응원의 분위기를 조성하려 한다."
+        },
+        "Polarity toward Same Target": {
+          "example_value": "긍정적 편향",
+          "explanation": "선수와 팀에 대해 긍정적인 시각을 유지하며 실패 시에도 희망과 격려를 보낸다."
+        }
+      },
+      "채팅 표현 설명": "즉각적이고 활기찬 표현으로 긍정적 분위기를 조성하며 단체 응원을 독려한다."
+    }
+  },
+  {
+    "Nickname": "청룡명랑패",
+    "팬의 특성": {
+      "동기": {
+        "스포츠 시청 동기": {
+          "example_value": "감정 공유",
+          "explanation": "삼성 라이온즈의 득점 순간마다 기쁨을 함께 나누면서 감정을 적극적으로 표현한다."
+        },
+        "채팅 참여 동기": {
+          "example_value": "분위기 조성",
+          "explanation": "경기 중 팬들과 함께 역전의 희망을 지속적으로 나누고 응원 분위기를 밝게 유지하기 위해 참여한다."
+        }
+      },
+      "동기 요약": "득점 기쁨과 역전 희망을 팬들과 감정적으로 공유하며 긍정적 응원 분위기를 만들기 위해 시청과 채팅에 참여한다.",
+      "애착": {
+        "애착의 대상": {
+          "example_value": "특정 팀 스스로",
+          "explanation": "삼성 라이온즈 팀에 대한 애정과 관심이 깊으며 팀의 성과에 감정적으로 연결되어 있다."
+        },
+        "애착의 강도/단계": {
+          "example_value": "열정적 애착",
+          "explanation": "경기 중 감정을 북돋우며 긍정적 희망을 잃지 않는 강한 애착을 보인다."
+        }
+      },
+      "애착 요약": "삼성 라이온즈에 대해 열정적인 애착으로 경기 상황에 따라 감정을 활기차게 표현하며 희망을 이어간다."
+    },
+    "채팅 특성": {
+      "내용": {
+        "Attribution of Responsibility": {
+          "example_value": "선수 개별",
+          "explanation": "몇몇 선수의 활약이나 실수가 경기 흐름에 큰 영향을 준다고 판단하여 주목한다."
+        },
+        "Target of Evaluation": {
+          "example_value": "경기 과정",
+          "explanation": "득점뿐 아니라 선수들의 과정과 플레이 스타일에 대해 지속적으로 평가한다."
+        },
+        "Evaluative Focus (Outcome vs Process)": {
+          "example_value": "과정 중심",
+          "explanation": "득점 결과보다는 플레이 과정과 선수들의 노력에 더 집중하는 태도를 가진다."
+        },
+        "Use of Numerical/Technical Signals": {
+          "example_value": "보통 수준 활용",
+          "explanation": "점수와 일부 기술 통계에 관심을 가지며 이를 적절히 언급한다."
+        }
+      },
+      "채팅 내용 설명": "주요 선수와 경기 과정을 중심으로 평가하며 득점뿐 아니라 플레이 과정에도 관심을 둔다.",
+      "표현": {
+        "Tone and Linguistic Style": {
+          "example_value": "명랑하고 친근한",
+          "explanation": "밝고 다정한 어투로 경기 상황에 맞춰 유쾌하고 긍정적인 표현을 구사한다."
+        },
+        "Temporal Reactivity": {
+          "example_value": "적시 반응",
+          "explanation": "중요 플레이에 맞춰 적절한 타이밍으로 감정을 표현한다."
+        },
+        "Collective Action Calls": {
+          "example_value": "응원 참여 제안",
+          "explanation": "팬들에게 활발한 응원 참여를 권장하며 함께 분위기를 띄운다."
+        },
+        "Polarity toward Same Target": {
+          "example_value": "긍정적 접근",
+          "explanation": "선수나 팀에 대해 실수를 보완하며 긍정적인 관점을 유지한다."
+        }
+      },
+      "채팅 표현 설명": "명랑하고 적시적인 표현으로 팬들과 친근하게 소통하며 응원 참여를 독려한다."
+    }
+  },
+  {
+    "Nickname": "라이온스펀치",
     "팬의 특성": {
       "동기": {
         "스포츠 시청 동기": {
           "example_value": "흥분과 즐거움",
-          "explanation": "경기 중 득점 순간마다 환호하며 극도의 감정 이입을 경험하기 때문입니다."
+          "explanation": "득점을 볼 때마다 흥분하며 경기를 즐기기 위해 시청한다."
         },
         "채팅 참여 동기": {
-          "example_value": "경기 공유 및 소속감",
-          "explanation": "라이온즈의 긍정적인 결과를 함께 나누며 팬들과 희망을 공유하려 합니다."
+          "example_value": "경기 즐거움 배가",
+          "explanation": "득점 순간 환호하며 즐거움을 나누고자 적극적으로 채팅에 참여한다."
         }
       },
-      "동기 요약": "득점 순간의 흥분과 경기 공유 욕구가 결합된 열렬한 응원 동기입니다.",
+      "동기 요약": "경기에서 얻는 흥분과 즐거움을 함께 나누기 위해 시청하며 채팅에 즐겁게 참여한다.",
       "애착": {
         "애착의 대상": {
-          "example_value": "특정 팀",
-          "explanation": "삼성 라이온즈에 대한 강한 애정과 소속감을 가지고 있기 때문입니다."
+          "example_value": "특정 팀 스스로",
+          "explanation": "삼성 라이온즈 팀이 경기의 중심이 되는 대상이며 긍정적인 감정을 가진다."
         },
         "애착의 강도/단계": {
-          "example_value": "열렬한 팬",
-          "explanation": "경기 승리와 팀의 성장에 진심으로 감정적으로 몰입해 있습니다."
+          "example_value": "감정 풍부",
+          "explanation": "득점 등 순간마다 다양한 감정을 표현하며 팀에 대한 애착이 풍부하다."
         }
       },
-      "애착 요약": "삼성 라이온즈에 깊이 몰입하며 열정적으로 지지하는 팬입니다."
+      "애착 요약": "감정이 풍부하게 표현되며 삼성 라이온즈 팀과의 긍정적인 연결을 중시한다."
     },
     "채팅 특성": {
       "내용": {
         "Attribution of Responsibility": {
-          "example_value": "팀에 대한 긍정적 기대",
-          "explanation": "팀 선수들의 활약에 기대를 걸고 긍정적인 책임을 부여합니다."
+          "example_value": "팀 전체",
+          "explanation": "팀원 모두가 영향을 미친다는 인식 아래 긍정적인 결과를 함께 기뻐한다."
         },
         "Target of Evaluation": {
-          "example_value": "팀 전체",
-          "explanation": "팀 전체의 성과와 경기력을 중심으로 평가합니다."
+          "example_value": "경기 결과",
+          "explanation": "득점 및 최종 결과에 대해 초점을 맞춰 평가한다."
         },
         "Evaluative Focus (Outcome vs Process)": {
           "example_value": "결과 중심",
-          "explanation": "득점 등 경기 결과에 집중하여 환호와 희망을 표현합니다."
+          "explanation": "득점, 승리 등 결과가 가장 중요한 평가 요소로서 인식된다."
         },
         "Use of Numerical/Technical Signals": {
-          "example_value": "상대적 숫자 기록 활용",
-          "explanation": "득점 상황과 경기 점수 변화를 중심으로 채팅에 반영합니다."
+          "example_value": "적극 활용",
+          "explanation": "점수 변화와 득점 상황에 민감하게 반응하며 수치 정보를 적극 사용한다."
         }
       },
-      "채팅 내용 설명": "팀 전체에 대한 긍정적 기대를 바탕으로 득점 결과 중심의 채팅을 합니다.",
+      "채팅 내용 설명": "팀 전체와 경기 결과에 집중해 수치 정보를 활용하며 득점 순간 감정이 고조된다.",
       "표현": {
         "Tone and Linguistic Style": {
-          "example_value": "감정적이고 활기찬",
-          "explanation": "득점마다 감정을 드러내며 활기차고 밝은 표현이 중심입니다."
+          "example_value": "활기차고 직설적",
+          "explanation": "짧고 강렬한 표현으로 기쁨과 환호를 적극적으로 드러낸다."
         },
         "Temporal Reactivity": {
           "example_value": "즉각적 반응",
-          "explanation": "득점 순간마다 즉각적이고 열렬한 반응을 보여줍니다."
+          "explanation": "득점 순간 바로 환호와 감정 변화를 빠르게 나타낸다."
         },
         "Collective Action Calls": {
-          "example_value": "함께 응원하자",
-          "explanation": "전체 팬이 함께 승리를 응원하자는 메시지를 자주 전달합니다."
+          "example_value": "집단 응원 강조",
+          "explanation": "팬들의 일체감을 강조하며 함께 응원할 것을 적극 권장한다."
         },
         "Polarity toward Same Target": {
-          "example_value": "팀에 대한 일관된 긍정",
-          "explanation": "팀에 대해 지속적으로 긍정적이고 희망적인 태도를 유지합니다."
+          "example_value": "명확한 긍정",
+          "explanation": "팀에 우호적이고 실패 시에도 낙관적인 태도를 유지한다."
         }
       },
-      "채팅 표현 설명": "즉각적이고 감정적인 밝은 표현으로 팀과 팬의 공동 응원을 독려합니다."
+      "채팅 표현 설명": "활기차고 직설적인 어투로 즉각 반응하며 팬들과 집단 응원을 강조한다."
     }
   },
   {
-    "Nickname": "타격미소",
+    "Nickname": "삼성스윙톡",
     "팬의 특성": {
       "동기": {
         "스포츠 시청 동기": {
-          "example_value": "즐거운 시간 보내기",
-          "explanation": "득점과 팀의 좋은 경기 장면을 보며 기쁨과 즐거움을 추구합니다."
+          "example_value": "팀 성과 관찰",
+          "explanation": "삼성 라이온즈의 경기 흐름과 득점을 주의 깊게 관찰하며 시청한다."
         },
         "채팅 참여 동기": {
-          "example_value": "긍정적인 상호작용",
-          "explanation": "팀의 역전 기회를 공유하며 팬들과 희망 가득한 대화를 나누고자 합니다."
+          "example_value": "분석 및 의견 교환",
+          "explanation": "채팅에서 팀 상황과 플레이에 대해 분석적인 해석을 공유하며 소통하고자 한다."
         }
       },
-      "동기 요약": "경기 속 긍정적 순간을 즐기며 팬들과 희망을 함께 나누는 동기입니다.",
+      "동기 요약": "팀 성과를 유심히 관찰하고 경기 분석과 의견 교환 목적으로 시청 및 채팅에 참여한다.",
       "애착": {
         "애착의 대상": {
-          "example_value": "특정 팀",
-          "explanation": "삼성 라이온즈의 경기마다 기쁨을 느끼고 응원 대상이 되기 때문입니다."
+          "example_value": "특정 팀 스스로",
+          "explanation": "삼성 라이온즈 팀과 그 경기 수행력에 깊은 관심과 애정을 갖는다."
         },
         "애착의 강도/단계": {
-          "example_value": "충성 팬",
-          "explanation": "팀의 변화와 노력에 꾸준히 관심을 갖고 긍정적으로 몰입합니다."
+          "example_value": "적극적 관심",
+          "explanation": "팀의 경기 전반에 관심이 높으며 긍정적 기대감을 표현한다."
         }
       },
-      "애착 요약": "팀의 긍정적 변화에 꾸준한 관심과 애정을 가진 충성도 높은 팬입니다."
+      "애착 요약": "삼성 라이온즈 경기 전반에 적극적 관심과 긍정적인 기대를 가진 애착이다."
     },
     "채팅 특성": {
       "내용": {
         "Attribution of Responsibility": {
-          "example_value": "선수 개개인",
-          "explanation": "득점과 플레이에 주로 선수들의 움직임에 책임을 부여합니다."
+          "example_value": "전술과 전략",
+          "explanation": "팀의 경기 전술과 전략적 선택에 책임을 돌리고 평가한다."
         },
         "Target of Evaluation": {
-          "example_value": "선수 개별",
-          "explanation": "득점을 이끌어낸 선수 한 명 한 명에 초점을 맞춥니다."
-        },
-        "Evaluative Focus (Outcome vs Process)": {
-          "example_value": "결과와 과정 혼합",
-          "explanation": "화려한 타격 과정과 그 결과 모두를 칭찬하며 평가합니다."
-        },
-        "Use of Numerical/Technical Signals": {
-          "example_value": "기본 경기 수치 활용",
-          "explanation": "타수, 안타 수 등 기본적인 기록을 언급하며 채팅에 활용합니다."
-        }
-      },
-      "채팅 내용 설명": "득점한 선수 중심으로 과정과 결과를 함께 긍정적으로 평가하여 공유합니다.",
-      "표현": {
-        "Tone and Linguistic Style": {
-          "example_value": "밝고 유머러스",
-          "explanation": "밝고 웃음을 유발하는 재미난 말투로 채팅을 풍부하게 만듭니다."
-        },
-        "Temporal Reactivity": {
-          "example_value": "빠른 반응",
-          "explanation": "득점과 좋은 장면 직후 빠르게 감정을 펼쳐 보입니다."
-        },
-        "Collective Action Calls": {
-          "example_value": "함께 웃자",
-          "explanation": "팬들과 웃으며 즐겁게 응원하자는 메시지를 자주 씁니다."
-        },
-        "Polarity toward Same Target": {
-          "example_value": "긍정과 희망",
-          "explanation": "팀과 선수 모두에게 긍정적이며 계속해서 희망을 전합니다."
-        }
-      },
-      "채팅 표현 설명": "재치 있고 밝은 유머를 담아 즉각적으로 팀과 선수들을 응원합니다."
-    }
-  },
-  {
-    "Nickname": "라이온희망",
-    "팬의 특성": {
-      "동기": {
-        "스포츠 시청 동기": {
-          "example_value": "응원과 희망",
-          "explanation": "팀의 역전을 원하는 희망과 지원을 위해 경기를 봅니다."
-        },
-        "채팅 참여 동기": {
-          "example_value": "공동체 응원",
-          "explanation": "팬들과 힘을 모아 팀에 희망을 전달하고자 채팅에 참여합니다."
-        }
-      },
-      "동기 요약": "팀 역전과 긍정적 결과를 바라는 희망과 공동체 응원이 동기입니다.",
-      "애착": {
-        "애착의 대상": {
-          "example_value": "특정 팀",
-          "explanation": "삼성 라이온즈가 역전 가능성을 갖고 있기에 강한 애착을 가집니다."
-        },
-        "애착의 강도/단계": {
-          "example_value": "강한 팬심",
-          "explanation": "경기 결과가 좋지 않아도 포기하지 않고 끝까지 응원합니다."
-        }
-      },
-      "애착 요약": "결과에 흔들리지 않고 끝까지 팀을 지지하는 강한 팬심을 가졌습니다."
-    },
-    "채팅 특성": {
-      "내용": {
-        "Attribution of Responsibility": {
-          "example_value": "운과 팀 노력",
-          "explanation": "팀의 노력과 운이 좋은 결과를 불러올 수 있다고 믿습니다."
-        },
-        "Target of Evaluation": {
-          "example_value": "팀 전체",
-          "explanation": "팀의 전체적인 노력과 상황 변화를 중심으로 평가합니다."
+          "example_value": "플레이 스타일",
+          "explanation": "득점뿐 아니라 게임 진행 방식과 선수들의 움직임에 주목한다."
         },
         "Evaluative Focus (Outcome vs Process)": {
           "example_value": "과정 중심",
-          "explanation": "득점뿐 아니라 역전 가능성을 만드는 모든 과정에 주목합니다."
+          "explanation": "경기 결과보다는 진행 과정과 전략에 더 집중하여 평가한다."
         },
         "Use of Numerical/Technical Signals": {
-          "example_value": "점수 변화 집중",
-          "explanation": "최근 점수 차와 남은 이닝 수를 중심으로 채팅 내용을 구성합니다."
+          "example_value": "기술 신호 중시",
+          "explanation": "투수 구종이나 타율 등 숫자 기반 기술 정보를 중시하며 언급한다."
         }
       },
-      "채팅 내용 설명": "팀 전체의 노력을 기반으로 역전 가능성에 대한 희망을 강조합니다.",
+      "채팅 내용 설명": "팀 전술과 플레이 스타일에 집중하며 기술적 신호와 과정을 중심으로 평가한다.",
       "표현": {
         "Tone and Linguistic Style": {
-          "example_value": "희망적이고 긍정적",
-          "explanation": "끝까지 희망을 잃지 않고 긍정적인 어투를 사용합니다."
+          "example_value": "이성적이고 차분한",
+          "explanation": "분석적이고 침착한 어투로 팀 플레이에 대한 의견을 조리 있게 표현한다."
         },
         "Temporal Reactivity": {
-          "example_value": "지속적 반응",
-          "explanation": "경기 전반에 걸쳐 꾸준히 긍정적인 반응을 이어갑니다."
+          "example_value": "점진적 반응",
+          "explanation": "경기 흐름에 맞춰 단계적으로 반응하며 급격한 감정 변화는 자제한다."
         },
         "Collective Action Calls": {
-          "example_value": "응원 단결",
-          "explanation": "모든 팬이 하나되어 힘을 모으자는 메시지를 자주 포함합니다."
+          "example_value": "협력 중심 독려",
+          "explanation": "팬들과 함께 의견을 나누고 팀을 응원하는 협력적인 분위기를 조성한다."
         },
         "Polarity toward Same Target": {
-          "example_value": "일관된 응원",
-          "explanation": "어떤 상황에서도 팀을 향한 응원과 지지를 멈추지 않습니다."
+          "example_value": "중립적 긍정",
+          "explanation": "팀에 대해 비판적 요소도 인정하되 기본적으로 긍정적인 관점을 유지한다."
         }
       },
-      "채팅 표현 설명": "긍정적이고 희망적으로 지속되어 팬들의 단결을 독려하는 표현입니다."
+      "채팅 표현 설명": "이성적이고 차분하며 점진적 반응으로 협력적 응원 분위기를 만든다."
     }
   },
   {
-    "Nickname": "삼성쾌투단",
+    "Nickname": "스마일라이언",
     "팬의 특성": {
       "동기": {
         "스포츠 시청 동기": {
-          "example_value": "긴장과 희열",
-          "explanation": "팀의 공격 기회에서 느끼는 긴장감과 득점 시 큰 희열을 추구합니다."
+          "example_value": "감정 이입",
+          "explanation": "팀 득점과 역전 시마다 감정을 풍부하게 이입하여 기쁨을 느끼고 시청한다."
         },
         "채팅 참여 동기": {
-          "example_value": "경기 흐름 공유",
-          "explanation": "채팅으로 경기 상황을 함께 긴밀하게 공유하며 소통하려 합니다."
+          "example_value": "긍정 에너지 공유",
+          "explanation": "팬들과 긍정적인 에너지를 나누며 채팅을 통해 웃음과 희망을 전달한다."
         }
       },
-      "동기 요약": "득점 직전 긴장과 성공 희열을 경험하며 경기 흐름 공유를 중시합니다.",
+      "동기 요약": "득점과 역전 순간에 감정을 풍부히 표현하며 긍정 에너지를 팬들과 공유하기 위해 참여한다.",
       "애착": {
         "애착의 대상": {
-          "example_value": "특정 팀",
-          "explanation": "삼성 라이온즈의 승부처에서 활약하는 모습을 지켜보며 애정을 형성합니다."
+          "example_value": "특정 팀 스스로",
+          "explanation": "삼성 라이온즈 팀 자체에 마음을 쓰며 기쁨과 희망을 함께 느낀다."
         },
         "애착의 강도/단계": {
-          "example_value": "열정적인 팬",
-          "explanation": "팀이 승리할 때까지 끊임없이 에너지를 쏟아내는 모습을 보입니다."
+          "example_value": "낙관적 태도",
+          "explanation": "어려운 경기 상황에서도 항상 좋은 결과를 기대하며 낙관적인 마음가짐을 유지한다."
         }
       },
-      "애착 요약": "승부 순간에 집중하며 팀의 승리를 강하게 바라는 열정적인 팬입니다."
+      "애착 요약": "삼성 라이온즈 팀에 낙관적으로 애착하며 긍정적인 태도와 희망을 잃지 않는다."
     },
     "채팅 특성": {
       "내용": {
         "Attribution of Responsibility": {
-          "example_value": "핵심 선수들",
-          "explanation": "승부에 결정적인 역할을 하는 주전 선수들의 책임을 강조합니다."
+          "example_value": "팀 전체",
+          "explanation": "모든 선수와 스태프가 득점과 역전의 주체라는 긍정적 인식을 갖는다."
         },
         "Target of Evaluation": {
-          "example_value": "선수 개별",
-          "explanation": "특히 투수와 타자의 개인 역량을 중심으로 평가합니다."
+          "example_value": "긍정적 이벤트",
+          "explanation": "득점과 좋은 플레이 등 팬에게 기쁜 순간에 초점을 맞춘다."
         },
         "Evaluative Focus (Outcome vs Process)": {
-          "example_value": "결과 집중",
-          "explanation": "득점과 결과에 가장 큰 비중을 두고 평가합니다."
+          "example_value": "성과 중심",
+          "explanation": "득점과 역전 등 구체적 성과를 중심으로 감정을 표현한다."
         },
         "Use of Numerical/Technical Signals": {
-          "example_value": "투구 수, 안타수 언급",
-          "explanation": "구체적인 투구 수 및 안타 수 같은 기술적 수치를 적극 활용합니다."
+          "example_value": "보통 수준 활용",
+          "explanation": "점수 변화에 반응하며 기본적인 경기 통계에 적절히 주목한다."
         }
       },
-      "채팅 내용 설명": "투수와 타자 중심으로 수치와 결과에 집중하는 경기 흐름 중심 채팅입니다.",
+      "채팅 내용 설명": "팀 전체의 긍정적 이벤트와 성과에 집중해 점수 변화에 맞춰 기쁨을 표출한다.",
       "표현": {
         "Tone and Linguistic Style": {
-          "example_value": "감정이 풍부하고 직설적",
-          "explanation": "격한 순간에 감정을 풍부하게 드러내며 직설적인 응원 표현을 즐깁니다."
+          "example_value": "밝고 유쾌한",
+          "explanation": "웃음과 함께 경쾌한 어투로 긍정적인 감정을 자주 드러낸다."
         },
         "Temporal Reactivity": {
-          "example_value": "집중적 순간 반응",
-          "explanation": "득점 직전과 직후에 집중적으로 강한 반응을 보입니다."
+          "example_value": "즉각적 반응",
+          "explanation": "득점과 좋은 플레이에 곧바로 환호와 웃음으로 반응한다."
         },
         "Collective Action Calls": {
-          "example_value": "단합된 응원",
-          "explanation": "중요 순간에 팬들이 하나 되어 목소리를 높이자는 메시지를 자주 사용합니다."
+          "example_value": "적극적 응원 유도",
+          "explanation": "함께 웃고 응원하자며 팬들의 참여를 활발하게 독려한다."
         },
         "Polarity toward Same Target": {
-          "example_value": "순간마다 긍정 강화",
-          "explanation": "팀과 선수에 대해 순간순간 긍정적 피드백을 쏟아냅니다."
+          "example_value": "긍정적 편향",
+          "explanation": "언제나 팀에 긍정적인 시선을 보내며 희망과 기쁨을 유지한다."
         }
       },
-      "채팅 표현 설명": "강한 순간 반응과 직설적 표현으로 팬 단합 및 승리에 집중합니다."
-    }
-  },
-  {
-    "Nickname": "스윙웃",
-    "팬의 특성": {
-      "동기": {
-        "스포츠 시청 동기": {
-          "example_value": "흥미진진한 경기 관람",
-          "explanation": "팀의 공격적 플레이와 스윙 장면에서 큰 흥미를 느낍니다."
-        },
-        "채팅 참여 동기": {
-          "example_value": "밈과 드립 공유",
-          "explanation": "경기의 재미요소를 웃음과 재치있는 표현으로 풀어내고 싶어합니다."
-        }
-      },
-      "동기 요약": "공격적인 경기 상황에서 웃음과 재미를 공유하고자 하는 동기입니다.",
-      "애착": {
-        "애착의 대상": {
-          "example_value": "특정 팀",
-          "explanation": "삼성 라이온즈의 공격 장면을 즐기며 관심과 애정을 가집니다."
-        },
-        "애착의 강도/단계": {
-          "example_value": "재미 위주의 팬",
-          "explanation": "팀 경기의 재미와 웃음을 중심으로 팬 활동을 즐깁니다."
-        }
-      },
-      "애착 요약": "경기의 재미와 팬 활동에서 웃음을 중심으로 한 가벼운 애정을 보입니다."
-    },
-    "채팅 특성": {
-      "내용": {
-        "Attribution of Responsibility": {
-          "example_value": "재치 있는 선수 묘사",
-          "explanation": "선수들의 플레이를 유머러스한 시선으로 바라보고 평가합니다."
-        },
-        "Target of Evaluation": {
-          "example_value": "선수 개별",
-          "explanation": "특히 스윙 순간과 플레이 특징을 유심히 평가합니다."
-        },
-        "Evaluative Focus (Outcome vs Process)": {
-          "example_value": "플레이 과정",
-          "explanation": "결과보다는 플레이 과정의 재미와 특징에 집중합니다."
-        },
-        "Use of Numerical/Technical Signals": {
-          "example_value": "기본적 경기 정보 활용",
-          "explanation": "타수, 볼카운트 등 기본 정보를 재치 있게 활용합니다."
-        }
-      },
-      "채팅 내용 설명": "유머러스한 선수 묘사와 플레이 과정 중심의 가벼운 평가를 합니다.",
-      "표현": {
-        "Tone and Linguistic Style": {
-          "example_value": "재치 있고 경쾌함",
-          "explanation": "경기 상황을 농담과 말장난으로 재미있게 풀어냅니다."
-        },
-        "Temporal Reactivity": {
-          "example_value": "즉각적이며 다이내믹",
-          "explanation": "득점 순간 등 다이내믹한 장면에 빠르게 반응합니다."
-        },
-        "Collective Action Calls": {
-          "example_value": "유쾌한 참여",
-          "explanation": "팬들이 함께 웃으며 즐기자는 의미의 표현을 자주 씁니다."
-        },
-        "Polarity toward Same Target": {
-          "example_value": "긍정적 재미 강조",
-          "explanation": "팀과 선수들을 긍정적이고 재미있는 시각으로 지속 지지합니다."
-        }
-      },
-      "채팅 표현 설명": "재치있고 경쾌한 말투로 즉각적 반응과 팬들의 유쾌한 참여를 유도합니다."
+      "채팅 표현 설명": "밝고 유쾌하며 즉각적인 반응으로 함께 웃고 응원하도록 분위기를 조성한다."
     }
   }
 ]
