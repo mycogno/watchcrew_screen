@@ -320,6 +320,7 @@ export function WatchGame({
   // Orchestrator를 사용한 에이전트 대화 생성 (스트리밍) - 30초 인터벌에서만 호출
   const callOrchestrator = async (memoryToUse: Array<{speaker: string, text: string}>) => {
     setIsGenerating(true);
+    const requestStartTime = Date.now(); // 요청 시작 시간 기록
 
     try {
       // localStorage에서 뉴스 데이터 읽기
@@ -391,8 +392,8 @@ export function WatchGame({
           console.log(`[Display] First message from "${item.speaker}" - displaying immediately`);
         } else {
           // 메시지 길이에 따라 목표 간격 계산 (1.5초 ~ 2.5초)
-          const minInterval = 1500;
-          const maxInterval = 2500;
+          const minInterval = 3500;
+          const maxInterval = 4500;
           const avgTextLength = 100;
           
           const textLengthRatio = Math.min(item.text.length / avgTextLength, 2);
@@ -435,7 +436,9 @@ export function WatchGame({
         const { done, value } = await reader.read();
         
         if (done) {
+          const totalElapsedTime = Date.now() - requestStartTime;
           console.log(`[Orchestrator] Stream ended. Total lines processed: ${lineCount}, Parse errors: ${parseErrorCount}`);
+          console.log(`⏱️ [Orchestrator] Total time from request start to all messages displayed: ${totalElapsedTime}ms (${(totalElapsedTime / 1000).toFixed(2)}s)`);
           break;
         }
 
@@ -526,41 +529,53 @@ export function WatchGame({
     }
   };
 
-  // 15초마다 새로운 orchestrator 요청을 병렬로 시작
+  // 15초마다 새로운 orchestrator 요청을 시작 (이전 요청 완료 후)
   useEffect(() => {
     let isActive = true;
     let requestCount = 0;
+    let lastRequestStartTime = 0;
 
-    const startOrchestratorRequest = () => {
+    const startOrchestratorRequest = async () => {
       if (!isActive) return;
       
       requestCount++;
       const currentRequestId = requestCount;
       
-      console.log(`[Orchestrator] Starting request #${currentRequestId}`);
+      // 이번 요청의 시작 시간 기록
+      lastRequestStartTime = Date.now();
       
-      // 병렬로 요청 시작 (await 없이)
-      callOrchestrator(contextMemory).then(() => {
-        console.log(`[Orchestrator] Request #${currentRequestId} completed`);
-      }).catch((error) => {
+      console.log(`[Orchestrator] Starting request #${currentRequestId} at ${new Date(lastRequestStartTime).toLocaleTimeString()}`);
+      
+      try {
+        await callOrchestrator(contextMemory);
+        console.log(`[Orchestrator] Request #${currentRequestId} completed at ${new Date().toLocaleTimeString()}`);
+      } catch (error) {
         console.error(`[Orchestrator] Request #${currentRequestId} failed:`, error);
-      });
+      }
+
+      // 첫 요청 시작으로부터 얼마나 경과했는지 확인
+      const elapsedSinceRequestStart = Date.now() - lastRequestStartTime;
+      const remainingTime = Math.max(0, 15000 - elapsedSinceRequestStart);
+
+      if (remainingTime > 0) {
+        console.log(`[Orchestrator] Request #${currentRequestId} completed after ${elapsedSinceRequestStart.toFixed(0)}ms. Waiting ${remainingTime.toFixed(0)}ms before next request`);
+        await new Promise((resolve) => setTimeout(resolve, remainingTime));
+      } else {
+        console.log(`[Orchestrator] Request #${currentRequestId} completed after ${elapsedSinceRequestStart.toFixed(0)}ms. Starting next request immediately`);
+      }
+
+      // 다음 요청 시작 (재귀적으로)
+      if (isActive) {
+        startOrchestratorRequest();
+      }
     };
 
     // 즉시 첫 요청 시작
     startOrchestratorRequest();
 
-    // 15초마다 새로운 요청 시작 (이전 요청 완료 여부와 무관)
-    const interval = setInterval(() => {
-      if (isActive) {
-        startOrchestratorRequest();
-      }
-    }, 15000); // 15초마다
-
     // 클린업
     return () => {
       isActive = false;
-      clearInterval(interval);
     };
   }, []); // 빈 의존성 배열 - 마운트 시에만 설정
 
