@@ -1379,8 +1379,47 @@ async def orchestrate_chat(request: OrchestratorRequest):
 
                     # script 배열이 시작된 후에만 메시지 추출
                     if script_array_found and script_start_pos >= 0:
-                        # script 배열 내용만 추출 (버퍼 전체가 아닌 script 시작 위치 이후만)
-                        script_content = buffer[script_start_pos:]
+                        # script 배열의 끝(])을 찾아서 script 배열 내부만 추출
+                        remaining_buffer = buffer[script_start_pos:]
+                        
+                        # script 배열의 닫는 ] 찾기
+                        # 중첩된 배열/객체를 고려하여 올바른 닫는 괄호 찾기
+                        bracket_count = 1  # 이미 여는 [ 하나를 지나침
+                        brace_count = 0
+                        in_string = False
+                        escape_next = False
+                        script_end_pos = -1
+                        
+                        for i, char in enumerate(remaining_buffer):
+                            if escape_next:
+                                escape_next = False
+                                continue
+                            if char == '\\':
+                                escape_next = True
+                                continue
+                            if char == '"' and not escape_next:
+                                in_string = not in_string
+                                continue
+                            if in_string:
+                                continue
+                            
+                            if char == '{':
+                                brace_count += 1
+                            elif char == '}':
+                                brace_count -= 1
+                            elif char == '[':
+                                bracket_count += 1
+                            elif char == ']':
+                                bracket_count -= 1
+                                if bracket_count == 0:
+                                    script_end_pos = i
+                                    break
+                        
+                        # script 배열이 아직 완전히 도착하지 않았으면 현재까지만 파싱
+                        if script_end_pos == -1:
+                            script_content = remaining_buffer
+                        else:
+                            script_content = remaining_buffer[:script_end_pos]
 
                         # {"name": "...", "text": "..."} 패턴 찾기 (쉼표 선택적 포함)
                         import re

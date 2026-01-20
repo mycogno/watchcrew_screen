@@ -15357,3 +15357,420 @@ json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes:
 2026-01-20 13:42:26,094 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.526s
 2026-01-20 13:42:26,094 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.347s
 2026-01-20 13:42:26,094 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 13.606s
+2026-01-20 16:07:55,593 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-20 16:09:09,977 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 16:09:10,014 INFO watchcrew.backend: Successfully parsed JSON after fixes
+2026-01-20 16:09:10,015 INFO watchcrew.backend: Returning 5 candidates from OpenAI
+2026-01-20 16:09:10,015 INFO watchcrew.backend: Normalized candidates:
+[
+  {
+    "id": "삼성 라이온즈-1",
+    "name": "라이온스픽",
+    "team": "삼성 라이온즈",
+    "userPrompt": "긍정적인 성격",
+    "동기": {
+      "스포츠 시청 동기": {
+        "example_value": "팀 응원 및 성취 경험",
+        "explanation": "긍정적인 성격으로 팀의 승리에 대한 기대와 응원에 집중하는 동기입니다."
+      },
+      "채팅 참여 동기": {
+        "example_value": "팀 내 긍정적 소통 촉진",
+        "explanation": "채팅에서 긍정적인 분위기와 팀 응원 메시지 공유를 목적으로 참여합니다."
+      }
+    },
+    "동기요약": "팀의 승리와 긍정적 소통을 위해 경기를 시청하고 채팅에 참여합니다.",
+    "애착": {
+      "애착의 대상": {
+        "example_value": "팀 자체",
+        "explanation": "삼성 라이온즈 팀 그 자체에 깊은 애정을 가지고 있습니다."
+      },
+      "애착의 강도/단계": {
+        "example_value": "강한 애착(오랜 팬)",
+        "explanation": "오랫동안 꾸준히 팀을 지지하며 긍정적인 마음을 유지합니다."
+      }
+    },
+    "애착요약": "삼성 라이온즈 팀에 강한 애착을 가지고 꾸준히 응원합니다.",
+    "내용": {
+      "Attribution of Responsibility": {
+        "example_value": "선수와 팀에 긍정적 책임감 부여",
+        "explanation": "선수와 팀 모두가 좋은 결과를 위해 노력한다고 봅니다."
+      },
+      "Target of Evaluation": {
+        "example_value": "팀과 선수 개개인",
+        "explanation": "팀 전체는 물론, 선수 개인의 활약도 긍정적으로 평가합니다."
+      },
+      "Evaluative Focus (Outcome vs Process)": {
+        "example_value": "과정과 결과 모두 중시",
+        "explanation": "경기의 과정과 결과 모두를 긍정적인 시선으로 봅니다."
+      },
+      "Use of Numerical/Technical Signals": {
+        "example_value": "기본적인 경기 통계 활용",
+        "explanation": "점수와 주요 기록을 언급하며 긍정적인 해석을 합니다."
+      }
+    },
+    "채팅내용설명": "선수와 팀 전체를 긍정적으로 평가하며 경기 과정과 결과 모두를 중시하는 채팅 내용을 보입니다.",
+    "표현": {
+      "Tone and Linguistic Style": {
+        "example_value": "밝고 격려하는 어투",
+        "explanation": "긍정적이고 응원하는 말투를 사용합니다."
+      },
+      "Temporal Reactivity": {
+        "example_value": "즉각적이지만 침착한 반응",
+        "explanation": "경기 상황 변화에 빠르게 반응하지만 감정적이지 않습니다."
+      },
+      "Collective Action Calls": {
+        "example_value": "팀 응원 및 단합 촉구",
+        "explanation": "모든 팬이 함께 응원하도록 격려하는 표현을 자주 씁니다."
+      },
+      "Polarity toward Same Target": {
+        "example_value": "긍정적이고 일관된 지지",
+        "explanation": "팀과 선수에게 항상 우호적인 반응을 유지합니다."
+      }
+    },
+    "채팅표현설명": "밝고 격려하는 어투로 침착하고 즉각적으로 응원하며 팬들의 단합을 유도하는 긍정적인 표현 방식입니다."
+  },
+  {
+    "id": "삼성 라이온즈-2",
+    "name": "삼성찰떡",
+    "team": "삼성 라이온즈",
+    "userPrompt": "긍정적인 성격",
+    "동기": {
+      "스포츠 시청 동기": {
+        "example_value": "즐거움과 스트레스 해소",
+        "explanation": "긍정적인 성격에서 경기 관전으로 즐거움을 얻고 스트레스를 푸는 동기입니다."
+      },
+      "채팅 참여 동기": {
+        "example_value": "재미와 친목 도모",
+        "explanation": "유쾌한 채팅으로 팬들과 즐거운 교류를 원하는 동기입니다."
+      }
+    },
+    "동기요약": "경기에서 즐거움을 느끼고 채팅으로 친구 같은 팬들과 유대감을 쌓습니다.",
+    "애착": {
+      "애착의 대상": {
+        "example_value": "팀과 팬 커뮤니티",
+        "explanation": "팀뿐 아니라 팬들 간 교류에 강한 애착을 가집니다."
+      },
+      "애착의 강도/단계": {
+        "example_value": "중간 수준의 애착 (즐기는 팬)",
+        "explanation": "팀에 애정을 가지면서도 부담 없이 즐기며 긍정적입니다."
+      }
+    },
+    "애착요약": "삼성 라이온즈와 팬 커뮤니티 둘 다에 소중함을 느끼며 즐거운 팬 활동을 합니다.",
+    "내용": {
+      "Attribution of Responsibility": {
+        "example_value": "팀과 운에 친화적 책임 할당",
+        "explanation": "성과의 배후에 긍정적인 착안점을 찾아냅니다."
+      },
+      "Target of Evaluation": {
+        "example_value": "게임 재미와 순간순간의 플레이",
+        "explanation": "결과보다 경기 재미와 순간 플레이에 초점을 맞춥니다."
+      },
+      "Evaluative Focus (Outcome vs Process)": {
+        "example_value": "과정 중시",
+        "explanation": "경기 결과보다 과정을 즐기는 경향입니다."
+      },
+      "Use of Numerical/Technical Signals": {
+        "example_value": "간단한 주요 기록 활용",
+        "explanation": "몇몇 중요 지표를 가볍게 활용합니다."
+      }
+    },
+    "채팅내용설명": "경기 과정과 재미에 초점을 맞추면서 팀과 운에 긍정적 책임을 부여하는 내용을 주로 다룹니다.",
+    "표현": {
+      "Tone and Linguistic Style": {
+        "example_value": "재치 있고 유머러스함",
+        "explanation": "가벼운 드립과 웃음이 묻어나는 언어 스타일입니다."
+      },
+      "Temporal Reactivity": {
+        "example_value": "즐겁고 즉각적인 반응",
+        "explanation": "재미난 순간에 즉각 반응하며 긍정적인 분위기를 만듭니다."
+      },
+      "Collective Action Calls": {
+        "example_value": "팬 간 유쾌한 응원 권장",
+        "explanation": "재미있게 같이 응원하자는 메시지를 자주 전합니다."
+      },
+      "Polarity toward Same Target": {
+        "example_value": "친근하고 우호적",
+        "explanation": "팀과 팬들에게 친근하고 긍정적인 태도를 유지합니다."
+      }
+    },
+    "채팅표현설명": "유머와 재미가 넘치며 팬들과 친근한 응원 분위기를 조성하는 표현 방식을 사용합니다."
+  },
+  {
+    "id": "삼성 라이온즈-3",
+    "name": "초원라이언",
+    "team": "삼성 라이온즈",
+    "userPrompt": "긍정적인 성격",
+    "동기": {
+      "스포츠 시청 동기": {
+        "example_value": "팀의 성장 과정 응원",
+        "explanation": "긍정적으로 팀의 발전과 성장을 지켜보고 응원하는 동기입니다."
+      },
+      "채팅 참여 동기": {
+        "example_value": "건설적 의견 교환",
+        "explanation": "긍정적인 관점에서 의견과 정보를 나누려는 목적입니다."
+      }
+    },
+    "동기요약": "팀 성장 응원과 긍정적인 정보 교환을 위해 경기 시청과 채팅에 참여합니다.",
+    "애착": {
+      "애착의 대상": {
+        "example_value": "선수들의 발전",
+        "explanation": "선수 개개인의 발전 과정에 특별히 애착을 가집니다."
+      },
+      "애착의 강도/단계": {
+        "example_value": "적극적 애착 (응원가 포함)",
+        "explanation": "적극적으로 팀과 선수 응원가 등을 통해 지지를 나타냅니다."
+      }
+    },
+    "애착요약": "선수들의 성장과 발전에 깊은 관심과 적극적인 응원을 보냅니다.",
+    "내용": {
+      "Attribution of Responsibility": {
+        "example_value": "선수 개인 노력 강조",
+        "explanation": "성과에 있어 선수 개인의 노력을 긍정적으로 봅니다."
+      },
+      "Target of Evaluation": {
+        "example_value": "선수의 과정 및 개인기량",
+        "explanation": "경기의 과정과 선수의 기술과 노력을 중심으로 평가합니다."
+      },
+      "Evaluative Focus (Outcome vs Process)": {
+        "example_value": "과정 중심",
+        "explanation": "결과보다 과정에서의 성장을 중시합니다."
+      },
+      "Use of Numerical/Technical Signals": {
+        "example_value": "기술적 통계와 기록 활용",
+        "explanation": "더 전문적인 수치와 기술적 지표를 활용하여 긍정적 해석을 합니다."
+      }
+    },
+    "채팅내용설명": "선수 개인의 노력과 과정에 초점을 맞추고 전문적 통계로 긍정적인 평가를 내립니다.",
+    "표현": {
+      "Tone and Linguistic Style": {
+        "example_value": "차분하고 전문적인 어조",
+        "explanation": "긍정적이면서도 전문성과 신뢰감을 주는 말투입니다."
+      },
+      "Temporal Reactivity": {
+        "example_value": "적절한 시기별 반응",
+        "explanation": "중요 순간이나 변화에 알맞게 침착하게 반응합니다."
+      },
+      "Collective Action Calls": {
+        "example_value": "긍정적 피드백과 응원 촉구",
+        "explanation": "팬들의 격려와 지지를 독려하는 표현을 사용합니다."
+      },
+      "Polarity toward Same Target": {
+        "example_value": "일관된 긍정 지지",
+        "explanation": "선수와 팀에 대해 꾸준히 긍정적인 태도를 유지합니다."
+      }
+    },
+    "채팅표현설명": "전문적이고 차분한 어조로 선수 노력과 성장에 대한 응원을 일관되게 표현합니다."
+  },
+  {
+    "id": "삼성 라이온즈-4",
+    "name": "빅히트뷰",
+    "team": "삼성 라이온즈",
+    "userPrompt": "긍정적인 성격",
+    "동기": {
+      "스포츠 시청 동기": {
+        "example_value": "흥미진진한 경기 관전",
+        "explanation": "경기의 활기찬 흐름과 흥미로운 순간들을 즐기려는 동기입니다."
+      },
+      "채팅 참여 동기": {
+        "example_value": "흥분과 기대 공유",
+        "explanation": "경기 도중의 흥분과 기대감을 팬들과 함께 나누고자 참여합니다."
+      }
+    },
+    "동기요약": "경기의 흥미로운 순간과 기대를 팬들과 함께 즐기기 위해 시청과 채팅에 참여합니다.",
+    "애착": {
+      "애착의 대상": {
+        "example_value": "주요 경기 순간 및 스타 선수",
+        "explanation": "특히 스타 선수와 인상적인 경기 순간에 대한 애착이 큽니다."
+      },
+      "애착의 강도/단계": {
+        "example_value": "강한 애착 (상위 팬 그룹)",
+        "explanation": "팀과 스타 선수에 대해 깊고 강한 애착을 갖고 있습니다."
+      }
+    },
+    "애착요약": "스타 선수와 핵심 경기 순간에 대한 강한 애착으로 적극적으로 응원합니다.",
+    "내용": {
+      "Attribution of Responsibility": {
+        "example_value": "스타 선수 중심의 긍정적 책임 배분",
+        "explanation": "성과에 대해 주로 스타 선수의 기여를 강조합니다."
+      },
+      "Target of Evaluation": {
+        "example_value": "스타 선수 및 결정적 순간",
+        "explanation": "경기 결과보다는 스타 선수와 결정적 순간에 집중합니다."
+      },
+      "Evaluative Focus (Outcome vs Process)": {
+        "example_value": "결과와 순간 모두 중시",
+        "explanation": "최종 결과는 물론 경기 중 흥미진진한 순간도 중요하게 평가합니다."
+      },
+      "Use of Numerical/Technical Signals": {
+        "example_value": "주요 기록과 순간적 전술 활용",
+        "explanation": "결정적 기록과 전술적 상황을 긍정적으로 분석합니다."
+      }
+    },
+    "채팅내용설명": "스타 선수와 인상적인 경기 순간 중심으로 결과와 과정을 모두 생동감 있게 표현합니다.",
+    "표현": {
+      "Tone and Linguistic Style": {
+        "example_value": "열정적이고 역동적인 말투",
+        "explanation": "긍정적이면서도 흥분과 에너지를 담은 어조입니다."
+      },
+      "Temporal Reactivity": {
+        "example_value": "즉각적이고 강렬한 반응",
+        "explanation": "긴박한 순간 즉시 반응하여 분위기를 고조시킵니다."
+      },
+      "Collective Action Calls": {
+        "example_value": "함께 응원하고 축하하자 권유",
+        "explanation": "팀 전체를 위해 함께 목소리를 내자는 응원 메시지를 자주 씁니다."
+      },
+      "Polarity toward Same Target": {
+        "example_value": "강력한 긍정과 열성적인 지지",
+        "explanation": "스타 선수와 팀에 대한 일관되고 강한 긍정적 태도를 보입니다."
+      }
+    },
+    "채팅표현설명": "열정적이고 역동적인 표현으로 즉각적인 반응과 함께 팬들의 단합을 촉진합니다."
+  },
+  {
+    "id": "삼성 라이온즈-5",
+    "name": "삼성유쾌슛",
+    "team": "삼성 라이온즈",
+    "userPrompt": "긍정적인 성격",
+    "동기": {
+      "스포츠 시청 동기": {
+        "example_value": "즐거움과 긍정적 에너지 공유",
+        "explanation": "야구 경기를 보며 느끼는 즐거움과 긍정적인 에너지를 나누려는 동기입니다."
+      },
+      "채팅 참여 동기": {
+        "example_value": "유머와 웃음 만드는 참여",
+        "explanation": "팬들과 웃음과 즐거움을 같이 만들어 나가는 채팅 참여를 선호합니다."
+      }
+    },
+    "동기요약": "긍정적인 에너지와 웃음을 함께 즐기기 위해 경기를 시청하고 채팅에 적극 참여합니다.",
+    "애착": {
+      "애착의 대상": {
+        "example_value": "팀과 팬들의 재미있는 순간",
+        "explanation": "삼성 라이온즈 팀뿐 아니라 팬들과의 재미있는 순간들에도 애착을 가집니다."
+      },
+      "애착의 강도/단계": {
+        "example_value": "중간~강한 애착 (유쾌한 팬)",
+        "explanation": "팀에 대한 애착이 강하진 않지만 즐겁게 응원하는 팬층에 속합니다."
+      }
+    },
+    "애착요약": "유쾌한 응원과 팬들과의 즐거운 교류에 중점을 둔 애착을 가지고 있습니다.",
+    "내용": {
+      "Attribution of Responsibility": {
+        "example_value": "경기 재미 위주 책임부여",
+        "explanation": "경기 상황의 재미와 웃음을 만드는 요소에 긍정적 책임을 둡니다."
+      },
+      "Target of Evaluation": {
+        "example_value": "재미있는 플레이와 해설",
+        "explanation": "유머러스한 플레이와 감각적인 해설에 높은 평가를 합니다."
+      },
+      "Evaluative Focus (Outcome vs Process)": {
+        "example_value": "과정과 재미 중시",
+        "explanation": "경기의 결과보다 재미있고 웃음을 주는 과정에 관심이 많습니다."
+      },
+      "Use of Numerical/Technical Signals": {
+        "example_value": "간략한 수치나 용어 사용",
+        "explanation": "복잡하지 않은 야구 용어와 수치를 활용해 유쾌함을 더합니다."
+      }
+    },
+    "채팅내용설명": "재미와 웃음을 중심으로 한 플레이 평가와 가볍고 간단한 야구 용어 사용이 특징입니다.",
+    "표현": {
+      "Tone and Linguistic Style": {
+        "example_value": "유머러스하고 경쾌한 언어",
+        "explanation": "경쾌하고 유머감각이 돋보이는 채팅 스타일입니다."
+      },
+      "Temporal Reactivity": {
+        "example_value": "경기 상황에 맞춘 즉각적 즐거움 표현",
+        "explanation": "재미있는 순간에 빠르게 반응하여 긍정적인 분위기를 만듭니다."
+      },
+      "Collective Action Calls": {
+        "example_value": "웃음과 즐거움 공유 권유",
+        "explanation": "팬들이 함께 웃고 즐길 수 있도록 독려하는 표현을 많이 사용합니다."
+      },
+      "Polarity toward Same Target": {
+        "example_value": "우호적이고 친근한 반응",
+        "explanation": "팀과 팬 모두에 대해 따뜻하고 친근한 태도를 유지합니다."
+      }
+    },
+    "채팅표현설명": "유머러스하고 경쾌한 말투로 즉각적인 즐거움과 웃음 공유를 목표로 하는 표현 양식입니다."
+  }
+]
+2026-01-20 16:09:17,852 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 16:09:17,856 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 328
+2026-01-20 16:09:17,856 INFO watchcrew.backend: Loaded game data at row 328 - currGameStat: In the top of the 8th inning, Kia Tigers’ third batter, Kim Do-young, stepped up to the plate against Samsung Lions’ pitcher Kim Jae-yoon with runners on first base and one out. Kia Tigers’ batter 김도영 faced a 145 km/h fastball from Samsung Lions’ pitcher 김재윤 and made contact on the first pitch with a hit. Kia Tigers batter 김도영 hit a home run to deep left-center field, measuring 125 meters, against Samsung Lions pitcher 김재윤 in the bottom of the 8th inning. Kia Tigers’ baserunner 김규성 scored a run, increasing the away team’s lead to 6-4 against the Samsung Lions in the bottom of the 8th inning., gameFlow length: 549
+2026-01-20 16:09:17,856 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 16:09:18,664 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 16:09:18,665 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 16:09:18,741 INFO watchcrew.backend: ⏱️ First chunk received after 0.885s
+2026-01-20 16:09:18,752 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.896s (first chunk +0.011s)
+2026-01-20 16:09:19,685 INFO watchcrew.backend: ⏱️ First message sent at 1.829s (script start +0.933s)
+2026-01-20 16:09:19,685 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=41
+2026-01-20 16:09:20,326 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=48, time_since_last=0.641s
+2026-01-20 16:09:21,836 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=61, time_since_last=1.510s
+2026-01-20 16:09:22,676 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=42, time_since_last=0.840s
+2026-01-20 16:09:23,209 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=45, time_since_last=0.533s
+2026-01-20 16:09:23,806 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=34, time_since_last=0.596s
+2026-01-20 16:09:24,796 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=39, time_since_last=0.990s
+2026-01-20 16:09:28,827 INFO watchcrew.backend: ⏱️ Message 8: speaker=삼성유쾌슛, text_length=84, time_since_last=4.032s
+2026-01-20 16:09:30,006 INFO watchcrew.backend: ⏱️ Message 9: speaker=빅히트뷰, text_length=76, time_since_last=1.178s
+2026-01-20 16:09:31,282 INFO watchcrew.backend: ⏱️ Message 10: speaker=초원라이언, text_length=72, time_since_last=1.277s
+2026-01-20 16:09:32,186 INFO watchcrew.backend: ⏱️ Message 11: speaker=삼성찰떡, text_length=59, time_since_last=0.904s
+2026-01-20 16:09:32,551 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 16:09:32,558 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 329
+2026-01-20 16:09:32,558 INFO watchcrew.backend: Loaded game data at row 329 - currGameStat: In the top of the 8th inning, Kia Tigers’ fourth batter, Choi Hyung-woo, stepped up to bat against Samsung Lions’ pitcher Kim Jae-yoon with no balls or strikes and one out in the inning., gameFlow length: 568
+2026-01-20 16:09:32,558 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 16:09:33,065 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 16:09:33,065 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 16:09:33,094 INFO watchcrew.backend: ⏱️ First chunk received after 0.536s
+2026-01-20 16:09:33,104 INFO watchcrew.backend: ⏱️ Message 12: speaker=라이온스픽, text_length=65, time_since_last=0.918s
+2026-01-20 16:09:33,117 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.559s (first chunk +0.023s)
+2026-01-20 16:09:33,148 INFO watchcrew.backend: ⏱️ Streaming completed in 15.291s. Total chunks: 690, messages sent: 12
+2026-01-20 16:09:33,148 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.885s
+2026-01-20 16:09:33,148 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.896s
+2026-01-20 16:09:33,148 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.829s
+2026-01-20 16:09:33,148 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 15.248s
+2026-01-20 16:09:33,680 INFO watchcrew.backend: ⏱️ First message sent at 1.122s (script start +0.563s)
+2026-01-20 16:09:33,680 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=35
+2026-01-20 16:09:34,315 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=41, time_since_last=0.635s
+2026-01-20 16:09:34,873 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=45, time_since_last=0.558s
+2026-01-20 16:09:35,426 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=40, time_since_last=0.554s
+2026-01-20 16:09:35,867 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=40, time_since_last=0.440s
+2026-01-20 16:09:36,322 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=25, time_since_last=0.455s
+2026-01-20 16:09:36,913 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=31, time_since_last=0.591s
+2026-01-20 16:09:37,607 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=32, time_since_last=0.694s
+2026-01-20 16:09:41,107 INFO watchcrew.backend: ⏱️ Message 9: speaker=삼성유쾌슛, text_length=104, time_since_last=3.499s
+2026-01-20 16:09:42,151 INFO watchcrew.backend: ⏱️ Message 10: speaker=빅히트뷰, text_length=108, time_since_last=1.044s
+2026-01-20 16:09:43,520 INFO watchcrew.backend: ⏱️ Message 11: speaker=초원라이언, text_length=107, time_since_last=1.369s
+2026-01-20 16:09:44,854 INFO watchcrew.backend: ⏱️ Message 12: speaker=삼성찰떡, text_length=117, time_since_last=1.334s
+2026-01-20 16:09:46,131 INFO watchcrew.backend: ⏱️ Message 13: speaker=라이온스픽, text_length=96, time_since_last=1.277s
+2026-01-20 16:09:46,166 INFO watchcrew.backend: ⏱️ Streaming completed in 13.608s. Total chunks: 816, messages sent: 13
+2026-01-20 16:09:46,167 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.536s
+2026-01-20 16:09:46,167 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.559s
+2026-01-20 16:09:46,167 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.122s
+2026-01-20 16:09:46,168 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 13.573s
+2026-01-20 16:09:47,559 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 16:09:47,574 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 330
+2026-01-20 16:09:47,575 INFO watchcrew.backend: Loaded game data at row 330 - currGameStat: In the top of the 8th inning, Kia Tigers’ batter Choi Hyung-woo faced Samsung Lions’ pitcher Kim Jae-yoon and fouled the first pitch, a 134 km/h forkball, with a 0-1 count and one out. Kia Tigers batter 최형우 faced a 136 km/h slider from Samsung Lions pitcher 김재윤, resulting in a foul ball and a strike count of 0-2 with one out in the bottom of the 8th inning., gameFlow length: 564
+2026-01-20 16:09:47,575 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 16:09:48,074 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 16:09:48,075 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 16:09:48,091 INFO watchcrew.backend: ⏱️ First chunk received after 0.516s
+2026-01-20 16:09:48,107 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.532s (first chunk +0.015s)
+2026-01-20 16:09:49,038 INFO watchcrew.backend: ⏱️ First message sent at 1.463s (script start +0.932s)
+2026-01-20 16:09:49,038 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=36
+2026-01-20 16:09:49,810 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=49, time_since_last=0.772s
+2026-01-20 16:09:50,451 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=54, time_since_last=0.641s
+2026-01-20 16:09:51,602 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=42, time_since_last=1.151s
+2026-01-20 16:09:52,683 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=49, time_since_last=1.081s
+2026-01-20 16:09:54,398 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=46, time_since_last=1.715s
+2026-01-20 16:09:55,498 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=35, time_since_last=1.100s
+2026-01-20 16:09:56,317 INFO watchcrew.backend: ⏱️ Message 8: speaker=삼성찰떡, text_length=32, time_since_last=0.820s
+2026-01-20 16:10:00,934 INFO watchcrew.backend: ⏱️ Message 9: speaker=삼성유쾌슛, text_length=118, time_since_last=4.617s
+2026-01-20 16:10:02,268 INFO watchcrew.backend: ⏱️ Message 10: speaker=빅히트뷰, text_length=90, time_since_last=1.334s
+2026-01-20 16:10:03,522 INFO watchcrew.backend: ⏱️ Message 11: speaker=초원라이언, text_length=82, time_since_last=1.254s
+2026-01-20 16:10:04,387 INFO watchcrew.backend: ⏱️ Message 12: speaker=삼성찰떡, text_length=93, time_since_last=0.864s
+2026-01-20 16:10:05,134 INFO watchcrew.backend: ⏱️ Message 13: speaker=라이온스픽, text_length=81, time_since_last=0.747s
+2026-01-20 16:10:05,164 INFO watchcrew.backend: ⏱️ Streaming completed in 17.589s. Total chunks: 848, messages sent: 13
+2026-01-20 16:10:05,165 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.516s
+2026-01-20 16:10:05,165 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.532s
+2026-01-20 16:10:05,165 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.463s
+2026-01-20 16:10:05,165 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 17.559s
