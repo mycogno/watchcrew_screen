@@ -606,11 +606,11 @@ def normalize_candidates(
 
 def transform_agent_for_orchestrate(agent: Dict) -> Dict:
     """localStorage 에이전트를 orchestrate용으로 변환
-    
+
     제외할 필드:
     - id, avatarSeed, createdAt, isHome, userPrompt
     - 동기요약, 애착요약, 채팅내용설명, 채팅표현설명
-    
+
     유지할 필드:
     - name → userName
     - team
@@ -620,41 +620,39 @@ def transform_agent_for_orchestrate(agent: Dict) -> Dict:
         "userName": agent.get("name", "DefaultAgent"),
         "team": agent.get("team", "samsung"),
     }
-    
+
     # 팬의 특성 구성
     fan_traits = {}
-    
+
     # 동기 및 애착
     motivation = agent.get("동기", {})
     attachment = agent.get("애착", {})
-    
+
     if motivation or attachment:
         fan_traits["동기"] = motivation if motivation else {}
         fan_traits["애착"] = attachment if attachment else {}
-    
+
     if fan_traits:
         result["팬의 특성"] = fan_traits
-    
+
     # 채팅 특성 구성
     chat_traits = {}
-    
+
     # 내용 및 표현
     content = agent.get("내용", {})
     expression = agent.get("표현", {})
-    
+
     if content or expression:
         chat_traits["내용"] = content if content else {}
         chat_traits["표현"] = expression if expression else {}
-    
+
     if chat_traits:
         result["채팅 특성"] = chat_traits
-    
+
     return result
 
 
-def make_tuning_prompt(
-    user_team: str, user_request: str
-) -> str:
+def make_tuning_prompt(user_team: str, user_request: str) -> str:
     output_schema = {
         "Nickname": "string",
         "팬의 특성": {
@@ -1172,7 +1170,9 @@ async def orchestrate_chat(request: OrchestratorRequest):
 
         # localStorage에서 전달받은 에이전트 리스트 사용
         if request.agents and len(request.agents) > 0:
-            ap_list = [transform_agent_for_orchestrate(agent) for agent in request.agents]
+            ap_list = [
+                transform_agent_for_orchestrate(agent) for agent in request.agents
+            ]
             logger.info(f"Using {len(ap_list)} agents from localStorage")
         else:
             # 폴백: 하드코딩된 에이전트 사용
