@@ -1381,7 +1381,7 @@ async def orchestrate_chat(request: OrchestratorRequest):
                     if script_array_found and script_start_pos >= 0:
                         # script 배열의 끝(])을 찾아서 script 배열 내부만 추출
                         remaining_buffer = buffer[script_start_pos:]
-                        
+
                         # script 배열의 닫는 ] 찾기
                         # 중첩된 배열/객체를 고려하여 올바른 닫는 괄호 찾기
                         bracket_count = 1  # 이미 여는 [ 하나를 지나침
@@ -1389,12 +1389,12 @@ async def orchestrate_chat(request: OrchestratorRequest):
                         in_string = False
                         escape_next = False
                         script_end_pos = -1
-                        
+
                         for i, char in enumerate(remaining_buffer):
                             if escape_next:
                                 escape_next = False
                                 continue
-                            if char == '\\':
+                            if char == "\\":
                                 escape_next = True
                                 continue
                             if char == '"' and not escape_next:
@@ -1402,19 +1402,19 @@ async def orchestrate_chat(request: OrchestratorRequest):
                                 continue
                             if in_string:
                                 continue
-                            
-                            if char == '{':
+
+                            if char == "{":
                                 brace_count += 1
-                            elif char == '}':
+                            elif char == "}":
                                 brace_count -= 1
-                            elif char == '[':
+                            elif char == "[":
                                 bracket_count += 1
-                            elif char == ']':
+                            elif char == "]":
                                 bracket_count -= 1
                                 if bracket_count == 0:
                                     script_end_pos = i
                                     break
-                        
+
                         # script 배열이 아직 완전히 도착하지 않았으면 현재까지만 파싱
                         if script_end_pos == -1:
                             script_content = remaining_buffer

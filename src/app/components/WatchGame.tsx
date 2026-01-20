@@ -105,6 +105,7 @@ export function WatchGame({
   const [expandedBatters, setExpandedBatters] = useState<
     Set<number>
   >(new Set()); // 확장된 타자 목록 (batterAppearanceOrder 기준) - 초기값 비움
+  const shouldAutoScrollRef = useRef(true); // 자동 스크롤 여부 (useRef 사용)
   const chatRef = useRef<HTMLDivElement>(null);
 
   // 예시 문자 중계 데이터 (여러 개)
@@ -567,10 +568,22 @@ export function WatchGame({
   // 인터벌 재설정은 불필요 (이미 설정된 인터벌이 contextMemory를 캡처)
 
   useEffect(() => {
-    if (chatRef.current) {
+    if (chatRef.current && shouldAutoScrollRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
   }, [messages]);
+
+  // 스크롤 이벤트 핸들러
+  const handleChatScroll = () => {
+    if (chatRef.current) {
+      const element = chatRef.current;
+      // 스크롤이 최하단인지 확인 (10px 여유 범위)
+      const isAtBottom = element.scrollHeight - element.scrollTop - element.clientHeight < 10;
+      
+      // 최하단이면 자동 스크롤 재개, 아니면 중지
+      shouldAutoScrollRef.current = isAtBottom;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
@@ -713,6 +726,7 @@ export function WatchGame({
                 <div
                   className="flex-1 overflow-y-auto space-y-2 pr-2"
                   ref={chatRef}
+                  onScroll={handleChatScroll}
                 >
                   {messages.length > 0 ? (
                     messages.map((msg) => {
