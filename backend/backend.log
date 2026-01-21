@@ -16473,3 +16473,442 @@ json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes:
 2026-01-20 19:04:53,417 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.489s
 2026-01-20 19:04:53,417 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.959s
 2026-01-20 19:04:53,417 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 7.821s
+2026-01-20 20:17:36,059 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:17:36,066 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 354
+2026-01-20 20:17:36,066 INFO watchcrew.backend: Loaded game data at row 354 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 716
+2026-01-20 20:17:36,066 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:17:36,999 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:17:36,999 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:17:37,174 INFO watchcrew.backend: ⏱️ First chunk received after 1.108s
+2026-01-20 20:17:37,279 INFO watchcrew.backend: ⏱️ Found 'script' array at 1.213s (first chunk +0.105s)
+2026-01-20 20:17:37,972 INFO watchcrew.backend: ⏱️ First message sent at 1.906s (script start +0.693s)
+2026-01-20 20:17:37,972 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=39
+2026-01-20 20:17:38,576 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=45, time_since_last=0.604s
+2026-01-20 20:17:39,557 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=52, time_since_last=0.981s
+2026-01-20 20:17:40,185 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=45, time_since_last=0.628s
+2026-01-20 20:17:40,921 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=41, time_since_last=0.736s
+2026-01-20 20:17:41,639 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=34, time_since_last=0.718s
+2026-01-20 20:17:42,186 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=32, time_since_last=0.546s
+2026-01-20 20:17:42,679 INFO watchcrew.backend: ⏱️ Message 8: speaker=삼성찰떡, text_length=28, time_since_last=0.493s
+2026-01-20 20:17:50,755 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:17:50,761 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 355
+2026-01-20 20:17:50,762 INFO watchcrew.backend: Loaded game data at row 355 - currGameStat: In the top of the 8th inning, Samsung Lions’ third batter, Gu Ja-wook, stepped up to the plate against Kia Tigers’ pitcher Choi Ji-min with no balls, no strikes, and no runners on base. Samsung Lions, the batting team, made a defensive adjustment as center fielder Park Jung-woo moved to left field while Kia Tigers continued to pitch to batter Gu Ja-wook. In the top of the 8th inning, the Samsung Lions, who are batting, made a defensive substitution as pinch hitter Kim Ho-ryeong replaced center fielder Park Jung-woo, who moved to left field. In the top of the 8th inning, Kia Tigers pitcher Choi Ji-min threw a 146 km/h fastball for a strike against Samsung Lions batter Gu Ja-wook, who is currently batting with no runners on base and no outs., gameFlow length: 690
+2026-01-20 20:17:50,762 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:17:51,530 INFO watchcrew.backend: ⏱️ Streaming completed in 15.465s. Total chunks: 683, messages sent: 8
+2026-01-20 20:17:51,530 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.108s
+2026-01-20 20:17:51,530 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 1.213s
+2026-01-20 20:17:51,530 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.906s
+2026-01-20 20:17:51,530 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 6.613s
+2026-01-20 20:17:53,341 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:17:53,341 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:17:53,351 INFO watchcrew.backend: ⏱️ First chunk received after 2.589s
+2026-01-20 20:17:53,360 INFO watchcrew.backend: ⏱️ Found 'script' array at 2.598s (first chunk +0.009s)
+2026-01-20 20:17:54,033 INFO watchcrew.backend: ⏱️ First message sent at 3.271s (script start +0.673s)
+2026-01-20 20:17:54,033 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=42
+2026-01-20 20:17:54,545 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=46, time_since_last=0.511s
+2026-01-20 20:17:55,318 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=44, time_since_last=0.773s
+2026-01-20 20:17:55,889 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=43, time_since_last=0.571s
+2026-01-20 20:17:56,825 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=42, time_since_last=0.936s
+2026-01-20 20:17:57,497 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=32, time_since_last=0.672s
+2026-01-20 20:17:57,991 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=40, time_since_last=0.494s
+2026-01-20 20:17:58,774 INFO watchcrew.backend: ⏱️ Message 8: speaker=삼성찰떡, text_length=39, time_since_last=0.783s
+2026-01-20 20:18:06,065 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:18:06,072 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 356
+2026-01-20 20:18:06,072 INFO watchcrew.backend: Loaded game data at row 356 - currGameStat: In the top of the 8th inning, Samsung Lions batter Gu Ja-wook took a 135 km/h slider from Kia Tigers pitcher Choi Ji-min and swung and missed for strike two, with no runners on base and the count at 0-2., gameFlow length: 732
+2026-01-20 20:18:06,073 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:18:06,547 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:18:06,548 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:18:06,568 INFO watchcrew.backend: ⏱️ First chunk received after 0.495s
+2026-01-20 20:18:06,588 INFO watchcrew.backend: ⏱️ Streaming completed in 15.826s. Total chunks: 834, messages sent: 8
+2026-01-20 20:18:06,589 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 2.589s
+2026-01-20 20:18:06,589 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 2.598s
+2026-01-20 20:18:06,589 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 3.271s
+2026-01-20 20:18:06,589 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 8.012s
+2026-01-20 20:18:06,600 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.528s (first chunk +0.033s)
+2026-01-20 20:18:07,320 INFO watchcrew.backend: ⏱️ First message sent at 1.247s (script start +0.719s)
+2026-01-20 20:18:07,321 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=40
+2026-01-20 20:18:07,936 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=47, time_since_last=0.616s
+2026-01-20 20:18:08,469 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=43, time_since_last=0.534s
+2026-01-20 20:18:09,086 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=39, time_since_last=0.617s
+2026-01-20 20:18:09,510 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=39, time_since_last=0.424s
+2026-01-20 20:18:10,008 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=39, time_since_last=0.497s
+2026-01-20 20:18:10,441 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=27, time_since_last=0.434s
+2026-01-20 20:18:22,939 INFO watchcrew.backend: ⏱️ Streaming completed in 16.866s. Total chunks: 787, messages sent: 7
+2026-01-20 20:18:22,940 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.495s
+2026-01-20 20:18:22,940 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.528s
+2026-01-20 20:18:22,940 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.247s
+2026-01-20 20:18:22,940 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 4.369s
+2026-01-20 20:22:40,920 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:22:40,936 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 357
+2026-01-20 20:22:40,936 INFO watchcrew.backend: Loaded game data at row 357 - currGameStat: In the top of the 8th inning, Samsung Lions batter Gu Ja-wook faced Kia Tigers pitcher Choi Ji-min and swung at the third pitch, a 136 km/h slider, with a 0-2 count and no runners on base. Samsung Lions’ batter 구자욱 was retired on a fly out to left field against Kia Tigers’ pitcher 최지민, resulting in the first out of the inning. 8회초 삼성 라이온즈가 공격 중인 가운데 4번타자 디아즈가 타석에 들어섰다., gameFlow length: 683
+2026-01-20 20:22:40,937 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:22:41,876 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:22:41,876 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:22:42,055 INFO watchcrew.backend: ⏱️ First chunk received after 1.119s
+2026-01-20 20:22:42,234 INFO watchcrew.backend: ⏱️ Found 'script' array at 1.298s (first chunk +0.179s)
+2026-01-20 20:22:43,272 INFO watchcrew.backend: ⏱️ First message sent at 2.336s (script start +1.038s)
+2026-01-20 20:22:43,272 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=28
+2026-01-20 20:22:44,142 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=43, time_since_last=0.870s
+2026-01-20 20:22:44,608 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=37, time_since_last=0.466s
+2026-01-20 20:22:45,515 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=32, time_since_last=0.907s
+2026-01-20 20:22:46,672 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=35, time_since_last=1.157s
+2026-01-20 20:22:47,250 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=24, time_since_last=0.578s
+2026-01-20 20:22:47,894 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=26, time_since_last=0.644s
+2026-01-20 20:22:48,627 INFO watchcrew.backend: ⏱️ Message 8: speaker=삼성찰떡, text_length=33, time_since_last=0.732s
+2026-01-20 20:22:59,951 INFO watchcrew.backend: ⏱️ Streaming completed in 19.015s. Total chunks: 668, messages sent: 8
+2026-01-20 20:22:59,952 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.119s
+2026-01-20 20:22:59,953 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 1.298s
+2026-01-20 20:22:59,953 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 2.336s
+2026-01-20 20:22:59,953 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 7.690s
+2026-01-20 20:23:01,612 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:23:01,624 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 358
+2026-01-20 20:23:01,624 INFO watchcrew.backend: Loaded game data at row 358 - currGameStat: In the top of the 8th inning, Samsung Lions batter Díaz took a swing and missed on the first pitch, a 136 km/h slider thrown by Kia Tigers pitcher Choi Ji-min, with no runners on base and one out. Samsung Lions의 타자 디아즈가 Kia Tigers 투수 최지민의 슬라이더(135km/h)에 2구째 헛스윙을 기록했다., gameFlow length: 694
+2026-01-20 20:23:01,624 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:23:02,973 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:23:02,973 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:23:02,975 INFO watchcrew.backend: ⏱️ First chunk received after 1.345s
+2026-01-20 20:23:03,000 INFO watchcrew.backend: ⏱️ Found 'script' array at 1.370s (first chunk +0.025s)
+2026-01-20 20:23:03,929 INFO watchcrew.backend: ⏱️ First message sent at 2.299s (script start +0.929s)
+2026-01-20 20:23:03,929 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=44
+2026-01-20 20:23:04,785 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=48, time_since_last=0.856s
+2026-01-20 20:23:06,301 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=50, time_since_last=1.516s
+2026-01-20 20:23:06,983 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=39, time_since_last=0.682s
+2026-01-20 20:23:07,532 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=41, time_since_last=0.549s
+2026-01-20 20:23:09,443 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=40, time_since_last=1.911s
+2026-01-20 20:23:10,189 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=30, time_since_last=0.745s
+2026-01-20 20:23:11,947 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=39, time_since_last=1.759s
+2026-01-20 20:23:20,403 INFO watchcrew.backend: ⏱️ Streaming completed in 18.773s. Total chunks: 797, messages sent: 8
+2026-01-20 20:23:20,403 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.345s
+2026-01-20 20:23:20,403 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 1.370s
+2026-01-20 20:23:20,403 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 2.299s
+2026-01-20 20:23:20,403 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 10.317s
+2026-01-20 20:23:22,418 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:23:22,420 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 359
+2026-01-20 20:23:22,420 INFO watchcrew.backend: Loaded game data at row 359 - currGameStat: In the top of the 8th inning, Samsung Lions batter Díaz faced a slider at 135 km/h from Kia Tigers pitcher Choi Ji-min, with a 0-2 count and one out. Samsung Lions’ batter 디아즈 hit a single to center-right field, reaching first base with one out in the bottom of the 8th inning against Kia Tigers’ pitcher 최지민., gameFlow length: 654
+2026-01-20 20:23:22,420 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:23:22,991 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:23:22,991 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:23:22,996 INFO watchcrew.backend: ⏱️ First chunk received after 0.576s
+2026-01-20 20:23:23,026 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.606s (first chunk +0.029s)
+2026-01-20 20:23:24,655 INFO watchcrew.backend: ⏱️ First message sent at 2.235s (script start +1.629s)
+2026-01-20 20:23:24,655 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=40
+2026-01-20 20:23:25,342 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=36, time_since_last=0.687s
+2026-01-20 20:23:26,155 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=40, time_since_last=0.813s
+2026-01-20 20:23:27,063 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=41, time_since_last=0.908s
+2026-01-20 20:23:27,653 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=36, time_since_last=0.590s
+2026-01-20 20:23:28,515 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=44, time_since_last=0.862s
+2026-01-20 20:23:28,991 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=30, time_since_last=0.476s
+2026-01-20 20:23:29,414 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=30, time_since_last=0.423s
+2026-01-20 20:23:38,635 INFO watchcrew.backend: ⏱️ Streaming completed in 16.214s. Total chunks: 750, messages sent: 8
+2026-01-20 20:23:38,636 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.576s
+2026-01-20 20:23:38,636 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.606s
+2026-01-20 20:23:38,636 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 2.235s
+2026-01-20 20:23:38,636 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 6.994s
+2026-01-20 20:23:43,092 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:23:43,108 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 360
+2026-01-20 20:23:43,108 INFO watchcrew.backend: Loaded game data at row 360 - currGameStat: In the top of the 8th inning, Samsung Lions’ fifth batter, Kim Young-woong, stepped up to the plate against Kia Tigers’ pitcher Choi Ji-min with one out and a runner on first base. Samsung Lions’ batter 김영웅 faces a 147 km/h fastball from Kia Tigers’ pitcher 최지민, resulting in a called strike, bringing the count to 0 balls and 1 strike with one out in the 8th inning., gameFlow length: 730
+2026-01-20 20:23:43,108 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:23:44,124 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:23:44,125 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:23:44,155 INFO watchcrew.backend: ⏱️ First chunk received after 1.047s
+2026-01-20 20:23:44,175 INFO watchcrew.backend: ⏱️ Found 'script' array at 1.068s (first chunk +0.021s)
+2026-01-20 20:23:44,951 INFO watchcrew.backend: ⏱️ First message sent at 1.843s (script start +0.776s)
+2026-01-20 20:23:44,951 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=36
+2026-01-20 20:23:45,633 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=43, time_since_last=0.683s
+2026-01-20 20:23:46,243 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=47, time_since_last=0.610s
+2026-01-20 20:23:47,093 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=38, time_since_last=0.850s
+2026-01-20 20:23:47,781 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=45, time_since_last=0.688s
+2026-01-20 20:23:48,374 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=36, time_since_last=0.593s
+2026-01-20 20:23:50,468 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=34, time_since_last=2.094s
+2026-01-20 20:23:54,799 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=38, time_since_last=4.332s
+2026-01-20 20:24:30,483 INFO watchcrew.backend: ⏱️ Streaming completed in 47.375s. Total chunks: 719, messages sent: 8
+2026-01-20 20:24:30,483 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.047s
+2026-01-20 20:24:30,483 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 1.068s
+2026-01-20 20:24:30,483 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.843s
+2026-01-20 20:24:30,483 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 11.692s
+2026-01-20 20:24:30,708 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:24:30,714 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 361
+2026-01-20 20:24:30,714 INFO watchcrew.backend: Loaded game data at row 361 - currGameStat: In the top of the 8th inning, Samsung Lions batter Kim Young-woong faced Kia Tigers pitcher Choi Ji-min and swung at the second pitch, a 147 km/h fastball, with a 0-1 count and one out. Samsung Lions batter 김영웅 hit a home run over the right fielder's head, covering a distance of 125 meters, against Kia Tigers pitcher 최지민 in the bottom of the 8th inning. 1루에 있던 삼성 라이온즈의 주자 디아즈가 홈으로 들어와 득점했다., gameFlow length: 680
+2026-01-20 20:24:30,714 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:24:32,358 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:24:32,359 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:24:32,556 INFO watchcrew.backend: ⏱️ First chunk received after 1.840s
+2026-01-20 20:24:32,583 INFO watchcrew.backend: ⏱️ Found 'script' array at 1.868s (first chunk +0.027s)
+2026-01-20 20:24:33,281 INFO watchcrew.backend: ⏱️ First message sent at 2.566s (script start +0.698s)
+2026-01-20 20:24:33,281 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=35
+2026-01-20 20:24:34,042 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=41, time_since_last=0.761s
+2026-01-20 20:24:34,733 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=44, time_since_last=0.691s
+2026-01-20 20:24:35,404 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=32, time_since_last=0.671s
+2026-01-20 20:24:36,140 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=42, time_since_last=0.735s
+2026-01-20 20:24:36,951 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=35, time_since_last=0.812s
+2026-01-20 20:24:37,717 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=35, time_since_last=0.765s
+2026-01-20 20:24:38,405 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=45, time_since_last=0.688s
+2026-01-20 20:24:45,735 INFO watchcrew.backend: ⏱️ Streaming completed in 15.020s. Total chunks: 696, messages sent: 8
+2026-01-20 20:24:45,736 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.840s
+2026-01-20 20:24:45,736 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 1.868s
+2026-01-20 20:24:45,736 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 2.566s
+2026-01-20 20:24:45,736 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 7.689s
+2026-01-20 20:24:52,054 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:24:52,061 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 362
+2026-01-20 20:24:52,061 INFO watchcrew.backend: Loaded game data at row 362 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 680
+2026-01-20 20:24:52,062 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:24:53,414 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:24:53,417 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:24:53,459 INFO watchcrew.backend: ⏱️ First chunk received after 1.397s
+2026-01-20 20:24:53,464 INFO watchcrew.backend: ⏱️ Found 'script' array at 1.402s (first chunk +0.005s)
+2026-01-20 20:24:54,086 INFO watchcrew.backend: ⏱️ First message sent at 2.024s (script start +0.622s)
+2026-01-20 20:24:54,086 INFO watchcrew.backend: ⏱️ Message 1: speaker=빅히트뷰, text_length=31
+2026-01-20 20:24:54,603 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성유쾌슛, text_length=40, time_since_last=0.517s
+2026-01-20 20:24:55,227 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=42, time_since_last=0.624s
+2026-01-20 20:24:56,109 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=38, time_since_last=0.882s
+2026-01-20 20:24:56,575 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=41, time_since_last=0.466s
+2026-01-20 20:24:57,487 INFO watchcrew.backend: ⏱️ Message 6: speaker=빅히트뷰, text_length=33, time_since_last=0.913s
+2026-01-20 20:24:57,942 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성유쾌슛, text_length=30, time_since_last=0.454s
+2026-01-20 20:24:58,702 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=36, time_since_last=0.761s
+2026-01-20 20:25:08,486 INFO watchcrew.backend: ⏱️ Streaming completed in 16.424s. Total chunks: 700, messages sent: 8
+2026-01-20 20:25:08,486 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.397s
+2026-01-20 20:25:08,487 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 1.402s
+2026-01-20 20:25:08,487 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 2.024s
+2026-01-20 20:25:08,487 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 6.641s
+2026-01-20 20:25:12,493 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:25:12,498 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 363
+2026-01-20 20:25:12,498 INFO watchcrew.backend: Loaded game data at row 363 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 680
+2026-01-20 20:25:12,498 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:25:12,957 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:25:12,958 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:25:12,974 INFO watchcrew.backend: ⏱️ First chunk received after 0.476s
+2026-01-20 20:25:13,010 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.512s (first chunk +0.036s)
+2026-01-20 20:25:13,984 INFO watchcrew.backend: ⏱️ First message sent at 1.486s (script start +0.974s)
+2026-01-20 20:25:13,984 INFO watchcrew.backend: ⏱️ Message 1: speaker=빅히트뷰, text_length=48
+2026-01-20 20:25:15,312 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성유쾌슛, text_length=57, time_since_last=1.328s
+2026-01-20 20:25:17,127 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=55, time_since_last=1.815s
+2026-01-20 20:25:18,936 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=44, time_since_last=1.808s
+2026-01-20 20:25:19,648 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=41, time_since_last=0.713s
+2026-01-20 20:25:20,473 INFO watchcrew.backend: ⏱️ Message 6: speaker=빅히트뷰, text_length=40, time_since_last=0.825s
+2026-01-20 20:25:21,257 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성유쾌슛, text_length=28, time_since_last=0.785s
+2026-01-20 20:25:21,958 INFO watchcrew.backend: ⏱️ Message 8: speaker=삼성찰떡, text_length=33, time_since_last=0.700s
+2026-01-20 20:25:30,507 INFO watchcrew.backend: ⏱️ Streaming completed in 18.009s. Total chunks: 792, messages sent: 8
+2026-01-20 20:25:30,507 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.476s
+2026-01-20 20:25:30,509 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.512s
+2026-01-20 20:25:30,509 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.486s
+2026-01-20 20:25:30,509 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 9.459s
+2026-01-20 20:26:16,577 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:26:16,594 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 364
+2026-01-20 20:26:16,594 INFO watchcrew.backend: Loaded game data at row 364 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 680
+2026-01-20 20:26:16,595 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:26:17,031 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:26:17,031 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:26:17,067 INFO watchcrew.backend: ⏱️ First chunk received after 0.472s
+2026-01-20 20:26:17,096 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.501s (first chunk +0.029s)
+2026-01-20 20:26:18,158 INFO watchcrew.backend: ⏱️ First message sent at 1.563s (script start +1.062s)
+2026-01-20 20:26:18,158 INFO watchcrew.backend: ⏱️ Message 1: speaker=빅히트뷰, text_length=48
+2026-01-20 20:26:18,938 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성유쾌슛, text_length=31, time_since_last=0.779s
+2026-01-20 20:26:19,755 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=42, time_since_last=0.818s
+2026-01-20 20:26:20,608 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=41, time_since_last=0.852s
+2026-01-20 20:26:21,297 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=34, time_since_last=0.690s
+2026-01-20 20:26:22,463 INFO watchcrew.backend: ⏱️ Message 6: speaker=빅히트뷰, text_length=31, time_since_last=1.166s
+2026-01-20 20:26:22,986 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성유쾌슛, text_length=31, time_since_last=0.523s
+2026-01-20 20:26:23,516 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=32, time_since_last=0.530s
+2026-01-20 20:26:32,082 INFO watchcrew.backend: ⏱️ Streaming completed in 15.486s. Total chunks: 651, messages sent: 8
+2026-01-20 20:26:32,082 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.472s
+2026-01-20 20:26:32,083 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.501s
+2026-01-20 20:26:32,083 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.563s
+2026-01-20 20:26:32,083 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 6.921s
+2026-01-20 20:26:44,156 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:26:44,156 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 365
+2026-01-20 20:26:44,156 INFO watchcrew.backend: Loaded game data at row 365 - currGameStat: There's a TV commercial or a replay on., gameFlow length: 680
+2026-01-20 20:26:44,156 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:26:45,344 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:26:45,344 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:26:45,395 INFO watchcrew.backend: ⏱️ First chunk received after 1.239s
+2026-01-20 20:26:45,413 INFO watchcrew.backend: ⏱️ Found 'script' array at 1.256s (first chunk +0.017s)
+2026-01-20 20:26:46,187 INFO watchcrew.backend: ⏱️ First message sent at 2.031s (script start +0.774s)
+2026-01-20 20:26:46,187 INFO watchcrew.backend: ⏱️ Message 1: speaker=빅히트뷰, text_length=48
+2026-01-20 20:26:47,147 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성유쾌슛, text_length=57, time_since_last=0.960s
+2026-01-20 20:26:47,869 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=52, time_since_last=0.722s
+2026-01-20 20:26:49,237 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=45, time_since_last=1.368s
+2026-01-20 20:26:49,779 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=37, time_since_last=0.542s
+2026-01-20 20:26:50,351 INFO watchcrew.backend: ⏱️ Message 6: speaker=빅히트뷰, text_length=29, time_since_last=0.572s
+2026-01-20 20:26:50,995 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성유쾌슛, text_length=35, time_since_last=0.644s
+2026-01-20 20:26:51,642 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=38, time_since_last=0.647s
+2026-01-20 20:26:58,076 INFO watchcrew.backend: ⏱️ Streaming completed in 13.920s. Total chunks: 725, messages sent: 8
+2026-01-20 20:26:58,076 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.239s
+2026-01-20 20:26:58,076 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 1.256s
+2026-01-20 20:26:58,078 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 2.031s
+2026-01-20 20:26:58,078 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 7.486s
+2026-01-20 20:27:12,745 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:27:12,752 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 366
+2026-01-20 20:27:12,752 INFO watchcrew.backend: Loaded game data at row 366 - currGameStat: In the top of the 8th inning, Samsung Lions’ sixth batter, Kim Heon-gon, stepped up to the plate against Kia Tigers’ pitcher Choi Ji-min with no balls or strikes and one out. In the top of the 8th inning, the Kia Tigers, currently fielding, replaced pitcher Choi Ji-min with pitcher Jo Sang-woo while the Samsung Lions, batting, had Kim Heon-gon at the plate with one out and no runners on base., gameFlow length: 713
+2026-01-20 20:27:12,752 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:27:13,250 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:27:13,251 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:27:13,280 INFO watchcrew.backend: ⏱️ First chunk received after 0.527s
+2026-01-20 20:27:13,368 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.616s (first chunk +0.089s)
+2026-01-20 20:27:13,901 INFO watchcrew.backend: ⏱️ First message sent at 1.148s (script start +0.532s)
+2026-01-20 20:27:13,901 INFO watchcrew.backend: ⏱️ Message 1: speaker=빅히트뷰, text_length=37
+2026-01-20 20:27:14,294 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성유쾌슛, text_length=27, time_since_last=0.393s
+2026-01-20 20:27:14,818 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=38, time_since_last=0.524s
+2026-01-20 20:27:15,261 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=34, time_since_last=0.444s
+2026-01-20 20:27:15,685 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=38, time_since_last=0.424s
+2026-01-20 20:27:16,656 INFO watchcrew.backend: ⏱️ Message 6: speaker=빅히트뷰, text_length=31, time_since_last=0.970s
+2026-01-20 20:27:17,328 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성유쾌슛, text_length=32, time_since_last=0.672s
+2026-01-20 20:27:17,696 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=30, time_since_last=0.368s
+2026-01-20 20:27:36,730 INFO watchcrew.backend: ⏱️ Streaming completed in 23.976s. Total chunks: 733, messages sent: 8
+2026-01-20 20:27:36,730 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.527s
+2026-01-20 20:27:36,730 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.616s
+2026-01-20 20:27:36,730 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.148s
+2026-01-20 20:27:36,730 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 4.944s
+2026-01-20 20:28:05,937 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:28:05,944 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 367
+2026-01-20 20:28:05,944 INFO watchcrew.backend: Loaded game data at row 367 - currGameStat: In the top of the 8th inning, Kia Tigers' pitcher 조상우 delivered a 127 km/h slider for a strike against Samsung Lions' batter 김헌곤, who is batting sixth in the lineup, with one out and no runners on base. In the top of the 8th inning, Kia Tigers pitcher 조상우 threw a 128 km/h slider for a ball, bringing the count to one ball and one strike against Samsung Lions batter 김헌곤, with one out and no runners on base., gameFlow length: 696
+2026-01-20 20:28:05,944 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:28:06,420 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:28:06,426 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:28:06,548 INFO watchcrew.backend: ⏱️ First chunk received after 0.603s
+2026-01-20 20:28:06,634 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.690s (first chunk +0.086s)
+2026-01-20 20:28:07,212 INFO watchcrew.backend: ⏱️ First message sent at 1.268s (script start +0.578s)
+2026-01-20 20:28:07,213 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=34
+2026-01-20 20:28:08,013 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=41, time_since_last=0.801s
+2026-01-20 20:28:08,532 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=34, time_since_last=0.519s
+2026-01-20 20:28:09,167 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=35, time_since_last=0.634s
+2026-01-20 20:28:09,859 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=41, time_since_last=0.692s
+2026-01-20 20:28:10,454 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=32, time_since_last=0.595s
+2026-01-20 20:28:10,841 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=36, time_since_last=0.388s
+2026-01-20 20:28:11,269 INFO watchcrew.backend: ⏱️ Message 8: speaker=삼성찰떡, text_length=31, time_since_last=0.427s
+2026-01-20 20:28:20,642 INFO watchcrew.backend: ⏱️ Streaming completed in 14.698s. Total chunks: 811, messages sent: 8
+2026-01-20 20:28:20,642 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.603s
+2026-01-20 20:28:20,643 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.690s
+2026-01-20 20:28:20,643 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.268s
+2026-01-20 20:28:20,643 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 5.325s
+2026-01-20 20:28:33,545 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:28:33,545 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 368
+2026-01-20 20:28:33,545 INFO watchcrew.backend: Loaded game data at row 368 - currGameStat: In the top of the 8th inning, Samsung Lions batter Kim Heon-gon faced Kia Tigers pitcher Jo Sang-woo and fouled off a slider on the third pitch, bringing the count to one ball and two strikes with one out and no runners on base., gameFlow length: 676
+2026-01-20 20:28:33,545 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:28:34,094 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:28:34,094 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:28:34,144 INFO watchcrew.backend: ⏱️ First chunk received after 0.599s
+2026-01-20 20:28:34,167 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.621s (first chunk +0.022s)
+2026-01-20 20:28:34,764 INFO watchcrew.backend: ⏱️ First message sent at 1.219s (script start +0.598s)
+2026-01-20 20:28:34,764 INFO watchcrew.backend: ⏱️ Message 1: speaker=빅히트뷰, text_length=29
+2026-01-20 20:28:35,387 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성유쾌슛, text_length=31, time_since_last=0.623s
+2026-01-20 20:28:36,017 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=41, time_since_last=0.631s
+2026-01-20 20:28:36,682 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=31, time_since_last=0.664s
+2026-01-20 20:28:37,052 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=33, time_since_last=0.370s
+2026-01-20 20:28:37,818 INFO watchcrew.backend: ⏱️ Message 6: speaker=빅히트뷰, text_length=37, time_since_last=0.766s
+2026-01-20 20:28:38,629 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성유쾌슛, text_length=32, time_since_last=0.811s
+2026-01-20 20:28:38,965 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=34, time_since_last=0.335s
+2026-01-20 20:28:44,343 INFO watchcrew.backend: ⏱️ Streaming completed in 10.798s. Total chunks: 630, messages sent: 8
+2026-01-20 20:28:44,343 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.599s
+2026-01-20 20:28:44,343 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.621s
+2026-01-20 20:28:44,343 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.219s
+2026-01-20 20:28:44,343 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 5.418s
+2026-01-20 20:29:00,734 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:29:00,750 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 369
+2026-01-20 20:29:00,750 INFO watchcrew.backend: Loaded game data at row 369 - currGameStat: In the top of the 8th inning, Samsung Lions batter Kim Heon-gon faced Kia Tigers pitcher Jo Sang-woo and fouled off a 145 km/h fastball, bringing the count to one ball and two strikes with one out and no runners on base., gameFlow length: 686
+2026-01-20 20:29:00,750 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:29:01,233 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:29:01,233 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:29:01,279 INFO watchcrew.backend: ⏱️ First chunk received after 0.529s
+2026-01-20 20:29:01,309 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.559s (first chunk +0.030s)
+2026-01-20 20:29:01,856 INFO watchcrew.backend: ⏱️ First message sent at 1.106s (script start +0.547s)
+2026-01-20 20:29:01,856 INFO watchcrew.backend: ⏱️ Message 1: speaker=빅히트뷰, text_length=33
+2026-01-20 20:29:02,546 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성유쾌슛, text_length=41, time_since_last=0.690s
+2026-01-20 20:29:03,562 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=52, time_since_last=1.016s
+2026-01-20 20:29:04,261 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=35, time_since_last=0.699s
+2026-01-20 20:29:05,012 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=49, time_since_last=0.751s
+2026-01-20 20:29:05,827 INFO watchcrew.backend: ⏱️ Message 6: speaker=빅히트뷰, text_length=42, time_since_last=0.815s
+2026-01-20 20:29:07,107 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성유쾌슛, text_length=36, time_since_last=1.280s
+2026-01-20 20:29:07,906 INFO watchcrew.backend: ⏱️ Message 8: speaker=삼성찰떡, text_length=32, time_since_last=0.799s
+2026-01-20 20:29:15,968 INFO watchcrew.backend: ⏱️ Streaming completed in 15.217s. Total chunks: 822, messages sent: 8
+2026-01-20 20:29:15,968 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.529s
+2026-01-20 20:29:15,968 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.559s
+2026-01-20 20:29:15,968 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.106s
+2026-01-20 20:29:15,968 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 7.155s
+2026-01-20 20:29:28,373 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:29:28,390 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 370
+2026-01-20 20:29:28,390 INFO watchcrew.backend: Loaded game data at row 370 - currGameStat: In the top of the 8th inning, Samsung Lions batter Kim Heon-gon faced Kia Tigers pitcher Jo Sang-woo and took a fifth pitch fastball for a ball, bringing the count to 2 balls and 2 strikes with one out and no runners on base., gameFlow length: 648
+2026-01-20 20:29:28,390 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:29:28,920 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:29:28,920 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:29:29,001 INFO watchcrew.backend: ⏱️ First chunk received after 0.611s
+2026-01-20 20:29:29,007 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.617s (first chunk +0.006s)
+2026-01-20 20:29:30,336 INFO watchcrew.backend: ⏱️ First message sent at 1.946s (script start +1.329s)
+2026-01-20 20:29:30,337 INFO watchcrew.backend: ⏱️ Message 1: speaker=빅히트뷰, text_length=46
+2026-01-20 20:29:31,327 INFO watchcrew.backend: ⏱️ Message 2: speaker=삼성유쾌슛, text_length=46, time_since_last=0.991s
+2026-01-20 20:29:32,161 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=44, time_since_last=0.834s
+2026-01-20 20:29:32,867 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=37, time_since_last=0.706s
+2026-01-20 20:29:33,332 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=46, time_since_last=0.465s
+2026-01-20 20:29:34,161 INFO watchcrew.backend: ⏱️ Message 6: speaker=빅히트뷰, text_length=49, time_since_last=0.829s
+2026-01-20 20:29:34,806 INFO watchcrew.backend: ⏱️ Message 7: speaker=삼성유쾌슛, text_length=44, time_since_last=0.645s
+2026-01-20 20:29:35,911 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=49, time_since_last=1.105s
+2026-01-20 20:29:43,765 INFO watchcrew.backend: ⏱️ Streaming completed in 15.375s. Total chunks: 716, messages sent: 8
+2026-01-20 20:29:43,766 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.611s
+2026-01-20 20:29:43,766 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.617s
+2026-01-20 20:29:43,766 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.946s
+2026-01-20 20:29:43,766 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 7.521s
+2026-01-20 20:29:56,698 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:29:56,705 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 371
+2026-01-20 20:29:56,705 INFO watchcrew.backend: Loaded game data at row 371 - currGameStat: In the top of the 8th inning, Samsung Lions batter Kim Heon-gon faced Kia Tigers pitcher Jo Sang-woo and swung and missed on a 145 km/h fastball for the sixth pitch, resulting in a full count of 2 balls and 3 strikes with one out and no runners on base. Samsung Lions’ batter 김헌곤 struck out against Kia Tigers’ pitcher 조상우, marking the second out in the 8th inning., gameFlow length: 629
+2026-01-20 20:29:56,705 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:29:57,980 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:29:57,980 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:29:58,002 INFO watchcrew.backend: ⏱️ First chunk received after 1.297s
+2026-01-20 20:29:58,009 INFO watchcrew.backend: ⏱️ Found 'script' array at 1.303s (first chunk +0.007s)
+2026-01-20 20:29:58,587 INFO watchcrew.backend: ⏱️ First message sent at 1.881s (script start +0.578s)
+2026-01-20 20:29:58,587 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=44
+2026-01-20 20:29:59,237 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=37, time_since_last=0.650s
+2026-01-20 20:29:59,855 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=46, time_since_last=0.617s
+2026-01-20 20:30:00,497 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=45, time_since_last=0.642s
+2026-01-20 20:30:01,117 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=46, time_since_last=0.620s
+2026-01-20 20:30:01,935 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=35, time_since_last=0.818s
+2026-01-20 20:30:02,739 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=39, time_since_last=0.804s
+2026-01-20 20:30:03,885 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=33, time_since_last=1.146s
+2026-01-20 20:30:11,190 INFO watchcrew.backend: ⏱️ Streaming completed in 14.484s. Total chunks: 721, messages sent: 8
+2026-01-20 20:30:11,190 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.297s
+2026-01-20 20:30:11,190 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 1.303s
+2026-01-20 20:30:11,190 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.881s
+2026-01-20 20:30:11,190 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 7.180s
+2026-01-20 20:30:25,082 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:30:25,089 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 372
+2026-01-20 20:30:25,090 INFO watchcrew.backend: Loaded game data at row 372 - currGameStat: In the top of the 8th inning, Samsung Lions batter Kim Heon-gon faced Kia Tigers pitcher Jo Sang-woo and swung and missed on a 145 km/h fastball for the sixth pitch, resulting in a full count of 2 balls and 3 strikes with one out and no runners on base. Samsung Lions’ batter 김헌곤 struck out against Kia Tigers’ pitcher 조상우, marking the second out in the top of the 8th inning., gameFlow length: 635
+2026-01-20 20:30:25,090 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:30:25,587 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:30:25,587 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:30:25,635 INFO watchcrew.backend: ⏱️ First chunk received after 0.545s
+2026-01-20 20:30:25,747 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.657s (first chunk +0.112s)
+2026-01-20 20:30:26,245 INFO watchcrew.backend: ⏱️ First message sent at 1.156s (script start +0.498s)
+2026-01-20 20:30:26,245 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=41
+2026-01-20 20:30:28,345 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=47, time_since_last=2.099s
+2026-01-20 20:30:29,108 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=45, time_since_last=0.763s
+2026-01-20 20:30:29,743 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=44, time_since_last=0.635s
+2026-01-20 20:30:30,621 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=40, time_since_last=0.878s
+2026-01-20 20:30:31,145 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=33, time_since_last=0.524s
+2026-01-20 20:30:31,876 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=33, time_since_last=0.732s
+2026-01-20 20:30:32,516 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=36, time_since_last=0.639s
+2026-01-20 20:30:49,998 INFO watchcrew.backend: ⏱️ Streaming completed in 24.908s. Total chunks: 738, messages sent: 8
+2026-01-20 20:30:49,998 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.545s
+2026-01-20 20:30:49,998 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.657s
+2026-01-20 20:30:49,998 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.156s
+2026-01-20 20:30:49,998 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 7.426s
+2026-01-20 20:30:52,405 INFO watchcrew.backend: Using 5 agents from localStorage
+2026-01-20 20:30:52,423 INFO watchcrew.backend: Loaded game data from 250523_HTSS_HT_game.csv at row 373
+2026-01-20 20:30:52,423 INFO watchcrew.backend: Loaded game data at row 373 - currGameStat: In the top of the 8th inning, with two outs and no runners on base, Samsung Lions’ seventh batter, Ryu Ji-hyuk, stepped up to face Kia Tigers’ pitcher Jo Sang-woo with a 0-0 count. In the top of the 8th inning, with two outs and no runners on base, the Samsung Lions, who are batting, replaced their 7th batter, Ryu Ji-hyuk, with pinch hitter Kang Min-ho against Kia Tigers pitcher Jo Sang-woo. In the bottom of the 8th inning, the Samsung Lions, who are batting, have sent in pinch hitter Kang Min-ho to bat in place of Ryu Ji-hyuk against Kia Tigers pitcher Jo Sang-woo, with two outs and no runners on base. In the bottom of the 8th inning, Samsung Lions batter 류지혁 faced Kia Tigers pitcher 조상우 and fouled off the first pitch, a 141 km/h forkball, bringing the count to no balls and one strike with two outs and no runners on base., gameFlow length: 649
+2026-01-20 20:30:52,423 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-20 20:30:52,983 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-20 20:30:52,983 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-20 20:30:53,131 INFO watchcrew.backend: ⏱️ First chunk received after 0.708s
+2026-01-20 20:30:53,326 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.903s (first chunk +0.195s)
+2026-01-20 20:30:54,327 INFO watchcrew.backend: ⏱️ First message sent at 1.903s (script start +1.001s)
+2026-01-20 20:30:54,327 INFO watchcrew.backend: ⏱️ Message 1: speaker=삼성유쾌슛, text_length=40
+2026-01-20 20:30:55,193 INFO watchcrew.backend: ⏱️ Message 2: speaker=빅히트뷰, text_length=35, time_since_last=0.866s
+2026-01-20 20:30:55,587 INFO watchcrew.backend: ⏱️ Message 3: speaker=초원라이언, text_length=37, time_since_last=0.394s
+2026-01-20 20:30:56,998 INFO watchcrew.backend: ⏱️ Message 4: speaker=삼성찰떡, text_length=42, time_since_last=1.411s
+2026-01-20 20:30:57,804 INFO watchcrew.backend: ⏱️ Message 5: speaker=라이온스픽, text_length=43, time_since_last=0.806s
+2026-01-20 20:30:59,264 INFO watchcrew.backend: ⏱️ Message 6: speaker=삼성유쾌슛, text_length=34, time_since_last=1.459s
+2026-01-20 20:30:59,941 INFO watchcrew.backend: ⏱️ Message 7: speaker=빅히트뷰, text_length=36, time_since_last=0.677s
+2026-01-20 20:31:00,498 INFO watchcrew.backend: ⏱️ Message 8: speaker=초원라이언, text_length=38, time_since_last=0.557s
+2026-01-20 20:31:07,886 INFO watchcrew.backend: ⏱️ Streaming completed in 15.463s. Total chunks: 747, messages sent: 8
+2026-01-20 20:31:07,886 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.708s
+2026-01-20 20:31:07,886 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.903s
+2026-01-20 20:31:07,886 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstMessage: 1.903s
+2026-01-20 20:31:07,886 INFO watchcrew.backend: ⏱️ Timing summary: Request→LastMessage: 8.074s

@@ -31,9 +31,10 @@ interface AgentCardProps {
   onDelete: (id: string) => void;
   homeTeamId?: string | null;
   awayTeamId?: string | null;
+  readOnly?: boolean;
 }
 
-export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: AgentCardProps) {
+export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, readOnly }: AgentCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(agent.name);
   const [editPrompt, setEditPrompt] = useState(agent.userPrompt);
@@ -129,7 +130,7 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId }: A
               </div>
             </>
           )}
-          {!isEditing && (
+          {!isEditing && !readOnly && (
             <div className="flex gap-2 flex-shrink-0">
               <Button
                 variant="ghost"

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Agent } from "./AgentCard";
+import { Agent, AgentCard } from "./AgentCard";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -9,6 +9,7 @@ import {
 } from "./ui/card";
 import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import {
   ArrowLeft,
   Send,
@@ -683,59 +684,28 @@ export function WatchGame({
                 </Button>
               </CardHeader>
               <CardContent className="flex-1 flex flex-col gap-3 p-4 overflow-hidden min-h-0 relative">
-                {/* Agent Info Panel */}
-                {showAgentInfo && (
-                  <div className="absolute top-0 left-0 right-0 z-10 bg-white shadow-lg rounded-lg m-4 p-4 space-y-2 border">
-                    <p className="text-xs font-semibold text-muted-foreground">
-                      활성화된 AI 팬 ({selectedAgents.length}명)
-                    </p>
-                    <div className="space-y-2 max-h-[200px] overflow-y-auto pr-2">
-                      {selectedAgents.map((agent) => {
-                        const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${agent.avatarSeed}`;
-                        const teamInfo = getTeamInfo(
-                          agent.team,
-                        );
-
-                        return (
-                          <div
-                            key={agent.id}
-                            className="p-2 bg-slate-50 rounded-lg space-y-1"
-                          >
-                            <div className="flex items-center gap-2">
-                              <img
-                                src={avatarUrl}
-                                alt={agent.name}
-                                className="size-6 rounded-full bg-white flex-shrink-0"
-                              />
-                              <span className="font-semibold text-sm">
-                                {agent.name}
-                              </span>
-                              <Badge
-                                variant={
-                                  agent.isHome
-                                    ? "default"
-                                    : "secondary"
-                                }
-                                className="text-xs"
-                                style={{
-                                  backgroundColor:
-                                    teamInfo.color,
-                                  borderColor: teamInfo.color,
-                                  color: "white",
-                                }}
-                              >
-                                {teamInfo.shortName}
-                              </Badge>
-                            </div>
-                            <p className="text-xs text-muted-foreground pl-8">
-                              {agent.prompt}
-                            </p>
-                          </div>
-                        );
-                      })}
+                {/* Agent List Modal (full details) */}
+                <Dialog open={showAgentInfo} onOpenChange={(open) => setShowAgentInfo(!!open)}>
+                  <DialogContent className="max-w-[90vw] w-full sm:max-w-[90vw] max-h-[95vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="text-xl">에이전트 목록</DialogTitle>
+                      <p className="text-sm text-muted-foreground mt-1">선택된 에이전트들의 상세 정보를 확인하세요.</p>
+                    </DialogHeader>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-2">
+                      {selectedAgents.map((agent) => (
+                        <AgentCard
+                          key={agent.id}
+                          agent={agent}
+                          onEdit={() => {}}
+                          onDelete={() => {}}
+                          homeTeamId={homeTeamId}
+                          awayTeamId={awayTeamId}
+                          readOnly={true}
+                        />
+                      ))}
                     </div>
-                  </div>
-                )}
+                  </DialogContent>
+                </Dialog>
 
                 {/* Chat Messages */}
                 <div
