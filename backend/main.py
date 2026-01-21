@@ -62,6 +62,10 @@ logger.info("OPENAI_API_KEY present: %s", bool(os.getenv("OPENAI_API_KEY")))
 # 게임 데이터 row_index 상태 관리 (요청마다 증가)
 current_row_index = 328
 
+# 게임 데이터 캐시 (앱 시작 시 한 번만 로드)
+_game_data_cache: Optional[pd.DataFrame] = None
+_game_file_cache: Optional[str] = None
+
 # 환경변수로 허용할 origin을 설정할 수 있도록 함 (쉼표로 구분)
 _allowed = os.getenv(
     "BACKEND_ALLOWED_ORIGINS",
@@ -365,6 +369,10 @@ def load_game_data(
     backend/game 폴더에서 CSV 파일을 로드하고 특정 행에서
     currGameStat과 gameFlow를 추출합니다.
 
+    캐싱 전략:
+    - 같은 game_file이면 메모리 캐시된 DataFrame 재사용
+    - 다른 파일 요청 시에만 새로 로드
+
     orchestration_v2.ipynb의 로직:
     i = 361
     curr_game_stat = df.loc[i, 'currGameStat']
@@ -377,6 +385,8 @@ def load_game_data(
     Returns:
         tuple: (currGameStat, gameFlow, df)
     """
+    global _game_data_cache, _game_file_cache
+
     try:
         game_path = Path(__file__).resolve().parent / "game" / game_file
 
@@ -384,15 +394,31 @@ def load_game_data(
             logger.warning(f"Game file not found: {game_path}, using default data")
             return "경기 진행 중", "경기 흐름 데이터 없음", None
 
-        # CSV 파일 로드
-        df = pd.read_csv(game_path, encoding="utf-8-sig")
+        # 캐시 확인: 같은 파일이면 캐시된 DataFrame 사용
+        if _game_file_cache == game_file and _game_data_cache is not None:
+            df = _game_data_cache
+            logger.debug(f"Using cached game data for {game_file}")
+        else:
+            # CSV 파일 로드 (처음이거나 다른 파일 요청 시)
+            logger.info(f"Loading game data from {game_file}...")
+            load_start = time.time()
+            df = pd.read_csv(game_path, encoding="utf-8-sig")
 
-        if df.empty:
-            logger.warning(f"Game data is empty: {game_path}")
-            return "경기 진행 중", "경기 흐름 데이터 없음", df
+            if df.empty:
+                logger.warning(f"Game data is empty: {game_path}")
+                return "경기 진행 중", "경기 흐름 데이터 없음", df
 
-        # 중복 제거 (orchestration_v2.ipynb 참고)
-        df = df.drop_duplicates("messageTime").reset_index(drop=True)
+            # 중복 제거 (orchestration_v2.ipynb 참고)
+            df = df.drop_duplicates("messageTime").reset_index(drop=True)
+
+            # 캐시 저장
+            _game_data_cache = df
+            _game_file_cache = game_file
+
+            load_time = time.time() - load_start
+            logger.info(
+                f"Loaded and cached game data from {game_file} in {load_time:.3f}s ({len(df)} rows)"
+            )
 
         # 지정된 행 번호가 유효한지 확인
         if row_index < 0 or row_index >= len(df):
@@ -414,7 +440,7 @@ def load_game_data(
             )
         )
 
-        logger.info(f"Loaded game data from {game_file} at row {row_index}")
+        logger.debug(f"Retrieved row {row_index} from cached data")
         logger.debug(f"Current game stat: {curr_game_stat}")
         logger.debug(f"Game flow: {game_flow[:100]}...")  # 첫 100자만 로그
 

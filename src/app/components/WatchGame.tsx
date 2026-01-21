@@ -64,7 +64,7 @@ interface PlayData {
   ballCount: string;
   pitchResult: string;
   pitchType: string;
-  pitchSpeed: number;
+  pitchSpeed: number | string;
   totalPitches: number;
   pitchTime: string;
   runnerOnFirst: number;
@@ -106,8 +106,26 @@ export function WatchGame({
   const [expandedBatters, setExpandedBatters] = useState<
     Set<number>
   >(new Set()); // 확장된 타자 목록 (batterAppearanceOrder 기준) - 초기값 비움
+  const [speedMode, setSpeedMode] = useState<"fast" | "normal" | "slow">("normal");
   const shouldAutoScrollRef = useRef(true); // 자동 스크롤 여부 (useRef 사용)
   const chatRef = useRef<HTMLDivElement>(null);
+  const speedModeRef = useRef<"fast" | "normal" | "slow">("normal");
+  const lastDisplayTimeRef = useRef<number | null>(null); // cross-request display pacing
+
+  const updateSpeedMode = (mode: "fast" | "normal" | "slow") => {
+    setSpeedMode(mode);
+    speedModeRef.current = mode; // 즉시 반영되도록 ref도 업데이트
+  };
+
+  useEffect(() => {
+    speedModeRef.current = speedMode;
+  }, [speedMode]);
+
+  const speedRanges = {
+    fast: { min: 1500, max: 2500 },
+    normal: { min: 2500, max: 3500 },
+    slow: { min: 3500, max: 4500 },
+  } as const;
 
   // 예시 문자 중계 데이터 (여러 개)
   const [playHistory, setPlayHistory] =
@@ -382,26 +400,23 @@ export function WatchGame({
       let lineCount = 0;
       let parseErrorCount = 0;
       let requestStartTime = Date.now();
-      let lastMessageDisplayTime = 0;
 
       console.log("[Orchestrator] Starting to read stream response");
 
       // 메시지 표시 함수
-      const displayMessage = async (item: {speaker: string, text: string, team?: string}, arrivalTime: number) => {
-        if (lastMessageDisplayTime === 0) {
+      const displayMessage = async (item: {speaker: string, text: string, team?: string}) => {
+        if (lastDisplayTimeRef.current === null) {
           // 첫 메시지는 바로 표시
           console.log(`[Display] First message from "${item.speaker}" - displaying immediately`);
         } else {
-          // 메시지 길이에 따라 목표 간격 계산 (1.5초 ~ 2.5초)
-          const minInterval = 3500;
-          const maxInterval = 4500;
+          const { min: minInterval, max: maxInterval } = speedRanges[speedModeRef.current];
           const avgTextLength = 100;
           
           const textLengthRatio = Math.min(item.text.length / avgTextLength, 2);
           const targetInterval = minInterval + (maxInterval - minInterval) * (textLengthRatio / 2);
           
-          // 직전 메시지 표시로부터 경과 시간 계산
-          const elapsedSinceLastDisplay = Date.now() - lastMessageDisplayTime;
+          // 직전 메시지 표시로부터 경과 시간 계산 (cross-request 포함)
+          const elapsedSinceLastDisplay = Date.now() - lastDisplayTimeRef.current;
           
           // 목표 간격에 미달하면 추가 딜레이
           const additionalDelay = Math.max(0, targetInterval - elapsedSinceLastDisplay);
@@ -430,7 +445,7 @@ export function WatchGame({
         };
 
         setMessages((prev) => [...prev, agentMessage]);
-        lastMessageDisplayTime = Date.now();
+        lastDisplayTimeRef.current = Date.now();
       };
 
       while (true) {
@@ -462,8 +477,7 @@ export function WatchGame({
               console.log(`[Orchestrator] Message ${lineCount}: speaker="${speaker}", textLength=${text.length}, team="${team}"`);
 
               // 메시지 도착 시간 기록하고 표시 (딜레이 포함)
-              const arrivalTime = Date.now();
-              await displayMessage({ speaker, text, team }, arrivalTime);
+              await displayMessage({ speaker, text, team });
 
             } catch (e) {
               parseErrorCount++;
@@ -665,7 +679,7 @@ export function WatchGame({
           {/* Right Side: AI Fan Chat */}
           <div className="lg:col-span-1">
             <Card className="h-[600px] flex flex-col">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-0">
                 <CardTitle className="text-base">
                   AI 팬 채팅
                 </CardTitle>
@@ -683,15 +697,33 @@ export function WatchGame({
                     : "에이전트 보기"}
                 </Button>
               </CardHeader>
-              <CardContent className="flex-1 flex flex-col gap-3 p-4 overflow-hidden min-h-0 relative">
+              <CardContent className="flex-1 flex flex-col gap-3 px-5 overflow-hidden min-h-0 relative">
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <span className="font-semibold text-slate-700">출력 속도</span>
+                  {[
+                    { key: "fast", label: "빠름" },
+                    { key: "normal", label: "보통" },
+                    { key: "slow", label: "느림" },
+                  ].map(({ key, label }) => (
+                    <Button
+                      key={key}
+                      variant={speedMode === key ? "secondary" : "ghost"}
+                      size="sm"
+                      onClick={() => updateSpeedMode(key as "fast" | "normal" | "slow")}
+                      className="h-7 px-2"
+                    >
+                      {label}
+                    </Button>
+                  ))}
+                </div>
                 {/* Agent List Modal (full details) */}
                 <Dialog open={showAgentInfo} onOpenChange={(open) => setShowAgentInfo(!!open)}>
-                  <DialogContent className="max-w-[90vw] w-full sm:max-w-[90vw] max-h-[95vh] overflow-y-auto">
+                  <DialogContent className="max-w-[70vw] w-full sm:max-w-[55vw] max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
                       <DialogTitle className="text-xl">에이전트 목록</DialogTitle>
                       <p className="text-sm text-muted-foreground mt-1">선택된 에이전트들의 상세 정보를 확인하세요.</p>
                     </DialogHeader>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 py-2">
                       {selectedAgents.map((agent) => (
                         <AgentCard
                           key={agent.id}

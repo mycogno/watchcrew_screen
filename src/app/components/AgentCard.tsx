@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
+import AgentSummary from "./AgentSummary";
 import { Pencil, Trash2, Users, Check } from "lucide-react";
 import { TEAMS } from "./TeamSelection";
 
@@ -178,46 +179,12 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, rea
             </div>
           </>
         ) : (
-          <>
-            {/* 동기, 애착, 내용(채팅내용설명), 표현(채팅표현설명) 표시 */}
-            {(agent.동기요약 || agent.애착요약 || agent.채팅내용설명 || agent.채팅표현설명) && (
-              <div className="space-y-4">
-                {agent.동기요약 && (
-                  <div>
-                    <div className="font-semibold text-slate-700 mb-1">동기</div>
-                    <div className="ml-2 text-sm text-slate-600">{agent.동기요약}</div>
-                  </div>
-                )}
-                {/* {agent.동기요약 && (agent.애착요약 || agent.채팅내용설명 || agent.채팅표현설명) && (
-                  <div className="border-t border-slate-200" />
-                )} */}
-                {agent.애착요약 && (
-                  <div>
-                    <div className="font-semibold text-slate-700 mb-1">애착</div>
-                    <div className="ml-2 text-sm text-slate-600">{agent.애착요약}</div>
-                  </div>
-                )}
-                {/* {agent.애착요약 && (agent.채팅내용설명 || agent.채팅표현설명) && (
-                  <div className="border-t border-slate-200" />
-                )} */}
-                {agent.채팅내용설명 && (
-                  <div>
-                    <div className="font-semibold text-slate-700 mb-1">내용</div>
-                    <div className="ml-2 text-sm text-slate-600">{agent.채팅내용설명}</div>
-                  </div>
-                )}
-                {/* {agent.채팅내용설명 && agent.채팅표현설명 && (
-                  <div className="border-t border-slate-200" />
-                )} */}
-                {agent.채팅표현설명 && (
-                  <div>
-                    <div className="font-semibold text-slate-700 mb-1">표현</div>
-                    <div className="ml-2 text-sm text-slate-600">{agent.채팅표현설명}</div>
-                  </div>
-                )}
-              </div>
-            )}
-          </>
+          <AgentSummary
+            동기요약={agent.동기요약}
+            애착요약={agent.애착요약}
+            채팅내용설명={agent.채팅내용설명}
+            채팅표현설명={agent.채팅표현설명}
+          />
         )}
       </CardContent>
     </Card>
