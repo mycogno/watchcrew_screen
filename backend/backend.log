@@ -22895,3 +22895,16 @@ Exception: No JSON array found in OpenAI response
 2026-01-22 16:58:14,006 INFO watchcrew.backend: [Stream] candidate 4/5: 삼성소프트텝
 2026-01-22 16:58:16,289 INFO watchcrew.backend: [Stream] candidate 5/5: 루키라이언
 2026-01-22 17:06:05,702 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-22 17:08:27,880 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-22 17:10:19,307 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-22 17:10:23,605 INFO watchcrew.backend: [Stream] candidate 1/5: 라이온희망러
+2026-01-22 17:10:29,994 INFO watchcrew.backend: [Stream] candidate 2/5: 삼판웃음사냥꾼
+2026-01-22 17:10:34,332 INFO watchcrew.backend: [Stream] candidate 3/5: 블루스마일
+2026-01-22 17:10:38,351 INFO watchcrew.backend: [Stream] candidate 4/5: 센트럴웃음꾼
+2026-01-22 17:10:42,655 INFO watchcrew.backend: [Stream] candidate 5/5: 홈런미소파
+2026-01-22 17:17:14,766 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-22 17:17:18,919 INFO watchcrew.backend: [Stream] candidate 1/5: 라이온스미소
+2026-01-22 17:17:23,106 INFO watchcrew.backend: [Stream] candidate 2/5: 스마일리온
+2026-01-22 17:17:26,743 INFO watchcrew.backend: [Stream] candidate 3/5: 해피스윙
+2026-01-22 17:17:30,557 INFO watchcrew.backend: [Stream] candidate 4/5: 컨디션히트
+2026-01-22 17:17:35,689 INFO watchcrew.backend: [Stream] candidate 5/5: 리듬볼러

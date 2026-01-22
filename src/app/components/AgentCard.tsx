@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
-import { Textarea } from "./ui/textarea";
 import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "./ui/alert-dialog";
 import AgentSummary from "./AgentSummary";
-import { Pencil, Trash2, Users, Check } from "lucide-react";
+import { Pencil, Trash2, Check } from "lucide-react";
 import { TEAMS } from "./TeamSelection";
 
 export interface Agent {
@@ -33,21 +41,20 @@ interface AgentCardProps {
 
 export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, readOnly }: AgentCardProps) {
   const [isEditing, setIsEditing] = useState(false);
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const [editName, setEditName] = useState(agent.name);
-  const [editPrompt, setEditPrompt] = useState(agent.userPrompt);
   const [editTeam, setEditTeam] = useState<string>(agent.team);
   const [editIsHome, setEditIsHome] = useState<boolean>(agent.isHome);
 
   const handleSave = () => {
-    if (editName.trim() && editPrompt.trim()) {
-      onEdit(agent.id, editName, editPrompt, editTeam, editIsHome);
+    if (editName.trim()) {
+      onEdit(agent.id, editName, agent.userPrompt, editTeam, editIsHome);
       setIsEditing(false);
     }
   };
 
   const handleCancel = () => {
     setEditName(agent.name);
-    setEditPrompt(agent.userPrompt);
     setEditTeam(agent.team);
     setEditIsHome(agent.isHome);
     setIsEditing(false);
@@ -65,18 +72,28 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, rea
   const agentTeamShortName = agentTeamData?.shortName || agent.team;
 
   return (
-    <Card className="hover:shadow-lg transition-all">
+    <Card className="hover:shadow-lg transition-all group">
       <CardHeader>
         <div className="flex items-start justify-between gap-4">
           {isEditing ? (
-            <div className="flex-1 space-y-2">
+            <div className="flex-1 flex items-center gap-2 flex-wrap">
+              <img 
+                src={avatarUrl} 
+                alt={agent.name} 
+                className="size-10 rounded-full bg-slate-100 flex-shrink-0"
+              />
               <Input
                 value={editName}
                 onChange={(e) => setEditName(e.target.value)}
                 placeholder="에이전트 이름"
+                className="flex-1 min-w-[150px]"
+                autoFocus
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') handleSave();
+                  if (e.key === 'Escape') handleCancel();
+                }}
               />
-              <div className="flex gap-2">
-                {/* 팀 이름 선택 */}
+              <div className="flex gap-1">
                 <Button
                   type="button"
                   variant={editTeam === awayTeam?.name ? 'default' : 'outline'}
@@ -85,10 +102,9 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, rea
                     setEditTeam(awayTeam?.name || 'away');
                     setEditIsHome(false);
                   }}
-                  className="flex-1"
-                  style={editTeam === awayTeam?.name ? { backgroundColor: awayTeam?.color, borderColor: awayTeam?.color } : {}}
+                  style={editTeam === awayTeam?.name ? { backgroundColor: awayTeam?.color, borderColor: awayTeam?.color, color: 'white' } : {}}
                 >
-                  {awayTeam?.name || '어웨이팀'}
+                  {awayTeam?.shortName || 'Away'}
                 </Button>
                 <Button
                   type="button"
@@ -98,10 +114,27 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, rea
                     setEditTeam(homeTeam?.name || 'home');
                     setEditIsHome(true);
                   }}
-                  className="flex-1"
-                  style={editTeam === homeTeam?.name ? { backgroundColor: homeTeam?.color, borderColor: homeTeam?.color } : {}}
+                  style={editTeam === homeTeam?.name ? { backgroundColor: homeTeam?.color, borderColor: homeTeam?.color, color: 'white' } : {}}
                 >
-                  {homeTeam?.name || '홈팀'}
+                  {homeTeam?.shortName || 'Home'}
+                </Button>
+              </div>
+              <div className="flex gap-1 flex-shrink-0">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleSave}
+                  className="hover:bg-green-100"
+                >
+                  <Check className="size-4 text-green-600" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleCancel}
+                  className="hover:bg-red-100"
+                >
+                  ✕
                 </Button>
               </div>
             </div>
@@ -114,16 +147,32 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, rea
               />
               <div className="flex items-center gap-2 flex-1 flex-wrap">
                 <CardTitle>{agent.name}</CardTitle>
-                <Badge 
-                  variant={agent.isHome ? 'default' : 'secondary'}
-                  style={{ 
-                    backgroundColor: agentTeamColor,
-                    borderColor: agentTeamColor,
-                    color: 'white'
-                  }}
-                >
-                  {agentTeamShortName}
-                </Badge>
+                <div className="flex items-center gap-1">
+                  <Badge 
+                    variant={agent.isHome ? 'default' : 'secondary'}
+                    style={{ 
+                      backgroundColor: agentTeamColor,
+                      borderColor: agentTeamColor,
+                      color: 'white'
+                    }}
+                  >
+                    {agentTeamShortName}
+                  </Badge>
+                  {!readOnly && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        setIsEditing(true);
+                      }}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <Pencil className="size-4" />
+                    </Button>
+                  )}
+                </div>
               </div>
             </>
           )}
@@ -135,18 +184,7 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, rea
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
-                  setIsEditing(true);
-                }}
-              >
-                <Pencil className="size-4" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  onDelete(agent.id);
+                  setIsConfirmingDelete(true);
                 }}
               >
                 <Trash2 className="size-4 text-destructive" />
@@ -156,31 +194,34 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, rea
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
-        {isEditing ? (
-          <>
-            <Textarea
-              value={editPrompt}
-              onChange={(e) => setEditPrompt(e.target.value)}
-              placeholder="에이전트 특징을 설명해주세요"
-              rows={4}
-              className="resize-none"
-            />
-            <div className="flex gap-2 justify-end">
-              <Button variant="outline" size="sm" onClick={handleCancel}>
-                취소
-              </Button>
-              <Button size="sm" onClick={handleSave}>
-                저장
-              </Button>
-            </div>
-          </>
-        ) : (
-          <AgentSummary
-            동기요약={agent.동기요약}
-            애착요약={agent.애착요약}
-          />
-        )}
+        <AgentSummary
+          동기요약={agent.동기요약}
+          애착요약={agent.애착요약}
+        />
       </CardContent>
+
+      <AlertDialog open={isConfirmingDelete} onOpenChange={setIsConfirmingDelete}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>에이전트 삭제</AlertDialogTitle>
+            <AlertDialogDescription>
+              &quot;{agent.name}&quot;을(를) 정말 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="flex justify-end gap-2">
+            <AlertDialogCancel>취소</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                onDelete(agent.id);
+                setIsConfirmingDelete(false);
+              }}
+              className="bg-destructive hover:bg-destructive/90 text-white"
+            >
+              삭제
+            </AlertDialogAction>
+          </div>
+        </AlertDialogContent>
+      </AlertDialog>
     </Card>
   );
 }
