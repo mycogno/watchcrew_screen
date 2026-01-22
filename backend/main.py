@@ -1023,10 +1023,9 @@ async def generate_candidates_stream(payload: GenerateRequest):
         try:
             openai.api_key = openai_key
 
-            # Render/Nginx 버퍼링 방지를 위한 즉시 응답 시작
-            yield ": ping\n\n"  # SSE 코멘트로 연결 열기
+            # 클라이언트가 스트림을 바로 인식할 수 있도록 초기 keep-alive 전송
             yield "data: [START]\n\n"
-            
+            await asyncio.sleep(0.05)
             # incremental state for object boundary detection
             state = {
                 "in_array": False,
@@ -1035,8 +1034,6 @@ async def generate_candidates_stream(payload: GenerateRequest):
                 "escape": False,
                 "current": "",
             }
-            
-            last_keepalive = time.time()
 
             parsed_raw: List[dict] = []
 
@@ -1147,11 +1144,6 @@ async def generate_candidates_stream(payload: GenerateRequest):
 
             # Consume streaming chunks and emit per-object immediately
             for chunk in stream:
-                # Keep-alive ping every 5 seconds to prevent Render timeout
-                if time.time() - last_keepalive > 5:
-                    yield ": keepalive\n\n"
-                    last_keepalive = time.time()
-                
                 text = extract_content(chunk)
                 if not text:
                     continue
@@ -1191,6 +1183,8 @@ async def generate_candidates_stream(payload: GenerateRequest):
                     )
 
                     yield f"data: {json.dumps(candidate, ensure_ascii=False)}\n\n"
+                    # 각 후보자 전송 후 이벤트 루프에 제어권을 넘겨 즉시 flush
+                    await asyncio.sleep(0)
 
                 if len(parsed_raw) >= 5:
                     break
@@ -1207,11 +1201,11 @@ async def generate_candidates_stream(payload: GenerateRequest):
         headers={
             "Cache-Control": "no-cache",
             "Connection": "keep-alive",
-            "X-Accel-Buffering": "no",  # Nginx/Render 버퍼링 방지
         },
     )
 
 
+@app.post("/news-summary")
 async def get_news_summary(request: NewsSummaryRequest):
     """뉴스 요약을 받아오는 엔드포인트 (비동기 처리)
 
