@@ -157,9 +157,9 @@ export function WatchGame({
   }, [speedMode]);
 
   const speedRanges = {
-    fast: { min: 1500, max: 2500 },
-    normal: { min: 2500, max: 3500 },
-    slow: { min: 3500, max: 4500 },
+    fast: { min: 1500, max: 3000 },
+    normal: { min: 3000, max: 4500 },
+    slow: { min: 4500, max: 6000 },
   } as const;
 
   // 문자 중계 데이터: backend에서 로드
@@ -496,7 +496,7 @@ export function WatchGame({
           const avgTextLength = 100;
           
           const textLengthRatio = Math.min(item.text.length / avgTextLength, 2);
-          const targetInterval = minInterval + (maxInterval - minInterval) * (textLengthRatio / 2);
+          const targetInterval = minInterval + (maxInterval - minInterval) * (textLengthRatio/2);
           
           // 직전 메시지 표시로부터 경과 시간 계산 (cross-request 포함)
           const elapsedSinceLastDisplay = Date.now() - lastDisplayTimeRef.current;
@@ -763,10 +763,7 @@ export function WatchGame({
                   }
                   className="ml-auto"
                 >
-                  <Users className="size-4 mr-2" />
-                  {showAgentInfo
-                    ? "에이전트 숨기기"
-                    : "에이전트 보기"}
+                  <Users className="size-4" />
                 </Button>
               </CardHeader>
               <CardContent className="flex-1 flex flex-col gap-3 px-5 overflow-hidden min-h-0 relative">

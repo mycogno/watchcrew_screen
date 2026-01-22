@@ -43,20 +43,16 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, rea
   const [isEditing, setIsEditing] = useState(false);
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const [editName, setEditName] = useState(agent.name);
-  const [editTeam, setEditTeam] = useState<string>(agent.team);
-  const [editIsHome, setEditIsHome] = useState<boolean>(agent.isHome);
 
   const handleSave = () => {
     if (editName.trim()) {
-      onEdit(agent.id, editName, agent.userPrompt, editTeam, editIsHome);
+      onEdit(agent.id, editName, agent.userPrompt, agent.team, agent.isHome);
       setIsEditing(false);
     }
   };
 
   const handleCancel = () => {
     setEditName(agent.name);
-    setEditTeam(agent.team);
-    setEditIsHome(agent.isHome);
     setIsEditing(false);
   };
 
@@ -76,7 +72,7 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, rea
       <CardHeader>
         <div className="flex items-start justify-between gap-4">
           {isEditing ? (
-            <div className="flex-1 flex items-center gap-2 flex-wrap">
+            <div className="flex-1 flex items-center gap-2">
               <img 
                 src={avatarUrl} 
                 alt={agent.name} 
@@ -86,39 +82,13 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, rea
                 value={editName}
                 onChange={(e) => setEditName(e.target.value)}
                 placeholder="에이전트 이름"
-                className="flex-1 min-w-[150px]"
+                className="flex-1"
                 autoFocus
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') handleSave();
                   if (e.key === 'Escape') handleCancel();
                 }}
               />
-              <div className="flex gap-1">
-                <Button
-                  type="button"
-                  variant={editTeam === awayTeam?.name ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => {
-                    setEditTeam(awayTeam?.name || 'away');
-                    setEditIsHome(false);
-                  }}
-                  style={editTeam === awayTeam?.name ? { backgroundColor: awayTeam?.color, borderColor: awayTeam?.color, color: 'white' } : {}}
-                >
-                  {awayTeam?.shortName || 'Away'}
-                </Button>
-                <Button
-                  type="button"
-                  variant={editTeam === homeTeam?.name ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => {
-                    setEditTeam(homeTeam?.name || 'home');
-                    setEditIsHome(true);
-                  }}
-                  style={editTeam === homeTeam?.name ? { backgroundColor: homeTeam?.color, borderColor: homeTeam?.color, color: 'white' } : {}}
-                >
-                  {homeTeam?.shortName || 'Home'}
-                </Button>
-              </div>
               <div className="flex gap-1 flex-shrink-0">
                 <Button
                   variant="ghost"

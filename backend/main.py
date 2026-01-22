@@ -1302,7 +1302,7 @@ async def orchestrate_chat(request: OrchestratorRequest):
 
     try:
         openai_key = os.getenv("OPENAI_API_KEY")
-        openai_model = os.getenv("OPENAI_MODEL", "gpt-5.1")
+        openai_model = os.getenv("OPENAI_MODEL", "gpt-4.1")
 
         if not openai or not openai_key:
             raise HTTPException(status_code=500, detail="OpenAI API not configured")
