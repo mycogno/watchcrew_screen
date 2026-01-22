@@ -156,6 +156,23 @@ export function WatchGame({
     speedModeRef.current = speedMode;
   }, [speedMode]);
 
+  // WatchGame을 벗어날 때 current_row_index 초기화
+  useEffect(() => {
+    return () => {
+      const resetRowIndex = async () => {
+        try {
+          await fetch(`${API_URL}/reset-row-index`, {
+            method: "POST",
+          });
+          console.log("✅ Row index reset on component unmount");
+        } catch (error) {
+          console.error("❌ Failed to reset row index:", error);
+        }
+      };
+      resetRowIndex();
+    };
+  }, []);
+
   const speedRanges = {
     fast: { min: 1500, max: 3000 },
     normal: { min: 3000, max: 4500 },

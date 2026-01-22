@@ -23788,3 +23788,102 @@ Exception: No JSON array found in OpenAI response
 2026-01-22 21:06:41,953 INFO watchcrew.backend: ⏱️ Streaming completed in 13.751s. Total chunks: 568, messages sent: 6
 2026-01-22 21:06:41,953 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.608s
 2026-01-22 21:06:41,953 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.622s
+2026-01-22 21:25:06,199 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-22 21:25:06,358 INFO watchcrew.backend: Loaded tobroadcast data from 250523_HTSS.json (136 rows)
+2026-01-22 21:25:06,358 INFO watchcrew.backend: Loaded broadcast data from 250523_HTSS.json (initial: 456, upcoming: 136 rows)
+2026-01-22 21:25:06,733 INFO watchcrew.backend: Using 4 agents from localStorage
+2026-01-22 21:25:06,733 INFO watchcrew.backend: Loading game data from 250523_HTSS_HT_game.csv...
+2026-01-22 21:25:06,739 INFO watchcrew.backend: Loaded and cached game data from 250523_HTSS_HT_game.csv in 0.006s (421 rows)
+2026-01-22 21:25:06,739 INFO watchcrew.backend: Loaded game data at row 328 - currGameStat: In the top of the 8th inning, Kia Tigers’ third batter, Kim Do-young, stepped up to the plate against Samsung Lions’ pitcher Kim Jae-yoon with runners on first base and one out. Kia Tigers’ batter 김도영 faced a 145 km/h fastball from Samsung Lions’ pitcher 김재윤 and made contact on the first pitch with a hit. Kia Tigers batter 김도영 hit a home run to deep left-center field, measuring 125 meters, against Samsung Lions pitcher 김재윤 in the bottom of the 8th inning. Kia Tigers’ baserunner 김규성 scored a run, increasing the away team’s lead to 6-4 against the Samsung Lions in the bottom of the 8th inning., gameFlow length: 549
+2026-01-22 21:25:06,739 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-22 21:25:07,828 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-22 21:25:07,838 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-22 21:25:07,855 INFO watchcrew.backend: ⏱️ First chunk received after 1.116s
+2026-01-22 21:25:07,925 INFO watchcrew.backend: ⏱️ Found 'script' array at 1.186s (first chunk +0.070s)
+2026-01-22 21:25:08,575 INFO watchcrew.backend: ⏱️ First message sent at 1.836s (script start +0.650s)
+2026-01-22 21:25:08,575 INFO watchcrew.backend: ⏱️ Message 1: speaker=스트라이크증인, text_length=39
+2026-01-22 21:25:09,144 INFO watchcrew.backend: ⏱️ Message 2: speaker=라이언펀치, text_length=39, time_since_last=0.569s
+2026-01-22 21:25:09,688 INFO watchcrew.backend: ⏱️ Message 3: speaker=토론베이스, text_length=39, time_since_last=0.544s
+2026-01-22 21:25:10,363 INFO watchcrew.backend: ⏱️ Message 4: speaker=스마일베이스, text_length=47, time_since_last=0.675s
+2026-01-22 21:25:18,246 INFO watchcrew.backend: ⏱️ Streaming completed in 11.507s. Total chunks: 603, messages sent: 4
+2026-01-22 21:25:18,247 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 1.116s
+2026-01-22 21:25:18,247 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 1.186s
+2026-01-22 21:25:21,156 INFO watchcrew.backend: Using 4 agents from localStorage
+2026-01-22 21:25:21,158 INFO watchcrew.backend: Loaded game data at row 329 - currGameStat: In the top of the 8th inning, Kia Tigers’ fourth batter, Choi Hyung-woo, stepped up to bat against Samsung Lions’ pitcher Kim Jae-yoon with no balls or strikes and one out in the inning., gameFlow length: 568
+2026-01-22 21:25:21,158 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-22 21:25:21,889 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-22 21:25:21,890 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-22 21:25:21,934 INFO watchcrew.backend: ⏱️ First chunk received after 0.776s
+2026-01-22 21:25:21,968 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.809s (first chunk +0.033s)
+2026-01-22 21:25:22,833 INFO watchcrew.backend: ⏱️ First message sent at 1.675s (script start +0.866s)
+2026-01-22 21:25:22,834 INFO watchcrew.backend: ⏱️ Message 1: speaker=스트라이크증인, text_length=37
+2026-01-22 21:25:23,364 INFO watchcrew.backend: ⏱️ Message 2: speaker=라이언펀치, text_length=35, time_since_last=0.531s
+2026-01-22 21:25:24,020 INFO watchcrew.backend: ⏱️ Message 3: speaker=토론베이스, text_length=42, time_since_last=0.656s
+2026-01-22 21:25:27,593 INFO watchcrew.backend: ⏱️ Message 4: speaker=스마일베이스, text_length=46, time_since_last=3.573s
+2026-01-22 21:25:45,363 INFO watchcrew.backend: ⏱️ Streaming completed in 24.205s. Total chunks: 477, messages sent: 4
+2026-01-22 21:25:45,365 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.776s
+2026-01-22 21:25:45,365 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.809s
+2026-01-22 21:25:45,678 INFO watchcrew.backend: Using 4 agents from localStorage
+2026-01-22 21:25:45,678 INFO watchcrew.backend: Loaded game data at row 330 - currGameStat: In the top of the 8th inning, Kia Tigers’ batter Choi Hyung-woo faced Samsung Lions’ pitcher Kim Jae-yoon and fouled the first pitch, a 134 km/h forkball, with a 0-1 count and one out. Kia Tigers batter 최형우 faced a 136 km/h slider from Samsung Lions pitcher 김재윤, resulting in a foul ball and a strike count of 0-2 with one out in the bottom of the 8th inning., gameFlow length: 564
+2026-01-22 21:25:45,679 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-22 21:25:46,458 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-22 21:25:46,459 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-22 21:25:46,549 INFO watchcrew.backend: ⏱️ First chunk received after 0.870s
+2026-01-22 21:25:46,556 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.876s (first chunk +0.006s)
+2026-01-22 21:25:47,409 INFO watchcrew.backend: ⏱️ First message sent at 1.730s (script start +0.853s)
+2026-01-22 21:25:47,409 INFO watchcrew.backend: ⏱️ Message 1: speaker=토론베이스, text_length=59
+2026-01-22 21:25:48,489 INFO watchcrew.backend: ⏱️ Message 2: speaker=라이언펀치, text_length=45, time_since_last=1.081s
+2026-01-22 21:25:49,499 INFO watchcrew.backend: ⏱️ Message 3: speaker=스트라이크증인, text_length=57, time_since_last=1.009s
+2026-01-22 21:25:50,693 INFO watchcrew.backend: ⏱️ Message 4: speaker=스마일베이스, text_length=61, time_since_last=1.195s
+2026-01-22 21:25:59,582 INFO watchcrew.backend: ⏱️ Streaming completed in 13.903s. Total chunks: 587, messages sent: 4
+2026-01-22 21:25:59,583 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.870s
+2026-01-22 21:25:59,583 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.876s
+2026-01-22 21:26:00,719 INFO watchcrew.backend: Using 4 agents from localStorage
+2026-01-22 21:26:00,719 INFO watchcrew.backend: Loaded game data at row 331 - currGameStat: In the top of the 8th inning, Kia Tigers batter Choi Hyung-woo faced Samsung Lions pitcher Kim Jae-yoon and fouled off a 144 km/h fastball for strike two with one out and no runners on base., gameFlow length: 556
+2026-01-22 21:26:00,719 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-22 21:26:01,158 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-22 21:26:01,158 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-22 21:26:01,194 INFO watchcrew.backend: ⏱️ First chunk received after 0.475s
+2026-01-22 21:26:01,210 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.492s (first chunk +0.017s)
+2026-01-22 21:26:01,826 INFO watchcrew.backend: ⏱️ First message sent at 1.107s (script start +0.616s)
+2026-01-22 21:26:01,826 INFO watchcrew.backend: ⏱️ Message 1: speaker=스트라이크증인, text_length=38
+2026-01-22 21:26:02,434 INFO watchcrew.backend: ⏱️ Message 2: speaker=라이언펀치, text_length=40, time_since_last=0.608s
+2026-01-22 21:26:03,163 INFO watchcrew.backend: ⏱️ Message 3: speaker=토론베이스, text_length=46, time_since_last=0.729s
+2026-01-22 21:26:03,749 INFO watchcrew.backend: ⏱️ Message 4: speaker=스마일베이스, text_length=47, time_since_last=0.586s
+2026-01-22 21:26:08,401 INFO watchcrew.backend: Reset current_row_index to 328
+2026-01-22 21:26:09,671 INFO watchcrew.backend: Using 4 agents from localStorage
+2026-01-22 21:26:09,671 INFO watchcrew.backend: Loaded game data at row 328 - currGameStat: In the top of the 8th inning, Kia Tigers’ third batter, Kim Do-young, stepped up to the plate against Samsung Lions’ pitcher Kim Jae-yoon with runners on first base and one out. Kia Tigers’ batter 김도영 faced a 145 km/h fastball from Samsung Lions’ pitcher 김재윤 and made contact on the first pitch with a hit. Kia Tigers batter 김도영 hit a home run to deep left-center field, measuring 125 meters, against Samsung Lions pitcher 김재윤 in the bottom of the 8th inning. Kia Tigers’ baserunner 김규성 scored a run, increasing the away team’s lead to 6-4 against the Samsung Lions in the bottom of the 8th inning., gameFlow length: 549
+2026-01-22 21:26:09,671 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-22 21:26:10,478 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-22 21:26:10,486 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-22 21:26:10,496 INFO watchcrew.backend: Loaded tobroadcast data from 250523_HTSS.json (136 rows)
+2026-01-22 21:26:10,496 INFO watchcrew.backend: Loaded broadcast data from 250523_HTSS.json (initial: 456, upcoming: 136 rows)
+2026-01-22 21:26:10,525 INFO watchcrew.backend: ⏱️ First chunk received after 0.852s
+2026-01-22 21:26:10,549 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.878s (first chunk +0.025s)
+2026-01-22 21:26:11,235 INFO watchcrew.backend: ⏱️ First message sent at 1.564s (script start +0.686s)
+2026-01-22 21:26:11,235 INFO watchcrew.backend: ⏱️ Message 1: speaker=스트라이크증인, text_length=38
+2026-01-22 21:26:12,866 INFO watchcrew.backend: ⏱️ Message 2: speaker=라이언펀치, text_length=51, time_since_last=1.631s
+2026-01-22 21:26:13,906 INFO watchcrew.backend: ⏱️ Message 3: speaker=토론베이스, text_length=47, time_since_last=1.040s
+2026-01-22 21:26:15,116 INFO watchcrew.backend: ⏱️ Message 4: speaker=스마일베이스, text_length=43, time_since_last=1.210s
+2026-01-22 21:26:19,367 INFO watchcrew.backend: ⏱️ Streaming completed in 18.648s. Total chunks: 548, messages sent: 4
+2026-01-22 21:26:19,367 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.475s
+2026-01-22 21:26:19,367 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.492s
+2026-01-22 21:26:24,208 INFO watchcrew.backend: ⏱️ Streaming completed in 14.537s. Total chunks: 552, messages sent: 4
+2026-01-22 21:26:24,209 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.852s
+2026-01-22 21:26:24,209 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.878s
+2026-01-22 21:26:24,709 INFO watchcrew.backend: Using 4 agents from localStorage
+2026-01-22 21:26:24,709 INFO watchcrew.backend: Loaded game data at row 329 - currGameStat: In the top of the 8th inning, Kia Tigers’ fourth batter, Choi Hyung-woo, stepped up to bat against Samsung Lions’ pitcher Kim Jae-yoon with no balls or strikes and one out in the inning., gameFlow length: 568
+2026-01-22 21:26:24,709 INFO watchcrew.backend: Calling OpenAI with model: gpt-4.1
+2026-01-22 21:26:25,282 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-22 21:26:25,282 INFO watchcrew.backend: Starting incremental parsing and streaming
+2026-01-22 21:26:25,289 INFO watchcrew.backend: ⏱️ First chunk received after 0.580s
+2026-01-22 21:26:25,334 INFO watchcrew.backend: ⏱️ Found 'script' array at 0.625s (first chunk +0.045s)
+2026-01-22 21:26:26,024 INFO watchcrew.backend: ⏱️ First message sent at 1.315s (script start +0.690s)
+2026-01-22 21:26:26,024 INFO watchcrew.backend: ⏱️ Message 1: speaker=스트라이크증인, text_length=47
+2026-01-22 21:26:26,829 INFO watchcrew.backend: ⏱️ Message 2: speaker=라이언펀치, text_length=51, time_since_last=0.805s
+2026-01-22 21:26:29,074 INFO watchcrew.backend: ⏱️ Message 3: speaker=토론베이스, text_length=67, time_since_last=2.245s
+2026-01-22 21:26:30,274 INFO watchcrew.backend: ⏱️ Message 4: speaker=스마일베이스, text_length=41, time_since_last=1.200s
+2026-01-22 21:26:32,189 INFO watchcrew.backend: Reset current_row_index to 328
+2026-01-22 21:26:36,250 INFO watchcrew.backend: ⏱️ Streaming completed in 11.541s. Total chunks: 488, messages sent: 4
+2026-01-22 21:26:36,250 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.580s
+2026-01-22 21:26:36,250 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.625s

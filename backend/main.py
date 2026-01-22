@@ -1658,6 +1658,19 @@ async def orchestrate_chat(request: OrchestratorRequest):
 # ============================================
 
 
+@app.post("/reset-row-index")
+async def reset_row_index():
+    """게임 데이터 row_index를 초기값으로 초기화합니다.
+
+    WatchGame 화면을 벗어날 때 호출되어,
+    다시 돌아오면 처음부터 데이터를 불러올 수 있도록 합니다.
+    """
+    global current_row_index
+    current_row_index = 328  # 초기값으로 리셋
+    logger.info("Reset current_row_index to 328")
+    return {"status": "success", "row_index": current_row_index}
+
+
 @app.get("/broadcast-data")
 async def get_broadcast_data(game_id: str = "250523_HTSS") -> dict:
     """
