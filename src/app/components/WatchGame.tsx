@@ -36,6 +36,41 @@ interface WatchGameProps {
   awayTeamId: string | null;
 }
 
+// VideoPlayer 컴포넌트
+const VideoPlayer = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      const handleLoadedMetadata = () => {
+        if (videoRef.current) {
+          videoRef.current.currentTime = 17; // 5초 지점으로 설정
+          videoRef.current.play();
+        }
+      };
+
+      videoRef.current.addEventListener("loadedmetadata", handleLoadedMetadata);
+      return () => {
+        if (videoRef.current) {
+          videoRef.current.removeEventListener("loadedmetadata", handleLoadedMetadata);
+        }
+      };
+    }
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      className="w-full h-full rounded-lg object-contain bg-black"
+      controls
+      src="https://askdotv8l5k3gx2x.public.blob.vercel-storage.com/250523_HTSS.mp4"
+    >
+      <source src="https://askdotv8l5k3gx2x.public.blob.vercel-storage.com/250523_HTSS.mp4" type="video/mp4" />
+      브라우저가 비디오 재생을 지원하지 않습니다.
+    </video>
+  );
+};
+
 interface ChatMessage {
   id: string;
   agentId: string;
@@ -127,9 +162,56 @@ export function WatchGame({
     slow: { min: 3500, max: 4500 },
   } as const;
 
-  // 예시 문자 중계 데이터 (여러 개)
-  const [playHistory, setPlayHistory] =
-    useState<PlayData[]>(playHistoryData);
+  // 문자 중계 데이터: backend에서 로드
+  const [playHistory, setPlayHistory] = useState<PlayData[]>([]);
+  const [upcomingPlays, setUpcomingPlays] = useState<PlayData[]>([]);
+  const [upcomingIndex, setUpcomingIndex] = useState(0);
+  const [broadcastLoading, setBroadcastLoading] = useState(true);
+
+  // 앱 마운트 시 backend에서 문자 중계 데이터 로드
+  useEffect(() => {
+    const loadBroadcastData = async () => {
+      try {
+        const response = await fetch(`${API_URL}/broadcast-data?game_id=250523_HTSS`);
+        if (!response.ok) {
+          throw new Error(`Failed to load broadcast data: ${response.status}`);
+        }
+        const data: { initial: PlayData[], upcoming: PlayData[] } = await response.json();
+        setPlayHistory(data.initial);
+        setUpcomingPlays(data.upcoming);
+        console.log(`📺 Loaded broadcast data: initial=${data.initial.length}, upcoming=${data.upcoming.length}`);
+      } catch (error) {
+        console.error("❌ Failed to load broadcast data:", error);
+        // fallback: playHistoryData 사용
+        setPlayHistory(playHistoryData);
+      } finally {
+        setBroadcastLoading(false);
+      }
+    };
+
+    loadBroadcastData();
+  }, []);
+
+  // 15초마다 tobroadcast 데이터를 하나씩 추가
+  useEffect(() => {
+    if (upcomingPlays.length === 0 || upcomingIndex >= upcomingPlays.length) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setPlayHistory(prev => {
+        const nextPlay = upcomingPlays[upcomingIndex];
+        if (!nextPlay) return prev;
+        
+        console.log(`📺 Adding play #${upcomingIndex + 1}/${upcomingPlays.length} to broadcast`);
+        return [...prev, nextPlay];
+      });
+      
+      setUpcomingIndex(prev => prev + 1);
+    }, 15000); // 15초마다
+
+    return () => clearInterval(interval);
+  }, [upcomingPlays, upcomingIndex]);
 
   // 이닝  초/말별로 데이터 그룹화
   const groupedByInningAndHalf = playHistory.reduce(
@@ -139,6 +221,7 @@ export function WatchGame({
       const half =
         play.offensiveTeam === play.homeTeam ? "말" : "초";
       const key = `${inning}-${half}`;
+
 
       if (!acc[key]) {
         acc[key] = [];
@@ -660,18 +743,7 @@ export function WatchGame({
                 </CardTitle>
               </CardHeader>
               <CardContent className="h-[calc(100%-80px)]">
-                <div className="w-full h-full bg-slate-900 rounded-lg flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <Video className="size-16 mx-auto text-slate-600" />
-                    <p className="text-slate-400">
-                      경기 영상이 여기에 표시됩니다
-                    </p>
-                    <p className="text-slate-500 text-sm">
-                      실제 구현 시 YouTube iframe 또는 video
-                      태그가 들어갈 위치입니다
-                    </p>
-                  </div>
-                </div>
+                <VideoPlayer />
               </CardContent>
             </Card>
           </div>
@@ -830,11 +902,29 @@ export function WatchGame({
         {/* Text Broadcast Section - Bottom */}
         <Card className="mt-4">
           <CardHeader>
-            <CardTitle className="text-base">
+            <CardTitle className="text-base flex items-center gap-2">
               문자 중계
+              {broadcastLoading && (
+                <span className="text-xs text-muted-foreground animate-pulse">
+                  로딩 중...
+                </span>
+              )}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4">
+            {broadcastLoading ? (
+              <div className="h-[400px] flex items-center justify-center">
+                <p className="text-muted-foreground text-center text-sm">
+                  문자 중계 데이터를 불러오는 중입니다...
+                </p>
+              </div>
+            ) : playHistory.length === 0 ? (
+              <div className="h-[400px] flex items-center justify-center">
+                <p className="text-muted-foreground text-center text-sm">
+                  사용 가능한 문자 중계 데이터가 없습니다.
+                </p>
+              </div>
+            ) : (
             <Tabs
               value={selectedInning}
               onValueChange={setSelectedInning}
@@ -1037,6 +1127,7 @@ export function WatchGame({
                                     plays.filter(
                                       (p) =>
                                         p.pitchType &&
+                                        typeof p.pitchSpeed === 'number' &&
                                         p.pitchSpeed > 0,
                                     );
                                   const lastPitchEvent =
@@ -1082,6 +1173,7 @@ export function WatchGame({
                                       </div>
 
                                       {play.pitchType &&
+                                        typeof play.pitchSpeed === 'number' &&
                                         play.pitchSpeed > 0 &&
                                         !play.seqDescription.includes(
                                           ":",
@@ -1137,7 +1229,7 @@ export function WatchGame({
                     key={inning}
                     value={inning.toString()}
                   >
-                    <div className="max-h-[400px] overflow-y-auto space-y-4 pr-2">
+                    <div className="space-y-4 pr-2">
                       {hasAnyData ? (
                         <>
                           {/* 말 (홈팀 공격) */}
@@ -1190,6 +1282,7 @@ export function WatchGame({
                 );
               })}
             </Tabs>
+            )}
           </CardContent>
         </Card>
       </div>

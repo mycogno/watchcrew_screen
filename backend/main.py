@@ -15,6 +15,7 @@ from collections import Counter
 import asyncio
 import pandas as pd
 import time
+import openai
 
 # load .env (prefer backend/.env located next to this file)
 env_path = Path(__file__).resolve().parent / ".env"
@@ -118,14 +119,6 @@ class AgentCandidate(BaseModel):
         {}
     )  # 애착의 대상, 애착의 강도/단계 (각각 example_value, explanation)
     애착요약: str = ""  # 애착 요약 설명
-    내용: Dict[str, Dict[str, str]] = (
-        {}
-    )  # Attribution of Responsibility, Target of Evaluation, etc.
-    채팅내용설명: str = ""  # 채팅 내용 요약 설명
-    표현: Dict[str, Dict[str, str]] = (
-        {}
-    )  # Tone and Linguistic Style, Temporal Reactivity, etc.
-    채팅표현설명: str = ""  # 채팅 표현 요약 설명
 
 
 # ============================================
@@ -553,35 +546,6 @@ def normalize_candidates(
             or ""
         )
 
-        # Extract new structure: 채팅 특성 → {내용, 채팅 내용 설명, 표현, 채팅 표현 설명}
-        chat_traits = item.get("채팅 특성") or {}
-        if not isinstance(chat_traits, dict):
-            chat_traits = {}
-
-        # 내용: {Attribution of Responsibility: {example_value, explanation}, ...}
-        content_raw = chat_traits.get("내용") or {}
-        content, content_sum = _clean_attr_dict(
-            content_raw, ["채팅 내용 설명", "채팅내용설명"]
-        )
-        content_description = (
-            content_sum
-            or chat_traits.get("채팅 내용 설명")
-            or chat_traits.get("채팅내용설명")
-            or ""
-        )
-
-        # 표현: {Tone and Linguistic Style: {example_value, explanation}, ...}
-        expression_raw = chat_traits.get("표현") or {}
-        expression, expr_sum = _clean_attr_dict(
-            expression_raw, ["채팅 표현 설명", "채팅표현설명"]
-        )
-        expression_description = (
-            expr_sum
-            or chat_traits.get("채팅 표현 설명")
-            or chat_traits.get("채팅표현설명")
-            or ""
-        )
-
         out.append(
             {
                 "id": new_id,
@@ -592,10 +556,6 @@ def normalize_candidates(
                 "동기요약": motivation_summary,
                 "애착": attachment,
                 "애착요약": attachment_summary,
-                "내용": content,
-                "채팅내용설명": content_description,
-                "표현": expression,
-                "채팅표현설명": expression_description,
             }
         )
 
@@ -699,46 +659,6 @@ def make_tuning_prompt(user_team: str, user_request: str) -> str:
             },
             "애착 요약": "string",
         },
-        "채팅 특성": {
-            "내용": {
-                "Attribution of Responsibility": {
-                    "example_value": "string",
-                    "explanation": "string",
-                },
-                "Target of Evaluation": {
-                    "example_value": "string",
-                    "explanation": "string",
-                },
-                "Evaluative Focus (Outcome vs Process)": {
-                    "example_value": "string",
-                    "explanation": "string",
-                },
-                "Use of Numerical/Technical Signals": {
-                    "example_value": "string",
-                    "explanation": "string",
-                },
-            },
-            "채팅 내용 설명": "string",
-            "표현": {
-                "Tone and Linguistic Style": {
-                    "example_value": "string",
-                    "explanation": "string",
-                },
-                "Temporal Reactivity": {
-                    "example_value": "string",
-                    "explanation": "string",
-                },
-                "Collective Action Calls": {
-                    "example_value": "string",
-                    "explanation": "string",
-                },
-                "Polarity toward Same Target": {
-                    "example_value": "string",
-                    "explanation": "string",
-                },
-            },
-            "채팅 표현 설명": "string",
-        },
     }
 
     # Format the schema as a clean JSON string for the prompt
@@ -766,11 +686,9 @@ def make_tuning_prompt(user_team: str, user_request: str) -> str:
 - 각 속성은 dv_set의 Example Value 라벨 중 하나를 선택하고, explanation은 사용자 요구사항을 반영해 새로 작성하세요.
 - 하나의 페르소나 내에서 선택된 모든 Attribute-Example Values set 조합은 의미적으로 서로 모순되지 않아야 합니다.
 - 모든 출력은 한국어로 작성하세요.
-- 아래 4개의 요약 필드는 각각 1문장으로 작성하세요:
+- 아래 2개의 요약 필드는 각각 1문장으로 작성하세요:
   1) "동기 요약": "스포츠 시청 동기" + "채팅 참여 동기"를 종합
   2) "애착 요약": "애착의 대상" + "애착의 강도/단계"를 종합
-  3) "채팅 내용 설명": "내용"의 4개 속성을 종합
-  4) "채팅 표현 설명": "표현"의 4개 속성을 종합
 - 공격적·모욕적 표현 금지(밈/드립은 가능하나 누구를 지목해 조롱하지 않기).
 
 [IMPORTANT: 값 출력 형식]
@@ -1085,12 +1003,206 @@ def generate_candidates(payload: GenerateRequest):
         )
 
 
-# ============================================
-# News Summary Endpoint
-# ============================================
+@app.post("/generate_candidates_stream")
+async def generate_candidates_stream(payload: GenerateRequest):
+    """에이전트 후보를 스트리밍으로 반환하는 엔드포인트 (Server-Sent Events)."""
+    userPrompt = payload.prompt or ""
+    userTeam = payload.team or "samsung"
+
+    openai_key = os.getenv("OPENAI_API_KEY")
+    openai_model = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
+
+    if not openai or not openai_key:
+        raise HTTPException(
+            status_code=500,
+            detail="OpenAI API not configured. Please set OPENAI_API_KEY environment variable.",
+        )
+
+    async def event_generator():
+        """스트리밍 이벤트 생성 제너레이터"""
+        try:
+            openai.api_key = openai_key
+
+            # 클라이언트가 스트림을 바로 인식할 수 있도록 초기 keep-alive 전송
+            yield "data: [START]\n\n"
+            await asyncio.sleep(0.05)
+            # incremental state for object boundary detection
+            state = {
+                "in_array": False,
+                "brace_depth": 0,
+                "in_string": False,
+                "escape": False,
+                "current": "",
+            }
+
+            parsed_raw: List[dict] = []
+
+            def extract_content(chunk) -> str:
+                """Extract text delta from both old/new OpenAI SDK chunks."""
+                try:
+                    # new SDK object
+                    delta = chunk.choices[0].delta
+                    content = getattr(delta, "content", None)
+                    if isinstance(content, list):
+                        return "".join(
+                            (
+                                elem.get("text", "")
+                                if isinstance(elem, dict)
+                                else getattr(elem, "text", "") or ""
+                            )
+                            for elem in content
+                        )
+                    if content:
+                        return content
+                except Exception:
+                    pass
+
+                try:
+                    # old SDK dict-like
+                    return (
+                        chunk.get("choices", [])[0].get("delta", {}).get("content", "")
+                    )
+                except Exception:
+                    return ""
+
+            def feed_and_collect(text: str) -> List[str]:
+                """Collect complete top-level JSON objects inside array as soon as they close."""
+                objects: List[str] = []
+                for ch in text:
+                    if state["escape"]:
+                        state["current"] += ch
+                        state["escape"] = False
+                        continue
+
+                    if ch == "\\" and state["in_string"]:
+                        state["current"] += ch
+                        state["escape"] = True
+                        continue
+
+                    if ch == '"':
+                        state["in_string"] = not state["in_string"]
+                        state["current"] += ch
+                        continue
+
+                    if not state["in_array"]:
+                        if ch == "[":
+                            state["in_array"] = True
+                        continue
+
+                    if state["brace_depth"] == 0:
+                        if ch in " \t\r\n,":
+                            continue
+                        if ch == "{":
+                            state["brace_depth"] = 1
+                            state["current"] = "{"
+                        elif ch == "]":
+                            state["in_array"] = False
+                        continue
+
+                    state["current"] += ch
+
+                    if not state["in_string"]:
+                        if ch == "{":
+                            state["brace_depth"] += 1
+                        elif ch == "}":
+                            state["brace_depth"] -= 1
+                            if state["brace_depth"] == 0:
+                                objects.append(state["current"])
+                                state["current"] = ""
+                return objects
+
+            # OpenAI streaming call
+            tuning_prompt = make_tuning_prompt(
+                user_team=userTeam, user_request=userPrompt
+            )
+
+            if hasattr(openai, "OpenAI"):
+                client = openai.OpenAI(api_key=openai_key)
+                stream = client.chat.completions.create(
+                    model=openai_model,
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": "Return ONLY valid JSON. Generating results in Korean.",
+                        },
+                        {"role": "user", "content": tuning_prompt},
+                    ],
+                    stream=True,
+                )
+            else:
+                stream = openai.ChatCompletion.create(
+                    model=openai_model,
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": "Return ONLY valid JSON. Generating results in Korean.",
+                        },
+                        {"role": "user", "content": tuning_prompt},
+                    ],
+                    stream=True,
+                )
+
+            # Consume streaming chunks and emit per-object immediately
+            for chunk in stream:
+                text = extract_content(chunk)
+                if not text:
+                    continue
+
+                for obj_str in feed_and_collect(text):
+                    try:
+                        raw_obj = json.loads(obj_str)
+                    except Exception as parse_err:
+                        logger.debug(
+                            "Skipping malformed candidate chunk: %s", parse_err
+                        )
+                        continue
+
+                    parsed_raw.append(raw_obj)
+
+                    # Stop after 5 to align with expected count
+                    if len(parsed_raw) > 5:
+                        break
+
+                    normalized = normalize_candidates(
+                        parsed_raw, team=userTeam, want_count=len(parsed_raw)
+                    )
+                    candidate = normalized[-1]
+                    candidate["userPrompt"] = userPrompt
+
+                    safe_name = (
+                        candidate.get("name")
+                        or candidate.get("Nickname")
+                        or "(unknown)"
+                    )
+
+                    logger.info(
+                        "[Stream] candidate %d/%d: %s",
+                        len(parsed_raw),
+                        5,
+                        safe_name,
+                    )
+
+                    yield f"data: {json.dumps(candidate, ensure_ascii=False)}\n\n"
+
+                if len(parsed_raw) >= 5:
+                    break
+
+            yield "data: [DONE]\n\n"
+
+        except Exception as e:
+            logger.exception("Stream generation failed")
+            yield 'data: {"error": "stream_generation_failed"}\n\n'
+
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+        },
+    )
 
 
-@app.post("/get_news_summary")
 async def get_news_summary(request: NewsSummaryRequest):
     """뉴스 요약을 받아오는 엔드포인트 (비동기 처리)
 
@@ -1187,7 +1299,7 @@ async def orchestrate_chat(request: OrchestratorRequest):
 
     try:
         openai_key = os.getenv("OPENAI_API_KEY")
-        openai_model = os.getenv("OPENAI_MODEL", "gpt-4.1")
+        openai_model = os.getenv("OPENAI_MODEL", "gpt-5.1")
 
         if not openai or not openai_key:
             raise HTTPException(status_code=500, detail="OpenAI API not configured")
@@ -1347,7 +1459,6 @@ async def orchestrate_chat(request: OrchestratorRequest):
             model=openai_model,
             messages=[{"role": "user", "content": prompt}],
             stream=True,
-            temperature=0,
         )
 
         # 에이전트 team 정보 매핑 (이름으로 team 찾기)
@@ -1529,25 +1640,75 @@ async def orchestrate_chat(request: OrchestratorRequest):
                 logger.info(
                     f"⏱️ Timing summary: Request→ScriptStart: {(script_start_time - request_start_time):.3f}s"
                 )
-            if first_message_time:
-                logger.info(
-                    f"⏱️ Timing summary: Request→FirstMessage: {(first_message_time - request_start_time):.3f}s"
-                )
-            if last_message_time:
-                logger.info(
-                    f"⏱️ Timing summary: Request→LastMessage: {(last_message_time - request_start_time):.3f}s"
-                )
 
         return StreamingResponse(generate(), media_type="application/x-ndjson")
 
-    except json.JSONDecodeError as e:
-        logger.exception(f"JSON parsing error in orchestrate: {e}")
-        raise HTTPException(
-            status_code=500, detail=f"Failed to parse response: {str(e)}"
-        )
+    except HTTPException:
+        raise
     except Exception as e:
         logger.exception(f"Error in orchestrate: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================
+# Broadcast Data Endpoint
+# ============================================
+
+
+@app.get("/broadcast-data")
+async def get_broadcast_data(game_id: str = "250523_HTSS") -> dict:
+    """
+    문자 중계 데이터를 JSON 파일에서 로드하여 반환합니다.
+
+    Returns:
+        dict: {
+            "initial": List[dict] - broadcast 폴더의 초기 데이터
+            "upcoming": List[dict] - tobroadcast 폴더의 추가될 데이터
+        }
+    """
+    try:
+        broadcast_path = (
+            Path(__file__).resolve().parent / "broadcast" / f"{game_id}.json"
+        )
+        tobroadcast_path = (
+            Path(__file__).resolve().parent / "tobroadcast" / f"{game_id}.json"
+        )
+
+        if not broadcast_path.exists():
+            logger.warning(f"Broadcast data not found: {broadcast_path}")
+            raise HTTPException(
+                status_code=404, detail=f"Broadcast data not found for game {game_id}"
+            )
+
+        # broadcast 데이터 로드 (초기 상태)
+        with open(broadcast_path, "r", encoding="utf-8") as f:
+            initial_data = json.load(f)
+
+        # tobroadcast 데이터 로드 (추가될 데이터)
+        upcoming_data = []
+        if tobroadcast_path.exists():
+            with open(tobroadcast_path, "r", encoding="utf-8") as f:
+                upcoming_data = json.load(f)
+            logger.info(
+                f"Loaded tobroadcast data from {game_id}.json ({len(upcoming_data)} rows)"
+            )
+        else:
+            logger.info(f"No tobroadcast data found for {game_id}")
+
+        logger.info(
+            f"Loaded broadcast data from {game_id}.json (initial: {len(initial_data)}, upcoming: {len(upcoming_data)} rows)"
+        )
+
+        return {"initial": initial_data, "upcoming": upcoming_data}
+
+    except json.JSONDecodeError as e:
+        logger.error(f"Failed to parse JSON file")
+        raise HTTPException(status_code=400, detail="Invalid JSON format")
+    except Exception as e:
+        logger.exception(f"Error loading broadcast data: {e}")
+        raise HTTPException(
+            status_code=500, detail=f"Error loading broadcast data: {str(e)}"
+        )
 
 
 if __name__ == "__main__":

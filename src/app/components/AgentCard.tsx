@@ -20,10 +20,6 @@ export interface Agent {
   동기요약?: string; // 동기 요약 설명
   애착?: Record<string, { example_value: string; explanation: string }>; // 애착의 대상, 애착의 강도/단계
   애착요약?: string; // 애착 요약 설명
-  내용?: Record<string, { example_value: string; explanation: string }>; // Attribution of Responsibility 등
-  채팅내용설명?: string; // 채팅 내용 요약 설명
-  표현?: Record<string, { example_value: string; explanation: string }>; // Tone and Linguistic Style 등
-  채팅표현설명?: string; // 채팅 표현 요약 설명
 }
 
 interface AgentCardProps {
@@ -182,8 +178,6 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, rea
           <AgentSummary
             동기요약={agent.동기요약}
             애착요약={agent.애착요약}
-            채팅내용설명={agent.채팅내용설명}
-            채팅표현설명={agent.채팅표현설명}
           />
         )}
       </CardContent>
