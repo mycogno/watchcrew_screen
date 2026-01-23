@@ -23887,3 +23887,6 @@ Exception: No JSON array found in OpenAI response
 2026-01-22 21:26:36,250 INFO watchcrew.backend: ⏱️ Streaming completed in 11.541s. Total chunks: 488, messages sent: 4
 2026-01-22 21:26:36,250 INFO watchcrew.backend: ⏱️ Timing summary: Request→FirstChunk: 0.580s
 2026-01-22 21:26:36,250 INFO watchcrew.backend: ⏱️ Timing summary: Request→ScriptStart: 0.625s
+2026-01-22 21:27:00,774 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-23 14:39:56,530 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-23 14:43:03,250 INFO watchcrew.backend: OPENAI_API_KEY present: True

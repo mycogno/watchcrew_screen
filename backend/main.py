@@ -1205,7 +1205,7 @@ async def generate_candidates_stream(payload: GenerateRequest):
     )
 
 
-@app.post("/news-summary")
+@app.post("/get_news_summary")
 async def get_news_summary(request: NewsSummaryRequest):
     """뉴스 요약을 받아오는 엔드포인트 (비동기 처리)
 
@@ -1243,24 +1243,56 @@ def _process_news_summary_sync(game: str):
     news_csv_path = backend_dir / "news" / date / f"{news}.csv"
     logger.info(f"News CSV path: {news_csv_path}")
 
-    # df
-    ndf = pd.read_csv(news_csv_path, encoding="utf-8-sig")
-    logger.info(f"✅ News CSV loaded successfully")
+    # 파일 존재 여부 확인
+    if not news_csv_path.exists():
+        logger.error(f"❌ News CSV file not found: {news_csv_path}")
+        raise FileNotFoundError(f"News CSV file not found: {news_csv_path}")
 
-    # 데이터
+    # df 로드
+    try:
+        ndf = pd.read_csv(news_csv_path, encoding="utf-8-sig")
+        logger.info(f"✅ News CSV loaded successfully ({len(ndf)} rows)")
+    except Exception as e:
+        logger.error(f"❌ Failed to read CSV: {e}")
+        raise
+
+    # 팀 ID 추출 (게임 ID 포맷: 250523_HTSS_HT_game or 250523_HTSS)
+    # "250523_HTSS" 형식: 위치 9-11이 away_team_id, 11-13이 home_team_id
+    # "250523_HTSS_HT_game" 형식에서도 동일한 위치에서 추출 가능
+    parts = game.split("_")
+    
+    if len(parts) >= 2:
+        # 팀 코드 추출: "HTSS" -> away=SS, home=HT
+        team_codes = parts[1]
+        if len(team_codes) >= 4:
+            home_team_id = team_codes[0:2]  # "HT"
+            away_team_id = team_codes[2:4]  # "SS"
+        else:
+            logger.error(f"❌ Invalid team code format in game ID: {game}")
+            raise ValueError(f"Invalid game ID format: {game}")
+    else:
+        logger.error(f"❌ Invalid game ID format: {game}")
+        raise ValueError(f"Invalid game ID format: {game}")
+
+    # 데이터 추출
     news_dict = {}
-    away_team_id = game[7:9]  # "SS"
-    home_team_id = game[9:11]  # "HT"
-
-    news_dict[TEAM_DICT[away_team_id]] = ndf[ndf["teamId"] == away_team_id][
-        "title"
-    ].tolist()
-    news_dict[TEAM_DICT[home_team_id]] = ndf[ndf["teamId"] == home_team_id][
-        "title"
-    ].tolist()
+    
+    # away_team_id 뉴스
+    away_news_list = ndf[ndf["teamId"] == away_team_id]["title"].tolist()
+    if away_team_id in TEAM_DICT:
+        news_dict[TEAM_DICT[away_team_id]] = away_news_list
+    else:
+        logger.warning(f"Unknown team ID: {away_team_id}")
+    
+    # home_team_id 뉴스
+    home_news_list = ndf[ndf["teamId"] == home_team_id]["title"].tolist()
+    if home_team_id in TEAM_DICT:
+        news_dict[TEAM_DICT[home_team_id]] = home_news_list
+    else:
+        logger.warning(f"Unknown team ID: {home_team_id}")
 
     logger.info(
-        f"Extracted news - {away_team_id}: {len(news_dict[TEAM_DICT[away_team_id]])} items, {home_team_id}: {len(news_dict[TEAM_DICT[home_team_id]])} items"
+        f"Extracted news - {away_team_id}: {len(away_news_list)} items, {home_team_id}: {len(home_news_list)} items"
     )
 
     news_data = news_summarizer(news_dict)
