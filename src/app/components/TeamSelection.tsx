@@ -3,6 +3,7 @@ import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { Trophy, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { AnimatePresence, motion } from "motion/react";
 import samsungLogo from "../../assets/874a11a99b89be3a71a2b277829f42896b7c1a3e.png";
 import kiaLogo from "../../assets/ad6932e734bbd147d58bf54adc70d8318382e377.png";
 import lgLogo from "../../assets/bc63019987c3fb3bd9d9b29b25a2f51005c1032f.png";
@@ -21,6 +22,21 @@ export interface Team {
   color: string;
   logo?: string;
 }
+
+export type MotivationLevel = "상" | "중" | "하";
+
+export type MotivationSelection = Record<
+  "shareFeelings" | "belonging" | "infoSharing" | "fun" | "emotionRelease",
+  MotivationLevel
+>;
+
+const MOTIVATION_ITEMS: Array<{ key: keyof MotivationSelection; label: string }> = [
+  { key: "shareFeelings", label: "감정 & 생각 나누기" },
+  { key: "belonging", label: "소속감 형성" },
+  { key: "infoSharing", label: "정보 공유" },
+  { key: "fun", label: "재미와 즐거움" },
+  { key: "emotionRelease", label: "감정 해소" },
+];
 
 export const TEAMS: Team[] = [
   { id: 'samsung', name: '삼성 라이온즈', shortName: '삼성', color: '#074CA1', logo: samsungLogo },
@@ -50,30 +66,65 @@ export const GAMES: Game[] = [
 ];
 
 interface TeamSelectionProps {
-  onSelectTeams: (homeTeamId: string, awayTeamId: string, userTeam: string) => void;
+  onSelectTeams: (
+    homeTeamId: string,
+    awayTeamId: string,
+    userTeam: string,
+    motivations: MotivationSelection
+  ) => void;
 }
 
 export function TeamSelection({ onSelectTeams }: TeamSelectionProps) {
   const [selectedGame, setSelectedGame] = useState<string | null>(null);
   const [userTeam, setUserTeam] = useState<string | null>(null);
+  const [motivations, setMotivations] = useState<MotivationSelection>({
+    shareFeelings: "중",
+    belonging: "중",
+    infoSharing: "중",
+    fun: "중",
+    emotionRelease: "중",
+  });
+  const [selectionLocked, setSelectionLocked] = useState(false);
+
+  const resetMotivations = () => {
+    setMotivations({
+      shareFeelings: "중",
+      belonging: "중",
+      infoSharing: "중",
+      fun: "중",
+      emotionRelease: "중",
+    });
+  };
+
+  const resetSelection = () => {
+    setSelectedGame(null);
+    setUserTeam(null);
+    resetMotivations();
+    setSelectionLocked(false);
+  };
 
   const handleSelectGame = (gameId: string) => {
-    // 이미 선택된 경기를 다시 클릭하면 선택 해제
-    if (selectedGame === gameId) {
-      setSelectedGame(null);
-      setUserTeam(null); // 응원팀도 초기화
+    // 잠금 상태에서 동일 카드 클릭 시 선택 해제
+    if (selectionLocked && selectedGame === gameId) {
+      resetSelection();
       return;
     }
-    
+
     setSelectedGame(gameId);
     setUserTeam(null); // 새 경기 선택 시 응원팀 초기화
+    resetMotivations();
+    setSelectionLocked(true);
+  };
+
+  const handleMotivationChange = (key: keyof MotivationSelection, level: MotivationLevel) => {
+    setMotivations((prev) => ({ ...prev, [key]: level }));
   };
 
   const handleConfirm = () => {
     if (selectedGame && userTeam) {
       const game = GAMES.find(g => g.id === selectedGame);
       if (game) {
-        onSelectTeams(game.homeTeamId, game.awayTeamId, userTeam);
+        onSelectTeams(game.homeTeamId, game.awayTeamId, userTeam, motivations);
       }
     }
   };
@@ -81,6 +132,7 @@ export function TeamSelection({ onSelectTeams }: TeamSelectionProps) {
   const selectedGameData = selectedGame ? GAMES.find(g => g.id === selectedGame) : null;
   const awayTeam = selectedGameData ? TEAMS.find(t => t.id === selectedGameData.awayTeamId) : null;
   const homeTeam = selectedGameData ? TEAMS.find(t => t.id === selectedGameData.homeTeamId) : null;
+  const visibleGames = selectionLocked && selectedGame ? GAMES.filter(g => g.id === selectedGame) : GAMES;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-6">
@@ -98,7 +150,8 @@ export function TeamSelection({ onSelectTeams }: TeamSelectionProps) {
 
         {/* 경기 선택 */}
         <div className="space-y-4">
-          {GAMES.map((game) => {
+          <AnimatePresence mode="popLayout" initial={false}>
+            {visibleGames.map((game) => {
             const awayTeam = TEAMS.find(t => t.id === game.awayTeamId);
             const homeTeam = TEAMS.find(t => t.id === game.homeTeamId);
             const isSelected = selectedGame === game.id;
@@ -106,18 +159,24 @@ export function TeamSelection({ onSelectTeams }: TeamSelectionProps) {
             if (!awayTeam || !homeTeam) return null;
 
             return (
-              <Card
+              <motion.div
                 key={game.id}
-                className={`group cursor-pointer transition-all hover:shadow-lg border-2 overflow-hidden relative ${
-                  isSelected ? 'ring-4 ring-primary ring-offset-2 scale-[1.01]' : 'hover:scale-[1.005]'
-                }`}
-                style={{
-                  borderColor: isSelected ? '#0ea5e9' : 'transparent',
-                }}
-                onClick={() => handleSelectGame(game.id)}
+                layout
+                initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.2 } }}
+                exit={{ opacity: 0, y: -8, scale: 0.98, height: 0, margin: 0, transition: { duration: 0.18 } }}
               >
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between gap-6">
+                <Card
+                  className={`group cursor-pointer transition-all hover:shadow-lg border-2 overflow-hidden relative ${
+                    isSelected ? 'ring-4 ring-primary ring-offset-2 scale-[1.01]' : 'hover:scale-[1.005]'
+                  }`}
+                  style={{
+                    borderColor: isSelected ? '#0ea5e9' : 'transparent',
+                  }}
+                  onClick={() => handleSelectGame(game.id)}
+                >
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between gap-6">
                     {/* 어웨이팀 */}
                     <div className="flex-1 flex items-center gap-3">
                       <div className="w-16 h-16 flex items-center justify-center bg-white rounded-lg p-2 shadow-sm flex-shrink-0">
@@ -178,11 +237,21 @@ export function TeamSelection({ onSelectTeams }: TeamSelectionProps) {
                       </div>
                     )}
                   </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </motion.div>
             );
           })}
+          </AnimatePresence>
         </div>
+
+        {selectionLocked && selectedGame && (
+          <div className="flex justify-end">
+            <Button variant="outline" size="sm" onClick={resetSelection}>
+              다른 경기 선택하기
+            </Button>
+          </div>
+        )}
 
         {/* 응원팀 선택 */}
         {selectedGame && (
@@ -258,6 +327,42 @@ export function TeamSelection({ onSelectTeams }: TeamSelectionProps) {
                   )}
                 </CardContent>
               </Card>
+            </div>
+          </div>
+        )}
+
+        {/* 시청 동기 선택 */}
+        {selectedGame && (
+          <div className="space-y-3">
+            <div className="text-center">
+              <p className="font-medium text-base">경기 시청 동기(상/중/하)를 선택하세요</p>
+              <p className="text-sm text-muted-foreground">각 항목별 중요도는 경기 중 에이전트 채팅 생성에 활용될 예정입니다.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {MOTIVATION_ITEMS.map((item) => (
+                <Card key={item.key} className="border-2">
+                  <CardContent className="p-4 flex items-center justify-between gap-3">
+                    <div className="flex flex-col">
+                      <span className="font-semibold">{item.label}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {["상", "중", "하"].map((level) => {
+                        const isActive = motivations[item.key] === level;
+                        return (
+                          <Button
+                            key={level}
+                            size="sm"
+                            variant={isActive ? "default" : "outline"}
+                            onClick={() => handleMotivationChange(item.key, level as MotivationLevel)}
+                          >
+                            {level}
+                          </Button>
+                        );
+                      })}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         )}

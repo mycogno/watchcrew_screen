@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { AgentCreator } from "./components/AgentCreator";
 import { AgentCard, Agent } from "./components/AgentCard";
 import { WatchGame } from "./components/WatchGame";
-import { TeamSelection, TEAMS } from "./components/TeamSelection";
+import { TeamSelection, TEAMS, MotivationSelection } from "./components/TeamSelection";
 import { Button } from "./components/ui/button";
 import { Users, Play, ArrowLeft } from "lucide-react";
 import {
@@ -79,6 +79,7 @@ function App() {
   const [homeTeamId, setHomeTeamId] = useState<string | null>(null);
   const [awayTeamId, setAwayTeamId] = useState<string | null>(null);
   const [userTeam, setUserTeam] = useState<string | null>(null);
+  const [userMotivations, setUserMotivations] = useState<MotivationSelection | null>(null);
   const [showResetDialog, setShowResetDialog] = useState(false);
 
   // Load agents from localStorage on mount
@@ -171,6 +172,7 @@ function App() {
     setHomeTeamId(null);
     setAwayTeamId(null);
     setUserTeam(null);
+    setUserMotivations(null);
     setShowResetDialog(false);
     // 뉴스 데이터 제거
     localStorage.removeItem('gameNewsData');
@@ -340,10 +342,16 @@ function App() {
   }
 
   // Show Team Selection Screen
-  const handleSelectTeams = (homeId: string, awayId: string, userTeamId: string) => {
+  const handleSelectTeams = (
+    homeId: string,
+    awayId: string,
+    userTeamId: string,
+    motivations: MotivationSelection
+  ) => {
     setHomeTeamId(homeId);
     setAwayTeamId(awayId);
     setUserTeam(userTeamId);
+    setUserMotivations(motivations);
     setCurrentScreen('setup');
     
     // 뉴스 요약 요청을 비동기로 fire-and-forget 처리 (응답을 기다리지 않음)

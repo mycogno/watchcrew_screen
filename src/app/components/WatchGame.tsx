@@ -146,6 +146,10 @@ export function WatchGame({
   const chatRef = useRef<HTMLDivElement>(null);
   const speedModeRef = useRef<"fast" | "normal" | "slow">("normal");
   const lastDisplayTimeRef = useRef<number | null>(null); // cross-request display pacing
+  const sessionStartRef = useRef<number>(Date.now());
+  const SESSION_LIMIT_MS = 150_000; // 2분 30초
+
+  const hasSessionExpired = () => Date.now() - sessionStartRef.current >= SESSION_LIMIT_MS;
 
   const updateSpeedMode = (mode: "fast" | "normal" | "slow") => {
     setSpeedMode(mode);
@@ -215,7 +219,16 @@ export function WatchGame({
       return;
     }
 
-    const interval = setInterval(() => {
+    let interval: ReturnType<typeof setInterval> | null = null;
+
+    interval = setInterval(() => {
+      if (hasSessionExpired()) {
+        if (interval) {
+          clearInterval(interval);
+        }
+        return;
+      }
+
       setPlayHistory(prev => {
         const nextPlay = upcomingPlays[upcomingIndex];
         if (!nextPlay) return prev;
@@ -227,7 +240,11 @@ export function WatchGame({
       setUpcomingIndex(prev => prev + 1);
     }, 15000); // 15초마다
 
-    return () => clearInterval(interval);
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
   }, [upcomingPlays, upcomingIndex]);
 
   // 이닝  초/말별로 데이터 그룹화
@@ -652,6 +669,12 @@ export function WatchGame({
 
     const startOrchestratorRequest = async () => {
       if (!isActive) return;
+
+      if (hasSessionExpired()) {
+        console.log(`[Orchestrator] Session expired (${SESSION_LIMIT_MS}ms). Stopping further requests.`);
+        isActive = false;
+        return;
+      }
       
       requestCount++;
       const currentRequestId = requestCount;
@@ -680,7 +703,7 @@ export function WatchGame({
       }
 
       // 다음 요청 시작 (재귀적으로)
-      if (isActive) {
+      if (isActive && !hasSessionExpired()) {
         startOrchestratorRequest();
       }
     };
