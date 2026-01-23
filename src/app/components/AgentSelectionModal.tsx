@@ -72,24 +72,24 @@ export function AgentSelectionModal({
   const [candidates, setCandidates] = useState<AgentCandidate[]>([]);
   const [loading, setLoading] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
-  const [cardHeight, setCardHeight] = useState<number | null>(null);
+  // const [cardHeight, setCardHeight] = useState<number | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
-  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  // const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const TARGET_COUNT = 5;
 
-  // 각 카드 높이를 측정해 가장 높은 값으로 통일
-  useEffect(() => {
-    const rAF = requestAnimationFrame(() => {
-      const heights = Object.values(cardRefs.current || {})
-        .map(el => (el?.offsetHeight ?? 0))
-        .filter(h => h > 0);
-      if (heights.length) {
-        const maxHeight = Math.max(...heights);
-        setCardHeight(maxHeight);
-      }
-    });
-    return () => cancelAnimationFrame(rAF);
-  }, [candidates]);
+  // 각 카드 높이를 측정해 가장 높은 값으로 통일 (주석 처리)
+  // useEffect(() => {
+  //   const rAF = requestAnimationFrame(() => {
+  //     const heights = Object.values(cardRefs.current || {})
+  //       .map(el => (el?.offsetHeight ?? 0))
+  //       .filter(h => h > 0);
+  //     if (heights.length) {
+  //       const maxHeight = Math.max(...heights);
+  //       setCardHeight(maxHeight);
+  //     }
+  //   });
+  //   return () => cancelAnimationFrame(rAF);
+  // }, [candidates]);
 
   const fetchCandidates = async (signal?: AbortSignal) => {
     const startTime = performance.now();
@@ -313,13 +313,13 @@ export function AgentSelectionModal({
                           : 'border-slate-200 hover:border-primary/50'
                       }`}
                       onClick={() => handleToggleSelect(candidate.id)}
-                      style={cardHeight ? { height: cardHeight } : undefined}
+                      style={{ minHeight: 360, height: 400 }}
                     >
                       <CardContent
                         className="p-3 h-full flex flex-col justify-between"
-                        ref={el => {
-                          cardRefs.current[candidate.id] = el;
-                        }}
+                        // ref={el => {
+                        //   cardRefs.current[candidate.id] = el;
+                        // }}
                       >
                         <div className="space-y-2">
                           <div className="flex items-center gap-4">
@@ -371,7 +371,8 @@ export function AgentSelectionModal({
                       <div
                         key={`placeholder-${idx}`}
                         className="w-[320px] flex-shrink-0 border-2 border-dashed border-slate-200 rounded-lg flex items-center justify-center"
-                        style={cardHeight ? { height: cardHeight } : { minHeight: 360, height: 400 }}
+                        style={{ minHeight: 360, height: 400 }}
+                        // style={cardHeight ? { height: cardHeight } : { minHeight: 360, height: 400 }}
                       >
                         <div className="flex flex-col items-center gap-2 text-muted-foreground">
                           <Spinner size="md" />

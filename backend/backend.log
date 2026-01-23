@@ -23890,3 +23890,10 @@ Exception: No JSON array found in OpenAI response
 2026-01-22 21:27:00,774 INFO watchcrew.backend: OPENAI_API_KEY present: True
 2026-01-23 14:39:56,530 INFO watchcrew.backend: OPENAI_API_KEY present: True
 2026-01-23 14:43:03,250 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-23 14:57:38,802 INFO watchcrew.backend: OPENAI_API_KEY present: True
+2026-01-23 14:57:45,819 INFO watchcrew.backend: Parsing game ID: 250523_HTSS_HT_game
+2026-01-23 14:57:45,819 INFO watchcrew.backend: News CSV path: C:\Users\장동건\Desktop\WatchCrew_screen\backend\news\250523\250523recentNews.csv
+2026-01-23 14:57:45,836 INFO watchcrew.backend: ✅ News CSV loaded successfully (321 rows)
+2026-01-23 14:57:45,844 INFO watchcrew.backend: Extracted news - SS: 50 items, HT: 50 items
+2026-01-23 14:58:28,634 INFO httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-23 14:58:28,661 INFO watchcrew.backend: ✅ News summary generated: {"Samsung Lions": "삼성은 최근 키움과의 3연전에서 싹쓸이로 시리즈를 가져가며 연승 흐름을 만들었다. 레예스가 7⅔이닝 무실점 호투를 보였고 후라도도 복귀전에서 6이닝 1실점 등 선발진이 제 몫을 했다. 구자욱의 결승 투런포와 복귀한 김지찬의 타격 영향이 팀 승리에 이어졌고 류지혁은 1000경기에서 결승타를 기록했다. 오승환의 1군 복귀는 구위·구속 회복이 필요하다는 평가로 당분간 늦어질 가능성이 언급됐다.", "Kia Tigers": "KIA는 KT전에서 김도영의 3안타·1홈런과 양현종의 호투를 앞세워 8-3으로 승리하며 연패에서 벗어났다. 양현종은 6⅔이닝 수준의 역투로 팀 승리를 이끌었고 5월에 좋은 투구 지표를 보였다는 보도가 나왔다. 김도영이 결승포를 포함한 맹타로 공격을 이끌었으나 김선빈이 왼쪽 종아리 근육 손상으로 1군에서 제외돼 2주 뒤 재검진 예정이며 최원준은 실책으로 2군행되는 등 부상·수비 문제로 라인업 변화가 잇따르고 있다."}

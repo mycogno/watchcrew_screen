@@ -1260,7 +1260,7 @@ def _process_news_summary_sync(game: str):
     # "250523_HTSS" 형식: 위치 9-11이 away_team_id, 11-13이 home_team_id
     # "250523_HTSS_HT_game" 형식에서도 동일한 위치에서 추출 가능
     parts = game.split("_")
-    
+
     if len(parts) >= 2:
         # 팀 코드 추출: "HTSS" -> away=SS, home=HT
         team_codes = parts[1]
@@ -1276,14 +1276,14 @@ def _process_news_summary_sync(game: str):
 
     # 데이터 추출
     news_dict = {}
-    
+
     # away_team_id 뉴스
     away_news_list = ndf[ndf["teamId"] == away_team_id]["title"].tolist()
     if away_team_id in TEAM_DICT:
         news_dict[TEAM_DICT[away_team_id]] = away_news_list
     else:
         logger.warning(f"Unknown team ID: {away_team_id}")
-    
+
     # home_team_id 뉴스
     home_news_list = ndf[ndf["teamId"] == home_team_id]["title"].tolist()
     if home_team_id in TEAM_DICT:
