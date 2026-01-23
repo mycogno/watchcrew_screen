@@ -1238,23 +1238,43 @@ def _process_news_summary_sync(game: str):
     date = game.split("_")[0]
     news = f"{date}recentNews"
 
-    # 파일 경로 (backend/news/YYYYMMDD/YYYYMMDD recentNews.csv)
+    # 파일 경로 (backend/news/YYYYMMDD/YYYYMMDDrecentNews.csv)
     backend_dir = Path(__file__).resolve().parent
     news_csv_path = backend_dir / "news" / date / f"{news}.csv"
-    logger.info(f"News CSV path: {news_csv_path}")
 
-    # 파일 존재 여부 확인
-    if not news_csv_path.exists():
-        logger.error(f"❌ News CSV file not found: {news_csv_path}")
-        raise FileNotFoundError(f"News CSV file not found: {news_csv_path}")
+    # 배포 환경에서 로컬 파일이 없을 때 사용할 원격 기본 URL
+    # 프런트에서 쓰는 VITE_API_URL을 우선 사용, 없으면 NEWS_REMOTE_BASE_URL, 둘 다 없으면 기본 onrender 도메인
+    remote_base = (
+        os.getenv("VITE_API_URL")
+        or os.getenv("NEWS_REMOTE_BASE_URL")
+        or "https://watchcrew-screen.onrender.com"
+    ).rstrip("/")
+    remote_csv_url = f"{remote_base}/news/{date}/{news}.csv"
 
-    # df 로드
-    try:
-        ndf = pd.read_csv(news_csv_path, encoding="utf-8-sig")
-        logger.info(f"✅ News CSV loaded successfully ({len(ndf)} rows)")
-    except Exception as e:
-        logger.error(f"❌ Failed to read CSV: {e}")
-        raise
+    logger.info(f"News CSV local path: {news_csv_path}")
+    logger.info(f"News CSV remote url: {remote_csv_url}")
+
+    ndf = None
+
+    if news_csv_path.exists():
+        # 우선 로컬 파일 시도
+        try:
+            ndf = pd.read_csv(news_csv_path, encoding="utf-8-sig")
+            logger.info(f"✅ News CSV loaded from local ({len(ndf)} rows)")
+        except Exception as e:
+            logger.error(f"❌ Failed to read local CSV: {e}")
+            raise
+    else:
+        # 로컬 파일이 없으면 원격 경로 시도
+        logger.warning(f"❌ Local news CSV not found, trying remote: {remote_csv_url}")
+        try:
+            ndf = pd.read_csv(remote_csv_url, encoding="utf-8-sig")
+            logger.info(f"✅ News CSV loaded from remote ({len(ndf)} rows)")
+        except Exception as e:
+            logger.error(f"❌ Failed to read remote CSV: {e}")
+            raise FileNotFoundError(
+                f"News CSV not found locally or remotely: {news_csv_path}, {remote_csv_url}"
+            ) from e
 
     # 팀 ID 추출 (게임 ID 포맷: 250523_HTSS_HT_game or 250523_HTSS)
     # "250523_HTSS" 형식: 위치 9-11이 away_team_id, 11-13이 home_team_id
