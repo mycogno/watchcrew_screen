@@ -58,7 +58,7 @@ export interface Game {
 }
 
 export const GAMES: Game[] = [
-  { id: 'game1', awayTeamId: 'samsung', homeTeamId: 'kia' },
+  { id: 'game1', awayTeamId: 'kia', homeTeamId: 'samsung' },
   { id: 'game2', awayTeamId: 'lg', homeTeamId: 'nc' },
   { id: 'game3', awayTeamId: 'lotte', homeTeamId: 'hanwha' },
   { id: 'game4', awayTeamId: 'kiwoom', homeTeamId: 'kt' },

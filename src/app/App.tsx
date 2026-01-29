@@ -107,14 +107,8 @@ function App() {
     avatarSeed?: string,
     id?: string,
     createdAt?: string,
-    동기?: Record<string, { example_value: string; explanation: string }>,
-    동기요약?: string,
-    애착?: Record<string, { example_value: string; explanation: string }>,
-    애착요약?: string,
-    내용?: Record<string, { example_value: string; explanation: string }>,
-    채팅내용설명?: string,
-    표현?: Record<string, { example_value: string; explanation: string }>,
-    채팅표현설명?: string
+    동기?: Record<string, any>,
+    애착?: Record<string, any>
   ) => {
     const newAgent: Agent = {
       id: id || `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
@@ -125,13 +119,7 @@ function App() {
       createdAt: createdAt || new Date().toISOString(),
       avatarSeed: avatarSeed ? avatarSeed : Math.random().toString(36).substring(7),
       동기,
-      동기요약,
       애착,
-      애착요약,
-      내용,
-      채팅내용설명,
-      표현,
-      채팅표현설명,
     };
     setAgents((prev) => [newAgent, ...prev]);
   };

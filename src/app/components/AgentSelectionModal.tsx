@@ -19,14 +19,8 @@ interface AgentCandidate {
   name: string;
   team: string;
   userPrompt: string;
-  동기: Record<string, { example_value: string; explanation: string }>;
-  동기요약?: string;
-  애착: Record<string, { example_value: string; explanation: string }>;
-  애착요약?: string;
-  내용: Record<string, { example_value: string; explanation: string }>;
-  채팅내용설명?: string;
-  표현: Record<string, { example_value: string; explanation: string }>;
-  채팅표현설명?: string;
+  동기?: Record<string, any>; // 7개 동기 항목 + 동기 요약
+  애착?: Record<string, any>; // 애찰1, 애찰2 등 + 애착 요약
 }
 
 interface AgentSelectionModalProps {
@@ -40,14 +34,8 @@ interface AgentSelectionModalProps {
     avatarSeed: string,
     id?: string,
     createdAt?: string,
-    동기?: Record<string, { example_value: string; explanation: string }>,
-    동기요약?: string,
-    애착?: Record<string, { example_value: string; explanation: string }>,
-    애착요약?: string,
-    내용?: Record<string, { example_value: string; explanation: string }>,
-    채팅내용설명?: string,
-    표현?: Record<string, { example_value: string; explanation: string }>,
-    채팅표현설명?: string
+    동기?: Record<string, any>,
+    애착?: Record<string, any>
   ) => void;
   team: string; // 팀 이름
   isHome: boolean; // home인지 away인지
@@ -227,10 +215,8 @@ export function AgentSelectionModal({
         isHome: isHome,
         createdAt: new Date().toISOString(),
         avatarSeed: candidate.id,
-        동기: candidate.동기,
-        동기요약: candidate.동기요약,
-        애착: candidate.애착,
-        애착요약: candidate.애착요약
+        동기: candidate.동기 || {},
+        애착: candidate.애착 || {}
       };
       console.log('Registering Agent:', agentData);
       if (typeof onSelectAgent === 'function') {
@@ -243,9 +229,7 @@ export function AgentSelectionModal({
           agentData.id,
           agentData.createdAt,
           agentData.동기,
-          agentData.동기요약,
-          agentData.애착,
-          agentData.애착요약
+          agentData.애착
         );
       }
     });
@@ -313,7 +297,7 @@ export function AgentSelectionModal({
                           : 'border-slate-200 hover:border-primary/50'
                       }`}
                       onClick={() => handleToggleSelect(candidate.id)}
-                      style={{ minHeight: 360, height: 400 }}
+                      style={{ minHeight: 240, height: 280 }}
                     >
                       <CardContent
                         className="p-3 h-full flex flex-col justify-between"
@@ -344,19 +328,19 @@ export function AgentSelectionModal({
                           </div>
 
                           <div className="pl-4 space-y-2">
-                            {candidate.동기요약 && (
+                            {candidate.동기?.['동기 요약'] && typeof candidate.동기['동기 요약'] === 'string' && (
                               <div className="text-sm">
                                 <div className="font-semibold text-slate-700 mb-0.5">동기</div>
-                                <div className="ml-2 text-xs text-slate-600">{candidate.동기요약}</div>
+                                <div className="ml-2 text-xs text-slate-600 whitespace-pre-wrap">{candidate.동기['동기 요약']}</div>
                               </div>
                             )}
-                            {candidate.동기요약 && candidate.애착요약 && (
+                            {candidate.동기?.['동기 요약'] && candidate.애착?.['애착 요약'] && (
                               <div className="border-t border-slate-200 my-1.5" />
                             )}
-                            {candidate.애착요약 && (
+                            {candidate.애착?.['애착 요약'] && typeof candidate.애착['애착 요약'] === 'string' && (
                               <div className="text-sm">
                                 <div className="font-semibold text-slate-700 mb-0.5">애착</div>
-                                <div className="ml-2 text-xs text-slate-600">{candidate.애착요약}</div>
+                                <div className="ml-2 text-xs text-slate-600 whitespace-pre-wrap">{candidate.애착['애착 요약']}</div>
                               </div>
                             )}
                           </div>
@@ -371,8 +355,7 @@ export function AgentSelectionModal({
                       <div
                         key={`placeholder-${idx}`}
                         className="w-[320px] flex-shrink-0 border-2 border-dashed border-slate-200 rounded-lg flex items-center justify-center"
-                        style={{ minHeight: 360, height: 400 }}
-                        // style={cardHeight ? { height: cardHeight } : { minHeight: 360, height: 400 }}
+                        style={{ minHeight: 240, height: 280 }}
                       >
                         <div className="flex flex-col items-center gap-2 text-muted-foreground">
                           <Spinner size="md" />

@@ -16,6 +16,25 @@ import AgentSummary from "./AgentSummary";
 import { Pencil, Trash2, Check } from "lucide-react";
 import { TEAMS } from "./TeamSelection";
 
+export interface MotivationDetail {
+  강도?: string;
+  Graphic?: string;
+  Orthographic?: string;
+  Lexical?: string;
+  Grammatical?: string;
+  Examples?: string[];
+}
+
+export interface AttachmentDetail {
+  Value?: string;
+  강도?: string;
+  Graphic?: string;
+  Orthographic?: string;
+  Lexical?: string;
+  Grammatical?: string;
+  Examples?: string[];
+}
+
 export interface Agent {
   id: string;
   name: string;
@@ -24,10 +43,8 @@ export interface Agent {
   isHome: boolean; // home인지 away인지 구분
   createdAt: string;
   avatarSeed: string;
-  동기?: Record<string, { example_value: string; explanation: string }>; // 스포츠 시청 동기, 채팅 참여 동기
-  동기요약?: string; // 동기 요약 설명
-  애착?: Record<string, { example_value: string; explanation: string }>; // 애착의 대상, 애착의 강도/단계
-  애착요약?: string; // 애착 요약 설명
+  동기?: Record<string, MotivationDetail | string>; // 7개 동기 항목 + 동기 요약
+  애착?: Record<string, AttachmentDetail | string>; // 애착1, 애착2 등 + 애착 요약
 }
 
 interface AgentCardProps {
@@ -165,8 +182,8 @@ export function AgentCard({ agent, onEdit, onDelete, homeTeamId, awayTeamId, rea
       </CardHeader>
       <CardContent className="space-y-4">
         <AgentSummary
-          동기요약={agent.동기요약}
-          애착요약={agent.애착요약}
+          동기={agent.동기}
+          애착={agent.애착}
         />
       </CardContent>
 

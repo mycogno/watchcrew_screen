@@ -106,19 +106,36 @@ class NewsSummaryRequest(BaseModel):
     game: str  # 예: "250523_HTSS_HT_game"
 
 
+class MotivationDetail(BaseModel):
+    """각 동기 항목의 상세 정보"""
+
+    강도: str = ""
+    Graphic: str = ""
+    Orthographic: str = ""
+    Lexical: str = ""
+    Grammatical: str = ""
+    Examples: List[str] = []
+
+
+class AttachmentDetail(BaseModel):
+    """각 애착 항목의 상세 정보"""
+
+    Value: str = ""
+    강도: str = ""
+    Graphic: str = ""
+    Orthographic: str = ""
+    Lexical: str = ""
+    Grammatical: str = ""
+    Examples: List[str] = []
+
+
 class AgentCandidate(BaseModel):
     id: str
     name: str  # Nickname
     team: str
     userPrompt: str = ""  # 사용자 입력 프롬프트
-    동기: Dict[str, Dict[str, str]] = (
-        {}
-    )  # 스포츠 시청 동기, 채팅 참여 동기 (각각 example_value, explanation)
-    동기요약: str = ""  # 동기 요약 설명
-    애착: Dict[str, Dict[str, str]] = (
-        {}
-    )  # 애착의 대상, 애착의 강도/단계 (각각 example_value, explanation)
-    애착요약: str = ""  # 애착 요약 설명
+    동기: Dict = {}  # 7개 동기 항목 + 동기 요약
+    애착: Dict = {}  # 애착 항목들 + 애착 요약
 
 
 # ============================================
@@ -449,41 +466,6 @@ def load_game_data(
 # ============================================
 
 
-def _clean_attr_dict(raw: dict, summary_keys: List[str]) -> tuple:
-    """Helper to extract a summary string and ensure all other values are Dict[str, str]."""
-    cleaned = {}
-    summary = ""
-    if not isinstance(raw, dict):
-        return {}, ""
-
-    # Copy to avoid mutating original
-    temp_raw = dict(raw)
-
-    # 1. Extract summary if present in this dict
-    for sk in summary_keys:
-        if sk in temp_raw:
-            val = temp_raw.pop(sk)
-            if not summary and isinstance(val, (str, bytes)):
-                summary = str(val)
-
-    # 2. Normalize remaining keys
-    for k, v in temp_raw.items():
-        if isinstance(v, dict):
-            # Ensure example_value and explanation exist
-            cleaned[k] = {
-                "example_value": str(v.get("example_value", v.get("label", ""))),
-                "explanation": str(v.get("explanation", "")),
-            }
-        elif isinstance(v, str):
-            # LLM flattened it
-            cleaned[k] = {"example_value": v, "explanation": ""}
-        else:
-            # Fallback for unexpected types
-            cleaned[k] = {"example_value": str(v), "explanation": ""}
-
-    return cleaned, summary
-
-
 def normalize_candidates(
     parsed: List[dict], team: str = "samsung", want_count: int = 5
 ) -> List[dict]:
@@ -494,6 +476,7 @@ def normalize_candidates(
     - team is set to the provided team parameter
     - no duplicate ids
     - result count = want_count (pads or truncates)
+    - 새로운 동기/애착 구조 유지
     """
     counter = 1
     seen = set()
@@ -520,31 +503,15 @@ def normalize_candidates(
             or f"{team.title()}Fan{counter}"
         )
 
-        # Extract new structure: 팬의 특성 → {동기, 애착}
-        fan_traits = item.get("팬의 특성") or {}
-        if not isinstance(fan_traits, dict):
-            fan_traits = {}
+        # 동기 데이터 추출 (7개 항목 + 동기 요약)
+        motivations = item.get("동기") or {}
+        if not isinstance(motivations, dict):
+            motivations = {}
 
-        # 동기: {스포츠 시청 동기: {example_value, explanation}, 채팅 참여 동기: {...}}
-        motivations_raw = fan_traits.get("동기") or {}
-        motivations, motiv_sum = _clean_attr_dict(
-            motivations_raw, ["동기 요약", "동기요약"]
-        )
-        motivation_summary = (
-            motiv_sum or fan_traits.get("동기 요약") or fan_traits.get("동기요약") or ""
-        )
-
-        # 애착: {애착의 대상: {example_value, explanation}, 애착의 강도/단계: {...}}
-        attachment_raw = fan_traits.get("애착") or {}
-        attachment, attach_sum = _clean_attr_dict(
-            attachment_raw, ["애착 요약", "애착요약"]
-        )
-        attachment_summary = (
-            attach_sum
-            or fan_traits.get("애착 요약")
-            or fan_traits.get("애착요약")
-            or ""
-        )
+        # 애착 데이터 추출 (애착1, 애착2, ... + 애착 요약)
+        attachments = item.get("애착") or {}
+        if not isinstance(attachments, dict):
+            attachments = {}
 
         out.append(
             {
@@ -553,9 +520,7 @@ def normalize_candidates(
                 "team": team,
                 "userPrompt": "",  # Will be set by the caller
                 "동기": motivations,
-                "동기요약": motivation_summary,
-                "애착": attachment,
-                "애착요약": attachment_summary,
+                "애착": attachments,
             }
         )
 
@@ -577,13 +542,7 @@ def normalize_candidates(
                     "team": team,
                     "userPrompt": "",
                     "동기": {},
-                    "동기요약": "",
                     "애착": {},
-                    "애착요약": "",
-                    "내용": {},
-                    "채팅내용설명": "",
-                    "표현": {},
-                    "채팅표현설명": "",
                 }
             )
 
@@ -595,45 +554,27 @@ def transform_agent_for_orchestrate(agent: Dict) -> Dict:
 
     제외할 필드:
     - id, avatarSeed, createdAt, isHome, userPrompt
-    - 동기요약, 애착요약, 채팅내용설명, 채팅표현설명
 
     유지할 필드:
     - name → userName
     - team
-    - 동기, 애착, 내용, 표현 (dict 형식)
+    - 동기 (7개 항목 구조 유지)
+    - 애착 (애착1, 애착2 등 구조 유지)
     """
     result = {
         "userName": agent.get("name", "DefaultAgent"),
         "team": agent.get("team", "samsung"),
     }
 
-    # 팬의 특성 구성
-    fan_traits = {}
-
-    # 동기 및 애착
+    # 동기 및 애착 데이터 그대로 전달
     motivation = agent.get("동기", {})
     attachment = agent.get("애착", {})
 
-    if motivation or attachment:
-        fan_traits["동기"] = motivation if motivation else {}
-        fan_traits["애착"] = attachment if attachment else {}
+    if motivation:
+        result["동기"] = motivation
 
-    if fan_traits:
-        result["팬의 특성"] = fan_traits
-
-    # 채팅 특성 구성
-    chat_traits = {}
-
-    # 내용 및 표현
-    content = agent.get("내용", {})
-    expression = agent.get("표현", {})
-
-    if content or expression:
-        chat_traits["내용"] = content if content else {}
-        chat_traits["표현"] = expression if expression else {}
-
-    if chat_traits:
-        result["채팅 특성"] = chat_traits
+    if attachment:
+        result["애착"] = attachment
 
     return result
 
@@ -661,53 +602,192 @@ def make_tuning_prompt(user_team: str, user_request: str) -> str:
         },
     }
 
+    set_explain = {
+        "동기": {
+            "채팅 참여 동기": {
+                "Sharing Feelings and Thoughts": "Motivation to express and exchange immediate reactions or opinions and to see others’ responses during the game.",
+                "Fun and Entertainment": "Enjoyment derived from chatting itself, including humor, playfulness, and amusement from participating in the live stream crowd.",
+                "Information Seeking": "Using chat to ask questions or request clarification about rules, players, calls, or unfolding game situations.",
+                "Information Offering": "Providing answers, explanations, or useful facts to others in the chat environment.",
+                "Emotional Release": "Venting, releasing tension, and discharging emotions generated by match events.",
+                "Intra-membership": "Experiencing a sense of belonging within one’s own fan group (us-ness), reinforced through co-viewing and chat participation.",
+                "Inter-membership": "Positioning against or comparing with rival groups (them-ness), emphasizing group boundaries during mass interaction.",
+            },
+            "채팅 참여 동기 강도": {
+                "강함": "The motivation constitutes a high level of participation preference, strongly guiding the user’s inclination to engage in chat interaction.",
+                "중간": "The motivation constitutes a moderate level of participation preference, shaping engagement selectively depending on contextual relevance.",
+                "약함": "The motivation constitutes a low level of participation preference, exerting minimal influence on chat engagement decisions.",
+            },
+        },
+        "애착": {
+            "애착의 대상": {
+                "Team (팀)": "Primary attachment directed toward the team as an entity, including its history, brand, results, and collective identity.",
+                "Player (선수)": "Attachment centered on specific players, such as stars or favorites, and their performance or career narratives.",
+                "Coach (감독/코치)": "Attachment oriented toward the head coach or manager, focusing on leadership, tactics, accountability, or philosophy.",
+                "Community/City (지역)": "Place-based attachment to the local community, city, or region represented by the team.",
+                "Sport (종목 자체)": "Attachment to the sport itself, including appreciation of its rules, aesthetics, and intrinsic qualities, independent of teams.",
+                "Level of sport (리그/프로/대학 등)": "Attachment to a specific level of competition (e.g., professional, college, minor leagues) as a meaningful object.",
+            },
+            "애착의 강도/단계": {
+                "Awareness": "Basic recognition or knowledge that the sport or team exists, with minimal personal meaning or involvement.",
+                "Attraction": "Growing interest or liking accompanied by positive affect and emerging involvement intentions.",
+                "Attachment": "A stage where the sport or team becomes personally meaningful and emotionally, functionally, or symbolically internalized.",
+                "Allegiance": "A durable and persistent commitment marked by strong loyalty that consistently guides behavior over time.",
+            },
+        },
+        "채팅의 특징": {
+            "Graphic features": "Visual emphasis in chat messages, such as repeated symbols, emojis, line breaks, or rapid consecutive posts reflecting emotional intensity or engagement.",
+            "Orthographic features": "Non-standard spelling, abbreviations, character repetition, or modified profanity reflecting speed, informality, or emotion in Korean online chat.",
+            "Lexical features": "Word choices that signal emotion, evaluation, group belonging, or opposition, including slang, fandom terms, and expressive modifiers.",
+            "Grammatical features": "Loose, spoken-style sentence structures with omissions, short clauses, rhetorical questions, or fragmented constructions typical of live chat.",
+        },
+    }
+
+    persona_format = {
+        "Nickname": "",
+        "동기": {
+            "Sharing Feelings and Thoughts": {
+                "강도": "",
+                "Graphic": "",
+                "Orthographic": "",
+                "Lexical": "",
+                "Grammatical": "",
+                "Examples": [],
+            },
+            "Fun and Entertainment": {
+                "강도": "",
+                "Graphic": "",
+                "Orthographic": "",
+                "Lexical": "",
+                "Grammatical": "",
+                "Examples": [],
+            },
+            "Information Seeking": {
+                "강도": "",
+                "Graphic": "",
+                "Orthographic": "",
+                "Lexical": "",
+                "Grammatical": "",
+                "Examples": [],
+            },
+            "Information Offering": {
+                "강도": "",
+                "Graphic": "",
+                "Orthographic": "",
+                "Lexical": "",
+                "Grammatical": "",
+                "Examples": [],
+            },
+            "Emotional Release": {
+                "강도": "",
+                "Graphic": "",
+                "Orthographic": "",
+                "Lexical": "",
+                "Grammatical": "",
+                "Examples": [],
+            },
+            "Intra-membership": {
+                "강도": "",
+                "Graphic": "",
+                "Orthographic": "",
+                "Lexical": "",
+                "Grammatical": "",
+                "Examples": [],
+            },
+            "Inter-membership": {
+                "강도": "",
+                "Graphic": "",
+                "Orthographic": "",
+                "Lexical": "",
+                "Grammatical": "",
+                "Examples": [],
+            },
+            "동기 요약": "",
+        },
+        "애착": {
+            "애착1": {
+                "Value": "",
+                "강도": "",
+                "Graphic": "",
+                "Orthographic": "",
+                "Lexical": "",
+                "Grammatical": "",
+                "Examples": [],
+            },
+            "애착2": {
+                "Value": "",
+                "강도": "",
+                "Graphic": "",
+                "Orthographic": "",
+                "Lexical": "",
+                "Grammatical": "",
+                "Examples": [],
+            },
+            "애착 요약": "",
+        },
+    }
+
     # Format the schema as a clean JSON string for the prompt
     output_format_str = json.dumps(output_schema, indent=2, ensure_ascii=False)
 
     return f"""
-당신은 사용자의 요구사항을 기반으로 야구 팬 페르소나를 커스터마이징하는 페르소나 제작자(Persona Generator)입니다.
-사용자 요구사항이 주어지면, 주어진 Attribute–Example Values 세트를 커스터마이징하여 사용자에게 적합한 야구 팀 팬 페르소나 5개를 생성하세요.
-
-────────────────
-
-[주어진 데이터]
+입력:
 - 사용자 선호 야구 팀: {user_team}
-- 사용자 요구사항: {user_request}
-- Attribute–Example Values set:
-  · Attribute: 야구 팬의 특성을 설명하는 상위 카테고리
-  · Example Values: 각 Attribute에 대응하는 구체적 특성 값
-  · Explanation: 각 Example Value의 의미 설명
+- user_request: {user_request}
+- set_explain: {set_explain}
 
-────────────────
+출력 규칙:
+1. 출력은 JSON 배열이며 길이는 정확히 5이다.
+2. 배열의 각 원소는 PERSONA FORMAT과 동일한 구조의 객체다.
+3. key 이름을 변경하거나 생략하지 않는다.
+4. "강도" 필드는 지정된 선택지 중 하나만 사용한다.
+5. Examples 필드는 문자열 배열 형태로 작성한다.
+6. JSON 외의 설명 문장은 출력하지 않는다.
+7. 5개 페르소나는 서로 다른 말투/강조점으로 변주하고, 최소 2개 동기의 "강도"가 서로 다르게 설정되도록 구성한다.
 
-[RESPONSE RULES]
-- 출력은 반드시 [OUTPUT FORMAT]을 따르며, 전체 출력은 JSON list 1개(정확히 5개 object)입니다.
-- dv_set에 없는 Attribute를 새로 만들지 마세요.
-- 각 속성은 dv_set의 Example Value 라벨 중 하나를 선택하고, explanation은 사용자 요구사항을 반영해 새로 작성하세요.
-- 하나의 페르소나 내에서 선택된 모든 Attribute-Example Values set 조합은 의미적으로 서로 모순되지 않아야 합니다.
-- 모든 출력은 한국어로 작성하세요.
-- 아래 2개의 요약 필드는 각각 1문장으로 작성하세요:
-  1) "동기 요약": "스포츠 시청 동기" + "채팅 참여 동기"를 종합
-  2) "애착 요약": "애착의 대상" + "애착의 강도/단계"를 종합
-- 공격적·모욕적 표현 금지(밈/드립은 가능하나 누구를 지목해 조롱하지 않기).
+내용 생성 가이드:
+- user_request의 내용을 바탕으로 “이런 성향의 사람이 단체 채팅에서 보일 법한 언어 특징”을 간결한 서술문 형태로 작성한다.
+- 분석이나 평가가 아니라, 사용 양상 묘사에 집중한다.
 
-[IMPORTANT: 값 출력 형식]
-- 각 속성 값은 반드시 아래 형태의 JSON object로 출력하세요.
-  {{ "example_value": "라벨", "explanation": "선택한 example_value가 사용자 요구사항에서 어떻게 드러나는지를 설명하는 1문장" }}
+언어 스타일 가이드:
+- 한국어 온라인 채팅 특성이 자연스럽게 반영되면 충분하다.
+- 다음과 요소들이 설명에 포함될 수 있다. 필요에 따라 변형, 생성하여 반영한다(모두 포함할 필요 없음):
+  · 정서 공유, 속도, 소속감
+  · 친밀한 소통, 유머·비판
+  · 명확성, 신뢰·정중함
+  · 필수 성분 탈락, 절 단위 분해
+  · 강조용 중첩, 형태소 생략
+  · 어순 자유화, 기호의 통사화
+  · 발화 태도 삽입, 상호작용 의존
+  · 문법 관대성, 문어+구어 혼합
 
-────────────────
+동기 섹션 작성 규칙:
+- "동기" 아래의 7개 항목은 모두 채운다.
+- 각 항목의 4가지 features는 1~2문장으로 작성한다.
+- Examples에는 해당 동기의 전형적인 채팅 발화 예시를 2~4개 제시한다.
+- "동기 요약"은 전체 동기 특성을 1~2문장으로 정리한다.
+
+애착 섹션 작성 규칙:
+- 애착은 user_request에 근거해 필요한 만큼만 생성한다.
+- 최소 1개 이상, 최대 개수 제한은 없다.
+- 각 애착 객체는 다음을 반드시 포함한다:
+  · Value
+  · 강도
+  · 4가지 features
+  · Examples
+- 애착이 여러 개인 경우 키 이름은 "애착1", "애착2", "애착3" … 순서로 생성한다.
+- "애착 요약"은 전체 애착 경향을 1~2문장으로 작성한다.
 
 [NICKNAME DESIGN RULES]
 닉네임은 단순한 이름이 아니라, 팬의 성향을 암시하는 “압축된 신호”입니다.
 
 - 아래 단서 중 1~2개를 자연스럽게 반영하세요.
-  · 팀/야구가 맥락: {user_team} 또는 팀을 연상시키는 야구 관련 표현
+  · 팀/야구 맥락: {user_team} 또는 팀을 연상시키는 야구 관련 표현
   · 성향 단서: 웃음, 풍자, 드립, 편파 없는 관찰자 시선
   · 말투/리듬: 짧은 말장난이나 리듬감 있는 표현
   · 취향 단서: 대표적인 야구 용어 1개 내외
 
-- 공격적·모욕적 표현은 금지하며, “상황을 웃기는 해설자/관찰자” 프레임을 유지하세요.
-- 특정 개인(선수·심판·팬)을 지목해 조롱하지 마세요.
+- 공격적·모욕적 표현은 금지하며, 특정 개인(선수·심판·팬)을 지목해 조롱하지 마세요.
 - Nickname은 해당 페르소나의 다른 Attribute들과 논리적으로 연결되어야 합니다.
 
 [닉네임 형식 제약]
@@ -718,289 +798,286 @@ def make_tuning_prompt(user_team: str, user_request: str) -> str:
 [닉네임 다양성]
 - 5개 페르소나의 닉네임은 서로 다른 스타일이어야 합니다.
 
-────────────────
+persona_format 구조를 그대로 유지한 채, user_request를 반영하여 5개의 페르소나를 생성하여라.
 
-[OUTPUT FORMAT]
-[
-  {output_format_str},
-  ... (총 5개)
-]
+[PERSONA FORMAT]
+{persona_format}
 """.strip()
 
 
-@app.post("/generate_candidates", response_model=List[AgentCandidate])
-def generate_candidates(payload: GenerateRequest):
-    """페르소나 후보 생성 엔드포인트."""
-    userPrompt = payload.prompt or ""
-    userTeam = payload.team or "samsung"  # default to samsung if not provided
+# @app.post("/generate_candidates", response_model=List[AgentCandidate])
+# def generate_candidates(payload: GenerateRequest):
+#     """페르소나 후보 생성 엔드포인트."""
+#     userPrompt = payload.prompt or ""
+#     userTeam = payload.team or "samsung"  # default to samsung if not provided
 
-    # Check if OpenAI SDK and API key are available
-    openai_key = os.getenv("OPENAI_API_KEY")
-    openai_model = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
+#     # Check if OpenAI SDK and API key are available
+#     openai_key = os.getenv("OPENAI_API_KEY")
+#     openai_model = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
 
-    if not openai or not openai_key:
-        raise HTTPException(
-            status_code=500,
-            detail="OpenAI API not configured. Please set OPENAI_API_KEY environment variable.",
-        )
+#     if not openai or not openai_key:
+#         raise HTTPException(
+#             status_code=500,
+#             detail="OpenAI API not configured. Please set OPENAI_API_KEY environment variable.",
+#         )
 
-    try:
-        openai.api_key = openai_key
+#     try:
+#         openai.api_key = openai_key
 
-        # Support both old openai (0.28) and new openai>=1.0 interfaces.
-        if hasattr(openai, "OpenAI"):
-            # new interface
-            client = openai.OpenAI(api_key=openai_key)
-            tuning_prompt = make_tuning_prompt(
-                user_team=userTeam, user_request=userPrompt
-            )
-            resp = client.chat.completions.create(
-                model=openai_model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "Return ONLY valid JSON. Generating results in Korean.",
-                    },
-                    {"role": "user", "content": tuning_prompt},
-                ],
-            )
-        else:
-            # old interface
-            tuning_prompt = make_tuning_prompt(
-                user_team=userTeam, user_request=userPrompt
-            )
-            resp = openai.ChatCompletion.create(
-                model=openai_model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "Return ONLY valid JSON. Generating results in Korean.",
-                    },
-                    {"role": "user", "content": tuning_prompt},
-                ],
-            )
+#         # Support both old openai (0.28) and new openai>=1.0 interfaces.
+#         if hasattr(openai, "OpenAI"):
+#             # new interface
+#             client = openai.OpenAI(api_key=openai_key)
+#             tuning_prompt = make_tuning_prompt(
+#                 user_team=userTeam, user_request=userPrompt
+#             )
+#             resp = client.chat.completions.create(
+#                 model=openai_model,
+#                 messages=[
+#                     {
+#                         "role": "system",
+#                         "content": "Return ONLY valid JSON. Generating results in Korean.",
+#                     },
+#                     {"role": "user", "content": tuning_prompt},
+#                 ],
+#             )
+#         else:
+#             # old interface
+#             tuning_prompt = make_tuning_prompt(
+#                 user_team=userTeam, user_request=userPrompt
+#             )
+#             resp = openai.ChatCompletion.create(
+#                 model=openai_model,
+#                 messages=[
+#                     {
+#                         "role": "system",
+#                         "content": "Return ONLY valid JSON. Generating results in Korean.",
+#                     },
+#                     {"role": "user", "content": tuning_prompt},
+#                 ],
+#             )
 
-        # Try multiple ways to extract text from response (dict-like or object-like)
-        text = None
-        try:
-            # dict-like response
-            if isinstance(resp, dict):
-                text = resp.get("choices", [])[0].get("message", {}).get("content")
-            else:
-                # object response from new SDK
-                choices = getattr(resp, "choices", None)
-                if choices and len(choices) > 0:
-                    first = choices[0]
-                    msg = getattr(first, "message", None)
-                    if msg is not None:
-                        content = getattr(msg, "content", None)
-                        if isinstance(content, list) and len(content) > 0:
-                            elem = content[0]
-                            # elem may be dict-like or object-like
-                            if isinstance(elem, dict):
-                                text = elem.get("text")
-                            else:
-                                text = getattr(elem, "text", None)
-                        else:
-                            # fallback: maybe message.content is a plain string
-                            text = content or getattr(msg, "content", None)
-        except Exception:
-            text = None
+#         # Try multiple ways to extract text from response (dict-like or object-like)
+#         text = None
+#         try:
+#             # dict-like response
+#             if isinstance(resp, dict):
+#                 text = resp.get("choices", [])[0].get("message", {}).get("content")
+#             else:
+#                 # object response from new SDK
+#                 choices = getattr(resp, "choices", None)
+#                 if choices and len(choices) > 0:
+#                     first = choices[0]
+#                     msg = getattr(first, "message", None)
+#                     if msg is not None:
+#                         content = getattr(msg, "content", None)
+#                         if isinstance(content, list) and len(content) > 0:
+#                             elem = content[0]
+#                             # elem may be dict-like or object-like
+#                             if isinstance(elem, dict):
+#                                 text = elem.get("text")
+#                             else:
+#                                 text = getattr(elem, "text", None)
+#                         else:
+#                             # fallback: maybe message.content is a plain string
+#                             text = content or getattr(msg, "content", None)
+#         except Exception:
+#             text = None
 
-        if not text:
-            # final fallback: string representation
-            try:
-                text = str(resp)
-            except Exception:
-                text = ""
+#         if not text:
+#             # final fallback: string representation
+#             try:
+#                 text = str(resp)
+#             except Exception:
+#                 text = ""
 
-        # Log the full response for debugging
-        logger.debug(f"OpenAI raw response (first 2000 chars): {text[:2000]}")
-        if len(text) > 2000:
-            # Save full response to file for inspection
-            try:
-                with open(
-                    os.path.join(os.path.dirname(__file__), "openai_response.txt"),
-                    "w",
-                    encoding="utf-8",
-                ) as f:
-                    f.write(text)
-                logger.debug("Full response saved to openai_response.txt")
-            except Exception as e:
-                logger.debug(f"Could not save response to file: {e}")
+#         # Log the full response for debugging
+#         logger.debug(f"OpenAI raw response (first 2000 chars): {text[:2000]}")
+#         if len(text) > 2000:
+#             # Save full response to file for inspection
+#             try:
+#                 with open(
+#                     os.path.join(os.path.dirname(__file__), "openai_response.txt"),
+#                     "w",
+#                     encoding="utf-8",
+#                 ) as f:
+#                     f.write(text)
+#                 logger.debug("Full response saved to openai_response.txt")
+#             except Exception as e:
+#                 logger.debug(f"Could not save response to file: {e}")
 
-        # Try to parse JSON directly
-        try:
-            parsed = json.loads(text)
-        except Exception as e:
-            # Attempt to extract JSON substring with more robust regex
-            import re
+#         # Try to parse JSON directly
+#         try:
+#             parsed = json.loads(text)
+#         except Exception as e:
+#             # Attempt to extract JSON substring with more robust regex
+#             import re
 
-            logger.debug(f"JSON parse failed, attempting extraction. Error: {e}")
+#             logger.debug(f"JSON parse failed, attempting extraction. Error: {e}")
 
-            json_str = None
+#             json_str = None
 
-            # Try to extract from markdown code blocks first (```json ... ```)
-            if not json_str:
-                m = re.search(r"```(?:json)?\s*([\s\S]*?)```", text)
-                if m:
-                    json_str = m.group(1).strip()
-                    logger.debug(
-                        f"Extracted JSON from markdown code block (length={len(json_str)})"
-                    )
+#             # Try to extract from markdown code blocks first (```json ... ```)
+#             if not json_str:
+#                 m = re.search(r"```(?:json)?\s*([\s\S]*?)```", text)
+#                 if m:
+#                     json_str = m.group(1).strip()
+#                     logger.debug(
+#                         f"Extracted JSON from markdown code block (length={len(json_str)})"
+#                     )
 
-            # Try multiple regex patterns to find JSON array
-            patterns = [
-                r"\[\s*\{[\s\S]*\}\s*\]",  # Greedy: [ ... ] with { } objects
-                r"\[[\s\S]*\]",  # Just find any array brackets
-            ]
+#             # Try multiple regex patterns to find JSON array
+#             patterns = [
+#                 r"\[\s*\{[\s\S]*\}\s*\]",  # Greedy: [ ... ] with { } objects
+#                 r"\[[\s\S]*\]",  # Just find any array brackets
+#             ]
 
-            for pattern in patterns:
-                if json_str:
-                    break
-                m = re.search(pattern, text)
-                if m:
-                    json_str = m.group(0)
-                    logger.debug(
-                        f"Extracted JSON with pattern '{pattern}' (length={len(json_str)})"
-                    )
-                    break
+#             for pattern in patterns:
+#                 if json_str:
+#                     break
+#                 m = re.search(pattern, text)
+#                 if m:
+#                     json_str = m.group(0)
+#                     logger.debug(
+#                         f"Extracted JSON with pattern '{pattern}' (length={len(json_str)})"
+#                     )
+#                     break
 
-            if json_str:
-                try:
-                    parsed = json.loads(json_str)
-                except Exception as e2:
-                    logger.debug(f"Direct parse failed: {e2}, attempting fixes")
+#             if json_str:
+#                 try:
+#                     parsed = json.loads(json_str)
+#                 except Exception as e2:
+#                     logger.debug(f"Direct parse failed: {e2}, attempting fixes")
 
-                    # Try to fix common JSON issues
-                    # 1. Replace smart quotes with regular quotes first
-                    json_str = (
-                        json_str.replace('"', '"')
-                        .replace('"', '"')
-                        .replace(
-                            """, "'")
-                        .replace(""",
-                            "'",
-                        )
-                        .replace("–", "-")
-                        .replace("—", "-")
-                    )
-                    # 2. Remove any control characters that might break JSON
-                    json_str = "".join(
-                        c for c in json_str if ord(c) >= 32 or c in "\n\r\t"
-                    )
-                    # 3. Try to fix unclosed strings by finding patterns
-                    # Count quotes to detect unclosed strings
-                    in_string = False
-                    fixed_chars = []
-                    i = 0
-                    while i < len(json_str):
-                        c = json_str[i]
-                        if c == '"' and (i == 0 or json_str[i - 1] != "\\"):
-                            in_string = not in_string
-                            fixed_chars.append(c)
-                        elif c in "\n\r" and in_string:
-                            # Skip newlines inside strings
-                            fixed_chars.append(" ")
-                        else:
-                            fixed_chars.append(c)
-                        i += 1
-                    json_str = "".join(fixed_chars)
+#                     # Try to fix common JSON issues
+#                     # 1. Replace smart quotes with regular quotes first
+#                     json_str = (
+#                         json_str.replace('"', '"')
+#                         .replace('"', '"')
+#                         .replace(
+#                             """, "'")
+#                         .replace(""",
+#                             "'",
+#                         )
+#                         .replace("–", "-")
+#                         .replace("—", "-")
+#                     )
+#                     # 2. Remove any control characters that might break JSON
+#                     json_str = "".join(
+#                         c for c in json_str if ord(c) >= 32 or c in "\n\r\t"
+#                     )
+#                     # 3. Try to fix unclosed strings by finding patterns
+#                     # Count quotes to detect unclosed strings
+#                     in_string = False
+#                     fixed_chars = []
+#                     i = 0
+#                     while i < len(json_str):
+#                         c = json_str[i]
+#                         if c == '"' and (i == 0 or json_str[i - 1] != "\\"):
+#                             in_string = not in_string
+#                             fixed_chars.append(c)
+#                         elif c in "\n\r" and in_string:
+#                             # Skip newlines inside strings
+#                             fixed_chars.append(" ")
+#                         else:
+#                             fixed_chars.append(c)
+#                         i += 1
+#                     json_str = "".join(fixed_chars)
 
-                    # 4. Handle trailing braces issues (e.g., }}} followed by , or ])
-                    # Replace triple closing braces with double if they look like candidate closers
-                    json_str = re.sub(r"\}\s*\}\s*\}\s*,", "}},", json_str)
-                    json_str = re.sub(r"\}\s*\}\s*\}\s*\]", "}}]", json_str)
+#                     # 4. Handle trailing braces issues (e.g., }}} followed by , or ])
+#                     # Replace triple closing braces with double if they look like candidate closers
+#                     json_str = re.sub(r"\}\s*\}\s*\}\s*,", "}},", json_str)
+#                     json_str = re.sub(r"\}\s*\}\s*\}\s*\]", "}}]", json_str)
 
-                    # 5. Remove trailing commas before closing braces/brackets
-                    json_str = re.sub(r",\s*([\]}])", r"\1", json_str)
+#                     # 5. Remove trailing commas before closing braces/brackets
+#                     json_str = re.sub(r",\s*([\]}])", r"\1", json_str)
 
-                    try:
-                        parsed = json.loads(json_str)
-                        logger.info("Successfully parsed JSON after fixes")
-                    except Exception as e3:
-                        logger.error(f"Post-fix JSON parse failed. Error: {e3}")
-                        # If still failing, try a more aggressive extraction of objects
-                        try:
-                            # Find all blocks starting with {"Nickname" and ending with }} before a , or ]
-                            candidate_matches = re.findall(
-                                r'\{"Nickname":[\s\S]*?\}\s*\}', json_str
-                            )
-                            if candidate_matches:
-                                candidates = []
-                                for cand_str in candidate_matches:
-                                    try:
-                                        cand_str_fixed = re.sub(
-                                            r",\s*([\]}])", r"\1", cand_str
-                                        )
-                                        candidates.append(json.loads(cand_str_fixed))
-                                    except:
-                                        continue
-                                if len(candidates) >= 1:
-                                    parsed = candidates
-                                    logger.info(
-                                        f"Successfully extracted {len(candidates)} candidates via regex"
-                                    )
-                                else:
-                                    raise e3
-                            else:
-                                raise e3
-                        except Exception:
-                            logger.error(f"All JSON parse attempts failed: {e3}")
-                            logger.debug(f"Problematic JSON string: {json_str[:1000]}")
-                            raise e3
-            else:
-                logger.error(
-                    f"Could not find JSON array in response. Full response length={len(text)}"
-                )
-                logger.debug(f"Response preview (first 1000 chars): {text[:1000]}")
-                logger.debug(f"Response preview (last 500 chars): {text[-500:]}")
-                raise Exception("No JSON array found in OpenAI response")
+#                     try:
+#                         parsed = json.loads(json_str)
+#                         logger.info("Successfully parsed JSON after fixes")
+#                     except Exception as e3:
+#                         logger.error(f"Post-fix JSON parse failed. Error: {e3}")
+#                         # If still failing, try a more aggressive extraction of objects
+#                         try:
+#                             # Find all blocks starting with {"Nickname" and ending with }} before a , or ]
+#                             candidate_matches = re.findall(
+#                                 r'\{"Nickname":[\s\S]*?\}\s*\}', json_str
+#                             )
+#                             if candidate_matches:
+#                                 candidates = []
+#                                 for cand_str in candidate_matches:
+#                                     try:
+#                                         cand_str_fixed = re.sub(
+#                                             r",\s*([\]}])", r"\1", cand_str
+#                                         )
+#                                         candidates.append(json.loads(cand_str_fixed))
+#                                     except:
+#                                         continue
+#                                 if len(candidates) >= 1:
+#                                     parsed = candidates
+#                                     logger.info(
+#                                         f"Successfully extracted {len(candidates)} candidates via regex"
+#                                     )
+#                                 else:
+#                                     raise e3
+#                             else:
+#                                 raise e3
+#                         except Exception:
+#                             logger.error(f"All JSON parse attempts failed: {e3}")
+#                             logger.debug(f"Problematic JSON string: {json_str[:1000]}")
+#                             raise e3
+#             else:
+#                 logger.error(
+#                     f"Could not find JSON array in response. Full response length={len(text)}"
+#                 )
+#                 logger.debug(f"Response preview (first 1000 chars): {text[:1000]}")
+#                 logger.debug(f"Response preview (last 500 chars): {text[-500:]}")
+#                 raise Exception("No JSON array found in OpenAI response")
 
-        # Validate structure minimally and coerce to expected types
-        output: List[dict] = []
-        for item in parsed:
-            try:
-                # Keep the raw structure from OpenAI - normalize_candidates will handle it
-                # Just ensure it's a dict
-                if isinstance(item, dict):
-                    output.append(item)
-            except Exception:
-                logger.exception("invalid item from openai, skipping")
+#         # Validate structure minimally and coerce to expected types
+#         output: List[dict] = []
+#         for item in parsed:
+#             try:
+#                 # Keep the raw structure from OpenAI - normalize_candidates will handle it
+#                 # Just ensure it's a dict
+#                 if isinstance(item, dict):
+#                     output.append(item)
+#             except Exception:
+#                 logger.exception("invalid item from openai, skipping")
 
-        # Normalize candidates to ensure proper id format, uniqueness, team assignment
-        normalized = normalize_candidates(output, team=userTeam, want_count=5)
+#         # Normalize candidates to ensure proper id format, uniqueness, team assignment
+#         normalized = normalize_candidates(output, team=userTeam, want_count=5)
 
-        # Add userPrompt to all candidates
-        for candidate in normalized:
-            candidate["userPrompt"] = userPrompt
+#         # Add userPrompt to all candidates
+#         for candidate in normalized:
+#             candidate["userPrompt"] = userPrompt
 
-        if len(normalized) >= 1:
-            logger.info("Returning %d candidates from OpenAI", len(normalized))
-            # Dump full normalized payload to console/log for inspection
-            try:
-                logger.info(
-                    "Normalized candidates:\n%s",
-                    json.dumps(normalized, ensure_ascii=False, indent=2),
-                )
-            except Exception:
-                logger.info("Normalized candidates (raw): %s", normalized)
-            return normalized
-        else:
-            # Parsed but got no valid candidates after normalization
-            raise HTTPException(
-                status_code=500,
-                detail="Failed to generate valid candidates from OpenAI response",
-            )
+#         if len(normalized) >= 1:
+#             logger.info("Returning %d candidates from OpenAI", len(normalized))
+#             # Dump full normalized payload to console/log for inspection
+#             try:
+#                 logger.info(
+#                     "Normalized candidates:\n%s",
+#                     json.dumps(normalized, ensure_ascii=False, indent=2),
+#                 )
+#             except Exception:
+#                 logger.info("Normalized candidates (raw): %s", normalized)
+#             return normalized
+#         else:
+#             # Parsed but got no valid candidates after normalization
+#             raise HTTPException(
+#                 status_code=500,
+#                 detail="Failed to generate valid candidates from OpenAI response",
+#             )
 
-    except HTTPException:
-        # Re-raise HTTP exceptions as-is
-        raise
-    except Exception as e:
-        logger.exception("OpenAI call failed")
-        raise HTTPException(
-            status_code=500, detail=f"Failed to generate candidates: {str(e)}"
-        )
+#     except HTTPException:
+#         # Re-raise HTTP exceptions as-is
+#         raise
+#     except Exception as e:
+#         logger.exception("OpenAI call failed")
+#         raise HTTPException(
+#             status_code=500, detail=f"Failed to generate candidates: {str(e)}"
+#         )
 
 
 @app.post("/generate_candidates_stream")
@@ -1123,7 +1200,7 @@ async def generate_candidates_stream(payload: GenerateRequest):
                     messages=[
                         {
                             "role": "system",
-                            "content": "Return ONLY valid JSON. Generating results in Korean.",
+                            "content": "너는 입력된 user_request를 바탕으로 한국어 단체 온라인 채팅 페르소나를 지정된 JSON output_format에 맞게 채워서 생성하는 시스템이다.",
                         },
                         {"role": "user", "content": tuning_prompt},
                     ],
@@ -1135,7 +1212,7 @@ async def generate_candidates_stream(payload: GenerateRequest):
                     messages=[
                         {
                             "role": "system",
-                            "content": "Return ONLY valid JSON. Generating results in Korean.",
+                            "content": "너는 입력된 user_request를 바탕으로 한국어 단체 온라인 채팅 페르소나를 지정된 JSON output_format에 맞게 채워서 생성하는 시스템이다.",
                         },
                         {"role": "user", "content": tuning_prompt},
                     ],
