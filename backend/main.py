@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+﻿from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel
@@ -227,7 +227,26 @@ def news_summarizer(news_dict: dict) -> dict:
 }}
 
 """
-        chatResult = llm.invoke(prompt).content
+        openai_key = os.getenv("OPENAI_API_KEY")
+        openai_model = os.getenv("OPENAI_MODEL", "gpt-4.1")
+
+        if not openai or not openai_key:
+            logger.warning("OpenAI not available for news summarization")
+            return {}
+
+        client = openai.OpenAI(api_key=openai_key)
+        resp = client.chat.completions.create(
+            model=openai_model,
+            messages=[
+                {
+                    "role": "system",
+                    "content": "Return ONLY valid JSON. Generating results in Korean.",
+                },
+                {"role": "user", "content": prompt},
+            ],
+        )
+
+        chatResult = resp.choices[0].message.content
 
         clean = prepare_json_text(chatResult)
         recNews = json.loads(clean)
@@ -1418,6 +1437,10 @@ class OrchestratorRequest(BaseModel):
     gameFlow: Optional[str] = ""  # 경기 흐름 요약 (추후 자동 업데이트)
     newsData: Optional[Dict[str, str]] = {}  # 뉴스 요약 데이터
     agents: List[Dict] = []  # localStorage의 ai-fan-agents
+    userMotivation: Optional[Dict[str, str]] = (
+        {}
+    )  # 사용자 채팅 동기 (예: {"Sharing Feelings and Thoughts": "약함", ...})
+    speedMode: Optional[str] = "normal"  # 채팅 냈도 ("fast", "normal", "slow")
 
 
 @app.post("/orchestrate")
@@ -1449,17 +1472,8 @@ async def orchestrate_chat(request: OrchestratorRequest):
             ap_list = HARDCODED_AGENTS
             logger.info(f"No agents provided, using {len(ap_list)} HARDCODED_AGENTS")
 
-        # turn_num 계산 (ipynb 로직 그대로)
-        turn_num = [
-            math.floor(len(ap_list) * 1 + 0.5),
-            math.floor(len(ap_list) * 1.5 + 0.5),
-        ]
-
         # context_memory 구성: 사용자 메시지를 포함
         context_memory = request.userMessages if request.userMessages else []
-
-        # news_data 구성
-        news_data = request.newsData if request.newsData else {}
 
         # =====================================================
         # 게임 데이터 로드 (orchestration_v2.ipynb의 Pre data, Stimulus data)
@@ -1475,20 +1489,331 @@ async def orchestrate_chat(request: OrchestratorRequest):
             f"Loaded game data at row {current_row_index - 1} - currGameStat: {curr_game_stat}, gameFlow length: {len(game_flow)}"
         )
 
-        # 프롬프트 생성 (ipynb 로직 그대로)
+        # orchestrate.log에 입력 데이터 로깅 (실제 게임 데이터 사용)
+        orchestrate_logger.info("=" * 80)
+        orchestrate_logger.info("NEW ORCHESTRATE REQUEST - INPUT DATA")
+        orchestrate_logger.info("=" * 80)
+        orchestrate_logger.info(f"userMessages count: {len(context_memory)}")
+        if context_memory:
+            orchestrate_logger.info(f"userMessages (last 3): {context_memory[-3:]}")
+        orchestrate_logger.info(
+            f"currGameStat (loaded from game data): {curr_game_stat}"
+        )
+        orchestrate_logger.info(
+            f"gameFlow (loaded from game data): {game_flow[:200] if game_flow else 'None'}..."
+        )
+        orchestrate_logger.info(f"agents count: {len(ap_list)}")
+        if ap_list:
+            orchestrate_logger.info(
+                f"agents[0] team: {ap_list[0].get('team', 'N/A')}, userName: {ap_list[0].get('userName', 'N/A')}"
+            )
+        orchestrate_logger.info(f"userMotivation: {request.userMotivation}")
+        orchestrate_logger.info("=" * 80)
+
+        # orchestrate.log에 입력 데이터 로깅 (실제 게임 데이터 사용)
+        orchestrate_logger.info("=" * 80)
+        orchestrate_logger.info("NEW ORCHESTRATE REQUEST - INPUT DATA")
+        orchestrate_logger.info("=" * 80)
+        orchestrate_logger.info(f"userMessages count: {len(context_memory)}")
+        if context_memory:
+            orchestrate_logger.info(f"userMessages (last 3): {context_memory[-3:]}")
+        orchestrate_logger.info(
+            f"currGameStat (loaded from game data): {curr_game_stat}"
+        )
+        orchestrate_logger.info(
+            f"gameFlow (loaded from game data): {game_flow[:200] if game_flow else 'None'}..."
+        )
+        orchestrate_logger.info(f"agents count: {len(ap_list)}")
+        if ap_list:
+            orchestrate_logger.info(
+                f"agents[0] team: {ap_list[0].get('team', 'N/A')}, userName: {ap_list[0].get('userName', 'N/A')}"
+            )
+        orchestrate_logger.info(f"userMotivation: {request.userMotivation}")
+        orchestrate_logger.info("=" * 80)
+
+        # 사용자가 WatchCrew 화면에서 선택한 속도
+        speed_mapping = {"fast": "상", "normal": "중", "slow": "하"}
+        speed = speed_mapping.get(request.speedMode, "중")  # 기본값: 중
+        orchestrate_logger.info(
+            f"speedMode (from user): {request.speedMode} -> mapped to: {speed}"
+        )
+        orchestrate_logger.info(f"turn_num will be calculated based on speed: {speed}")
+
+        if speed == "상":
+            turn_num = [15 / 2.5, 15 / 1.5]
+        elif speed == "중":
+            turn_num = [15 / 3.5, 15 / 2.5]
+        else:
+            turn_num = [15 / 4.5, 15 / 3.5]
+
+        turn_num = [math.floor(turn_num[0] + 0.5), math.floor(turn_num[1] + 0.5)]
+
+        # 팀 정보 추출 (transform_agent_for_orchestrate에서 team 키 사용)
+        per_team = []
+        for i in ap_list:
+            per_team += [i.get("team", "samsung")]
+
+        # 사용자 채팅 동기 구성
+        # userMotivation에서 받은 데이터를 7가지 동기로 매핑
+        user_motiv_raw = request.userMotivation if request.userMotivation else {}
+
+        # 사용자 동기 매핑: 프론트엔드의 키를 OpenAI의 키로 변환
+        motivation_mapping = {
+            "shareFeelings": "Sharing Feelings and Thoughts",
+            "fun": "Fun and Entertainment",
+            "infoSharing": "Information Sharing",
+            "emotionRelease": "Emotional Release",
+            "belonging": "Membership",  # 팀 구성에 따라 Intra/Inter로 나뉨
+        }
+
+        uq_motive = {}
+        for old_key, new_key in motivation_mapping.items():
+            if old_key in user_motiv_raw:
+                uq_motive[new_key] = user_motiv_raw[old_key]
+
+        # Membership을 팀 구성에 따라 Intra/Inter로 변환
+        if "Membership" in uq_motive:
+            membership_strength = uq_motive.pop("Membership")
+            if len(set(per_team)) == 1:
+                # 같은 팀만 있으면 Intra-membership
+                uq_motive["Intra-membership"] = membership_strength
+            else:
+                # 서로 다른 팀이 있으면 Inter-membership
+                uq_motive["Inter-membership"] = membership_strength
+
+        logger.debug(f"Mapped user motivation: {uq_motive}")
+
+        # =====================================================
+        # [1단계] 강화할 동기 선택
+        # =====================================================
+        orchestrate_logger.info("\n[STAGE 1] 스타트: 강화할 동기 선택")
+        orchestrate_logger.info(f"User motivation: {uq_motive}")
+        orchestrate_logger.info(f"Agent personas count: {len(ap_list)}")
+        orchestrate_logger.info("Sending motive_prompt to LLM...")
+        # 에이전트의 동기/애착 정보를 추출하여 상세 정보 구성
+        ap_list_detail = []
+        for agent in ap_list:
+            agent_detail = {
+                "응원하는 팀": agent.get("team", "samsung"),
+                "Nickname": agent.get("userName", "Unknown"),
+                "동기": agent.get("동기", {}),
+                "애착": agent.get("애착", {}),  # 원본 애착 데이터 보존
+                "애착1": None,
+                "애착2": None,
+            }
+
+            # 애착 정보 추출 (애착1, 애착2 등)
+            attachment_data = agent.get("애착", {})
+            attachment_keys = [
+                k
+                for k in attachment_data.keys()
+                if k.startswith("애착") and k != "애착 요약"
+            ]
+
+            for idx, key in enumerate(sorted(attachment_keys)[:2], start=1):
+                agent_detail[f"애착{idx}"] = attachment_data[key]
+
+            ap_list_detail.append(agent_detail)
+
+        logger.debug(
+            f"ap_list_detail sample: {ap_list_detail[0] if ap_list_detail else 'empty'}"
+        )
+        ap_list = ap_list_detail
+        logger.debug(f"Extracted {len(ap_list)} agent details for orchestration")
+
+        # TODO 채팅에 참여하는 에이전트 페르소나 정보에서 요약 정보 추출
+        # 각 에이전트의 동기 요약과 애착 요약을 추출하여 간결한 요약 정보 구성
+        ap_sum_list = []
+        for agent_detail in ap_list:
+            # 동기 요약 추출 (동기 딕셔너리에서 "동기 요약" 키 찾기)
+            motivation_summary = ""
+            motivation_dict = agent_detail.get("동기", {})
+            if isinstance(motivation_dict, dict):
+                motivation_summary = motivation_dict.get("동기 요약", "")
+
+            summary_item = {
+                "응원하는 팀": agent_detail.get("응원하는 팀"),
+                "Nickname": agent_detail.get("Nickname"),
+                "동기": motivation_summary,
+                "애착": "",
+            }
+
+            # 애착 요약: 전체 애착 딕셔너리에서 "애착 요약" 키 찾기
+            # 또는 애착1, 애착2 객체 내부에서 찾기
+            attachment_summaries = []
+
+            # 방법 1: 전체 애착 딕셔너리에서 "애착 요약" 찾기
+            original_attachment = agent_detail.get("애착", {})
+            if (
+                isinstance(original_attachment, dict)
+                and "애착 요약" in original_attachment
+            ):
+                attachment_summaries.append(original_attachment["애착 요약"])
+
+            # 방법 2: 애착1, 애착2에서 찾기
+            for i in [1, 2]:
+                attachment_item = agent_detail.get(f"애착{i}")
+                if attachment_item and isinstance(attachment_item, dict):
+                    if "애착 요약" in attachment_item:
+                        attachment_summaries.append(attachment_item["애착 요약"])
+
+            summary_item["애착"] = (
+                " ".join(attachment_summaries) if attachment_summaries else ""
+            )
+            ap_sum_list.append(summary_item)
+
+        logger.debug(f"Created summary list with {len(ap_sum_list)} items")
+
+        # =====================================================
+        # [STAGE 1] 강화할 동기 선택
+        # =====================================================
+        orchestrate_logger.info("\n[STAGE 1] 시작: 강화할 동기 선택")
+        orchestrate_logger.info(f"User motivation: {uq_motive}")
+        orchestrate_logger.info(f"Agent personas count: {len(ap_list)}")
+        orchestrate_logger.info("Sending motive_prompt to LLM...")
+        motive_start_time = time.time()
+
+        motive_prompt = f"""
+        
+당신은 야구 중계 채팅 시스템 매니저입니다. 당신의 역할은 현재 경기 상황에서 시청자들이 더 재미있거나 유용하다고 느낄 만한 에이전트 대화를 제공하기에 앞서, 해당 에이전트(페르소나)가 이 상황에서 가질 법한 채팅 동기를 선택하는 것입니다.
+
+주어진 데이터와 에이전트에 사용될 페르소나의 요약 정보 그리고 7가지 채팅 동기들을 활용하여 다음의 작업을 수행하세요.
+
+[주어진 데이터]
+# 사용자의 채팅 동기
+: {json.dumps(uq_motive, ensure_ascii=False)}
+
+# Current Game Data
+- Current Game Status: {curr_game_stat}
+- Game Flow: {game_flow}
+
+# Context Memory
+: {json.dumps(context_memory, ensure_ascii=False)}
+
+[Summarized personas list]
+: {json.dumps(ap_sum_list, ensure_ascii=False)}
+
+
+[Seven Chatting Motivations]
+- Sharing Feelings and Thoughts
+: 사람들은 경기 해석·예측을 공유하고, 반응을 보며 감정을 확인해 공감·동의/반박을 주고받기 위해 채팅한다.
+- Fun and Entertainment
+: 사람들은 채팅 자체가 재미있어 참여하고, 재치 있는 댓글로 웃으며 지루한 시간을 보내고 즐거움을 더하기 위해 채팅한다.
+- Information Offering
+: 사람들은 질문에 답하고 유용한 정보를 제공하며, 잘못된 정보를 바로잡아 전달·정정하기 위해 채팅한다.
+- Information Seeking
+: 사람들은 모르는 점을 질문하고 Q&A로 답을 얻으며, 규칙·팀·선수 등 필요한 정보를 배우기 위해 채팅한다.
+- Emotional Release
+: 사람들은 흥분·기쁨·분노를 글로 쏟아 스트레스를 풀고, 긴장 순간 감정을 더 고조시키기 위해 채팅한다.
+- Intra-membership
+: 팬들은 같은 팀 팬끼리 함께 응원하며 하나됨과 소속감을 느끼고, 결속을 다지며 더 열심히 응원하기 위해 채팅한다.
+- Inter-membership
+: 팬들은 상대 팀·팬을 견제하거나 야유하고, 우리 팀을 비판하는 상대에게 맞서 옹호하며 라이벌 의식을 드러내기 위해 채팅한다.
+   
+[작업]
+사용자 채팅 동기, 현재 경기 상황, 페르소나 요약 정보를 바탕으로 현재 페르소나가 이 상황에서 가질 법한 채팅 동기를 Seven Chatting Motivation에서 한 가지 선택합니다.
+
+----------------
+
+[RESPONSE RULES]
+1. Output format
+- 출력은 반드시 [OUTPUT FORMAT]의 JSON 구조를 따릅니다.
+
+2. Rule of chat_motivation
+- 사용자 채팅 동기, 현재 경기 상황, 페르소나 요약 정보를 바탕으로 현재 페르소나가 이 상황에서 가질 법한 채팅 동기를 Seven Chatting Motivation에서 한 가지 선택하여 출력합니다.
+- 반드시 Seven Chatting Motivation 중 1 개만 선택하세요.
+
+----------------
+
+[INPUT FORMAT]
+# 사용자의 채팅 동기
+: {json.dumps(uq_motive, ensure_ascii=False)}
+
+# Current Game Data
+- Current Game Status: {curr_game_stat}
+- Game Flow: {game_flow} 
+
+# Context Memory
+: {json.dumps(context_memory, ensure_ascii=False)}
+
+[Summarized personas list]
+: {json.dumps(ap_sum_list, ensure_ascii=False)}
+
+
+[OUTPUT FORMAT]
+{{
+    "chat_motivation": Chatting motivation in the current game situation
+}}
+
+
+"""
+        resp = client.chat.completions.create(
+            model=openai_model,
+            messages=[
+                {"role": "user", "content": motive_prompt},
+            ],
+        )
+
+        chatResult = resp.choices[0].message.content
+        clean = prepare_json_text(chatResult)
+        data = json.loads(clean)
+        motiv = data["chat_motivation"]
+        motive_elapsed = time.time() - motive_start_time
+        logger.debug(f"Selected motivation: {motiv}")
+        orchestrate_logger.info(
+            f"[STAGE 1] 완료: 동기 '{motiv}' 선택 (소요 시간: {motive_elapsed:.2f}초)"
+        )
+
+        # ap_list에서 선택된 동기에 맞는 정보만 추출
+        ap_detail_list = []
+        for agent_detail in ap_list:
+            detail_item = {
+                "응원하는 팀": agent_detail.get("응원하는 팀"),
+                "Nickname": agent_detail.get("Nickname"),
+                "동기": {},
+                "애착1": agent_detail.get("애착1"),
+                "애착2": agent_detail.get("애착2"),
+            }
+
+            # 선택된 동기에 해당하는 정보 추출
+            motivation_data = agent_detail.get("동기", {}).get(motiv)
+            if motivation_data:
+                detail_item["동기"][motiv] = motivation_data
+
+            ap_detail_list.append(detail_item)
+
+        logger.debug(f"Created {len(ap_detail_list)} agent detail items")
+
+        # =====================================================
+        # [STAGE 2] 연출 전략을 결정하고 그에 맞는 대화 시나리오 생성
+        # =====================================================
+        orchestrate_logger.info(
+            "\n[STAGE 2] 시작: 연출 전략 결정 및 대화 시나리오 생성"
+        )
+        orchestrate_logger.info(f"Selected motivation for this stage: '{motiv}'")
+        orchestrate_logger.info(f"Processing {len(ap_detail_list)} agents...")
+        orchestrate_logger.info("Building main scenario prompt...")
+        scenario_start_time = time.time()
+        # 아래 3개 변수 일단  패스
+        curr_news_info, curr_nickname_info, curr_stat_info = "", "", ""
         prompt = f"""
 
-당신은 야구 중계 채팅 시스템 매니저입니다. 당신의 역할은 현재 야구 경기를 시청 중인 시청자들에게, 지금 경기 상황에 맞춰 사람들이 더 재미있거나 더 유용하다고 느낄 만한 대화를 생성해 제공하는 것입니다.
+당신은 야구 중계 채팅 시스템 매니저입니다. 당신의 역할은 현재 야구 경기를 시청 중인 시청자들에게, 지금 경기 상황에 맞춰 사람들이 더 재미있거나 더 유용하다고 느낄 만한 시나리오를 만들고 대화를 생성해 제공하는 것입니다.
 
 주어진 데이터와 에이전트 및 페르소나 리스트 그리고 7가지 채팅 동기들을 활용하여 다음의 작업을 Chain-of-thought 방식으로 단계적으로 수행하세요.
 
 [주어진 데이터]
+# 사용자의 채팅 동기
+: 사용자의 채팅 동기를 5가지로 구분하여 동기의 정도를 표시한 것. 약함, 중간, 강함으로 그 정도를 표시.
+
 # Current Game Data
 - Current Game Status: The current state of the game at this moment.
 - Game Flow: Summary of game events leading up to this point.
 
-# Recent News
-: 전날 업데이트된 각 팀별 최신 이슈들
+# External Information
+- 뉴스 정보: 현재 경기 상황과 관련된 선수들의 뉴스 정보
+- 별명 정보: 현재 경기 상황과 관련된 선수들의 별명 정보
+- 기록 정보: 현재 경기 상황과 관련된 선수들의 기록 정보
 
 # Context Memory
 : 에이전트들의 이전 대화 내용들
@@ -1513,11 +1838,13 @@ async def orchestrate_chat(request: OrchestratorRequest):
 : 팬들은 상대 팀·팬을 견제하거나 야유하고, 우리 팀을 비판하는 상대에게 맞서 옹호하며 라이벌 의식을 드러내기 위해 채팅한다.
    
 [작업]
-1. Seven Chatting Motivation를 참고하여 주어진 현재 경기 데이터 상황에서 사람들이 더 재미있거나 더 유용하다고 느낄 만한 주제와 대화의 전략을 선정합니다.
+1. 사용자 채팅 동기, 현재 경기 상황, 페르소나 정보를 바탕으로 현재 페르소나가 이 상황에서 가질 법한 채팅 동기를 Seven Chatting Motivation에서 한 가지 선택합니다.
 
-2. 1에서 정해진 주제 혹은 전략에 맞춰서, 각각 다른 페르소나를 가진 에이전트들이 대화 내에서 어떤 역할을 해야하는지를 결정합니다.
+2. 1에서 선택된 채팅 동기에 맞춰서, 현재 경기 데이터 상황에서 사람들이 더 재미있거나 더 유용하다고 느낄 만한 주제와 대화의 전략을 생성합니다.
 
-3. 2.에서 결정된 역할에 맞춰 에이전트끼리 대화를 나누는 발화 텍스트를 생성합니다.
+3. 2에서 생성된 주제 혹은 전략에 맞춰서, 각각 다른 페르소나를 가진 에이전트들이 대화 내에서 어떤 역할을 해야하는지를 결정합니다.
+
+4. 3에서 결정된 역할에 맞춰 에이전트끼리 대화를 나누는 발화 텍스트를 생성합니다.
 
 ----------------
 
@@ -1525,24 +1852,32 @@ async def orchestrate_chat(request: OrchestratorRequest):
 1. Output format
 - 출력은 반드시 [OUTPUT FORMAT]의 JSON 구조를 따릅니다.
 - agent_role과 script는 에이전트/발화의 리스트(배열)로 작성합니다.
-- script는 총 {turn_num[0]} 턴 이상 {turn_num[1]} 턴 이하로 구성하세요.
+- script는 반드시 총 {turn_num[0]} 턴 이상 {turn_num[1]} 턴 이하로 구성하세요.
 - script의 각 utterance는 한 번에 한 문장을 넘지 않습니다.
-- 출력시, script를 반드시 첫번째로 반환해야 합니다.
 
-2. Rule of strategy
-- strategy에는 현재 경기 데이터 상황에서 사람들이 더 재미있거나 더 유용하다고 느낄 만한 주제와 대화의 전략을 출력합니다.
-- Seven Chatting Motivation 중 1 ~ 2개만 참고하여 대화 전략을 고르고, 어떤 대화를 해야할지를 결정합니다.
+3. Rule of chat_motivation
+- 사용자 채팅 동기, 현재 경기 상황, 페르소나 정보를 바탕으로 현재 페르소나가 이 상황에서 가질 법한 채팅 동기를 Seven Chatting Motivation에서 한 가지 선택하여 출력합니다.
+- 반드시 Seven Chatting Motivation 중 1 개만 선택하세요.
+
+3. Rule of strategy
+- strategy에는 선택된 채팅 동기에 맞춰서, 현재 경기 데이터 상황에서 사람들이 더 재미있거나 더 유용하다고 느낄 만한 주제와 대화의 전략을 생성하여 출력합니다.
 - 대화의 유형에는 질의 응답, 동조(긍정/부정), 갈등(같은 팀 간의/다른 팀 간의), 침묵, 환호 등이 있습니다.
-- 필요한 경우, (1) 현재 경기 상황과 직접 관련이 있거나, (2) 경기가 다소 잔잔해 대화 소재가 부족한 구간이라면, 최근 팀 이슈/뉴스를 보조 주제로 활용할 수 있습니다.
+- 필요한 경우, (1) 현재 경기 상황과 직접 관련이 있거나, (2) 경기가 다소 잔잔해 대화 소재가 부족한 구간이라면, 선수들의 뉴스, 별명, 기록 정보(External Information)를 보조 주제로 활용할 수 있습니다.
+- External Information을 활용하는 경우, 선택된 채팅 동기와 관련 있는 정보를 최대한 활용하세요. 
+    예 1) 선택된 채팅 동기가 Information과 관련이 있다면 External Information으로 기록 정보를 활용한다.
+    예 2) 선택된 채팅 동기가 Membership과 관련이 있다면 External Information으로 뉴스 정보를 활용한다.
+    예 3) 선택된 채팅 동기가 Fun and Entertainment와 관련이 있다면 External Information으로 별명 정보를 활용한다.
+- External Information을 활용하는 경우, External Information에서 알 수 없는 정보는 절대 추론해서 작성하거나 언급하지마세요.
 
-3. Rule of agent_role
-- agent_role에는 각 에이전트의 페르소나를 고려하여, 선택된 대화 주제 및 전략에 맞게 대화에서 수행해야 할 역할을 명시합니다.
+4. Rule of agent_role
+- agent_role에는 각 에이전트의 페르소나를 고려하여, 정해진 대화 주제 및 전략에 맞게 에이전트가 대화에서 수행해야 할 역할을 명시합니다.
+- agent_role에서 각 에이전트의 역할은 정해진 대화 주제 및 전략을 고려하면서도, 동시에 본인 페르소나 정보를 반영해야합니다.
 - agent_role에 역할 설명은 반드시 해당 에이전트의 응원 team을 고려하여 작성되어야 합니다.
-- 대화 주제가 최근 이슈/뉴스와 관련된 경우, agent_role은 해당 최근 이슈를 참고하여 역할을 구체화해 작성합니다.
+- 대화 주제가 External Information과 관련된 경우, agent_role은 External Information를 참고하여 역할을 구체화해 작성합니다. 
 - agent_role을 작성할 때, 각 에이전트가 다른 에이전트의 발화에 반응하거나 질문·동의·반박·보완을 수행하는 등, 상호작용 방식(예: “앞선 에이전트의 의견에 반응한다”, “상대의 질문에 답한다”, “상대의 주장에 근거를 덧붙인다”)이 드러나도록 역할을 부여합니다.
 - agent_role의 개수는 선택된 에이전트의 개수에 따라 달라질 수 있습니다.
 
-4. Rule of script
+5. Rule of script
 - script에는 strategy와 agent_role을 고려하여 각 에이전트가 실제 말해야하는 발화 텍스트(utterance of the speaker)을 생성합니다.
 - script는 에이전트 간 상호 대화처럼 보이도록 작성합니다. 즉, 에이전트 간 대화를 서로 주고받는 흐름이 드러나야 합니다.
 - 발화 순서는 정해진 역할과 에이전트의 페르소나를 고려해 결정합니다.
@@ -1550,17 +1885,23 @@ async def orchestrate_chat(request: OrchestratorRequest):
 - script의 대화의 문맥과 흐름은 자연스럽게 이어져야합니다.
 - 에이전트의 각 발화는 문맥을 유지하면서도 해당 에이전트의 응원 team 관점이 반영되어야 합니다.
 - 각 에이전트의 발화 텍스트가 서로 너무 비슷하지 않게 합니다.
-- strategy 또는 agent_role이 최근 이슈/뉴스 정보를 필요로 하는 경우, 해당 최근 이슈를 참고하여 발화를 작성합니다.
+- strategy 또는 agent_role이 External Information를 필요로 하는 경우, 해당 External Information을 활용하여 발화를 작성합니다.
+- External Information을 활용하는 경우, External Information에서 알 수 없는 정보는 절대 추론해서 작성하거나 언급하지마세요.
 
 ----------------
 
 [INPUT FORMAT]
+# 사용자의 채팅 동기
+: {uq_motive}
+
 # Current Game Data
 - Current Game Status: {curr_game_stat}
 - Game Flow: {game_flow} 
 
-# Recent News
-: {news_data}
+# External Information
+- 뉴스 정보: {curr_news_info}
+- 별명 정보: {curr_nickname_info}
+- 기록 정보: {curr_stat_info}
 
 # Context Memory
 : {context_memory}
@@ -1575,17 +1916,23 @@ async def orchestrate_chat(request: OrchestratorRequest):
         {{"name": name of the speaker1, "text": utterance of the speaker1}},
         {{"name": name of the speaker2, "text": utterance of the speaker2}},
         ... ],
+    "chat_motivation": Chatting motivation in the current game situation,
     "strategy": Conversation strategy for the current situation,
     "agent_role": [
         {{"name": name of agent1, "text": The role of Agent 1 in this conversation}},
         {{"name": name of agent2, "text": The role of Agent 2 in this conversation}},      
-        ... ],
+        ... ]
 }}
 
 """
 
         # OpenAI API 호출 - 스트리밍 모드
         logger.info(f"Calling OpenAI with model: {openai_model}")
+        scenario_elapsed = time.time() - scenario_start_time
+        orchestrate_logger.info(
+            f"[STAGE 2] 프롬프트 준비 완료 (소요 시간: {scenario_elapsed:.2f}초)"
+        )
+        orchestrate_logger.info("Starting LLM streaming response...")
         request_start_time = time.time()
         response = client.chat.completions.create(
             model=openai_model,
@@ -1595,7 +1942,10 @@ async def orchestrate_chat(request: OrchestratorRequest):
 
         # 에이전트 team 정보 매핑 (이름으로 team 찾기)
         agent_team_map = {
-            agent["userName"]: agent.get("team", "samsung") for agent in ap_list
+            agent.get("Nickname", agent.get("userName", "Unknown")): agent.get(
+                "응원하는 팀", "samsung"
+            )
+            for agent in ap_list
         }
 
         # 스트리밍 응답을 즉시 파싱하여 전송 (동기 generator로 변경하여 즉시 스트리밍)
@@ -1616,6 +1966,7 @@ async def orchestrate_chat(request: OrchestratorRequest):
             orchestrate_logger.info("=" * 80)
             orchestrate_logger.info("NEW ORCHESTRATE REQUEST")
             orchestrate_logger.info("=" * 80)
+            orchestrate_logger.info("[STAGE 2] 완료: LLM 스트리밍 응답 시작")
 
             for chunk in response:
                 if chunk.choices[0].delta.content:

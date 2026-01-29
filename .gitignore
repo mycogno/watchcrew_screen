@@ -7,3 +7,5 @@ __pycache__
 ./backend/__pycache__
 ./backend/.venv
 .ipynb_checkpoints/
+*.ipynb
+orchestration_v5.ipynb

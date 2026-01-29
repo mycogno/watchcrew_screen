@@ -18,6 +18,7 @@ import {
 
 // 로컬스토리지 키
 const STORAGE_KEY = "ai-fan-agents";
+const MOTIVATION_STORAGE_KEY = "user-motivations";
 
 // 10개 팀별 에이전트 템플릿
 const TEAM_AGENT_TEMPLATES: Record<string, { name: string; prompt: string; avatarSeed: string }> = {
@@ -92,12 +93,43 @@ function App() {
         console.error("Failed to load agents:", error);
       }
     }
+    
+    // userMotivations 복원
+    const storedMotivations = localStorage.getItem(MOTIVATION_STORAGE_KEY);
+    if (storedMotivations) {
+      try {
+        setUserMotivations(JSON.parse(storedMotivations));
+      } catch (error) {
+        console.error("Failed to load motivations:", error);
+      }
+    }
   }, []);
 
   // Save agents to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(agents));
   }, [agents]);
+
+  // 페르소나 데이터를 정규화하는 함수 (키에서 공백이 없는 경우 공백 추가)
+  const normalizePersonaData = (data: Record<string, any> | undefined): Record<string, any> | undefined => {
+    if (!data) return undefined;
+    
+    const normalized: Record<string, any> = {};
+    
+    for (const [key, value] of Object.entries(data)) {
+      // "애착요약" -> "애착 요약", "동기요약" -> "동기 요약" 정규화
+      let normalizedKey = key;
+      if (key === "애착요약") {
+        normalizedKey = "애착 요약";
+      } else if (key === "동기요약") {
+        normalizedKey = "동기 요약";
+      }
+      
+      normalized[normalizedKey] = value;
+    }
+    
+    return normalized;
+  };
 
   const handleCreateAgent = (
     name: string,
@@ -118,8 +150,8 @@ function App() {
       isHome,
       createdAt: createdAt || new Date().toISOString(),
       avatarSeed: avatarSeed ? avatarSeed : Math.random().toString(36).substring(7),
-      동기,
-      애착,
+      동기: normalizePersonaData(동기),
+      애착: normalizePersonaData(애착),
     };
     setAgents((prev) => [newAgent, ...prev]);
   };
@@ -164,7 +196,9 @@ function App() {
     setShowResetDialog(false);
     // 뉴스 데이터 제거
     localStorage.removeItem('gameNewsData');
-    console.log('🗑️ Cleared news data from localStorage');
+    // userMotivations 도 localStorage에서 제거
+    localStorage.removeItem(MOTIVATION_STORAGE_KEY);
+    console.log('🗾 Cleared news data and motivations from localStorage');
   };
 
   const handleLoadTestAgents = () => {
@@ -209,7 +243,7 @@ function App() {
 
   // Show Watch Game Screen
   if (currentScreen === 'watch') {
-    return <WatchGame selectedAgents={agents} onBack={handleBackToSetup} userTeam={userTeam} homeTeamId={homeTeamId} awayTeamId={awayTeamId} />;
+    return <WatchGame selectedAgents={agents} onBack={handleBackToSetup} userTeam={userTeam} homeTeamId={homeTeamId} awayTeamId={awayTeamId} userMotivations={userMotivations} />;
   }
 
   // Show Setup Screen
@@ -340,6 +374,15 @@ function App() {
     setAwayTeamId(awayId);
     setUserTeam(userTeamId);
     setUserMotivations(motivations);
+    
+    // userMotivations을 localStorage에 저장
+    try {
+      localStorage.setItem(MOTIVATION_STORAGE_KEY, JSON.stringify(motivations));
+      console.log("💾 Saved motivations to localStorage", motivations);
+    } catch (error) {
+      console.error("Failed to save motivations:", error);
+    }
+    
     setCurrentScreen('setup');
     
     // 뉴스 요약 요청을 비동기로 fire-and-forget 처리 (응답을 기다리지 않음)

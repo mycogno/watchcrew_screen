@@ -34,6 +34,7 @@ interface WatchGameProps {
   userTeam: string | null;
   homeTeamId: string | null;
   awayTeamId: string | null;
+  userMotivations?: Record<string, string> | null;
 }
 
 // VideoPlayer 컴포넌트
@@ -132,6 +133,7 @@ export function WatchGame({
   userTeam,
   homeTeamId,
   awayTeamId,
+  userMotivations,
 }: WatchGameProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState("");
@@ -498,6 +500,8 @@ export function WatchGame({
           gameFlow: "",
           newsData: newsData,
           agents: agents,
+          userMotivation: userMotivations || {},
+          speedMode: speedModeRef.current,
         }),
       });
 
